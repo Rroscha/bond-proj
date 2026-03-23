@@ -1,0 +1,3 @@
+block_type,total,matched,mean_similarity,accuracy
+BODY,28,28,1.0,1.0
+EPILOGUE,4,4,0.9666666666666667,1.0

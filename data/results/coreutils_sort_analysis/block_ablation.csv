@@ -1,0 +1,10 @@
+feature_removed,accuracy,mean_similarity
+callee_names,1.0,0.9569444444444445
+concrete_values,1.0,0.9569444444444445
+constants,1.0,0.94375
+dataflow_edges,1.0,0.9569444444444445
+instruction_count,1.0,1.0
+memory_pattern,1.0,0.9569444444444445
+none (baseline),1.0,0.9690972222222222
+opcodes,1.0,0.9270833333333334
+string_refs,1.0,0.9569444444444445

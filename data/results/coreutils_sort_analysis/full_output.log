@@ -1,0 +1,1356 @@
+2026-03-05 13:31:44,360 angr.state_plugins.unicorn_engine INFO Unicorn is not installed. Support disabled.
+2026-03-05 13:31:44,362 angr.state_plugins.unicorn_engine ERROR failed loading "unicornlib.so", unicorn support disabled ('NoneType' object has no attribute 'unicorn_py3')
+2026-03-05 13:31:47,216 rustdiff.loader INFO Loading binary: tmp/coreutils-sort-O0
+2026-03-05 13:31:47,217 angr.project INFO Loading binary tmp/coreutils-sort-O0
+2026-03-05 13:32:22,339 case_study WARNING Debug info load failed for binary1: refaddr 32938897 not in DIE range of CU 16469023; retrying without
+2026-03-05 13:32:22,339 rustdiff.loader INFO Loading binary: tmp/coreutils-sort-O0
+2026-03-05 13:32:22,339 angr.project INFO Loading binary tmp/coreutils-sort-O0
+2026-03-05 13:32:24,067 cle.loader INFO Linking /fs/ess/PAS1888/bond/bond-proj/tmp/coreutils-sort-O0
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for __libc_start_main
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for memcpy
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for memcmp
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for memset
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for memmove
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for setlocale
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for fcntl
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for sem_wait
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for sem_init
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for sem_post
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for dlsym
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for read
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for open
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for poll
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for close
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for syscall
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for __errno_location
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for dup
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for unlinkat
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for sigaction
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for fchmod
+2026-03-05 13:32:24,078 cle.backends.externs INFO Created extern symbol for signal
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for isatty
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for strlen
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for waitid
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for waitpid
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for getrlimit
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for pipe2
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for getpid
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for sysconf
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for setgroups
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for sigaddset
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for sigfillset
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for sigemptyset
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for fdopendir
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for closedir
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for dirfd
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawnattr_setpgroup
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawnattr_setsigdefault
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawnattr_init
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawnattr_destroy
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawnattr_setflags
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawn_file_actions_init
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawn_file_actions_destroy
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_spawn_file_actions_adddup2
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for exp2
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for log10
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for log2
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for malloc
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for posix_memalign
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for free
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for realloc
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for calloc
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for munmap
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for bcmp
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for fstat64
+2026-03-05 13:32:24,079 cle.backends.externs INFO Created extern symbol for mmap64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for dl_iterate_phdr
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for _Unwind_GetIP
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for mkdir
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for lseek64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for ftruncate64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for write
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for readv
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for writev
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for __xpg_strerror_r
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for recvmsg
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for sendmsg
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for socketpair
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for recv
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for open64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for abort
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_self
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_getattr_np
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_attr_getstack
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_attr_destroy
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pause
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for getcwd
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for environ
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for _Unwind_GetTextRelBase
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for _Unwind_GetDataRelBase
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_key_create
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_key_delete
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for pthread_setspecific
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for rmdir
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for unlink
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for lstat64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for realpath
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for openat64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for readdir64
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for chroot
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for readlink
+2026-03-05 13:32:24,080 cle.backends.externs INFO Created extern symbol for stat64
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for opendir
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for getenv
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for unsetenv
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for splice
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for sendfile64
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for getauxval
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for sigaltstack
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_attr_getguardsize
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for mprotect
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for gnu_get_libc_version
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for exit
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for chdir
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for clock_gettime
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_attr_init
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_attr_setstacksize
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_create
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_join
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_setname_np
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for posix_spawnp
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for fork
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for _exit
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for dup2
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for setgid
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for setuid
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for setpgid
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for setsid
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for execvp
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for sched_getaffinity
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for sched_yield
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for kill
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for _Unwind_Backtrace
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for pthread_detach
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for _Unwind_GetLanguageSpecificData
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for _Unwind_GetIPInfo
+2026-03-05 13:32:24,081 cle.backends.externs INFO Created extern symbol for _Unwind_GetRegionStart
+2026-03-05 13:32:24,082 cle.backends.externs INFO Created extern symbol for _Unwind_SetGR
+2026-03-05 13:32:24,082 cle.backends.externs INFO Created extern symbol for _Unwind_SetIP
+2026-03-05 13:32:24,082 cle.backends.externs INFO Created extern symbol for _Unwind_RaiseException
+2026-03-05 13:32:24,082 cle.backends.externs INFO Created extern symbol for _Unwind_DeleteException
+2026-03-05 13:32:24,082 cle.backends.externs INFO Created extern symbol for _Unwind_Resume
+2026-03-05 13:32:24,082 cle.loader INFO Mapping /fs/ess/PAS1888/bond/bond-proj/tmp/coreutils-sort-O0 at 0x400000
+2026-03-05 13:32:24,082 cle.loader INFO Mapping cle##externs at 0xc00000
+2026-03-05 13:32:24,137 angr.project INFO There are no simprocedures for missing library libgcc_s.so.1 :(
+2026-03-05 13:32:24,137 angr.project INFO There are no simprocedures for missing library libm.so.6 :(
+2026-03-05 13:32:24,137 angr.project INFO Using builtin SimProcedure for unresolved __libc_start_main from libc.so.0
+2026-03-05 13:32:24,138 angr.project INFO Using builtin SimProcedure for unresolved memcpy from libc.so.0
+2026-03-05 13:32:24,138 angr.project INFO Using builtin SimProcedure for unresolved memcmp from libc.so.0
+2026-03-05 13:32:24,138 angr.project INFO Using builtin SimProcedure for unresolved memset from libc.so.0
+2026-03-05 13:32:24,138 angr.project INFO Using builtin SimProcedure for unresolved memmove from libc.so.0
+2026-03-05 13:32:24,138 angr.project INFO Using builtin SimProcedure for unresolved setlocale from libc.so.0
+2026-03-05 13:32:24,138 angr.project INFO Using builtin SimProcedure for unresolved fcntl from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved sem_wait from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved sem_init from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved sem_post from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using stub SimProcedure for unresolved dlsym
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved read from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved open from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved poll from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved close from libc.so.0
+2026-03-05 13:32:24,139 angr.project INFO Using builtin SimProcedure for unresolved syscall from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved __errno_location from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved dup from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using stub SimProcedure for unresolved unlinkat
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved sigaction from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved fchmod from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved signal from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved isatty from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved strlen from libc.so.0
+2026-03-05 13:32:24,140 angr.project INFO Using stub SimProcedure for unresolved waitid
+2026-03-05 13:32:24,140 angr.project INFO Using builtin SimProcedure for unresolved waitpid from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved getrlimit from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using stub SimProcedure for unresolved pipe2
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved getpid from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved sysconf from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved setgroups from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved sigaddset from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved sigfillset from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved sigemptyset from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved fdopendir from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved closedir from libc.so.0
+2026-03-05 13:32:24,141 angr.project INFO Using builtin SimProcedure for unresolved dirfd from libc.so.0
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_setpgroup
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_setsigdefault
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_init
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_destroy
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_setflags
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawn_file_actions_init
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawn_file_actions_destroy
+2026-03-05 13:32:24,142 angr.project INFO Using stub SimProcedure for unresolved posix_spawn_file_actions_adddup2
+2026-03-05 13:32:24,142 angr.project INFO Using builtin SimProcedure for unresolved exp2 from libc.so.0
+2026-03-05 13:32:24,142 angr.project INFO Using builtin SimProcedure for unresolved log10 from libc.so.0
+2026-03-05 13:32:24,142 angr.project INFO Using builtin SimProcedure for unresolved log2 from libc.so.0
+2026-03-05 13:32:24,142 angr.project INFO Using builtin SimProcedure for unresolved malloc from libc.so.0
+2026-03-05 13:32:24,142 angr.project INFO Using builtin SimProcedure for unresolved posix_memalign from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved free from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved realloc from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved calloc from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved munmap from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved bcmp from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved fstat64 from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved mmap64 from libc.so.0
+2026-03-05 13:32:24,143 angr.project INFO Using stub SimProcedure for unresolved dl_iterate_phdr
+2026-03-05 13:32:24,143 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetIP
+2026-03-05 13:32:24,143 angr.project INFO Using builtin SimProcedure for unresolved mkdir from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved lseek64 from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved ftruncate64 from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved write from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved readv from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved writev from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using stub SimProcedure for unresolved __xpg_strerror_r
+2026-03-05 13:32:24,144 angr.project INFO Using stub SimProcedure for unresolved recvmsg
+2026-03-05 13:32:24,144 angr.project INFO Using stub SimProcedure for unresolved sendmsg
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved socketpair from libc.so.0
+2026-03-05 13:32:24,144 angr.project INFO Using builtin SimProcedure for unresolved recv from libc.so.0
+2026-03-05 13:32:24,145 angr.project INFO Using builtin SimProcedure for unresolved open64 from libc.so.0
+2026-03-05 13:32:24,145 angr.project INFO Using builtin SimProcedure for unresolved abort from libc.so.0
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_self
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_getattr_np
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_getstack
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_destroy
+2026-03-05 13:32:24,145 angr.project INFO Using builtin SimProcedure for unresolved pause from libc.so.0
+2026-03-05 13:32:24,145 angr.project INFO Using builtin SimProcedure for unresolved getcwd from libc.so.0
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetTextRelBase
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetDataRelBase
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_key_create
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_key_delete
+2026-03-05 13:32:24,145 angr.project INFO Using stub SimProcedure for unresolved pthread_setspecific
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved rmdir from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved unlink from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved lstat64 from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved realpath from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using stub SimProcedure for unresolved openat64
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved readdir64 from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved chroot from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved readlink from libc.so.0
+2026-03-05 13:32:24,146 angr.project INFO Using builtin SimProcedure for unresolved stat64 from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved opendir from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved getenv from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved unsetenv from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using stub SimProcedure for unresolved splice
+2026-03-05 13:32:24,147 angr.project INFO Using stub SimProcedure for unresolved sendfile64
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved getauxval from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using stub SimProcedure for unresolved sigaltstack
+2026-03-05 13:32:24,147 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_getguardsize
+2026-03-05 13:32:24,147 angr.project INFO Using stub SimProcedure for unresolved mprotect
+2026-03-05 13:32:24,147 angr.project INFO Using stub SimProcedure for unresolved gnu_get_libc_version
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved exit from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved chdir from libc.so.0
+2026-03-05 13:32:24,147 angr.project INFO Using builtin SimProcedure for unresolved clock_gettime from libc.so.0
+2026-03-05 13:32:24,148 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_init
+2026-03-05 13:32:24,148 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_setstacksize
+2026-03-05 13:32:24,148 angr.project INFO Using builtin SimProcedure for unresolved pthread_create from libc.so.0
+2026-03-05 13:32:24,148 angr.project INFO Using stub SimProcedure for unresolved pthread_join
+2026-03-05 13:32:24,148 angr.project INFO Using stub SimProcedure for unresolved pthread_setname_np
+2026-03-05 13:32:24,148 angr.project INFO Using stub SimProcedure for unresolved posix_spawnp
+2026-03-05 13:32:24,148 angr.project INFO Using builtin SimProcedure for unresolved fork from libc.so.0
+2026-03-05 13:32:24,148 angr.project INFO Using builtin SimProcedure for unresolved _exit from libc.so.0
+2026-03-05 13:32:24,148 angr.project INFO Using builtin SimProcedure for unresolved dup2 from libc.so.0
+2026-03-05 13:32:24,148 angr.project INFO Using builtin SimProcedure for unresolved setgid from libc.so.0
+2026-03-05 13:32:24,148 angr.project INFO Using builtin SimProcedure for unresolved setuid from libc.so.0
+2026-03-05 13:32:24,149 angr.project INFO Using builtin SimProcedure for unresolved setpgid from libc.so.0
+2026-03-05 13:32:24,149 angr.project INFO Using builtin SimProcedure for unresolved setsid from libc.so.0
+2026-03-05 13:32:24,149 angr.project INFO Using builtin SimProcedure for unresolved execvp from libc.so.0
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved sched_getaffinity
+2026-03-05 13:32:24,149 angr.project INFO Using builtin SimProcedure for unresolved sched_yield from libc.so.0
+2026-03-05 13:32:24,149 angr.project INFO Using builtin SimProcedure for unresolved kill from libc.so.0
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_Backtrace
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved pthread_detach
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetLanguageSpecificData
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetIPInfo
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetRegionStart
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_SetGR
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_SetIP
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_RaiseException
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_DeleteException
+2026-03-05 13:32:24,149 angr.project INFO Using stub SimProcedure for unresolved _Unwind_Resume
+2026-03-05 13:32:24,150 angr.project INFO There are no simprocedures for missing library libgcc_s.so.1 :(
+2026-03-05 13:32:24,150 angr.project INFO There are no simprocedures for missing library libm.so.6 :(
+2026-03-05 13:32:24,150 cle.loader INFO Linking cle##externs
+2026-03-05 13:32:24,150 cle.loader INFO Mapping cle##externs at 0xd00000
+2026-03-05 13:32:24,150 cle.loader INFO Linking cle##tls
+2026-03-05 13:32:24,150 cle.loader INFO Mapping cle##tls at 0xe00000
+2026-03-05 13:32:24,151 cle.loader INFO Mapping cle##kernel at 0xf00000
+2026-03-05 13:32:24,151 angr.analyses.cfg.cfg_base INFO Loaded 5 indirect jump resolvers (3 timeless, 2 generic).
+2026-03-05 13:32:24,152 cle.backends.externs INFO Created extern symbol for UnresolvableJumpTarget
+2026-03-05 13:32:24,152 cle.backends.externs INFO Created extern symbol for UnresolvableCallTarget
+2026-03-05 13:32:24,181 angr.analyses.cfg.cfg_fast INFO Loaded 0 exception handlings from 0 binaries.
+2026-03-05 13:32:24,268 angr.analyses.cfg.cfg_fast INFO Found 14453 functions with prologue scanning.
+2026-03-05 13:33:52,676 angr.storage.memory_mixins.default_filler_mixin WARNING The program is accessing register with an unspecified value. This could indicate unwanted behavior.
+2026-03-05 13:33:52,676 angr.storage.memory_mixins.default_filler_mixin WARNING angr will cope with this by generating an unconstrained symbolic variable and continuing. You can resolve this by:
+2026-03-05 13:33:52,676 angr.storage.memory_mixins.default_filler_mixin WARNING 1) setting a value to the initial state
+2026-03-05 13:33:52,676 angr.storage.memory_mixins.default_filler_mixin WARNING 2) adding the state option ZERO_FILL_UNCONSTRAINED_{MEMORY,REGISTERS}, to make unknown regions hold null
+2026-03-05 13:33:52,676 angr.storage.memory_mixins.default_filler_mixin WARNING 3) adding the state option SYMBOL_FILL_UNCONSTRAINED_{MEMORY,REGISTERS}, to suppress these messages.
+2026-03-05 13:33:52,676 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register rax with 8 unconstrained bytes referenced from 0x0 (not part of a loaded object)
+2026-03-05 13:33:52,677 claripy.frontend.light_frontend INFO Light solver can't handle this is_false().
+2026-03-05 13:33:52,678 claripy.frontend.light_frontend INFO Light solver can't handle this is_false().
+2026-03-05 13:33:52,678 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register rbp with 8 unconstrained bytes referenced from 0xb19775 (_ZN3std3sys6thread4unix6Thread3new17h97a8a75f888b2835E+0x175 in coreutils-sort-O0 (0x719775))
+2026-03-05 13:33:52,679 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register r14 with 8 unconstrained bytes referenced from 0xb19775 (_ZN3std3sys6thread4unix6Thread3new17h97a8a75f888b2835E+0x175 in coreutils-sort-O0 (0x719775))
+2026-03-05 13:33:52,679 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register rsp with 8 unconstrained bytes referenced from 0xb1978a (_ZN3std3sys6thread4unix6Thread3new17h97a8a75f888b2835E+0x18a in coreutils-sort-O0 (0x71978a))
+2026-03-05 13:34:20,075 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xa8de19 has 21 targets: 0xa8de51, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de5d, 0xa8de45, 0xa8de45, 0xa8de69, 0xa8de45, 0xa8de45, 0xa8de45, 0xa8de75
+2026-03-05 13:34:21,208 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb60272 has 40 targets: 0xb60284, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb60388, 0xb60362, 0xb6029d, 0xb6029d, 0xb6037e, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb60392, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6029d, 0xb6036c
+2026-03-05 13:34:21,258 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb62457 in function 0xb62410.
+2026-03-05 13:34:22,990 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0xb52007 is probably illegal. Try to resolve indirect jump at 0xb510b8 from the next source.
+2026-03-05 13:34:22,995 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0xb52007 is probably illegal. Try to resolve indirect jump at 0xb510b8 from the next source.
+2026-03-05 13:34:23,014 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb510b8 has 25 targets: 0xb510c4, 0xb518cc, 0xb5170e, 0xb5140b, 0xb51626, 0xb519ac, 0xb51afa, 0xb5185f, 0xb51b67, 0xb510ea, 0xb511c3, 0xb515ee, 0xb51647, 0xb51ac5, 0xb515b6, 0xb517a5, 0xb5157e, 0xb518ee, 0xb51b2a, 0xb51ccb, 0xb5191d, 0xb51a6a, 0xb51c5a, 0xb51d3f, 0xb5268e
+2026-03-05 13:34:23,467 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8769c9 in function 0x876970.
+2026-03-05 13:34:23,488 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8769c9 in function 0x876970.
+2026-03-05 13:34:23,508 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8769c9 in function 0x876970.
+2026-03-05 13:34:23,614 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x877bb7 in function 0x877b50.
+2026-03-05 13:34:23,633 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x877bb7 in function 0x877b50.
+2026-03-05 13:34:23,652 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x877bb7 in function 0x877b50.
+2026-03-05 13:34:23,956 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb4be89 has 23 targets: 0xb4be99, 0xb4c0fe, 0xb4c1bf, 0xb4c118, 0xb4c1bf, 0xb4c10b, 0xb4c1bf, 0xb4c1bf, 0xb4c1bf, 0xb4c1bf, 0xb4c1bf, 0xb4c1bf, 0xb4c1bf, 0xb4c1bf, 0xb4bf29, 0xb4bf29, 0xb4bf77, 0xb4bf77, 0xb4be99, 0xb4c031, 0xb4c1bf, 0xb4c1bf, 0xb4c0bb
+2026-03-05 13:34:24,134 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x884a56 in function 0x884a00.
+2026-03-05 13:34:24,158 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x884a56 in function 0x884a00.
+2026-03-05 13:34:24,179 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x884a56 in function 0x884a00.
+2026-03-05 13:34:26,008 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x8866df has 38 targets: 0x886713, 0x886733, 0x886753, 0x886773, 0x8866f4, 0x8866f4, 0x886793, 0x8867b3, 0x8867d3, 0x8867f3, 0x8866f4, 0x886813, 0x886833, 0x886853, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x886873, 0x886893, 0x8868b3, 0x8868d3, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8866f4, 0x8868f3, 0x8866f4, 0x886913
+2026-03-05 13:34:26,200 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3ca3c has 6 targets: 0xb3cabd, 0xb3cac3, 0xb3caa6, 0xb3ca4c, 0xb3caab, 0xb3ca4c
+2026-03-05 13:34:26,297 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8c2e1b in function 0x8c2e00.
+2026-03-05 13:34:26,319 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8c2e1b in function 0x8c2e00.
+2026-03-05 13:34:26,338 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8c2e1b in function 0x8c2e00.
+2026-03-05 13:34:26,385 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8c2ead in function 0x8c2e90.
+2026-03-05 13:34:26,404 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8c2ead in function 0x8c2e90.
+2026-03-05 13:34:26,424 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x8c2ead in function 0x8c2e90.
+2026-03-05 13:34:26,458 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb40bc6 has 8 targets: 0xb40d33, 0xb40bdf, 0xb40e9b, 0xb40ef1, 0xb40e48, 0xb40f9a, 0xb40fe9, 0xb40f51
+2026-03-05 13:34:26,488 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb40c70 has 8 targets: 0xb40c80, 0xb40cec, 0xb41a21, 0xb40dfa, 0xb41a21, 0xb41a21, 0xb41a21, 0xb40d59
+2026-03-05 13:34:26,559 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb44000 in function 0xb43e80.
+2026-03-05 13:34:26,592 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb44000 in function 0xb43e80.
+2026-03-05 13:34:26,628 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0xb440c0 is probably illegal. Try to resolve indirect jump at 0xb44000 from the next source.
+2026-03-05 13:34:26,695 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb44000 in function 0xb43e80.
+2026-03-05 13:34:26,739 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb4c6de has 41 targets: 0xb4c812, 0xb4c7f2, 0xb4c90f, 0xb4c945, 0xb4c90f, 0xb4c9ef, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c6ee, 0xb4c771, 0xb4c8a1, 0xb4c90f, 0xb4cab9, 0xb4c90f, 0xb4c90f, 0xb4c727, 0xb4c6ee, 0xb4c727, 0xb4c90f, 0xb4c6ee, 0xb4c727, 0xb4c6ee, 0xb4c727, 0xb4c7d9, 0xb4c90f, 0xb4c90f, 0xb4c6ee, 0xb4c727, 0xb4c90f, 0xb4c90f, 0xb4c90f, 0xb4c6ee, 0xb4c727
+2026-03-05 13:34:26,812 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb43514 in function 0xb434b0.
+2026-03-05 13:34:26,841 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb43514 in function 0xb434b0.
+2026-03-05 13:34:26,936 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3ac5b has 33 targets: 0xb3ac6b, 0xb3ad26, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3b8ca, 0xb3ad91, 0xb3acd1
+2026-03-05 13:34:27,017 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3bff7 has 44 targets: 0xb3c3cc, 0xb3c020, 0xb3c020, 0xb3c020, 0xb3c39d, 0xb3c001, 0xb3c3a7, 0xb3c020, 0xb3c020, 0xb3c020, 0xb3c3e0, 0xb3c3e0, 0xb3c020, 0xb3c018, 0xb3c020, 0xb3c3d3, 0xb3c3e0, 0xb3c39d, 0xb3c001, 0xb3c3a7, 0xb3c020, 0xb3c020, 0xb3c018, 0xb3c020, 0xb3c3b1, 0xb3c020, 0xb3c020, 0xb3c001, 0xb3c018, 0xb3c3c2, 0xb3c018, 0xb3c3a7, 0xb3c3b1, 0xb3c020, 0xb3c020, 0xb3c3a7, 0xb3c3e0, 0xb3c39d, 0xb3c3b8, 0xb3c001, 0xb3c3e0, 0xb3c39d, 0xb3c3b8, 0xb3c001
+2026-03-05 13:34:27,056 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7e53b7 has 39 targets: 0x7e5438, 0x7e539e, 0x7e540b, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e53de, 0x7e539e, 0x7e53fc, 0x7e539e, 0x7e539e, 0x7e5429, 0x7e5474, 0x7e5465, 0x7e539e, 0x7e541a, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e5456, 0x7e5447, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e539e, 0x7e53ed
+2026-03-05 13:34:27,083 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c510 has 139 targets: 0xb3c53b, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c7f5, 0xb3cab4, 0xb3c5a8, 0xb3c5a8, 0xb3c5a8, 0xb3cab4, 0xb3cab4, 0xb3c7b8, 0xb3cab4, 0xb3c89b, 0xb3c74a, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c8e7, 0xb3cab4, 0xb3c53b, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c92f, 0xb3cab4, 0xb3c520, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c53b, 0xb3cab4, 0xb3c5c8, 0xb3cab4, 0xb3c72a, 0xb3c520, 0xb3cab4, 0xb3cab4, 0xb3c8bc, 0xb3c9af, 0xb3cab4, 0xb3cab4, 0xb3c66b, 0xb3c520, 0xb3c867, 0xb3c776, 0xb3c6de, 0xb3c602, 0xb3cab4, 0xb3cab4, 0xb3c6ff, 0xb3cab4, 0xb3c53b, 0xb3cab4, 0xb3c623, 0xb3c84a, 0xb3cab4, 0xb3cab4, 0xb3c53b, 0xb3cab4, 0xb3c53b, 0xb3cab4, 0xb3c53b, 0xb3cab4, 0xb3ca04, 0xb3c53b, 0xb3c520, 0xb3c520, 0xb3c520, 0xb3c7d5, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c5c8, 0xb3cab4, 0xb3c95a, 0xb3c820, 0xb3c797, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c9d9, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c696, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c520, 0xb3c6c1, 0xb3c58b, 0xb3c5e5, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c64e, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c520, 0xb3c520, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c520, 0xb3c520, 0xb3c520, 0xb3c520, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3cab4, 0xb3c912
+2026-03-05 13:34:34,173 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb589ca has 4 targets: 0xb58a81, 0xb589f0, 0xb58a85, 0xb589f0
+2026-03-05 13:34:34,284 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x978d5e has 5 targets: 0x978d9b, 0x978dc0, 0x978de5, 0x978e0a, 0x978e2f
+2026-03-05 13:34:34,310 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb58cab has 4 targets: 0xb58cef, 0xb58cd5, 0xb58cf3, 0xb58cd5
+2026-03-05 13:34:34,342 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb52d00 has 4 targets: 0xb52de5, 0xb52d1a, 0xb52d3b, 0xb52d76
+2026-03-05 13:34:34,957 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x85e398 has 122 targets: 0x85e4f1, 0x85e45f, 0x85e3ad, 0x85e437, 0x85e3ad, 0x85e3ad, 0x85e3bf, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e469, 0x85e4f1, 0x85e3ad, 0x85e3ad, 0x85e3dd, 0x85e419, 0x85e4dc, 0x85e3ad, 0x85e4a4, 0x85e44b, 0x85e441, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e4d5, 0x85e423, 0x85e473, 0x85e4c0, 0x85e4b9, 0x85e481, 0x85e4b2, 0x85e3ad, 0x85e3ad, 0x85e405, 0x85e488, 0x85e3ad, 0x85e47a, 0x85e4ab, 0x85e455, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e4ea, 0x85e3ad, 0x85e3ad, 0x85e3c9, 0x85e3d3, 0x85e48f, 0x85e496, 0x85e3ad, 0x85e3e7, 0x85e3fb, 0x85e3ad, 0x85e3ad, 0x85e49d, 0x85e3ad, 0x85e3ad, 0x85e4ce, 0x85e3f1, 0x85e3ad, 0x85e42d, 0x85e3ad, 0x85e4e3, 0x85e4c7, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e3ad, 0x85e40f
+2026-03-05 13:34:35,880 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1cab6 in function 0xa1ca50.
+2026-03-05 13:34:35,896 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1cab6 in function 0xa1ca50.
+2026-03-05 13:34:35,913 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1cab6 in function 0xa1ca50.
+2026-03-05 13:34:36,198 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3d2a4 has 6 targets: 0xb3d3d2, 0xb3d2c1, 0xb3d3cc, 0xb3d3dc, 0xb3d370, 0xb3d438
+2026-03-05 13:34:36,291 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa13d96 in function 0xa13d30.
+2026-03-05 13:34:36,308 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa13d96 in function 0xa13d30.
+2026-03-05 13:34:36,325 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa13d96 in function 0xa13d30.
+2026-03-05 13:34:36,404 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa13f86 in function 0xa13f20.
+2026-03-05 13:34:36,421 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa13f86 in function 0xa13f20.
+2026-03-05 13:34:36,439 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa13f86 in function 0xa13f20.
+2026-03-05 13:34:37,560 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x99c85e has 8 targets: 0x99c888, 0x99c8c2, 0x99c881, 0x99c881, 0x99c8fc, 0x99c881, 0x99c939, 0x99c976
+2026-03-05 13:34:38,582 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb59e00 in function 0xb59e00.
+2026-03-05 13:34:38,618 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb61830 in function 0xb61830.
+2026-03-05 13:34:39,662 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x85fc56 in function 0x85fbf0.
+2026-03-05 13:34:39,679 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x85fc56 in function 0x85fbf0.
+2026-03-05 13:34:39,696 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x85fc56 in function 0x85fbf0.
+2026-03-05 13:34:39,872 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x9540d7 in function 0x9540a0.
+2026-03-05 13:34:39,893 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x9540d7 in function 0x9540a0.
+2026-03-05 13:34:39,915 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x9540d7 in function 0x9540a0.
+2026-03-05 13:34:39,998 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x95431f in function 0x954300.
+2026-03-05 13:34:40,018 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x95431f in function 0x954300.
+2026-03-05 13:34:40,041 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x95431f in function 0x954300.
+2026-03-05 13:34:40,104 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb1c04b has 6 targets: 0xb1c115, 0xb1c122, 0xb1c10e, 0xb1c061, 0xb1c061, 0xb1c11d
+2026-03-05 13:34:41,509 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb09d3a in function 0xb07f66.
+2026-03-05 13:34:41,537 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb09d3a in function 0xb07f66.
+2026-03-05 13:34:41,570 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb09d3a in function 0xb07f66.
+2026-03-05 13:34:42,051 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1e617 in function 0xa1e5e0.
+2026-03-05 13:34:42,073 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1e617 in function 0xa1e5e0.
+2026-03-05 13:34:42,095 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1e617 in function 0xa1e5e0.
+2026-03-05 13:34:42,587 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa26346 in function 0xa262e0.
+2026-03-05 13:34:42,605 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa26346 in function 0xa262e0.
+2026-03-05 13:34:42,624 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa26346 in function 0xa262e0.
+2026-03-05 13:34:42,728 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa26536 in function 0xa264d0.
+2026-03-05 13:34:42,746 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa26536 in function 0xa264d0.
+2026-03-05 13:34:42,765 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa26536 in function 0xa264d0.
+2026-03-05 13:34:42,844 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0xb17ac1 is probably illegal. Try to resolve indirect jump at 0xb125d2 from the next source.
+2026-03-05 13:34:42,849 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0xb17ac1 is probably illegal. Try to resolve indirect jump at 0xb125d2 from the next source.
+2026-03-05 13:34:42,860 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb125d2 has 4 targets: 0xb12667, 0xb125eb, 0xb12660, 0xb1265e
+2026-03-05 13:34:43,136 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb10fa0 has 4 targets: 0xb10fb5, 0xb10fd7, 0xb10fbe, 0xb10fca
+2026-03-05 13:34:43,150 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb11220 has 4 targets: 0xb11235, 0xb1124c, 0xb1123c, 0xb11245
+2026-03-05 13:34:43,240 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb23a60 in function 0xb23a60.
+2026-03-05 13:34:43,284 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb327c0 in function 0xb327c0.
+2026-03-05 13:34:43,438 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb55910 in function 0xb55910.
+2026-03-05 13:34:43,921 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xae18d6 has 4 targets: 0xae1919, 0xae1926, 0xae1933, 0xae194a
+2026-03-05 13:34:44,643 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb48b2a in function 0xb488a0.
+2026-03-05 13:34:44,676 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb48b2a has 13 targets: 0xb48b3e, 0xb48b66, 0xb48cd1, 0xb48b52, 0xb48b3e, 0xb48e14, 0xb48e14, 0xb48e14, 0xb48e14, 0xb48be2, 0xb48ce1, 0xb48bce, 0xb48b3e
+2026-03-05 13:34:44,694 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb42dab has 4 targets: 0xb42dc0, 0xb42df0, 0xb42d80, 0xb42dd0
+2026-03-05 13:34:44,787 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb48dc9 in function 0xb488a0.
+2026-03-05 13:34:44,817 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb48944 has 6 targets: 0xb489cf, 0xb48997, 0xb48957, 0xb4897e, 0xb4896d, 0xb489c7
+2026-03-05 13:34:44,890 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77c598 has 39 targets: 0x77c5de, 0x77c5b4, 0x77c5c9, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5bb, 0x77c5b4, 0x77c5c2, 0x77c5b4, 0x77c5b4, 0x77c5d7, 0x77c5fa, 0x77c5f3, 0x77c5b4, 0x77c5d0, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5ec, 0x77c5e5, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5b4, 0x77c5bb
+2026-03-05 13:34:45,233 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x824f36 in function 0x824ed0.
+2026-03-05 13:34:45,251 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x824f36 in function 0x824ed0.
+2026-03-05 13:34:45,273 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x824f36 in function 0x824ed0.
+2026-03-05 13:34:45,669 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7d8bb1 has 19 targets: 0x7d8c0c, 0x7d8b92, 0x7d8b92, 0x7d8c6f, 0x7d8b92, 0x7d8bea, 0x7d8b92, 0x7d8b92, 0x7d8b92, 0x7d8bc6, 0x7d8b92, 0x7d8b92, 0x7d8bfb, 0x7d8c5b, 0x7d8c47, 0x7d8b92, 0x7d8b92, 0x7d8b92, 0x7d8c33
+2026-03-05 13:34:45,901 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7e5584 has 38 targets: 0x7e55f4, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5609, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e561f, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e55b0, 0x7e5510, 0x7e55b7, 0x7e5510, 0x7e55c6, 0x7e55d1, 0x7e55dc, 0x7e55e7, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e55ff, 0x7e5510, 0x7e5510, 0x7e5510, 0x7e5614
+2026-03-05 13:34:46,344 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb0d17d has 8 targets: 0xb0d198, 0xb0d456, 0xb0ece0, 0xb0d4af, 0xb0ece0, 0xb0ece0, 0xb0ece0, 0xb0d467
+2026-03-05 13:34:46,387 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb0d24b has 8 targets: 0xb0d266, 0xb0d4d0, 0xb0ece0, 0xb0d528, 0xb0ece0, 0xb0ece0, 0xb0ece0, 0xb0d4e1
+2026-03-05 13:34:46,400 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb13a1f to 0xbb05f0
+2026-03-05 13:34:46,400 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb13a1f to 0xbb05f0
+2026-03-05 13:34:46,401 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb13a1f to 0xbb05f0
+2026-03-05 13:34:46,401 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb13a1f to 0xbb05f0
+2026-03-05 13:34:46,445 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb17b37 has 122 targets: 0xb17b47, 0xb17b89, 0xb17ba4, 0xb17b95, 0xb17ba4, 0xb17ba4, 0xb17b98, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17b8c, 0xb17b8f, 0xb17b47, 0xb17ba4, 0xb17ba4, 0xb17b7a, 0xb17b80, 0xb17b6e, 0xb17ba4, 0xb17b7d, 0xb17b9e, 0xb17b9b, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17b71, 0xb17bad, 0xb17bb0, 0xb17b62, 0xb17bb6, 0xb17b65, 0xb17b92, 0xb17ba4, 0xb17ba4, 0xb17b5f, 0xb17b68, 0xb17ba4, 0xb17b4a, 0xb17ba7, 0xb17b74, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17b4a, 0xb17ba4, 0xb17ba4, 0xb17b5c, 0xb17b59, 0xb17b77, 0xb17b83, 0xb17ba4, 0xb17baa, 0xb17b86, 0xb17ba4, 0xb17ba4, 0xb17b50, 0xb17ba4, 0xb17ba4, 0xb17b6b, 0xb17bb3, 0xb17ba4, 0xb17b4d, 0xb17ba4, 0xb17b56, 0xb17ba1, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17ba4, 0xb17b53
+2026-03-05 13:34:46,479 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x86f02e has 15 targets: 0x86f05f, 0x86f078, 0x86f043, 0x86f043, 0x86f05f, 0x86f091, 0x86f091, 0x86f091, 0x86f043, 0x86f0c7, 0x86f043, 0x86f043, 0x86f0e0, 0x86f043, 0x86f0e0
+2026-03-05 13:34:47,762 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb2954b has 4 targets: 0xb29564, 0xb29940, 0xb298a2, 0xb298eb
+2026-03-05 13:34:47,809 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb29b86 in function 0xb28da0.
+2026-03-05 13:34:47,860 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb29b86 in function 0xb28da0.
+2026-03-05 13:34:47,970 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb29b86 in function 0xb28da0.
+2026-03-05 13:34:48,018 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb29479 has 12 targets: 0xb29489, 0xb29734, 0xb29646, 0xb296c1, 0xb295d6, 0xb2979d, 0xb297a7, 0xb2972a, 0xb297bb, 0xb2963c, 0xb297b1, 0xb29570
+2026-03-05 13:34:48,250 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x740882 in function 0x740850.
+2026-03-05 13:34:48,273 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x740882 in function 0x740850.
+2026-03-05 13:34:48,292 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x740882 in function 0x740850.
+2026-03-05 13:34:48,378 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x912c64 has 64 targets: 0x912c96, 0x912c96, 0x912ca0, 0x912c96, 0x912c96, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912c16, 0x912cb1, 0x912cb1, 0x912cb1, 0x912cc2
+2026-03-05 13:34:48,785 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb12eb4 to 0x64b638
+2026-03-05 13:34:48,785 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb12eb4 to 0x64b638
+2026-03-05 13:34:48,785 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb12eb4 to 0x64b638
+2026-03-05 13:34:48,785 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb12eb4 to 0x64b638
+2026-03-05 13:34:48,931 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7a96d8 has 122 targets: 0x7a9831, 0x7a979f, 0x7a96ed, 0x7a9777, 0x7a96ed, 0x7a96ed, 0x7a96ff, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a97a9, 0x7a9831, 0x7a96ed, 0x7a96ed, 0x7a971d, 0x7a9759, 0x7a981c, 0x7a96ed, 0x7a97e4, 0x7a978b, 0x7a9781, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a9815, 0x7a9763, 0x7a97b3, 0x7a9800, 0x7a97f9, 0x7a97c1, 0x7a97f2, 0x7a96ed, 0x7a96ed, 0x7a9745, 0x7a97c8, 0x7a96ed, 0x7a97ba, 0x7a97eb, 0x7a9795, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a982a, 0x7a96ed, 0x7a96ed, 0x7a9709, 0x7a9713, 0x7a97cf, 0x7a97d6, 0x7a96ed, 0x7a9727, 0x7a973b, 0x7a96ed, 0x7a96ed, 0x7a97dd, 0x7a96ed, 0x7a96ed, 0x7a980e, 0x7a9731, 0x7a96ed, 0x7a976d, 0x7a96ed, 0x7a9823, 0x7a9807, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a96ed, 0x7a974f
+2026-03-05 13:34:54,373 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xac74c0 has 5 targets: 0xac74f2, 0xac7501, 0xac7510, 0xac751f, 0xac752e
+2026-03-05 13:34:55,301 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1bf0a in function 0xa1beb0.
+2026-03-05 13:34:55,323 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1bf0a in function 0xa1beb0.
+2026-03-05 13:34:55,348 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xa1bf0a in function 0xa1beb0.
+2026-03-05 13:34:55,399 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x8125b8 has 122 targets: 0x812711, 0x81267f, 0x8125cd, 0x812657, 0x8125cd, 0x8125cd, 0x8125df, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x812689, 0x812711, 0x8125cd, 0x8125cd, 0x8125fd, 0x812639, 0x8126fc, 0x8125cd, 0x8126c4, 0x81266b, 0x812661, 0x8125cd, 0x8125cd, 0x8125cd, 0x8126f5, 0x812643, 0x812693, 0x8126e0, 0x8126d9, 0x8126a1, 0x8126d2, 0x8125cd, 0x8125cd, 0x812625, 0x8126a8, 0x8125cd, 0x81269a, 0x8126cb, 0x812675, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x81270a, 0x8125cd, 0x8125cd, 0x8125e9, 0x8125f3, 0x8126af, 0x8126b6, 0x8125cd, 0x812607, 0x81261b, 0x8125cd, 0x8125cd, 0x8126bd, 0x8125cd, 0x8125cd, 0x8126ee, 0x812611, 0x8125cd, 0x81264d, 0x8125cd, 0x812703, 0x8126e7, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x8125cd, 0x81262f
+2026-03-05 13:34:55,465 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb1900b has 38 targets: 0xb19214, 0xb191d2, 0xb191d2, 0xb1902c, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb1921d, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb1901b, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb19214
+2026-03-05 13:34:55,539 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb190cb has 38 targets: 0xb19214, 0xb191d2, 0xb191d2, 0xb190ec, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb1921d, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb190db, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb191d2, 0xb19214
+2026-03-05 13:34:55,595 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb15d8d has 38 targets: 0xb15de3, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15d9d, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15d9d, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15d9d, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de8, 0xb15de3
+2026-03-05 13:34:55,625 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x97ad12 has 5 targets: 0x97ad4f, 0x97ad74, 0x97ad99, 0x97adbe, 0x97ade3
+2026-03-05 13:34:55,677 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x814b26 in function 0x814ac0.
+2026-03-05 13:34:55,696 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x814b26 in function 0x814ac0.
+2026-03-05 13:34:55,713 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x814b26 in function 0x814ac0.
+2026-03-05 13:34:55,753 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x814d16 in function 0x814cb0.
+2026-03-05 13:34:55,770 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x814d16 in function 0x814cb0.
+2026-03-05 13:34:55,787 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x814d16 in function 0x814cb0.
+2026-03-05 13:34:55,864 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xa20258 has 122 targets: 0xa203b1, 0xa2031f, 0xa2026d, 0xa202f7, 0xa2026d, 0xa2026d, 0xa2027f, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa20329, 0xa203b1, 0xa2026d, 0xa2026d, 0xa2029d, 0xa202d9, 0xa2039c, 0xa2026d, 0xa20364, 0xa2030b, 0xa20301, 0xa2026d, 0xa2026d, 0xa2026d, 0xa20395, 0xa202e3, 0xa20333, 0xa20380, 0xa20379, 0xa20341, 0xa20372, 0xa2026d, 0xa2026d, 0xa202c5, 0xa20348, 0xa2026d, 0xa2033a, 0xa2036b, 0xa20315, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa203aa, 0xa2026d, 0xa2026d, 0xa20289, 0xa20293, 0xa2034f, 0xa20356, 0xa2026d, 0xa202a7, 0xa202bb, 0xa2026d, 0xa2026d, 0xa2035d, 0xa2026d, 0xa2026d, 0xa2038e, 0xa202b1, 0xa2026d, 0xa202ed, 0xa2026d, 0xa203a3, 0xa20387, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa2026d, 0xa202cf
+2026-03-05 13:34:55,889 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb1224f has 4 targets: 0xb121b8, 0xb12264, 0xb122b5, 0xb122da
+2026-03-05 13:34:56,759 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xac2596 has 133 targets: 0xac25b8, 0xac25c5, 0xac25d2, 0xac25df, 0xac25ec, 0xac25f9, 0xac2606, 0xac2613, 0xac2620, 0xac262d, 0xac263a, 0xac2647, 0xac2654, 0xac2661, 0xac266e, 0xac267b, 0xac2688, 0xac2695, 0xac26a2, 0xac26af, 0xac26bc, 0xac26c9, 0xac26d6, 0xac26e3, 0xac26f0, 0xac26fd, 0xac270a, 0xac2717, 0xac2724, 0xac2731, 0xac273e, 0xac274b, 0xac2758, 0xac2765, 0xac2772, 0xac277f, 0xac278c, 0xac2799, 0xac27a6, 0xac27b3, 0xac25ab, 0xac27c0, 0xac27cd, 0xac27da, 0xac27e7, 0xac27f4, 0xac2801, 0xac280e, 0xac281b, 0xac2828, 0xac2835, 0xac2842, 0xac284f, 0xac285c, 0xac2869, 0xac2876, 0xac2883, 0xac25ab, 0xac2890, 0xac289d, 0xac28aa, 0xac28b7, 0xac28c4, 0xac28d1, 0xac28de, 0xac28eb, 0xac28f8, 0xac2905, 0xac2912, 0xac291f, 0xac292c, 0xac2939, 0xac2946, 0xac2953, 0xac2960, 0xac296d, 0xac297a, 0xac2987, 0xac2994, 0xac29a1, 0xac29ae, 0xac29bb, 0xac29c8, 0xac29d5, 0xac29e2, 0xac29ef, 0xac29fc, 0xac2a09, 0xac2a16, 0xac2a23, 0xac2a30, 0xac2a3d, 0xac2a4a, 0xac2a57, 0xac2a64, 0xac2a71, 0xac2a7e, 0xac2a8b, 0xac2a98, 0xac2aa5, 0xac2ab2, 0xac2abf, 0xac2acc, 0xac2ad9, 0xac2ae6, 0xac2af3, 0xac2b00, 0xac2b0d, 0xac2b1a, 0xac2b27, 0xac2b34, 0xac2b41, 0xac2b4e, 0xac2b5b, 0xac2b68, 0xac2b75, 0xac2b82, 0xac2b8f, 0xac2b9c, 0xac2ba9, 0xac2bb6, 0xac2bc0, 0xac2bca, 0xac2bd4, 0xac2bde, 0xac2be8, 0xac2bf2, 0xac2bfc, 0xac2c06, 0xac2c10, 0xac2c1a, 0xac2c24, 0xac2c2e
+2026-03-05 13:34:56,863 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c042 has 33 targets: 0xb3c304, 0xb3c2b0, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c2d1, 0xb3c054, 0xb3c326, 0xb3c4b2, 0xb3c4b2, 0xb3c0cf, 0xb3c4b2, 0xb3c0cf, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c0cf, 0xb3c108, 0xb3c4b2, 0xb3c054, 0xb3c4b2, 0xb3c0cf, 0xb3c0cf, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c4b2, 0xb3c0cf, 0xb3c0cf
+2026-03-05 13:34:56,912 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb46122 in function 0xb45ff0.
+2026-03-05 13:34:56,940 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb46122 in function 0xb45ff0.
+2026-03-05 13:34:57,025 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb46122 in function 0xb45ff0.
+2026-03-05 13:34:57,478 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb39db3 has 38 targets: 0xb39dc4, 0xb3a1af, 0xb3a0e5, 0xb3a30e, 0xb3a148, 0xb3a118, 0xb3a295, 0xb3a1dc, 0xb3a269, 0xb39fef, 0xb39f8b, 0xb3a094, 0xb3a01e, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb3a3d1, 0xb39ec2, 0xb39ec2, 0xb39e59, 0xb39ec2, 0xb39ec2, 0xb39e08, 0xb39f41, 0xb3a380, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb39ec2, 0xb3a347, 0xb3a236, 0xb39ed5, 0xb39f08
+2026-03-05 13:34:57,526 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3ab8c has 44 targets: 0xb3b2d3, 0xb3b8ca, 0xb3b1aa, 0xb3b3e7, 0xb3b097, 0xb3b37a, 0xb3b4bc, 0xb3b164, 0xb3b31a, 0xb3b1d0, 0xb3b069, 0xb3b543, 0xb3b0fd, 0xb3b574, 0xb3b68f, 0xb3b66d, 0xb3b48e, 0xb3afeb, 0xb3aedc, 0xb3afa0, 0xb3b1f4, 0xb3ab96, 0xb3af78, 0xb3b41c, 0xb3b198, 0xb3ad26, 0xb3ac6b, 0xb3b6f4, 0xb3acd1, 0xb3b287, 0xb3b618, 0xb3ae3b, 0xb3b5c9, 0xb3b827, 0xb3af13, 0xb3b01e, 0xb3b5e3, 0xb3b7ae, 0xb3adff, 0xb3b764, 0xb3b259, 0xb3b0ca, 0xb3b72b, 0xb3aea5
+2026-03-05 13:34:57,575 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3ce1d has 6 targets: 0xb3ce56, 0xb3ce65, 0xb3ce3c, 0xb3ce2d, 0xb3ce4a, 0xb3ce2d
+2026-03-05 13:34:57,616 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3ce8d has 6 targets: 0xb3ceca, 0xb3cedb, 0xb3ceae, 0xb3ce9d, 0xb3cebe, 0xb3ce9d
+2026-03-05 13:34:57,639 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb59d03 has 4 targets: 0xb59d30, 0xb59d55, 0xb59d59, 0xb59d30
+2026-03-05 13:34:57,670 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3fb41 has 6 targets: 0xb3fb51, 0xb3fbe0, 0xb3fc24, 0xb3fb97, 0xb3fc31, 0xb3fc73
+2026-03-05 13:34:57,779 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb40770 has 8 targets: 0xb40781, 0xb407d4, 0xb40848, 0xb407aa, 0xb40848, 0xb40848, 0xb40848, 0xb407fb
+2026-03-05 13:34:58,204 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x9fcf46 in function 0x9fcee0.
+2026-03-05 13:34:58,221 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x9fcf46 in function 0x9fcee0.
+2026-03-05 13:34:58,238 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x9fcf46 in function 0x9fcee0.
+2026-03-05 13:34:58,436 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb58712 in function 0xb58640.
+2026-03-05 13:34:58,456 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb58712 in function 0xb58640.
+2026-03-05 13:34:58,500 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb58712 in function 0xb58640.
+2026-03-05 13:34:58,546 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xa01783 has 4 targets: 0xa0179f, 0xa017a6, 0xa017ad, 0xa017b4
+2026-03-05 13:34:58,841 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x976dae has 5 targets: 0x976deb, 0x976e10, 0x976e35, 0x976e5a, 0x976e7f
+2026-03-05 13:34:59,445 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb33f18 has 4 targets: 0xb33f27, 0xb33f7a, 0xb33f32, 0xb33f56
+2026-03-05 13:34:59,461 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb33aab has 4 targets: 0xb33aba, 0xb33b0e, 0xb33a66, 0xb33aed
+2026-03-05 13:34:59,503 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x8b3368 has 122 targets: 0x8b34c1, 0x8b342f, 0x8b337d, 0x8b3407, 0x8b337d, 0x8b337d, 0x8b338f, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b3439, 0x8b34c1, 0x8b337d, 0x8b337d, 0x8b33ad, 0x8b33e9, 0x8b34ac, 0x8b337d, 0x8b3474, 0x8b341b, 0x8b3411, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b34a5, 0x8b33f3, 0x8b3443, 0x8b3490, 0x8b3489, 0x8b3451, 0x8b3482, 0x8b337d, 0x8b337d, 0x8b33d5, 0x8b3458, 0x8b337d, 0x8b344a, 0x8b347b, 0x8b3425, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b34ba, 0x8b337d, 0x8b337d, 0x8b3399, 0x8b33a3, 0x8b345f, 0x8b3466, 0x8b337d, 0x8b33b7, 0x8b33cb, 0x8b337d, 0x8b337d, 0x8b346d, 0x8b337d, 0x8b337d, 0x8b349e, 0x8b33c1, 0x8b337d, 0x8b33fd, 0x8b337d, 0x8b34b3, 0x8b3497, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b337d, 0x8b33df
+2026-03-05 13:34:59,540 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb397e1 has 5 targets: 0xb39778, 0xb397f1, 0xb39874, 0xb3989e, 0xb39843
+2026-03-05 13:34:59,611 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb28406 has 8 targets: 0xb28420, 0xb28597, 0xb28bde, 0xb285d5, 0xb28bde, 0xb28bde, 0xb28bde, 0xb285a6
+2026-03-05 13:34:59,646 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb28369 has 8 targets: 0xb28383, 0xb28531, 0xb28bc9, 0xb2856f, 0xb28bc9, 0xb28bc9, 0xb28bc9, 0xb28540
+2026-03-05 13:34:59,702 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb47a4a has 87 targets: 0xb47d70, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47c46, 0xb47b97, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47a5a, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47a5a, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e01, 0xb47e1b, 0xb47e01, 0xb47ce4, 0xb47d1c, 0xb47b5f
+2026-03-05 13:34:59,747 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x88b52f in function 0x88b500.
+2026-03-05 13:34:59,766 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x88b52f in function 0x88b500.
+2026-03-05 13:34:59,784 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x88b52f in function 0x88b500.
+2026-03-05 13:34:59,863 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3d9bd has 27 targets: 0xb3d9cd, 0xb3da7d, 0xb3daa8, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3db2e
+2026-03-05 13:34:59,905 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3da0c has 25 targets: 0xb3d8f0, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3da1c, 0xb3db02, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3d920, 0xb3dad3
+2026-03-05 13:34:59,971 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3e93c has 8 targets: 0xb3e950, 0xb3ec0d, 0xb3e793, 0xb3ec00, 0xb3e793, 0xb3e793, 0xb3e793, 0xb3ec1b
+2026-03-05 13:35:00,440 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x97ccc2 has 5 targets: 0x97ccff, 0x97cd24, 0x97cd49, 0x97cd6e, 0x97cd93
+2026-03-05 13:35:00,584 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb58615 in function 0xb585e0.
+2026-03-05 13:35:00,627 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb58615 in function 0xb585e0.
+2026-03-05 13:35:08,995 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb5141d has 4 targets: 0xb5207a, 0xb514ab, 0xb5206b, 0xb52082
+2026-03-05 13:35:09,031 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c7a8 has 6 targets: 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b
+2026-03-05 13:35:09,067 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb47cbf has 8 targets: 0xb47cd3, 0xb48043, 0xb4858a, 0xb48081, 0xb4858a, 0xb4858a, 0xb4858a, 0xb48052
+2026-03-05 13:35:09,109 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb29961 has 8 targets: 0xb29978, 0xb2a07c, 0xb2ad53, 0xb2a0c4, 0xb2ad53, 0xb2ad53, 0xb2ad53, 0xb2a08c
+2026-03-05 13:35:09,208 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c9c0 has 6 targets: 0xb3ca8c, 0xb3ca92, 0xb3ca7c, 0xb3c9d0, 0xb3ca81, 0xb3c9d0
+2026-03-05 13:35:09,271 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3b3a3 has 120 targets: 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be66, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3b3b3, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3be78, 0xb3b3b3
+2026-03-05 13:35:09,301 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb47cfc has 6 targets: 0xb48028, 0xb48031, 0xb4800f, 0xb47d10, 0xb48017, 0xb47d10
+2026-03-05 13:35:09,342 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb39882 has 6 targets: 0xb39892, 0xb398c8, 0xb39900, 0xb39902, 0xb398e0, 0xb39902
+2026-03-05 13:35:09,369 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb47b77 has 6 targets: 0xb47feb, 0xb47ffd, 0xb47fbf, 0xb47b8b, 0xb47fd0, 0xb47b8b
+2026-03-05 13:35:09,406 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c5b8 has 8 targets: 0xb3c887, 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b, 0xb3c887
+2026-03-05 13:35:09,433 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c6ef has 6 targets: 0xb3ca68, 0xb3ca57, 0xb3ca52, 0xb3c841, 0xb3ca5d, 0xb3c841
+2026-03-05 13:35:09,470 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb40fff has 8 targets: 0xb4100f, 0xb412ea, 0xb41a96, 0xb41421, 0xb41a96, 0xb41a96, 0xb41a96, 0xb41379
+2026-03-05 13:35:09,498 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c73a has 8 targets: 0xb3c887, 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b, 0xb3c887
+2026-03-05 13:35:09,530 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c787 has 6 targets: 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b
+2026-03-05 13:35:09,592 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c613 has 6 targets: 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b
+2026-03-05 13:35:09,619 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb398ac has 6 targets: 0xb398bc, 0xb398d4, 0xb39933, 0xb39935, 0xb3990b, 0xb39935
+2026-03-05 13:35:09,698 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c1f3 has 44 targets: 0xb3c3c9, 0xb3c4ac, 0xb3c304, 0xb3c2b0, 0xb3c39a, 0xb3c367, 0xb3c3a4, 0xb3c2d1, 0xb3c054, 0xb3c326, 0xb3c36f, 0xb3c36f, 0xb3c0cf, 0xb3c392, 0xb3c0cf, 0xb3c3d0, 0xb3c36f, 0xb3c39a, 0xb3c367, 0xb3c3a4, 0xb3c0cf, 0xb3c203, 0xb3c392, 0xb3c054, 0xb3c3ae, 0xb3c0cf, 0xb3c0cf, 0xb3c367, 0xb3c392, 0xb3c3bf, 0xb3c392, 0xb3c3a4, 0xb3c3ae, 0xb3c0cf, 0xb3c0cf, 0xb3c3a4, 0xb3c36f, 0xb3c39a, 0xb3c3b5, 0xb3c367, 0xb3c36f, 0xb3c39a, 0xb3c3b5, 0xb3c367
+2026-03-05 13:35:09,744 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb40fb0 has 8 targets: 0xb40fc0, 0xb412c0, 0xb41a96, 0xb413fb, 0xb41a96, 0xb41a96, 0xb41a96, 0xb4132c
+2026-03-05 13:35:09,808 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb5146c has 4 targets: 0xb5207a, 0xb514ab, 0xb5206b, 0xb52082
+2026-03-05 13:35:09,838 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb47c21 has 8 targets: 0xb47c35, 0xb480aa, 0xb485d2, 0xb480e8, 0xb485d2, 0xb485d2, 0xb485d2, 0xb480b9
+2026-03-05 13:35:09,878 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3b2e1 has 8 targets: 0xb3b2f7, 0xb3bdab, 0xb3be2f, 0xb3bd8a, 0xb3be2f, 0xb3be2f, 0xb3be2f, 0xb3bdc9
+2026-03-05 13:35:09,908 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c8ac has 6 targets: 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b
+2026-03-05 13:35:09,938 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb397fb has 6 targets: 0xb3980b, 0xb398f4, 0xb3993e, 0xb39940, 0xb3991f, 0xb39940
+2026-03-05 13:35:09,964 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c831 has 6 targets: 0xb3ca68, 0xb3ca57, 0xb3ca52, 0xb3c841, 0xb3ca5d, 0xb3c841
+2026-03-05 13:35:10,007 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c7e5 has 8 targets: 0xb3c887, 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b, 0xb3c887
+2026-03-05 13:35:10,034 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c877 has 10 targets: 0xb3c887, 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b, 0xb3c887, 0xb3cab4, 0xb3c55a
+2026-03-05 13:35:10,061 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3c96b has 6 targets: 0xb3c98c, 0xb3c981, 0xb3c987, 0xb3c97b, 0xb3c992, 0xb3c97b
+2026-03-05 13:35:10,085 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb489a4 has 16 targets: 0xb489ba, 0xb48a43, 0xb48a6c, 0xb489e5, 0xb489ba, 0xb48e14, 0xb48e14, 0xb48e14, 0xb48e14, 0xb489ee, 0xb48a38, 0xb48a77, 0xb489ba, 0xb48b0a, 0xb48b32, 0xb48c9d
+2026-03-05 13:35:10,126 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb3b4e8 has 120 targets: 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3bedd, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3b4fb, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3beef, 0xb3b4fb
+2026-03-05 13:35:10,159 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb40f67 has 8 targets: 0xb40f77, 0xb411bf, 0xb41a96, 0xb41221, 0xb41a96, 0xb41a96, 0xb41a96, 0xb411e0
+2026-03-05 13:35:36,947 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x9922d9 has 8 targets: 0x992941, 0x9917bb, 0x9917bb, 0x9917bb, 0x992950, 0x9917bb, 0x99295c, 0x99296f
+2026-03-05 13:35:37,104 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x993041 has 8 targets: 0x993522, 0x9917bb, 0x99350c, 0x99350c, 0x99350c, 0x99350c, 0x993531, 0x993540
+2026-03-05 13:35:40,712 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x9fe37b has 21 targets: 0x9fe3b0, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3bc, 0x9fe3a4, 0x9fe3a4, 0x9fe3c8, 0x9fe3a4, 0x9fe3a4, 0x9fe3a4, 0x9fe3d4
+2026-03-05 13:35:47,577 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb414fd has 8 targets: 0xb41516, 0xb41599, 0xb41a9d, 0xb415f8, 0xb41a9d, 0xb41a9d, 0xb41a9d, 0xb415ae
+2026-03-05 13:35:47,608 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb41563 has 8 targets: 0xb41580, 0xb415e8, 0xb41a9d, 0xb41665, 0xb41a9d, 0xb41a9d, 0xb41a9d, 0xb41630
+2026-03-05 13:35:47,634 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb41693 has 8 targets: 0xb416ac, 0xb416ca, 0xb41a9d, 0xb41724, 0xb41a9d, 0xb41a9d, 0xb41a9d, 0xb416df
+2026-03-05 13:35:47,668 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0xb41792 has 8 targets: 0xb417ab, 0xb41843, 0xb41a9d, 0xb41899, 0xb41a9d, 0xb41a9d, 0xb41a9d, 0xb41853
+2026-03-05 13:35:47,700 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0xb41d19 in function 0xb41d19.
+2026-03-05 13:35:48,148 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0xb62d70 to 0xbb0b68
+2026-03-05 13:39:25,864 rustdiff.loader INFO Loaded 20193 functions (6763 user, 9210 stdlib, 2098 generated, 2122 other)
+2026-03-05 13:39:25,961 rustdiff.loader INFO Loading binary: tmp/coreutils-sort-O2
+2026-03-05 13:39:25,962 angr.project INFO Loading binary tmp/coreutils-sort-O2
+2026-03-05 13:39:26,994 case_study WARNING Debug info load failed for binary2: refaddr 141611 not in DIE range of CU 0; retrying without
+2026-03-05 13:39:26,994 rustdiff.loader INFO Loading binary: tmp/coreutils-sort-O2
+2026-03-05 13:39:26,994 angr.project INFO Loading binary tmp/coreutils-sort-O2
+2026-03-05 13:39:27,653 cle.loader INFO Linking /fs/ess/PAS1888/bond/bond-proj/tmp/coreutils-sort-O2
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for __libc_start_main
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for close
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for memcpy
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for bcmp
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for memcmp
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for memmove
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for setlocale
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for fcntl
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for memset
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sem_wait
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sem_init
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sem_post
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for __errno_location
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for read
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for dlsym
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for syscall
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for open
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for poll
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for isatty
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sigaction
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for signal
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for unlinkat
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for fchmod
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for dup
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for strlen
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sigaddset
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sigfillset
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sigemptyset
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for sysconf
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for getpid
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for pipe2
+2026-03-05 13:39:27,656 cle.backends.externs INFO Created extern symbol for setgroups
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawnattr_setpgroup
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawnattr_setsigdefault
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawnattr_init
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawnattr_destroy
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawnattr_setflags
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawn_file_actions_init
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawn_file_actions_destroy
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_spawn_file_actions_adddup2
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for getrlimit
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for waitpid
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for waitid
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for fdopendir
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for closedir
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for dirfd
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for log10
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for exp2
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for log2
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for malloc
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for posix_memalign
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for free
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for realloc
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for calloc
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for munmap
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for fstat64
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for mmap64
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for dl_iterate_phdr
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for _Unwind_GetIP
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for mkdir
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for lseek64
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for ftruncate64
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for write
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for readv
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for writev
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for __xpg_strerror_r
+2026-03-05 13:39:27,657 cle.backends.externs INFO Created extern symbol for recvmsg
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for sendmsg
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for socketpair
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for recv
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for open64
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for abort
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_self
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_getattr_np
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_attr_getstack
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_attr_destroy
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pause
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for getcwd
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for environ
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for _Unwind_GetTextRelBase
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for _Unwind_GetDataRelBase
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_key_create
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_key_delete
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for pthread_setspecific
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for rmdir
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for unlink
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for lstat64
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for realpath
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for openat64
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for readdir64
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for chroot
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for readlink
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for stat64
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for opendir
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for getenv
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for unsetenv
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for splice
+2026-03-05 13:39:27,658 cle.backends.externs INFO Created extern symbol for sendfile64
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for getauxval
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for sigaltstack
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_attr_getguardsize
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for mprotect
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for gnu_get_libc_version
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for exit
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for chdir
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for clock_gettime
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_attr_init
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_attr_setstacksize
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_create
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_join
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_setname_np
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for posix_spawnp
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for fork
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _exit
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for dup2
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for setgid
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for setuid
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for setpgid
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for setsid
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for execvp
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for sched_getaffinity
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for sched_yield
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for kill
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_Backtrace
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for pthread_detach
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_GetLanguageSpecificData
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_GetIPInfo
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_GetRegionStart
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_SetGR
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_SetIP
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_RaiseException
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_DeleteException
+2026-03-05 13:39:27,659 cle.backends.externs INFO Created extern symbol for _Unwind_Resume
+2026-03-05 13:39:27,660 cle.loader INFO Mapping /fs/ess/PAS1888/bond/bond-proj/tmp/coreutils-sort-O2 at 0x400000
+2026-03-05 13:39:27,660 cle.loader INFO Mapping cle##externs at 0x800000
+2026-03-05 13:39:27,674 angr.project INFO There are no simprocedures for missing library libgcc_s.so.1 :(
+2026-03-05 13:39:27,674 angr.project INFO There are no simprocedures for missing library libm.so.6 :(
+2026-03-05 13:39:27,674 angr.project INFO Using builtin SimProcedure for unresolved __libc_start_main from libc.so.0
+2026-03-05 13:39:27,674 angr.project INFO Using builtin SimProcedure for unresolved close from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved memcpy from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved bcmp from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved memcmp from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved memmove from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved setlocale from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved fcntl from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved memset from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved sem_wait from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved sem_init from libc.so.0
+2026-03-05 13:39:27,675 angr.project INFO Using builtin SimProcedure for unresolved sem_post from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved __errno_location from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved read from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using stub SimProcedure for unresolved dlsym
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved syscall from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved open from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved poll from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved isatty from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved sigaction from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved signal from libc.so.0
+2026-03-05 13:39:27,676 angr.project INFO Using stub SimProcedure for unresolved unlinkat
+2026-03-05 13:39:27,676 angr.project INFO Using builtin SimProcedure for unresolved fchmod from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved dup from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved strlen from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved sigaddset from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved sigfillset from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved sigemptyset from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved sysconf from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved getpid from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved pipe2
+2026-03-05 13:39:27,677 angr.project INFO Using builtin SimProcedure for unresolved setgroups from libc.so.0
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_setpgroup
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_setsigdefault
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_init
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_destroy
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved posix_spawnattr_setflags
+2026-03-05 13:39:27,677 angr.project INFO Using stub SimProcedure for unresolved posix_spawn_file_actions_init
+2026-03-05 13:39:27,678 angr.project INFO Using stub SimProcedure for unresolved posix_spawn_file_actions_destroy
+2026-03-05 13:39:27,678 angr.project INFO Using stub SimProcedure for unresolved posix_spawn_file_actions_adddup2
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved getrlimit from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved waitpid from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using stub SimProcedure for unresolved waitid
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved fdopendir from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved closedir from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved dirfd from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved log10 from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved exp2 from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved log2 from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved malloc from libc.so.0
+2026-03-05 13:39:27,678 angr.project INFO Using builtin SimProcedure for unresolved posix_memalign from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved free from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved realloc from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved calloc from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved munmap from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved fstat64 from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved mmap64 from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using stub SimProcedure for unresolved dl_iterate_phdr
+2026-03-05 13:39:27,679 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetIP
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved mkdir from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved lseek64 from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved ftruncate64 from libc.so.0
+2026-03-05 13:39:27,679 angr.project INFO Using builtin SimProcedure for unresolved write from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using builtin SimProcedure for unresolved readv from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using builtin SimProcedure for unresolved writev from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved __xpg_strerror_r
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved recvmsg
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved sendmsg
+2026-03-05 13:39:27,680 angr.project INFO Using builtin SimProcedure for unresolved socketpair from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using builtin SimProcedure for unresolved recv from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using builtin SimProcedure for unresolved open64 from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using builtin SimProcedure for unresolved abort from libc.so.0
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved pthread_self
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved pthread_getattr_np
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_getstack
+2026-03-05 13:39:27,680 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_destroy
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved pause from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved getcwd from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetTextRelBase
+2026-03-05 13:39:27,681 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetDataRelBase
+2026-03-05 13:39:27,681 angr.project INFO Using stub SimProcedure for unresolved pthread_key_create
+2026-03-05 13:39:27,681 angr.project INFO Using stub SimProcedure for unresolved pthread_key_delete
+2026-03-05 13:39:27,681 angr.project INFO Using stub SimProcedure for unresolved pthread_setspecific
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved rmdir from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved unlink from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved lstat64 from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved realpath from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using stub SimProcedure for unresolved openat64
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved readdir64 from libc.so.0
+2026-03-05 13:39:27,681 angr.project INFO Using builtin SimProcedure for unresolved chroot from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved readlink from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved stat64 from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved opendir from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved getenv from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved unsetenv from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using stub SimProcedure for unresolved splice
+2026-03-05 13:39:27,682 angr.project INFO Using stub SimProcedure for unresolved sendfile64
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved getauxval from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using stub SimProcedure for unresolved sigaltstack
+2026-03-05 13:39:27,682 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_getguardsize
+2026-03-05 13:39:27,682 angr.project INFO Using stub SimProcedure for unresolved mprotect
+2026-03-05 13:39:27,682 angr.project INFO Using stub SimProcedure for unresolved gnu_get_libc_version
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved exit from libc.so.0
+2026-03-05 13:39:27,682 angr.project INFO Using builtin SimProcedure for unresolved chdir from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved clock_gettime from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_init
+2026-03-05 13:39:27,683 angr.project INFO Using stub SimProcedure for unresolved pthread_attr_setstacksize
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved pthread_create from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using stub SimProcedure for unresolved pthread_join
+2026-03-05 13:39:27,683 angr.project INFO Using stub SimProcedure for unresolved pthread_setname_np
+2026-03-05 13:39:27,683 angr.project INFO Using stub SimProcedure for unresolved posix_spawnp
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved fork from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved _exit from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved dup2 from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved setgid from libc.so.0
+2026-03-05 13:39:27,683 angr.project INFO Using builtin SimProcedure for unresolved setuid from libc.so.0
+2026-03-05 13:39:27,684 angr.project INFO Using builtin SimProcedure for unresolved setpgid from libc.so.0
+2026-03-05 13:39:27,684 angr.project INFO Using builtin SimProcedure for unresolved setsid from libc.so.0
+2026-03-05 13:39:27,684 angr.project INFO Using builtin SimProcedure for unresolved execvp from libc.so.0
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved sched_getaffinity
+2026-03-05 13:39:27,684 angr.project INFO Using builtin SimProcedure for unresolved sched_yield from libc.so.0
+2026-03-05 13:39:27,684 angr.project INFO Using builtin SimProcedure for unresolved kill from libc.so.0
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_Backtrace
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved pthread_detach
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetLanguageSpecificData
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetIPInfo
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_GetRegionStart
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_SetGR
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_SetIP
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_RaiseException
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_DeleteException
+2026-03-05 13:39:27,684 angr.project INFO Using stub SimProcedure for unresolved _Unwind_Resume
+2026-03-05 13:39:27,685 angr.project INFO There are no simprocedures for missing library libgcc_s.so.1 :(
+2026-03-05 13:39:27,685 angr.project INFO There are no simprocedures for missing library libm.so.6 :(
+2026-03-05 13:39:27,685 cle.loader INFO Linking cle##externs
+2026-03-05 13:39:27,685 cle.loader INFO Mapping cle##externs at 0x900000
+2026-03-05 13:39:27,685 cle.loader INFO Linking cle##tls
+2026-03-05 13:39:27,685 cle.loader INFO Mapping cle##tls at 0xa00000
+2026-03-05 13:39:27,686 cle.loader INFO Mapping cle##kernel at 0xb00000
+2026-03-05 13:39:27,686 angr.analyses.cfg.cfg_base INFO Loaded 5 indirect jump resolvers (3 timeless, 2 generic).
+2026-03-05 13:39:27,686 cle.backends.externs INFO Created extern symbol for UnresolvableJumpTarget
+2026-03-05 13:39:27,686 cle.backends.externs INFO Created extern symbol for UnresolvableCallTarget
+2026-03-05 13:39:27,696 angr.analyses.cfg.cfg_fast INFO Loaded 0 exception handlings from 0 binaries.
+2026-03-05 13:39:27,719 angr.analyses.cfg.cfg_fast INFO Found 2635 functions with prologue scanning.
+2026-03-05 13:40:18,860 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register rax with 8 unconstrained bytes referenced from 0x0 (not part of a loaded object)
+2026-03-05 13:40:18,862 claripy.frontend.light_frontend INFO Light solver can't handle this is_false().
+2026-03-05 13:40:18,862 claripy.frontend.light_frontend INFO Light solver can't handle this is_false().
+2026-03-05 13:40:18,863 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register rbp with 8 unconstrained bytes referenced from 0x753ae5 (_ZN3std3sys6thread4unix6Thread3new17h97a8a75f888b2835E+0x175 in coreutils-sort-O2 (0x353ae5))
+2026-03-05 13:40:18,863 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register r14 with 8 unconstrained bytes referenced from 0x753ae5 (_ZN3std3sys6thread4unix6Thread3new17h97a8a75f888b2835E+0x175 in coreutils-sort-O2 (0x353ae5))
+2026-03-05 13:40:18,864 angr.storage.memory_mixins.default_filler_mixin WARNING Filling register rsp with 8 unconstrained bytes referenced from 0x753afa (_ZN3std3sys6thread4unix6Thread3new17h97a8a75f888b2835E+0x18a in coreutils-sort-O2 (0x353afa))
+2026-03-05 13:40:20,045 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f8a7e is probably illegal. Try to resolve indirect jump at 0x5f8422 from the next source.
+2026-03-05 13:40:20,051 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f8a7e is probably illegal. Try to resolve indirect jump at 0x5f8422 from the next source.
+2026-03-05 13:40:20,061 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f8a7e is probably illegal. Try to resolve indirect jump at 0x5f8422 from the next source.
+2026-03-05 13:40:20,083 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f8a7e is probably illegal. Try to resolve indirect jump at 0x5f8422 from the next source.
+2026-03-05 13:40:20,101 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f8a7e is probably illegal. Try to resolve indirect jump at 0x5f8422 from the next source.
+2026-03-05 13:40:20,101 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5f8422 in function 0x5f8300.
+2026-03-05 13:40:20,168 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x782cb4 has 6 targets: 0x782d3f, 0x782d07, 0x782cc7, 0x782cee, 0x782cdd, 0x782d37
+2026-03-05 13:40:20,382 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6deda8 has 4 targets: 0x6dedbb, 0x6dedd6, 0x6dedbb, 0x6dee11
+2026-03-05 13:40:20,418 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x68bdcf has 4 targets: 0x68bd60, 0x68be16, 0x68be30, 0x68be50
+2026-03-05 13:40:20,446 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x782e9a in function 0x782c10.
+2026-03-05 13:40:20,476 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x782e9a has 13 targets: 0x782eae, 0x782ed6, 0x783041, 0x782ec2, 0x782eae, 0x783184, 0x783184, 0x783184, 0x783184, 0x782f52, 0x783051, 0x782f3e, 0x782eae
+2026-03-05 13:40:20,807 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x60e5f5 in function 0x60e5d0.
+2026-03-05 13:40:20,828 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x60e5f5 in function 0x60e5d0.
+2026-03-05 13:40:20,849 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x60e5f5 in function 0x60e5d0.
+2026-03-05 13:40:20,940 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x786140 has 23 targets: 0x786150, 0x7863b5, 0x786476, 0x7863cf, 0x786476, 0x7863c2, 0x786476, 0x786476, 0x786476, 0x786476, 0x786476, 0x786476, 0x786476, 0x786476, 0x7861e0, 0x7861e0, 0x78622e, 0x78622e, 0x786150, 0x7862e8, 0x786476, 0x786476, 0x786372
+2026-03-05 13:40:21,030 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x777d2d has 27 targets: 0x777d3d, 0x777ded, 0x777e18, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777e9e
+2026-03-05 13:40:21,076 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x781dba has 87 targets: 0x7820e0, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x781fb6, 0x781f07, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x781dca, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x781dca, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x782171, 0x78218b, 0x782171, 0x782054, 0x78208c, 0x781ecf
+2026-03-05 13:40:21,112 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7626d9 has 8 targets: 0x7626f3, 0x7628a1, 0x762f39, 0x7628df, 0x762f39, 0x762f39, 0x762f39, 0x7628b0
+2026-03-05 13:40:21,144 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6e43c9 has 4 targets: 0x6e43dc, 0x6e43f7, 0x6e43dc, 0x6e4441
+2026-03-05 13:40:21,156 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x76e288 has 4 targets: 0x76e297, 0x76e2ea, 0x76e2a2, 0x76e2c6
+2026-03-05 13:40:21,250 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7563bb has 6 targets: 0x756485, 0x756492, 0x75647e, 0x7563d1, 0x7563d1, 0x75648d
+2026-03-05 13:40:21,276 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x708c20 has 16 targets: 0x708d69, 0x708d69, 0x708d69, 0x708d69, 0x708d69, 0x709ab2, 0x709afb, 0x708d69, 0x708c3b, 0x708cb0, 0x708d30, 0x708d69, 0x708d69, 0x708d69, 0x709999, 0x7099ef
+2026-03-05 13:40:21,326 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x773b51 has 5 targets: 0x773ae8, 0x773b61, 0x773be4, 0x773c0e, 0x773bb3
+2026-03-05 13:40:21,432 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x783139 in function 0x782c10.
+2026-03-05 13:40:21,486 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x64b479 has 4 targets: 0x64b488, 0x64b445, 0x64b4aa, 0x64b4c6
+2026-03-05 13:40:21,502 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x76de1b has 4 targets: 0x76de2a, 0x76de7e, 0x76ddd6, 0x76de5d
+2026-03-05 13:40:21,568 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x762776 has 8 targets: 0x762790, 0x762907, 0x762f4e, 0x762945, 0x762f4e, 0x762f4e, 0x762f4e, 0x762916
+2026-03-05 13:40:21,600 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x708765 has 5 targets: 0x708775, 0x7088a7, 0x708968, 0x70883f, 0x708854
+2026-03-05 13:40:21,617 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x6ea3a5 in function 0x6ea3a0.
+2026-03-05 13:40:21,679 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x70a1aa has 5 targets: 0x70a1ba, 0x70a316, 0x70a3f5, 0x70a29d, 0x70a2b2
+2026-03-05 13:40:21,786 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x778cac has 8 targets: 0x778cc0, 0x778f7d, 0x778b03, 0x778f70, 0x778b03, 0x778b03, 0x778b03, 0x778f8b
+2026-03-05 13:40:21,803 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67cd50 in function 0x67cd50.
+2026-03-05 13:40:21,846 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x62f285 in function 0x62f260.
+2026-03-05 13:40:21,867 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x62f285 in function 0x62f260.
+2026-03-05 13:40:21,888 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x62f285 in function 0x62f260.
+2026-03-05 13:40:21,901 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77d11b has 4 targets: 0x77d130, 0x77d160, 0x77d0f0, 0x77d140
+2026-03-05 13:40:21,953 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x777d7c has 25 targets: 0x777c60, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777d8c, 0x777e72, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777c90, 0x777e43
+2026-03-05 13:40:22,007 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6f9189 has 4 targets: 0x6f919c, 0x6f91b7, 0x6f919c, 0x6f9201
+2026-03-05 13:40:22,102 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x75343b has 38 targets: 0x753584, 0x753542, 0x753542, 0x75345c, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x75358d, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x75344b, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753584
+2026-03-05 13:40:22,167 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x66cd7f has 15 targets: 0x66cdc1, 0x66d191, 0x66d2f2, 0x66d2f2, 0x66cdc1, 0x66cd8f, 0x66cd8f, 0x66cd8f, 0x66d2f2, 0x66d2c0, 0x66d2f2, 0x66d2f2, 0x66ce30, 0x66d2f2, 0x66ce30
+2026-03-05 13:40:22,225 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x66767e has 5 targets: 0x66768e, 0x6676cb, 0x6676b8, 0x6677b6, 0x6676e8
+2026-03-05 13:40:22,298 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7500fd has 38 targets: 0x750153, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x75010d, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x75010d, 0x750158, 0x750158, 0x750158, 0x75010d, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750158, 0x750153
+2026-03-05 13:40:24,345 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x725f76 is probably illegal. Try to resolve indirect jump at 0x724674 from the next source.
+2026-03-05 13:40:24,350 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x725f76 is probably illegal. Try to resolve indirect jump at 0x724674 from the next source.
+2026-03-05 13:40:24,361 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x724674 has 4 targets: 0x724800, 0x724805, 0x724687, 0x7247da
+2026-03-05 13:40:24,601 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x68aee8 has 4 targets: 0x68afe5, 0x68aefd, 0x68b077, 0x68b1a7
+2026-03-05 13:40:24,642 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x76cb30 in function 0x76cb30.
+2026-03-05 13:40:24,977 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x701a0a has 5 targets: 0x701a1a, 0x701a1a, 0x701a1a, 0x701a2b, 0x701a25
+2026-03-05 13:40:25,109 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x701b46 in function 0x701b10.
+2026-03-05 13:40:25,134 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x701b46 in function 0x701b10.
+2026-03-05 13:40:25,162 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x701b46 has 4 targets: 0x701b56, 0x701b56, 0x701b56, 0x701b56
+2026-03-05 13:40:25,203 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x67a76d has 4 targets: 0x67a780, 0x67a7a3, 0x67a780, 0x67a7bd
+2026-03-05 13:40:25,270 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x62ec49 has 4 targets: 0x62ec58, 0x62ec9a, 0x62ec71, 0x62ec83
+2026-03-05 13:40:25,325 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x724642 has 4 targets: 0x724881, 0x724883, 0x724652, 0x7247a0
+2026-03-05 13:40:25,561 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67c9bc in function 0x67c980.
+2026-03-05 13:40:25,581 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67c9bc in function 0x67c980.
+2026-03-05 13:40:25,604 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67c9bc in function 0x67c980.
+2026-03-05 13:40:25,843 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x72f4b3 has 4 targets: 0x72f526, 0x72f49a, 0x72f4c4, 0x72f4d9
+2026-03-05 13:40:26,036 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5ed290 in function 0x5ed290.
+2026-03-05 13:40:26,079 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x647b25 in function 0x647b00.
+2026-03-05 13:40:26,100 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x647b25 in function 0x647b00.
+2026-03-05 13:40:26,121 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x647b25 in function 0x647b00.
+2026-03-05 13:40:26,207 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x74c5bf has 4 targets: 0x74c528, 0x74c5d4, 0x74c625, 0x74c64a
+2026-03-05 13:40:26,256 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x7440aa in function 0x7422d6.
+2026-03-05 13:40:26,289 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x7440aa in function 0x7422d6.
+2026-03-05 13:40:26,327 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x7440aa in function 0x7422d6.
+2026-03-05 13:40:26,352 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x792552 in function 0x792480.
+2026-03-05 13:40:26,371 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x792552 in function 0x792480.
+2026-03-05 13:40:26,416 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x792552 in function 0x792480.
+2026-03-05 13:40:26,671 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x62eaf3 has 4 targets: 0x62eb01, 0x62eb5e, 0x62eb21, 0x62eb3d
+2026-03-05 13:40:27,064 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x688a6f has 4 targets: 0x688a90, 0x688ab3, 0x688a90, 0x688b33
+2026-03-05 13:40:27,137 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x68a68c has 5 targets: 0x68a69c, 0x68a69c, 0x68a69c, 0x68a6ad, 0x68a6a7
+2026-03-05 13:40:27,213 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x717a1f has 21 targets: 0x717a30, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a42, 0x717a4a, 0x717a4a, 0x717a3d, 0x717a4a, 0x717a4a, 0x717a4a, 0x717a47
+2026-03-05 13:40:27,361 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68e4f9 in function 0x68e4c0.
+2026-03-05 13:40:27,381 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68e4f9 in function 0x68e4c0.
+2026-03-05 13:40:27,401 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68e4f9 in function 0x68e4c0.
+2026-03-05 13:40:27,464 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x77d884 in function 0x77d820.
+2026-03-05 13:40:27,494 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x77d884 in function 0x77d820.
+2026-03-05 13:40:27,546 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x77e370 in function 0x77e1f0.
+2026-03-05 13:40:27,582 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x77e370 in function 0x77e1f0.
+2026-03-05 13:40:27,619 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x77e430 is probably illegal. Try to resolve indirect jump at 0x77e370 from the next source.
+2026-03-05 13:40:27,686 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x77e370 in function 0x77e1f0.
+2026-03-05 13:40:27,716 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x786995 has 41 targets: 0x786ac9, 0x786aa9, 0x786bc6, 0x786bfc, 0x786bc6, 0x786ca6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x786bc6, 0x7869a5, 0x786a28, 0x786b58, 0x786bc6, 0x786d70, 0x786bc6, 0x786bc6, 0x7869de, 0x7869a5, 0x7869de, 0x786bc6, 0x7869a5, 0x7869de, 0x7869a5, 0x7869de, 0x786a90, 0x786bc6, 0x786bc6, 0x7869a5, 0x7869de, 0x786bc6, 0x786bc6, 0x786bc6, 0x7869a5, 0x7869de
+2026-03-05 13:40:27,740 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68f71e in function 0x68f6e0.
+2026-03-05 13:40:27,758 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68f71e in function 0x68f6e0.
+2026-03-05 13:40:27,776 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68f71e in function 0x68f6e0.
+2026-03-05 13:40:27,834 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x70ebad has 5 targets: 0x70ebbd, 0x70ef04, 0x70ef60, 0x70ef0c, 0x70eec6
+2026-03-05 13:40:27,862 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x690fcf has 4 targets: 0x690ff0, 0x691013, 0x690ff0, 0x691093
+2026-03-05 13:40:27,914 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x79280a has 4 targets: 0x7928c1, 0x792830, 0x7928c5, 0x792830
+2026-03-05 13:40:27,993 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x792aeb has 4 targets: 0x792b2f, 0x792b15, 0x792b33, 0x792b15
+2026-03-05 13:40:28,021 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x694668 has 5 targets: 0x694681, 0x6946b0, 0x69467b, 0x69467b, 0x69467b
+2026-03-05 13:40:28,105 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x69df2b has 5 targets: 0x69df47, 0x69dfbd, 0x69df3e, 0x69df3e, 0x69df3e
+2026-03-05 13:40:28,142 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x64b6c0 has 4 targets: 0x64b6cf, 0x64b695, 0x64b75a, 0x64b776
+2026-03-05 13:40:30,041 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x793b43 has 4 targets: 0x793b70, 0x793b95, 0x793b99, 0x793b70
+2026-03-05 13:40:30,085 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x777614 has 6 targets: 0x777742, 0x777631, 0x77773c, 0x77774c, 0x7776e0, 0x7777a8
+2026-03-05 13:40:30,223 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x69a947 has 39 targets: 0x69a951, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69a8e6, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69a960, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69ae9b, 0x69a8e6
+2026-03-05 13:40:30,246 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5e9e99 has 4 targets: 0x5e9e20, 0x5e9f06, 0x5e9f20, 0x5e9f40
+2026-03-05 13:40:30,305 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5eb6a3 has 4 targets: 0x5eb6b2, 0x5eb6f7, 0x5eb6ba, 0x5eb6d6
+2026-03-05 13:40:30,482 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5ea239 has 4 targets: 0x5ea248, 0x5ea205, 0x5ea26a, 0x5ea286
+2026-03-05 13:40:30,760 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x64dc94 in function 0x64db30.
+2026-03-05 13:40:30,788 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x64dc94 in function 0x64db30.
+2026-03-05 13:40:30,951 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x799f72 has 40 targets: 0x799f84, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x79a088, 0x79a062, 0x799f9d, 0x799f9d, 0x79a07e, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x79a092, 0x799f9d, 0x799f9d, 0x799f9d, 0x799f9d, 0x79a06c
+2026-03-05 13:40:30,979 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x78fa40 in function 0x78fa40.
+2026-03-05 13:40:31,057 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x79b7f7 in function 0x79b7b0.
+2026-03-05 13:40:31,320 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6610d9 has 4 targets: 0x6610e8, 0x6610a5, 0x66110a, 0x661126
+2026-03-05 13:40:31,354 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x793c40 in function 0x793c40.
+2026-03-05 13:40:31,499 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6d3aa8 has 4 targets: 0x6d3abb, 0x6d3ad6, 0x6d3abb, 0x6d3b11
+2026-03-05 13:40:31,643 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x6e41c0 in function 0x6e41c0.
+2026-03-05 13:40:31,736 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x78cf90 has 4 targets: 0x78d075, 0x78cfaa, 0x78cfcb, 0x78d006
+2026-03-05 13:40:31,884 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6fcffe has 5 targets: 0x6fd013, 0x6fd183, 0x6fd0ba, 0x6fd11c, 0x6fd05b
+2026-03-05 13:40:31,915 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776dac has 6 targets: 0x776e2d, 0x776e33, 0x776e16, 0x776dbc, 0x776e1b, 0x776dbc
+2026-03-05 13:40:31,964 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6fcbb6 has 5 targets: 0x6fcbcb, 0x6fcd2d, 0x6fcc64, 0x6fccc6, 0x6fcc0d
+2026-03-05 13:40:32,048 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6fd45e has 5 targets: 0x6fd473, 0x6fd5e4, 0x6fd51b, 0x6fd57d, 0x6fd4bc
+2026-03-05 13:40:32,080 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77af36 has 8 targets: 0x77b0a3, 0x77af4f, 0x77b20b, 0x77b261, 0x77b1b8, 0x77b30a, 0x77b359, 0x77b2c1
+2026-03-05 13:40:32,131 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77afe0 has 8 targets: 0x77aff0, 0x77b05c, 0x77bd91, 0x77b16a, 0x77bd91, 0x77bd91, 0x77bd91, 0x77b0c9
+2026-03-05 13:40:32,293 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6eefff has 17 targets: 0x6ef00f, 0x6ef325, 0x6ef0b1, 0x6ef559, 0x6ef5f1, 0x6ef12c, 0x6ef7cb, 0x6ef40d, 0x6ef47d, 0x6ef7cb, 0x6ef777, 0x6ef675, 0x6ef7cb, 0x6ef7cb, 0x6ef7cb, 0x6ef073, 0x6ef279
+2026-03-05 13:40:32,367 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x678413 has 5 targets: 0x678428, 0x678594, 0x6784cb, 0x67852d, 0x67846c
+2026-03-05 13:40:32,510 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x62da1d has 39 targets: 0x62db71, 0x62da35, 0x62db80, 0x62da35, 0x62da35, 0x62da35, 0x62da2e, 0x62da35, 0x62db8f, 0x62da35, 0x62da35, 0x62db9e, 0x62db53, 0x62dbad, 0x62da35, 0x62db44, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62dbbc, 0x62db62, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da35, 0x62da2e
+2026-03-05 13:40:32,525 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x68a550 in function 0x68a550.
+2026-03-05 13:40:32,702 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea68 in function 0x67e9a0.
+2026-03-05 13:40:32,728 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea68 in function 0x67e9a0.
+2026-03-05 13:40:32,760 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea68 in function 0x67e9a0.
+2026-03-05 13:40:32,794 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x6fe700 in function 0x6fe700.
+2026-03-05 13:40:32,864 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x751e31 is probably illegal. Try to resolve indirect jump at 0x74c942 from the next source.
+2026-03-05 13:40:32,869 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x751e31 is probably illegal. Try to resolve indirect jump at 0x74c942 from the next source.
+2026-03-05 13:40:32,880 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x74c942 has 4 targets: 0x74c9d7, 0x74c95b, 0x74c9d0, 0x74c9ce
+2026-03-05 13:40:32,962 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6696be has 14 targets: 0x6696ce, 0x669bd6, 0x669874, 0x669f81, 0x66a1e3, 0x669aaf, 0x669d42, 0x669e98, 0x66a444, 0x66a444, 0x66a444, 0x66a444, 0x66a444, 0x66a41c
+2026-03-05 13:40:33,266 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea73 in function 0x67e9a0.
+2026-03-05 13:40:33,286 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea73 in function 0x67e9a0.
+2026-03-05 13:40:33,330 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea73 in function 0x67e9a0.
+2026-03-05 13:40:33,377 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea50 in function 0x67e9a0.
+2026-03-05 13:40:33,399 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea50 in function 0x67e9a0.
+2026-03-05 13:40:33,444 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x67ea50 in function 0x67e9a0.
+2026-03-05 13:40:33,587 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7637e9 has 12 targets: 0x7637f9, 0x763aa4, 0x7639b6, 0x763a31, 0x763946, 0x763b0d, 0x763b17, 0x763a9a, 0x763b2b, 0x7639ac, 0x763b21, 0x7638e0
+2026-03-05 13:40:33,642 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x774123 has 38 targets: 0x774134, 0x77451f, 0x774455, 0x77467e, 0x7744b8, 0x774488, 0x774605, 0x77454c, 0x7745d9, 0x77435f, 0x7742fb, 0x774404, 0x77438e, 0x774232, 0x774232, 0x774232, 0x774232, 0x774232, 0x774232, 0x774232, 0x774741, 0x774232, 0x774232, 0x7741c9, 0x774232, 0x774232, 0x774178, 0x7742b1, 0x7746f0, 0x774232, 0x774232, 0x774232, 0x774232, 0x774232, 0x7746b7, 0x7745a6, 0x774245, 0x774278
+2026-03-05 13:40:33,702 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7638bb has 4 targets: 0x7638d4, 0x763cb0, 0x763c12, 0x763c5b
+2026-03-05 13:40:33,765 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x63555d in function 0x634b30.
+2026-03-05 13:40:33,806 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x63555d in function 0x634b30.
+2026-03-05 13:40:33,841 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6b0d6e has 64 targets: 0x6b0d77, 0x6b0d77, 0x6b0da4, 0x6b0d77, 0x6b0d77, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0ce3, 0x6b0cd0, 0x6b0cd0, 0x6b0cd0, 0x6b0d84
+2026-03-05 13:40:33,887 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x774efc has 44 targets: 0x775643, 0x775c3a, 0x77551a, 0x775757, 0x775407, 0x7756ea, 0x77582c, 0x7754d4, 0x77568a, 0x775540, 0x7753d9, 0x7758b3, 0x77546d, 0x7758e4, 0x7759ff, 0x7759dd, 0x7757fe, 0x77535b, 0x77524c, 0x775310, 0x775564, 0x774f06, 0x7752e8, 0x77578c, 0x775508, 0x775096, 0x774fdb, 0x775a64, 0x775041, 0x7755f7, 0x775988, 0x7751ab, 0x775939, 0x775b97, 0x775283, 0x77538e, 0x775953, 0x775b1e, 0x77516f, 0x775ad4, 0x7755c9, 0x77543a, 0x775a9b, 0x775215
+2026-03-05 13:40:33,986 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77718d has 6 targets: 0x7771c6, 0x7771d5, 0x7771ac, 0x77719d, 0x7771ba, 0x77719d
+2026-03-05 13:40:34,041 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x63566e in function 0x634b30.
+2026-03-05 13:40:34,085 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x63566e in function 0x634b30.
+2026-03-05 13:40:34,129 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7771fd has 6 targets: 0x77723a, 0x77724b, 0x77721e, 0x77720d, 0x77722e, 0x77720d
+2026-03-05 13:40:34,239 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x779eb1 has 6 targets: 0x779ec1, 0x779f50, 0x779f94, 0x779f07, 0x779fa1, 0x779fe3
+2026-03-05 13:40:34,312 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77aae0 has 8 targets: 0x77aaf1, 0x77ab44, 0x77abb8, 0x77ab1a, 0x77abb8, 0x77abb8, 0x77abb8, 0x77ab6b
+2026-03-05 13:40:34,371 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x763ef6 in function 0x763110.
+2026-03-05 13:40:34,421 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x763ef6 in function 0x763110.
+2026-03-05 13:40:34,531 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x763ef6 in function 0x763110.
+2026-03-05 13:40:34,563 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x725e7a has 5 targets: 0x725e8a, 0x725f9c, 0x725f8e, 0x725f94, 0x725f86
+2026-03-05 13:40:34,593 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x79b280 in function 0x79b280.
+2026-03-05 13:40:36,636 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7475bb has 8 targets: 0x7475d6, 0x747840, 0x749050, 0x747898, 0x749050, 0x749050, 0x749050, 0x747851
+2026-03-05 13:40:36,818 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7763b2 has 33 targets: 0x776674, 0x776620, 0x776822, 0x776822, 0x776822, 0x776641, 0x7763c4, 0x776696, 0x776822, 0x776822, 0x77643f, 0x776822, 0x77643f, 0x776822, 0x776822, 0x776822, 0x776822, 0x776822, 0x77643f, 0x776478, 0x776822, 0x7763c4, 0x776822, 0x77643f, 0x77643f, 0x776822, 0x776822, 0x776822, 0x776822, 0x776822, 0x776822, 0x77643f, 0x77643f
+2026-03-05 13:40:36,847 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5de3e5 in function 0x5de3c0.
+2026-03-05 13:40:36,868 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5de3e5 in function 0x5de3c0.
+2026-03-05 13:40:36,889 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5de3e5 in function 0x5de3c0.
+2026-03-05 13:40:36,937 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x780492 in function 0x780360.
+2026-03-05 13:40:36,965 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x780492 in function 0x780360.
+2026-03-05 13:40:37,026 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x780492 in function 0x780360.
+2026-03-05 13:40:37,328 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5e667f has 4 targets: 0x5e66a0, 0x5e66c3, 0x5e66a0, 0x5e6743
+2026-03-05 13:40:37,655 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x68c149 has 4 targets: 0x68c158, 0x68c115, 0x68c17a, 0x68c196
+2026-03-05 13:40:37,712 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5e118e has 11 targets: 0x5e11a2, 0x5e1495, 0x5e1451, 0x5e1b12, 0x5e1b12, 0x5e1b12, 0x5e1b12, 0x5e1b12, 0x5e14c3, 0x5e1b12, 0x5e14ef
+2026-03-05 13:40:37,732 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,738 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,748 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,748 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5f611c in function 0x5f5d70.
+2026-03-05 13:40:37,756 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,761 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,775 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,776 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5f611c in function 0x5f5d70.
+2026-03-05 13:40:37,784 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,789 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,809 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x5f852b is probably illegal. Try to resolve indirect jump at 0x5f611c from the next source.
+2026-03-05 13:40:37,809 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5f611c in function 0x5f5d70.
+2026-03-05 13:40:38,134 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74d224 to 0x599f5c
+2026-03-05 13:40:38,135 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74d224 to 0x599f5c
+2026-03-05 13:40:38,135 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74d224 to 0x599f5c
+2026-03-05 13:40:38,135 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74d224 to 0x599f5c
+2026-03-05 13:40:38,275 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5ef805 in function 0x5ef7e0.
+2026-03-05 13:40:38,297 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5ef805 in function 0x5ef7e0.
+2026-03-05 13:40:38,318 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x5ef805 in function 0x5ef7e0.
+2026-03-05 13:40:38,415 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x60d69c has 39 targets: 0x60d6ac, 0x60d6c0, 0x60d6ac, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6ac, 0x60d6c0, 0x60d6ac, 0x60d6c0, 0x60d6c0, 0x60d6ac, 0x60d6ac, 0x60d6ac, 0x60d6c0, 0x60d6ac, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6ac, 0x60d6ac, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6c0, 0x60d6ac
+2026-03-05 13:40:38,512 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x7474ed has 8 targets: 0x747508, 0x7477c6, 0x749050, 0x74781f, 0x749050, 0x749050, 0x749050, 0x7477d7
+2026-03-05 13:40:38,565 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x662f99 has 4 targets: 0x662fa8, 0x662f65, 0x662fca, 0x662fe6
+2026-03-05 13:40:38,577 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x74b590 has 4 targets: 0x74b5a5, 0x74b5bc, 0x74b5ac, 0x74b5b5
+2026-03-05 13:40:38,619 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x701af0 in function 0x701af0.
+2026-03-05 13:40:38,660 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x701c00 has 4 targets: 0x701c33, 0x701c85, 0x701c46, 0x701c69
+2026-03-05 13:40:39,157 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x75337b has 38 targets: 0x753584, 0x753542, 0x753542, 0x75339c, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x75358d, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x75338b, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753542, 0x753584
+2026-03-05 13:40:39,214 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x64b999 has 4 targets: 0x64b9a8, 0x64b965, 0x64b9ca, 0x64b9e6
+2026-03-05 13:40:39,247 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x75ddd0 in function 0x75ddd0.
+2026-03-05 13:40:39,259 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x64b583 has 4 targets: 0x64b592, 0x64b5d7, 0x64b59a, 0x64b5b6
+2026-03-05 13:40:39,268 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x64b889 has 4 targets: 0x64b898, 0x64b855, 0x64b8ba, 0x64b8d6
+2026-03-05 13:40:39,315 angr.analyses.cfg.indirect_jump_resolvers.jumptable.JumpTableProcessor INFO Unsupported Binop Iop_ExpCmpNE64.
+2026-03-05 13:40:39,315 angr.analyses.cfg.indirect_jump_resolvers.jumptable.JumpTableProcessor INFO Unsupported Unop Iop_Clz64.
+2026-03-05 13:40:39,329 angr.engines.vex.claripy.ccall WARNING Operation SUB with condition CondNO is not supported in pc_calculate_condition_simple(). Consider implementing.
+2026-03-05 13:40:39,373 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x71a95d has 6 targets: 0x71a96d, 0x71aa86, 0x71a9ca, 0x71aa5f, 0x71a9ac, 0x71aa9c
+2026-03-05 13:40:39,403 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x684c4f has 111 targets: 0x684c5f, 0x684ca3, 0x684cd3, 0x684d1a, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684d28, 0x684cd3, 0x684c5f, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cb4, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cf0, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cfe, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684cd3, 0x684d44, 0x684d36, 0x684cd3, 0x684cd3, 0x684cd3, 0x684c81, 0x684cc5, 0x684cd3, 0x684cd3, 0x684c92, 0x684cd3, 0x684cd3, 0x684c70, 0x684d0c
+2026-03-05 13:40:39,413 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x74b310 has 4 targets: 0x74b325, 0x74b347, 0x74b32e, 0x74b33a
+2026-03-05 13:40:39,575 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5e9ef0 has 4 targets: 0x5e9e20, 0x5e9f06, 0x5e9f20, 0x5e9f40
+2026-03-05 13:40:39,653 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x62d9e1 has 39 targets: 0x62db6a, 0x62da03, 0x62db79, 0x62da03, 0x62da03, 0x62da03, 0x62d9f1, 0x62da03, 0x62db88, 0x62da03, 0x62da03, 0x62db97, 0x62db4c, 0x62dba6, 0x62da03, 0x62db3d, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62dbb5, 0x62db5b, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62da03, 0x62d9f1
+2026-03-05 13:40:39,694 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x60198a has 38 targets: 0x601994, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x6019a2, 0x601a0e, 0x601a0e, 0x601a0e, 0x60199b, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x601963, 0x601a0e, 0x6019a9, 0x601a0e, 0x6019cc, 0x6019bf, 0x6019d2, 0x6019b4, 0x601a0e, 0x601a0e, 0x601a0e, 0x601a0e, 0x6019c6, 0x601a0e, 0x601a0e, 0x601a0e, 0x6019d9
+2026-03-05 13:40:39,761 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74dd8f to 0x7b8bf8
+2026-03-05 13:40:39,762 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74dd8f to 0x7b8bf8
+2026-03-05 13:40:39,762 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74dd8f to 0x7b8bf8
+2026-03-05 13:40:39,762 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x74dd8f to 0x7b8bf8
+2026-03-05 13:40:39,959 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x78c297 is probably illegal. Try to resolve indirect jump at 0x78b348 from the next source.
+2026-03-05 13:40:39,964 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump target 0x78c297 is probably illegal. Try to resolve indirect jump at 0x78b348 from the next source.
+2026-03-05 13:40:39,983 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x78b348 has 25 targets: 0x78b354, 0x78bb5c, 0x78b99e, 0x78b69b, 0x78b8b6, 0x78bc3c, 0x78bd8a, 0x78baef, 0x78bdf7, 0x78b37a, 0x78b453, 0x78b87e, 0x78b8d7, 0x78bd55, 0x78b846, 0x78ba35, 0x78b80e, 0x78bb7e, 0x78bdba, 0x78bf5b, 0x78bbad, 0x78bcfa, 0x78beea, 0x78bfcf, 0x78c91e
+2026-03-05 13:40:40,077 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x5f695d has 19 targets: 0x5f6979, 0x5f6a4a, 0x5f6a4a, 0x5f69b7, 0x5f6a4a, 0x5f69f5, 0x5f6a4a, 0x5f6a4a, 0x5f6a4a, 0x5f6a04, 0x5f6a4a, 0x5f6a4a, 0x5f6a2b, 0x5f699c, 0x5f69cf, 0x5f6a4a, 0x5f6a4a, 0x5f6a4a, 0x5f69e3
+2026-03-05 13:40:40,087 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x68be07 has 4 targets: 0x68bd60, 0x68be16, 0x68be30, 0x68be50
+2026-03-05 13:40:40,173 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x751ea7 has 122 targets: 0x751eb7, 0x751ef9, 0x751f14, 0x751f05, 0x751f14, 0x751f14, 0x751f08, 0x751f14, 0x751f14, 0x751f14, 0x751efc, 0x751eff, 0x751eb7, 0x751f14, 0x751f14, 0x751eea, 0x751ef0, 0x751ede, 0x751f14, 0x751eed, 0x751f0e, 0x751f0b, 0x751f14, 0x751f14, 0x751f14, 0x751ee1, 0x751f1d, 0x751f20, 0x751ed2, 0x751f26, 0x751ed5, 0x751f02, 0x751f14, 0x751f14, 0x751ecf, 0x751ed8, 0x751f14, 0x751eba, 0x751f17, 0x751ee4, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751eba, 0x751f14, 0x751f14, 0x751ecc, 0x751ec9, 0x751ee7, 0x751ef3, 0x751f14, 0x751f1a, 0x751ef6, 0x751f14, 0x751f14, 0x751ec0, 0x751f14, 0x751f14, 0x751edb, 0x751f23, 0x751f14, 0x751ebd, 0x751f14, 0x751ec6, 0x751f11, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751f14, 0x751ec3
+2026-03-05 13:40:40,256 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6474f9 has 4 targets: 0x647508, 0x6474c5, 0x64752a, 0x647546
+2026-03-05 13:40:40,285 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6c4dec has 4 targets: 0x6c4df8, 0x6c4e10, 0x6c4df8, 0x6c4e50
+2026-03-05 13:40:40,406 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x774fcb has 33 targets: 0x774fdb, 0x775096, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775c3a, 0x775101, 0x775041
+2026-03-05 13:40:40,455 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776367 has 44 targets: 0x77673c, 0x776390, 0x776390, 0x776390, 0x77670d, 0x776371, 0x776717, 0x776390, 0x776390, 0x776390, 0x776750, 0x776750, 0x776390, 0x776388, 0x776390, 0x776743, 0x776750, 0x77670d, 0x776371, 0x776717, 0x776390, 0x776390, 0x776388, 0x776390, 0x776721, 0x776390, 0x776390, 0x776371, 0x776388, 0x776732, 0x776388, 0x776717, 0x776721, 0x776390, 0x776390, 0x776717, 0x776750, 0x77670d, 0x776728, 0x776371, 0x776750, 0x77670d, 0x776728, 0x776371
+2026-03-05 13:40:40,487 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776880 has 139 targets: 0x7768ab, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776b65, 0x776e24, 0x776918, 0x776918, 0x776918, 0x776e24, 0x776e24, 0x776b28, 0x776e24, 0x776c0b, 0x776aba, 0x776e24, 0x776e24, 0x776e24, 0x776c57, 0x776e24, 0x7768ab, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776c9f, 0x776e24, 0x776890, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x7768ab, 0x776e24, 0x776938, 0x776e24, 0x776a9a, 0x776890, 0x776e24, 0x776e24, 0x776c2c, 0x776d1f, 0x776e24, 0x776e24, 0x7769db, 0x776890, 0x776bd7, 0x776ae6, 0x776a4e, 0x776972, 0x776e24, 0x776e24, 0x776a6f, 0x776e24, 0x7768ab, 0x776e24, 0x776993, 0x776bba, 0x776e24, 0x776e24, 0x7768ab, 0x776e24, 0x7768ab, 0x776e24, 0x7768ab, 0x776e24, 0x776d74, 0x7768ab, 0x776890, 0x776890, 0x776890, 0x776b45, 0x776e24, 0x776e24, 0x776e24, 0x776938, 0x776e24, 0x776cca, 0x776b90, 0x776b07, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776d49, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776a06, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776890, 0x776a31, 0x7768fb, 0x776955, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x7769be, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776890, 0x776890, 0x776e24, 0x776e24, 0x776e24, 0x776890, 0x776890, 0x776890, 0x776890, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776e24, 0x776c82
+2026-03-05 13:40:40,649 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x792455 in function 0x792420.
+2026-03-05 13:40:40,692 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x792455 in function 0x792420.
+2026-03-05 13:40:40,761 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x62ed83 has 4 targets: 0x62ed91, 0x62edee, 0x62edb1, 0x62edcd
+2026-03-05 13:40:40,799 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x70654d has 5 targets: 0x70655d, 0x70679f, 0x706913, 0x7066ba, 0x706713
+2026-03-05 13:40:44,327 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776563 has 44 targets: 0x776739, 0x77681c, 0x776674, 0x776620, 0x77670a, 0x7766d7, 0x776714, 0x776641, 0x7763c4, 0x776696, 0x7766df, 0x7766df, 0x77643f, 0x776702, 0x77643f, 0x776740, 0x7766df, 0x77670a, 0x7766d7, 0x776714, 0x77643f, 0x776573, 0x776702, 0x7763c4, 0x77671e, 0x77643f, 0x77643f, 0x7766d7, 0x776702, 0x77672f, 0x776702, 0x776714, 0x77671e, 0x77643f, 0x77643f, 0x776714, 0x7766df, 0x77670a, 0x776725, 0x7766d7, 0x7766df, 0x77670a, 0x776725, 0x7766d7
+2026-03-05 13:40:44,360 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776983 has 6 targets: 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb
+2026-03-05 13:40:44,393 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776a5f has 6 targets: 0x776dd8, 0x776dc7, 0x776dc2, 0x776bb1, 0x776dcd, 0x776bb1
+2026-03-05 13:40:44,421 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776cdb has 6 targets: 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb
+2026-03-05 13:40:44,440 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x78b6ad has 4 targets: 0x78c30a, 0x78b73b, 0x78c2fb, 0x78c312
+2026-03-05 13:40:44,522 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x763cd1 has 8 targets: 0x763ce8, 0x7643ec, 0x7650c3, 0x764434, 0x7650c3, 0x7650c3, 0x7650c3, 0x7643fc
+2026-03-05 13:40:44,591 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x68af0d has 86 targets: 0x68b8ba, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b974, 0x68b986, 0x68b986, 0x68af23, 0x68b986, 0x68b4a6, 0x68b986, 0x68b986, 0x68b986, 0x68b49f, 0x68b986, 0x68b4c0, 0x68b986, 0x68b986, 0x68b4cd, 0x68b492, 0x68b485, 0x68b986, 0x68b478, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b4b3, 0x68b46b, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b4da, 0x68b986, 0x68b986, 0x68af23, 0x68b986, 0x68b4a6, 0x68b986, 0x68b986, 0x68b986, 0x68b49f, 0x68b986, 0x68b4c0, 0x68b986, 0x68b986, 0x68b4cd, 0x68b492, 0x68b485, 0x68b986, 0x68b478, 0x68b986, 0x68b986, 0x68b986, 0x68b986, 0x68b4b3, 0x68b46b
+2026-03-05 13:40:44,628 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x781f91 has 8 targets: 0x781fa5, 0x78241a, 0x782942, 0x782458, 0x782942, 0x782942, 0x782942, 0x782429
+2026-03-05 13:40:44,712 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776d30 has 6 targets: 0x776dfc, 0x776e02, 0x776dec, 0x776d40, 0x776df1, 0x776d40
+2026-03-05 13:40:44,763 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x78b6fc has 4 targets: 0x78c30a, 0x78b73b, 0x78c2fb, 0x78c312
+2026-03-05 13:40:44,794 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77b36f has 8 targets: 0x77b37f, 0x77b65a, 0x77be06, 0x77b791, 0x77be06, 0x77be06, 0x77be06, 0x77b6e9
+2026-03-05 13:40:44,838 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77b320 has 8 targets: 0x77b330, 0x77b630, 0x77be06, 0x77b76b, 0x77be06, 0x77be06, 0x77be06, 0x77b69c
+2026-03-05 13:40:44,866 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776ba1 has 6 targets: 0x776dd8, 0x776dc7, 0x776dc2, 0x776bb1, 0x776dcd, 0x776bb1
+2026-03-05 13:40:44,892 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776928 has 8 targets: 0x776bf7, 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb, 0x776bf7
+2026-03-05 13:40:45,025 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x78206c has 6 targets: 0x782398, 0x7823a1, 0x78237f, 0x782080, 0x782387, 0x782080
+2026-03-05 13:40:45,140 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x781ee7 has 6 targets: 0x78235b, 0x78236d, 0x78232f, 0x781efb, 0x782340, 0x781efb
+2026-03-05 13:40:45,204 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776b18 has 6 targets: 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb
+2026-03-05 13:40:45,230 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x773bf2 has 6 targets: 0x773c02, 0x773c38, 0x773c70, 0x773c72, 0x773c50, 0x773c72
+2026-03-05 13:40:45,294 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x775858 has 120 targets: 0x77586b, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77624d, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77586b, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77586b, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77625f, 0x77586b
+2026-03-05 13:40:45,321 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776be7 has 10 targets: 0x776bf7, 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb, 0x776bf7, 0x776e24, 0x7768ca
+2026-03-05 13:40:45,350 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77b2d7 has 8 targets: 0x77b2e7, 0x77b52f, 0x77be06, 0x77b591, 0x77be06, 0x77be06, 0x77be06, 0x77b550
+2026-03-05 13:40:45,380 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776b55 has 8 targets: 0x776bf7, 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb, 0x776bf7
+2026-03-05 13:40:45,423 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x775713 has 120 targets: 0x775723, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761d6, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x775723, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x775723, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x7761e8, 0x775723
+2026-03-05 13:40:45,455 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x773c1c has 6 targets: 0x773c2c, 0x773c44, 0x773ca3, 0x773ca5, 0x773c7b, 0x773ca5
+2026-03-05 13:40:45,497 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x775651 has 8 targets: 0x775667, 0x77611b, 0x77619f, 0x7760fa, 0x77619f, 0x77619f, 0x77619f, 0x776139
+2026-03-05 13:40:45,538 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776aaa has 8 targets: 0x776bf7, 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb, 0x776bf7
+2026-03-05 13:40:45,572 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776c1c has 6 targets: 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb
+2026-03-05 13:40:45,605 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x78202f has 8 targets: 0x782043, 0x7823b3, 0x7828fa, 0x7823f1, 0x7828fa, 0x7828fa, 0x7828fa, 0x7823c2
+2026-03-05 13:40:45,629 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x773b6b has 6 targets: 0x773b7b, 0x773c64, 0x773cae, 0x773cb0, 0x773c8f, 0x773cb0
+2026-03-05 13:40:45,641 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x782d14 has 16 targets: 0x782d2a, 0x782db3, 0x782ddc, 0x782d55, 0x782d2a, 0x783184, 0x783184, 0x783184, 0x783184, 0x782d5e, 0x782da8, 0x782de7, 0x782d2a, 0x782e7a, 0x782ea2, 0x78300d
+2026-03-05 13:40:45,675 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x776af7 has 6 targets: 0x776cfc, 0x776cf1, 0x776cf7, 0x776ceb, 0x776d02, 0x776ceb
+2026-03-05 13:40:50,176 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x636f38 has 122 targets: 0x636f48, 0x636f94, 0x636faf, 0x636fa0, 0x636faf, 0x636faf, 0x636fa3, 0x636faf, 0x636faf, 0x636faf, 0x636f97, 0x636f9a, 0x636f48, 0x636faf, 0x636faf, 0x636f85, 0x636f8b, 0x636f79, 0x636faf, 0x636f88, 0x636fa9, 0x636fa6, 0x636faf, 0x636faf, 0x636faf, 0x636f7c, 0x636fb8, 0x636fbb, 0x636f6d, 0x636fc1, 0x636f70, 0x636f9d, 0x636faf, 0x636faf, 0x636f6a, 0x636f73, 0x636faf, 0x636f55, 0x636fb2, 0x636f7f, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636f55, 0x636faf, 0x636faf, 0x636f67, 0x636f64, 0x636f82, 0x636f8e, 0x636faf, 0x636fb5, 0x636f91, 0x636faf, 0x636faf, 0x636f5b, 0x636faf, 0x636faf, 0x636f76, 0x636fbe, 0x636faf, 0x636f58, 0x636faf, 0x636f61, 0x636fac, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636faf, 0x636f5e
+2026-03-05 13:40:51,135 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6475c8 has 122 targets: 0x6475d8, 0x647624, 0x64763f, 0x647630, 0x64763f, 0x64763f, 0x647633, 0x64763f, 0x64763f, 0x64763f, 0x647627, 0x64762a, 0x6475d8, 0x64763f, 0x64763f, 0x647615, 0x64761b, 0x647609, 0x64763f, 0x647618, 0x647639, 0x647636, 0x64763f, 0x64763f, 0x64763f, 0x64760c, 0x647648, 0x64764b, 0x6475fd, 0x647651, 0x647600, 0x64762d, 0x64763f, 0x64763f, 0x6475fa, 0x647603, 0x64763f, 0x6475e5, 0x647642, 0x64760f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x6475e5, 0x64763f, 0x64763f, 0x6475f7, 0x6475f4, 0x647612, 0x64761e, 0x64763f, 0x647645, 0x647621, 0x64763f, 0x64763f, 0x6475eb, 0x64763f, 0x64763f, 0x647606, 0x64764e, 0x64763f, 0x6475e8, 0x64763f, 0x6475f1, 0x64763c, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x64763f, 0x6475ee
+2026-03-05 13:40:52,657 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x65e4d6 has 122 targets: 0x65e4e6, 0x65e54e, 0x65e572, 0x65e55e, 0x65e572, 0x65e572, 0x65e562, 0x65e572, 0x65e572, 0x65e572, 0x65e552, 0x65e556, 0x65e4e6, 0x65e572, 0x65e572, 0x65e53a, 0x65e542, 0x65e52a, 0x65e572, 0x65e53e, 0x65e56a, 0x65e566, 0x65e572, 0x65e572, 0x65e572, 0x65e52e, 0x65e587, 0x65e58e, 0x65e51a, 0x65e59c, 0x65e51e, 0x65e55a, 0x65e572, 0x65e572, 0x65e516, 0x65e522, 0x65e572, 0x65e4fa, 0x65e579, 0x65e532, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e4fa, 0x65e572, 0x65e572, 0x65e512, 0x65e50e, 0x65e536, 0x65e546, 0x65e572, 0x65e580, 0x65e54a, 0x65e572, 0x65e572, 0x65e502, 0x65e572, 0x65e572, 0x65e526, 0x65e595, 0x65e572, 0x65e4fe, 0x65e572, 0x65e50a, 0x65e56e, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e572, 0x65e506
+2026-03-05 13:40:53,092 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x665b18 has 122 targets: 0x665b28, 0x665b74, 0x665b8f, 0x665b80, 0x665b8f, 0x665b8f, 0x665b83, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b77, 0x665b7a, 0x665b28, 0x665b8f, 0x665b8f, 0x665b65, 0x665b6b, 0x665b59, 0x665b8f, 0x665b68, 0x665b89, 0x665b86, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b5c, 0x665b98, 0x665b9b, 0x665b4d, 0x665ba1, 0x665b50, 0x665b7d, 0x665b8f, 0x665b8f, 0x665b4a, 0x665b53, 0x665b8f, 0x665b35, 0x665b92, 0x665b5f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b35, 0x665b8f, 0x665b8f, 0x665b47, 0x665b44, 0x665b62, 0x665b6e, 0x665b8f, 0x665b95, 0x665b71, 0x665b8f, 0x665b8f, 0x665b3b, 0x665b8f, 0x665b8f, 0x665b56, 0x665b9e, 0x665b8f, 0x665b38, 0x665b8f, 0x665b41, 0x665b8c, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b8f, 0x665b3e
+2026-03-05 13:40:58,764 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6cbe1c has 8 targets: 0x6cbe5b, 0x6cbf65, 0x6cbe2c, 0x6cbe2c, 0x6cbe2c, 0x6cbe2c, 0x6cbe48, 0x6cbe53
+2026-03-05 13:41:00,805 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x6ff71a has 21 targets: 0x6ff72a, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff732, 0x6ff743, 0x6ff743, 0x6ff72e, 0x6ff743, 0x6ff743, 0x6ff743, 0x6ff736
+2026-03-05 13:41:03,438 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77b86d has 8 targets: 0x77b886, 0x77b909, 0x77be0d, 0x77b968, 0x77be0d, 0x77be0d, 0x77be0d, 0x77b91e
+2026-03-05 13:41:03,468 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77b8d3 has 8 targets: 0x77b8f0, 0x77b958, 0x77be0d, 0x77b9d5, 0x77be0d, 0x77be0d, 0x77be0d, 0x77b9a0
+2026-03-05 13:41:03,497 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77ba03 has 8 targets: 0x77ba1c, 0x77ba3a, 0x77be0d, 0x77ba94, 0x77be0d, 0x77be0d, 0x77be0d, 0x77ba4f
+2026-03-05 13:41:03,529 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Jump table at 0x77bb02 has 8 targets: 0x77bb1b, 0x77bbb3, 0x77be0d, 0x77bc09, 0x77be0d, 0x77be0d, 0x77be0d, 0x77bbc3
+2026-03-05 13:41:03,601 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Could not resolve indirect jump 0x77c089 in function 0x77c089.
+2026-03-05 13:41:03,930 angr.analyses.cfg.indirect_jump_resolvers.jumptable INFO Resolved constant indirect jump from 0x79c040 to 0x7b91e0
+2026-03-05 13:42:28,506 rustdiff.loader INFO Loaded 3901 functions (1334 user, 1222 stdlib, 977 generated, 368 other)
+2026-03-05 13:44:23,649 rustdiff.matching.function_matcher INFO Computed 6630 fingerprints for tmp/coreutils-sort-O0
+2026-03-05 13:45:58,094 rustdiff.matching.function_matcher INFO Computed 1200 fingerprints for tmp/coreutils-sort-O2
+2026-03-05 13:46:20,340 eval.groundtruth INFO Groundtruth: 1356 matched, 2758 only in bin1, 4 only in bin2
+2026-03-05 13:46:20,403 eval.groundtruth INFO Groundtruth: 1356 matched, 2758 only in bin1, 4 only in bin2
+2026-03-05 13:46:42,396 rustdiff.analysis.ablation INFO Ablation [all_features]: MRR=0.192 R@1=0.171 R@5=0.215
+2026-03-05 13:47:02,392 rustdiff.analysis.ablation INFO Ablation [no_constants]: MRR=0.175 R@1=0.151 R@5=0.194
+2026-03-05 13:47:24,361 rustdiff.analysis.ablation INFO Ablation [no_concrete_values]: MRR=0.192 R@1=0.171 R@5=0.215
+2026-03-05 13:47:34,943 rustdiff.analysis.ablation INFO Ablation [no_opcode_histogram]: MRR=0.170 R@1=0.153 R@5=0.174
+2026-03-05 13:47:58,751 rustdiff.analysis.ablation INFO Ablation [no_memory_pattern]: MRR=0.192 R@1=0.171 R@5=0.215
+2026-03-05 13:48:20,653 rustdiff.analysis.ablation INFO Ablation [no_dataflow_edges]: MRR=0.192 R@1=0.171 R@5=0.215
+2026-03-05 13:48:40,480 rustdiff.analysis.ablation INFO Ablation [no_cfg_weights]: MRR=0.191 R@1=0.169 R@5=0.208
+2026-03-05 13:49:02,285 rustdiff.analysis.ablation INFO Ablation [no_callee_names]: MRR=0.192 R@1=0.171 R@5=0.215
+2026-03-05 13:49:21,324 rustdiff.analysis.ablation INFO Ablation [no_cfg_shape]: MRR=0.199 R@1=0.176 R@5=0.215
+2026-03-05 13:49:43,289 rustdiff.analysis.ablation INFO Ablation [no_string_refs]: MRR=0.192 R@1=0.171 R@5=0.215
+2026-03-05 13:49:48,944 rustdiff.analysis.ablation INFO Ablation [only_constants]: MRR=0.154 R@1=0.130 R@5=0.167
+2026-03-05 13:49:51,568 rustdiff.analysis.ablation INFO Ablation [only_concrete_values]: MRR=0.008 R@1=0.002 R@5=0.011
+2026-03-05 13:50:06,448 rustdiff.analysis.ablation INFO Ablation [only_opcode_histogram]: MRR=0.176 R@1=0.153 R@5=0.205
+2026-03-05 13:50:09,112 rustdiff.analysis.ablation INFO Ablation [only_memory_pattern]: MRR=0.008 R@1=0.002 R@5=0.011
+2026-03-05 13:50:11,725 rustdiff.analysis.ablation INFO Ablation [only_dataflow_edges]: MRR=0.008 R@1=0.002 R@5=0.011
+2026-03-05 13:50:17,455 rustdiff.analysis.ablation INFO Ablation [only_cfg_weights]: MRR=0.103 R@1=0.084 R@5=0.121
+2026-03-05 13:50:20,065 rustdiff.analysis.ablation INFO Ablation [only_callee_names]: MRR=0.008 R@1=0.002 R@5=0.011
+2026-03-05 13:50:26,495 rustdiff.analysis.ablation INFO Ablation [only_cfg_shape]: MRR=0.122 R@1=0.105 R@5=0.135
+2026-03-05 13:50:29,120 rustdiff.analysis.ablation INFO Ablation [only_string_refs]: MRR=0.008 R@1=0.002 R@5=0.011
+======================================================================
+PHASE 1: Loading Binaries
+======================================================================
+
+Binary 1 (coreutils-sort-O0):
+  Total functions: 20193
+  Analyzable (user code): 6763
+  Sample functions:
+    0x702e40  _start
+    0x702e70  deregister_tm_clones
+    0x702ea0  register_tm_clones
+    0x702ee0  __do_global_dtors_aux
+    0x702f20  frame_dummy
+    0x703800  clap_builder::parser::matches::arg_matches::ArgMatches::verify_arg
+    0x7038c0  clap_builder::parser::matches::arg_matches::ArgMatches::try_get_arg
+    0x7042c0  clap_builder::builder::command::Command::try_get_matches_from
+    0x704320  clap_builder::builder::command::Command::try_get_matches_from_mut
+    0x704a40  clap_builder::builder::command::Command::try_get_matches_from_mut::{{closure}}
+
+Binary 2 (coreutils-sort-O2):
+  Total functions: 3901
+  Analyzable (user code): 1334
+  Sample functions:
+    0x5ddc10  _start
+    0x5ddc40  deregister_tm_clones
+    0x5ddc70  register_tm_clones
+    0x5ddcb0  __do_global_dtors_aux
+    0x5ddcf0  frame_dummy
+    0x5ddd10  <T as alloc::string::SpecToString>::spec_to_string
+    0x5dee50  <uu_sort::SortError as core::fmt::Debug>::fmt
+    0x5df420  <nix::errno::consts::Errno as core::fmt::Debug>::fmt
+    0x5df4c0  <uu_sort::SortError as uucore::mods::error::UError>::code
+    0x5df4d0  <uucore::mods::error::UUsageError as core::fmt::Debug>::fmt
+
+======================================================================
+PHASE 2: Extracting Rust-Specific Features
+======================================================================
+
+  __do_global_dtors_aux (0x702ee0):
+    Callees: ['deregister_tm_clones', 'sub_762d80']
+
+======================================================================
+PHASE 3: Computing Function Fingerprints
+======================================================================
+  Computing fingerprints for binary 1...
+  -> 6630 fingerprints
+  Computing fingerprints for binary 2...
+  -> 1200 fingerprints
+
+  Sample fingerprint details:
+
+    _start:
+      Blocks: 1, Instructions: 12
+      CFG shape: edges=0, loops=0, depth=0, cyclomatic=1
+      Constants: 1
+      Callees: []
+      String refs: []
+      Feature set size: 27
+
+    deregister_tm_clones:
+      Blocks: 4, Instructions: 9
+      CFG shape: edges=5, loops=0, depth=2, cyclomatic=2
+      Constants: 0
+      Callees: []
+      String refs: []
+      Feature set size: 17
+
+    register_tm_clones:
+      Blocks: 4, Instructions: 14
+      CFG shape: edges=5, loops=0, depth=2, cyclomatic=2
+      Constants: 2
+      Callees: []
+      String refs: []
+      Feature set size: 28
+
+======================================================================
+PHASE 4: Cross-Binary Function Matching
+======================================================================
+
+  Matched (sim >= 0.3): 997
+  Modified (sim < 0.3): 203
+  New (only in binary 2): 0
+  Removed (only in binary 1): 5430
+
+  Top matches by similarity:
+    1.000  _start  <->  _start
+    1.000  deregister_tm_clones  <->  deregister_tm_clones
+    1.000  register_tm_clones  <->  register_tm_clones
+    1.000  frame_dummy  <->  frame_dummy
+    1.000  clap_builder::builder::command::Command::try_get_matches_from_mut::{{closure}}  <->  icu_locale_core::data::DataLocale::strict_cmp
+    1.000  <&T as core::convert::AsRef<U>>::as_ref  <->  uu_sort::merge::merge_with_file_limit::{{closure}}
+    1.000  <F as core::str::pattern::Pattern>::is_prefix_of  <->  bigdecimal::BigDecimal::is_one_quickcheck
+    1.000  <F as core::str::pattern::MultiCharEq>::matches  <->  <bigdecimal::BigDecimal as num_traits::identities::One>::is_one
+    1.000  <T as core::convert::Into<U>>::into  <->  uu_sort::merge::merge_with_file_limit::{{closure}}
+    1.000  __rustc::__rust_alloc  <->  __rustc::__rust_alloc
+
+  Modified functions (potential tampering):
+    0.298  <usize as core::slice::index::SliceIndex<[T]>>::index_mut  <->  crossbeam_epoch::internal::Local::defer
+    0.298  uu_sort::numeric_str_cmp::get_unit  <->  uu_sort::parse_legacy_part
+    0.298  <u64 as num_integer::Integer>::div_ceil  <->  num_bigint::biguint::convert::to_bitwise_digits_le
+    0.298  icu_collator::options::CollatorOptionsBitField::max_variable  <->  rayon_core::sleep::Sleep::sleep
+    0.297  intl_pluralrules::rules::PRS_CARDINAL::{{closure}}  <->  procfs_core::meminfo::convert_to_kibibytes
+
+======================================================================
+PHASE 5: Groundtruth Generation
+======================================================================
+  Groundtruth entries: 4118
+  Groundtruth addr pairs (1-to-1): 884
+
+  Baseline Matching Accuracy:
+    MRR:        0.192
+    Recall@1:   0.171
+    Precision:  0.062
+    Top-1:     0.171
+    Top-3:     0.187
+    Top-5:     0.215
+    Top-10:     0.233
+
+======================================================================
+PHASE 6: Feature Ablation Study
+======================================================================
+
+  Ablation Results (leave-one-out and single-feature):
+           experiment                                                                                                                       enabled_flags   mrr  recall_at_1  recall_at_5  top_1  top_5  top_10
+         all_features FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.192        0.171        0.215  0.171  0.215   0.233
+         no_constants           FeatureFlag.CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.175        0.151        0.194  0.151  0.194   0.221
+   no_concrete_values                 FeatureFlag.CONSTANTS|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.192        0.171        0.215  0.171  0.215   0.233
+  no_opcode_histogram                  FeatureFlag.CONSTANTS|CONCRETE_VALUES|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.170        0.153        0.174  0.153  0.174   0.199
+    no_memory_pattern                FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.192        0.171        0.215  0.171  0.215   0.233
+    no_dataflow_edges                FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.192        0.171        0.215  0.171  0.215   0.233
+       no_cfg_weights             FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CALLEE_NAMES|CFG_SHAPE|STRING_REFS 0.191        0.169        0.208  0.169  0.208   0.233
+      no_callee_names              FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CFG_SHAPE|STRING_REFS 0.192        0.171        0.215  0.171  0.215   0.233
+         no_cfg_shape           FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|STRING_REFS 0.199        0.176        0.215  0.176  0.215   0.231
+       no_string_refs             FeatureFlag.CONSTANTS|CONCRETE_VALUES|OPCODE_HISTOGRAM|MEMORY_PATTERN|DATAFLOW_EDGES|CFG_WEIGHTS|CALLEE_NAMES|CFG_SHAPE 0.192        0.171        0.215  0.171  0.215   0.233
+       only_constants                                                                                                               FeatureFlag.CONSTANTS 0.154        0.130        0.167  0.130  0.167   0.189
+ only_concrete_values                                                                                                         FeatureFlag.CONCRETE_VALUES 0.008        0.002        0.011  0.002  0.011   0.011
+only_opcode_histogram                                                                                                        FeatureFlag.OPCODE_HISTOGRAM 0.176        0.153        0.205  0.153  0.205   0.215
+  only_memory_pattern                                                                                                          FeatureFlag.MEMORY_PATTERN 0.008        0.002        0.011  0.002  0.011   0.011
+  only_dataflow_edges                                                                                                          FeatureFlag.DATAFLOW_EDGES 0.008        0.002        0.011  0.002  0.011   0.011
+     only_cfg_weights                                                                                                             FeatureFlag.CFG_WEIGHTS 0.103        0.084        0.121  0.084  0.121   0.132
+    only_callee_names                                                                                                            FeatureFlag.CALLEE_NAMES 0.008        0.002        0.011  0.002  0.011   0.011
+       only_cfg_shape                                                                                                               FeatureFlag.CFG_SHAPE 0.122        0.105        0.135  0.105  0.135   0.148
+     only_string_refs                                                                                                             FeatureFlag.STRING_REFS 0.008        0.002        0.011  0.002  0.011   0.011
+
+  Saved to: data/results/coreutils_sort_analysis/ablation_results.csv
+
+======================================================================
+PHASE 7: Function-Level Feature Impact Analysis
+======================================================================
+
+  Correct matches: 75/1200
+  Incorrect matches: 1125/1200
+
+  Average per-feature similarity (correct matches):
+    CONSTANTS                : 0.900
+    CONCRETE_VALUES          : 1.000
+    OPCODE_HISTOGRAM         : 0.950
+    MEMORY_PATTERN           : 1.000
+    DATAFLOW_EDGES           : 1.000
+    CFG_WEIGHTS              : 0.976
+    CALLEE_NAMES             : 1.000
+    CFG_SHAPE                : 0.944
+    STRING_REFS              : 1.000
+
+  Feature Interaction Matrix (synergy values):
+                  CONSTANTS  CONCRETE_VALUES  OPCODE_HISTOGRAM  MEMORY_PATTERN  DATAFLOW_EDGES  CFG_WEIGHTS  CALLEE_NAMES  CFG_SHAPE  STRING_REFS
+CONSTANTS            +0.130           +0.000            +0.011          +0.000          +0.000       +0.014        +0.000     +0.016       +0.000
+CONCRETE_VALUES      +0.000           +0.002            +0.000          +0.000          +0.000       +0.000        +0.000     +0.000       +0.000
+OPCODE_HISTOGRAM     +0.011           +0.000            +0.153          +0.000          +0.000       +0.009        +0.000     +0.002       +0.000
+MEMORY_PATTERN       +0.000           +0.000            +0.000          +0.002          +0.000       +0.000        +0.000     +0.000       +0.000
+DATAFLOW_EDGES       +0.000           +0.000            +0.000          +0.000          +0.002       +0.000        +0.000     +0.000       +0.000
+CFG_WEIGHTS          +0.014           +0.000            +0.009          +0.000          +0.000       +0.084        +0.000     +0.014       +0.000
+CALLEE_NAMES         +0.000           +0.000            +0.000          +0.000          +0.000       +0.000        +0.002     +0.000       +0.000
+CFG_SHAPE            +0.016           +0.000            +0.002          +0.000          +0.000       +0.014        +0.000     +0.105       +0.000
+STRING_REFS          +0.000           +0.000            +0.000          +0.000          +0.000       +0.000        +0.000     +0.000       +0.002
+
+  Saved to: data/results/coreutils_sort_analysis/interaction_matrix.csv
+
+  Mismatch Diagnostics (74 cases):
+
+    Function 0x714dd0:
+      Most divergent feature: CONSTANTS
+      Overall Jaccard: 1.000
+      Shared features: 8
+      Unique to bin1: 0
+      Unique to bin2: 0
+      Divergent by group: {}
+
+    Function 0x714de0:
+      Most divergent feature: CONSTANTS
+      Overall Jaccard: 1.000
+      Shared features: 10
+      Unique to bin1: 0
+      Unique to bin2: 0
+      Divergent by group: {}
+
+    Function 0x7fdd80:
+      Most divergent feature: CONSTANTS
+      Overall Jaccard: 0.214
+      Shared features: 6
+      Unique to bin1: 4
+      Unique to bin2: 18
+      Divergent by group: {'shape': 4, 'const': 2, 'op2': 10, 'op': 4, 'num_insns_bucket': 2}
+
+    Function 0x81dc00:
+      Most divergent feature: OPCODE_HISTOGRAM
+      Overall Jaccard: 0.800
+      Shared features: 8
+      Unique to bin1: 2
+      Unique to bin2: 0
+      Divergent by group: {'op2': 1, 'op': 1}
+
+    Function 0x8fda00:
+      Most divergent feature: CONSTANTS
+      Overall Jaccard: 0.257
+      Shared features: 9
+      Unique to bin1: 8
+      Unique to bin2: 18
+      Divergent by group: {'op2': 7, 'shape': 6, 'op': 6, 'const': 3, 'num_insns_bucket': 2, 'num_blocks': 2}
+
+======================================================================
+PHASE 8: Block-Level Feature Impact Analysis
+======================================================================
+
+  Analyzed 20 function pairs at block level
+
+  Block Type Matching Accuracy:
+block_type  total  matched  mean_similarity  accuracy
+      BODY     23       23            0.967     1.000
+  EPILOGUE      3        3            1.000     1.000
+
+  Block Feature Ablation (mean accuracy by removed feature):
+  feature_removed  accuracy  mean_similarity
+     callee_names     1.000            0.957
+  concrete_values     1.000            0.957
+        constants     1.000            0.944
+   dataflow_edges     1.000            0.957
+instruction_count     1.000            1.000
+   memory_pattern     1.000            0.957
+  none (baseline)     1.000            0.969
+          opcodes     1.000            0.927
+      string_refs     1.000            0.957
+
+  Rust-Specific Pattern Detection:
+    bounds_check_diff        : 0/20 functions
+    unrolling_diff           : 0/20 functions
+    drop_glue_diff           : 0/20 functions
+    panic_path_diff          : 0/20 functions
+    iterator_diff            : 0/20 functions
+
+    Block count ratio (O0/O2): mean=1.00, min=1.00, max=1.00
+
+======================================================================
+SUMMARY
+======================================================================
+  Binary 1: tmp/coreutils-sort-O0
+  Binary 2: tmp/coreutils-sort-O2
+  Functions analyzed: 6630 vs 1200
+  Groundtruth pairs: 884
+  MRR: 0.192
+  Recall@1: 0.171
+  Block-level analysis: 20 function pairs
+  Results saved to: data/results/coreutils_sort_analysis
+======================================================================

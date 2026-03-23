@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "rustdiff"
+version = "0.1.0"
+description = "Value-based function fingerprinting for Rust binary diffing"
+requires-python = ">=3.12"
+dependencies = [
+    "angr==9.2.138",
+    "claripy==9.2.138",
+    "networkx==3.3",
+    "numpy==2.2.4",
+    "pandas==2.2.3",
+    "scipy==1.15.2",
+    "scikit-learn==1.6.1",
+    "tqdm==4.66.5",
+    "matplotlib==3.10.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ipython>=8.12"]
+
+[tool.setuptools.packages.find]
+include = ["rustdiff*", "eval*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

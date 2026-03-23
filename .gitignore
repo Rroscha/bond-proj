@@ -205,3 +205,44 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# RustDiff project-specific
+data/corpus/
+data/results/
+*.pkl
+pip-ephem-wheel-cache-*/
+
+# Compiled binaries and build artifacts
+tmp/coreutils-sort-O0
+tmp/coreutils-sort-O2
+tmp/rust-corpus/testcrate-O0
+tmp/rust-corpus/testcrate-O2
+tmp/coreutils/
+tmp/rust-corpus/target/
+*_angr_rtdb/
+
+# Cargo lock for test corpus (reproducible from Cargo.toml)
+tmp/rust-corpus/Cargo.lock
+
+# angr/pyvex caches
+pyvex_ffi_parser_cache*
+
+# Personal dotfiles / editor / IDE config
+.bash_profile
+.bashrc
+.zshrc
+.zprofile
+.profile
+.gitconfig
+.idea
+.vscode
+.mcp.json
+.ripgreprc
+.claude/
+
+# Bare git objects leaked into workdir
+/HEAD
+/config
+/hooks
+/objects
+/refs
