@@ -215,9 +215,12 @@ pip-ephem-wheel-cache-*/
 # Compiled binaries and build artifacts
 tmp/coreutils-sort-O0
 tmp/coreutils-sort-O2
+tmp/ripgrep-O0
+tmp/ripgrep-O2
 tmp/rust-corpus/testcrate-O0
 tmp/rust-corpus/testcrate-O2
 tmp/coreutils/
+tmp/ripgrep/
 tmp/rust-corpus/target/
 *_angr_rtdb/
 

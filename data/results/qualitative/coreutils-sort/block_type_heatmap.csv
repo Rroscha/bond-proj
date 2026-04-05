@@ -1,0 +1,6 @@
+block_type,opcodes,constants,concrete_values,memory_pattern,dataflow_edges,instruction_count,callee_names,string_refs,count
+BODY,0.9439113049800073,0.9250348675034867,,,,0.9640651421854156,,,524
+EPILOGUE,0.8666666666666666,0.6666666666666666,,,,1.0,,,10
+ITERATOR_STATE,0.9732142857142857,0.9166666666666666,,,,0.9732142857142857,,,28
+LOOP_HEADER,1.0,1.0,,,,1.0,,,50
+PROLOGUE,,,,,,1.0,,,3

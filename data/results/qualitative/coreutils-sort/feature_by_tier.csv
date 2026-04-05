@@ -1,0 +1,4 @@
+tier,num_functions,opcodes,constants,concrete_values,memory_pattern,dataflow_edges,instruction_count,callee_names,string_refs
+high (>0.7),50,1.0,0.9921875,,,,0.9991164962766629,,
+medium (0.4-0.7),5,0.5354497354497356,0.3177083333333333,,,,0.7493195847362515,,
+low (<0.4),3,0.35869565217391297,0.0,,,,0.562428588036005,,
