@@ -10,6 +10,7 @@ import logging
 from collections import defaultdict
 
 import angr
+import claripy
 
 from rustdiff.micro_exec.arch_neutralizer import ArchNeutralizer
 from rustdiff.micro_exec.value_signature import (
@@ -84,6 +85,8 @@ class BlockMicroExecutor:
         # Extract static features (no execution needed)
         opcode_seq = self._extract_opcode_sequence(block)
         constants = self._extract_constants(block)
+        callee_names = self._extract_callee_names(block)
+        string_refs = self._extract_string_refs(block)
 
         # Run concrete executions with each test input set
         all_outputs = defaultdict(list)  # reg -> [values across inputs]
@@ -117,6 +120,8 @@ class BlockMicroExecutor:
                 constants=tuple(sorted(set(constants))),
                 opcode_sequence=tuple(opcode_seq),
                 out_degree=0,
+                callee_names=tuple(callee_names),
+                string_refs=tuple(string_refs),
             )
 
         # Deduplicate memory accesses by (offset, size, is_write)
@@ -141,6 +146,8 @@ class BlockMicroExecutor:
             dataflow_edges=frozenset(dataflow_edges),
             concrete_outputs=concrete_outputs,
             out_degree=out_degree,
+            callee_names=tuple(callee_names),
+            string_refs=tuple(string_refs),
         )
 
     def execute_function(
@@ -174,13 +181,14 @@ class BlockMicroExecutor:
                 add_options={
                     angr.sim_options.ZERO_FILL_UNCONSTRAINED_MEMORY,
                     angr.sim_options.ZERO_FILL_UNCONSTRAINED_REGISTERS,
+                    angr.sim_options.TRACK_MEMORY_ACTIONS,
                 },
             )
 
             # Initialize stack pointer
-            state.regs._store(self._arch.sp_reg,
-                              state.solver.BVV(self._arch.stack_base,
-                                               self._arch.ptr_size * 8))
+            setattr(state.regs, self._arch.sp_reg,
+                    claripy.BVV(self._arch.stack_base,
+                                     self._arch.ptr_size * 8))
 
             # Initialize general-purpose registers with test values
             pre_regs = {}
@@ -188,10 +196,8 @@ class BlockMicroExecutor:
             for i, reg in enumerate(gp_regs):
                 val = test_input[i % len(test_input)]
                 try:
-                    state.regs._store(
-                        reg,
-                        state.solver.BVV(val, self._arch.ptr_size * 8)
-                    )
+                    setattr(state.regs, reg,
+                            claripy.BVV(val, self._arch.ptr_size * 8))
                     pre_regs[reg] = val
                 except Exception:
                     pass
@@ -202,7 +208,7 @@ class BlockMicroExecutor:
                 sentinel = 0xDEAD0000 + offset
                 state.memory.store(
                     sp_val - offset,
-                    state.solver.BVV(sentinel, self._arch.ptr_size * 8),
+                    claripy.BVV(sentinel, self._arch.ptr_size * 8),
                     endness=self.proj.arch.memory_endness,
                 )
 
@@ -225,7 +231,7 @@ class BlockMicroExecutor:
             post_regs = {}
             for reg in gp_regs:
                 try:
-                    val = post_state.regs._load(reg)
+                    val = getattr(post_state.regs, reg)
                     if val.concrete:
                         post_regs[reg] = post_state.solver.eval(val)
                 except Exception:
@@ -351,3 +357,45 @@ class BlockMicroExecutor:
                 seen.add(key)
                 result.append(ma)
         return sorted(result, key=lambda m: (m.offset, m.is_write))
+
+    def _extract_callee_names(self, block: angr.block.Block) -> list[str]:
+        """Extract demangled names of functions called from this block."""
+        callees = []
+        for insn in block.capstone.insns:
+            if insn.mnemonic in ('call', 'callq', 'bl', 'blr'):
+                # Try to get immediate target address
+                if insn.operands and insn.operands[0].type == 2:  # IMM
+                    target_addr = insn.operands[0].imm
+                    name = self.loader.get_demangled_name(target_addr)
+                    if name:
+                        callees.append(name)
+                    else:
+                        callees.append(f'sub_{target_addr:x}')
+        return callees
+
+    def _extract_string_refs(self, block: angr.block.Block) -> list[str]:
+        """Extract string constant references from LEA instructions."""
+        strings = []
+        rodata = self.loader.get_section_range('.rodata')
+        if not rodata:
+            return strings
+
+        ro_lo, ro_hi = rodata
+        for insn in block.capstone.insns:
+            if insn.mnemonic not in ('lea', 'adr', 'adrp'):
+                continue
+            for op in insn.operands:
+                if not (hasattr(op, 'mem') and hasattr(op.mem, 'disp')):
+                    continue
+                # RIP-relative addressing: target = insn_addr + insn_size + disp
+                target_addr = insn.address + insn.size + op.mem.disp
+                if ro_lo <= target_addr <= ro_hi:
+                    try:
+                        raw = self.proj.loader.memory.load(target_addr, 128)
+                        null_idx = raw.index(b'\x00') if b'\x00' in raw else 128
+                        s = raw[:null_idx].decode('utf-8', errors='replace')
+                        if s and len(s) > 1:
+                            strings.append(s[:80])
+                    except Exception:
+                        pass
+        return strings
