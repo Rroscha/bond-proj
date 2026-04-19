@@ -4490,7 +4490,8 @@
             "0x427603: jmp      0x4272e2"
           ]
         }
-      ]
+      ],
+      "explanation": "om_01 (Rust): 66 O0 blocks \u2192 66 O2 blocks (1.0:1). Best method: size (83%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "om_01",
@@ -7039,7 +7040,8 @@
             "0x402bfd: jmp      0x402b90"
           ]
         }
-      ]
+      ],
+      "explanation": "om_01 (C): 32 O0 blocks \u2192 37 O2 blocks (0.9:1). Best method: opcodes (81%), worst: constants (3%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (32 vs Rust's 66 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_02",
@@ -10933,7 +10935,8 @@
             "0x427b18: jmp      0x4278f6"
           ]
         }
-      ]
+      ],
+      "explanation": "om_02 (Rust): 47 O0 blocks \u2192 68 O2 blocks (0.7:1). Best method: size (83%), worst: constants (2%). Loses to C on: value, opcodes, constants, size."
     },
     {
       "base_name": "om_02",
@@ -12043,7 +12046,8 @@
             "0x402cb8: jmp      0x402c61"
           ]
         }
-      ]
+      ],
+      "explanation": "om_02 (C): 13 O0 blocks \u2192 16 O2 blocks (0.8:1). Best method: opcodes (92%), worst: constants (23%). Beats Rust on: value, opcodes, constants, size. Simpler structure (13 vs Rust's 47 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_03",
@@ -13265,7 +13269,8 @@
             "... +5 more"
           ]
         }
-      ]
+      ],
+      "explanation": "om_03 (Rust): 23 O0 blocks \u2192 14 O2 blocks (1.6:1). Best method: size (86%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "om_03",
@@ -14047,7 +14052,8 @@
             "0x402d83: jmp      0x401040"
           ]
         }
-      ]
+      ],
+      "explanation": "om_03 (C): 10 O0 blocks \u2192 8 O2 blocks (1.2:1). Best method: opcodes (100%), worst: constants (12%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (10 vs Rust's 23 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_04",
@@ -15664,7 +15670,8 @@
             "0x427e9a: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_04 (Rust): 30 O0 blocks \u2192 20 O2 blocks (1.5:1). Best method: size (80%), worst: constants (0%). Loses to C on: constants, size."
     },
     {
       "base_name": "om_04",
@@ -17138,7 +17145,8 @@
             "0x402e9b: jmp      0x402e7e"
           ]
         }
-      ]
+      ],
+      "explanation": "om_04 (C): 23 O0 blocks \u2192 18 O2 blocks (1.3:1). Best method: size (100%), worst: constants (33%). Beats Rust on: constants, size."
     },
     {
       "base_name": "om_05",
@@ -18697,7 +18705,8 @@
             "0x42812b: jmp      0x428084"
           ]
         }
-      ]
+      ],
+      "explanation": "om_05 (Rust): 11 O0 blocks \u2192 43 O2 blocks (0.3:1). Best method: opcodes (100%), worst: constants (0%). Beats C on: opcodes, size. Loses to C on: value."
     },
     {
       "base_name": "om_05",
@@ -20426,7 +20435,8 @@
             "0x402fed: jmp      0x402fb9"
           ]
         }
-      ]
+      ],
+      "explanation": "om_05 (C): 22 O0 blocks \u2192 22 O2 blocks (1.0:1). Best method: opcodes (77%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, size."
     },
     {
       "base_name": "om_06",
@@ -22487,7 +22497,8 @@
             "0x4283f2: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_06 (Rust): 29 O0 blocks \u2192 29 O2 blocks (1.0:1). Best method: size (62%), worst: constants (0%). Loses to C on: value, opcodes, constants, size."
     },
     {
       "base_name": "om_06",
@@ -23060,7 +23071,8 @@
             "0x40304b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_06 (C): 7 O0 blocks \u2192 7 O2 blocks (1.0:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: value, opcodes, constants, size. Simpler structure (7 vs Rust's 29 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_07",
@@ -24587,7 +24599,8 @@
             "0x428580: call     qword ptr [rip + 0x56942]"
           ]
         }
-      ]
+      ],
+      "explanation": "om_07 (Rust): 35 O0 blocks \u2192 15 O2 blocks (2.3:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Large O0\u2192O2 block reduction (35\u219215) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "om_07",
@@ -25389,7 +25402,8 @@
             "0x4030e5: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_07 (C): 10 O0 blocks \u2192 10 O2 blocks (1.0:1). Best method: size (80%), worst: constants (0%). Loses to Rust on: size. Simpler structure (10 vs Rust's 35 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_08",
@@ -27091,7 +27105,8 @@
             "0x4287f7: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_08 (Rust): 23 O0 blocks \u2192 23 O2 blocks (1.0:1). Best method: size (57%), worst: constants (0%). Beats C on: value. Loses to C on: opcodes, constants, size."
     },
     {
       "base_name": "om_08",
@@ -27720,7 +27735,8 @@
             "0x40315b: jmp      0x403139"
           ]
         }
-      ]
+      ],
+      "explanation": "om_08 (C): 7 O0 blocks \u2192 9 O2 blocks (0.8:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: opcodes, constants, size. Loses to Rust on: value. Simpler structure (7 vs Rust's 23 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_09",
@@ -32753,7 +32769,8 @@
             "0x428c46: jmp      0x42894b"
           ]
         }
-      ]
+      ],
+      "explanation": "om_09 (Rust): 79 O0 blocks \u2192 72 O2 blocks (1.1:1). Best method: size (89%), worst: constants (1%). Beats C on: size. Loses to C on: opcodes."
     },
     {
       "base_name": "om_09",
@@ -35263,7 +35280,8 @@
             "0x403346: jmp      0x4032d4"
           ]
         }
-      ]
+      ],
+      "explanation": "om_09 (C): 34 O0 blocks \u2192 32 O2 blocks (1.1:1). Best method: opcodes (78%), worst: constants (3%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (34 vs Rust's 79 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_10",
@@ -40544,7 +40562,8 @@
             "0x429298: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_10 (Rust): 82 O0 blocks \u2192 73 O2 blocks (1.1:1). Best method: size (63%), worst: constants (0%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "om_10",
@@ -42143,7 +42162,8 @@
             "0x403477: jmp      0x403412"
           ]
         }
-      ]
+      ],
+      "explanation": "om_10 (C): 20 O0 blocks \u2192 22 O2 blocks (0.9:1). Best method: opcodes (95%), worst: constants (10%). Beats Rust on: value, opcodes, constants. Simpler structure (20 vs Rust's 82 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_11",
@@ -44712,7 +44732,8 @@
             "0x429738: jmp      0x429693"
           ]
         }
-      ]
+      ],
+      "explanation": "om_11 (Rust): 28 O0 blocks \u2192 46 O2 blocks (0.6:1). Best method: size (79%), worst: constants (0%). Loses to C on: opcodes, constants."
     },
     {
       "base_name": "om_11",
@@ -46056,7 +46077,8 @@
             "0x403546: jmp      0x403524"
           ]
         }
-      ]
+      ],
+      "explanation": "om_11 (C): 17 O0 blocks \u2192 19 O2 blocks (0.9:1). Best method: opcodes (88%), worst: constants (6%). Beats Rust on: opcodes, constants."
     },
     {
       "base_name": "om_12",
@@ -47088,7 +47110,8 @@
             "0x4298d5: jmp      0x42982e"
           ]
         }
-      ]
+      ],
+      "explanation": "om_12 (Rust): 18 O0 blocks \u2192 13 O2 blocks (1.4:1). Best method: size (77%), worst: constants (0%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "om_12",
@@ -49060,7 +49083,8 @@
             "0x4036a5: jmp      0x403663"
           ]
         }
-      ]
+      ],
+      "explanation": "om_12 (C): 28 O0 blocks \u2192 27 O2 blocks (1.0:1). Best method: opcodes (81%), worst: constants (26%). Beats Rust on: value, opcodes, constants."
     },
     {
       "base_name": "om_13",
@@ -50694,7 +50718,8 @@
             "... +1 more"
           ]
         }
-      ]
+      ],
+      "explanation": "om_13 (Rust): 26 O0 blocks \u2192 20 O2 blocks (1.3:1). Best method: size (60%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "om_13",
@@ -51166,7 +51191,8 @@
             "0x4036f6: jmp      0x401040"
           ]
         }
-      ]
+      ],
+      "explanation": "om_13 (C): 6 O0 blocks \u2192 5 O2 blocks (1.2:1). Best method: opcodes (80%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (6 vs Rust's 26 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_14",
@@ -53268,7 +53294,8 @@
             "0x429d21: call     qword ptr [rip + 0x551a1]"
           ]
         }
-      ]
+      ],
+      "explanation": "om_14 (Rust): 36 O0 blocks \u2192 28 O2 blocks (1.3:1). Best method: size (86%), worst: constants (0%). Beats C on: value, opcodes, size. Loses to C on: constants."
     },
     {
       "base_name": "om_14",
@@ -53990,7 +54017,8 @@
             "0x40378f: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_14 (C): 10 O0 blocks \u2192 8 O2 blocks (1.2:1). Best method: size (75%), worst: value (0%). Beats Rust on: constants. Loses to Rust on: value, opcodes, size. Simpler structure (10 vs Rust's 36 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_15",
@@ -55387,7 +55415,8 @@
             "0x429e7f: jmp      0x429e6e"
           ]
         }
-      ]
+      ],
+      "explanation": "om_15 (Rust): 29 O0 blocks \u2192 15 O2 blocks (1.9:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes."
     },
     {
       "base_name": "om_15",
@@ -56106,7 +56135,8 @@
             "0x403810: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_15 (C): 9 O0 blocks \u2192 9 O2 blocks (1.0:1). Best method: opcodes (89%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size. Simpler structure (9 vs Rust's 29 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_16",
@@ -60967,7 +60997,8 @@
             "0x42a5cc: jmp      0x42a2ac"
           ]
         }
-      ]
+      ],
+      "explanation": "om_16 (Rust): 55 O0 blocks \u2192 91 O2 blocks (0.6:1). Best method: size (91%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "om_16",
@@ -62387,7 +62418,8 @@
             "0x403908: jmp      0x40388f"
           ]
         }
-      ]
+      ],
+      "explanation": "om_16 (C): 18 O0 blocks \u2192 20 O2 blocks (0.9:1). Best method: opcodes (89%), worst: constants (33%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (18 vs Rust's 55 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_17",
@@ -63580,7 +63612,8 @@
             "0x42a7d2: call     qword ptr [rip + 0x546f0]"
           ]
         }
-      ]
+      ],
+      "explanation": "om_17 (Rust): 19 O0 blocks \u2192 15 O2 blocks (1.3:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Loses to C on: value."
     },
     {
       "base_name": "om_17",
@@ -64099,7 +64132,8 @@
             "0x40396b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_17 (C): 6 O0 blocks \u2192 6 O2 blocks (1.0:1). Best method: size (83%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: size. Simpler structure (6 vs Rust's 19 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_18",
@@ -67916,7 +67950,8 @@
             "0x42ac32: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_18 (Rust): 56 O0 blocks \u2192 54 O2 blocks (1.0:1). Best method: size (63%), worst: constants (0%). Beats C on: value. Loses to C on: opcodes, constants, size."
     },
     {
       "base_name": "om_18",
@@ -68967,7 +69002,8 @@
             "0x403a13: jmp      0x4039e9"
           ]
         }
-      ]
+      ],
+      "explanation": "om_18 (C): 13 O0 blocks \u2192 15 O2 blocks (0.9:1). Best method: opcodes (100%), worst: constants (8%). Beats Rust on: opcodes, constants, size. Loses to Rust on: value. Simpler structure (13 vs Rust's 56 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_19",
@@ -70484,7 +70520,8 @@
             "0x42ae76: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_19 (Rust): 26 O0 blocks \u2192 18 O2 blocks (1.4:1). Best method: size (83%), worst: constants (6%). Beats C on: constants. Loses to C on: value, opcodes."
     },
     {
       "base_name": "om_19",
@@ -71409,7 +71446,8 @@
             "0x403add: jmp      0x403aaa"
           ]
         }
-      ]
+      ],
+      "explanation": "om_19 (C): 11 O0 blocks \u2192 12 O2 blocks (0.9:1). Best method: size (82%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: constants. Simpler structure (11 vs Rust's 26 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "om_20",
@@ -74710,7 +74748,8 @@
             "0x42b206: call     qword ptr [rip + 0x53cbc]"
           ]
         }
-      ]
+      ],
+      "explanation": "om_20 (Rust): 51 O0 blocks \u2192 43 O2 blocks (1.2:1). Best method: size (72%), worst: constants (9%). Loses to C on: opcodes, constants, size."
     },
     {
       "base_name": "om_20",
@@ -75744,7 +75783,8 @@
             "0x403b97: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "om_20 (C): 14 O0 blocks \u2192 11 O2 blocks (1.3:1). Best method: opcodes (82%), worst: constants (27%). Beats Rust on: opcodes, constants, size. Simpler structure (14 vs Rust's 51 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_01",
@@ -79291,7 +79331,8 @@
             "0x423450: jmp      0x4233ac"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_01 (Rust): 53 O0 blocks \u2192 50 O2 blocks (1.1:1). Best method: size (86%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_01",
@@ -81143,7 +81184,8 @@
             "0x403cb2: jmp      0x403c95"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_01 (C): 25 O0 blocks \u2192 25 O2 blocks (1.0:1). Best method: opcodes (76%), worst: constants (8%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (25 vs Rust's 53 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_02",
@@ -83288,7 +83330,8 @@
             "0x4236e3: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_02 (Rust): 37 O0 blocks \u2192 27 O2 blocks (1.4:1). Best method: size (81%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_02",
@@ -84807,7 +84850,8 @@
             "0x403db3: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_02 (C): 21 O0 blocks \u2192 21 O2 blocks (1.0:1). Best method: opcodes (81%), worst: constants (24%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "dg_03",
@@ -85145,7 +85189,8 @@
             "0x423746: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_03 (Rust): 5 O0 blocks \u2192 4 O2 blocks (1.2:1). Best method: opcodes (75%), worst: constants (0%). Loses to C on: value, size."
     },
     {
       "base_name": "dg_03",
@@ -86477,7 +86522,8 @@
             "0x403fd3: jmp      0x403f9b"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_03 (C): 4 O0 blocks \u2192 55 O2 blocks (0.1:1). Best method: size (100%), worst: constants (0%). Beats Rust on: value, size."
     },
     {
       "base_name": "dg_04",
@@ -88806,7 +88852,8 @@
             "0x423c73: jmp      0x423bf2"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_04 (Rust): 25 O0 blocks \u2192 41 O2 blocks (0.6:1). Best method: size (92%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes."
     },
     {
       "base_name": "dg_04",
@@ -89933,7 +89980,8 @@
             "0x404092: jmp      0x404059"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_04 (C): 16 O0 blocks \u2192 15 O2 blocks (1.1:1). Best method: opcodes (80%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size."
     },
     {
       "base_name": "dg_05",
@@ -91265,7 +91313,8 @@
             "0x423da5: call     qword ptr [rip + 0x5b115]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_05 (Rust): 26 O0 blocks \u2192 13 O2 blocks (2.0:1). Best method: size (100%), worst: constants (15%). Beats C on: constants, size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "dg_05",
@@ -92159,7 +92208,8 @@
             "0x404132: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_05 (C): 11 O0 blocks \u2192 14 O2 blocks (0.8:1). Best method: opcodes (91%), worst: constants (9%). Beats Rust on: value, opcodes. Loses to Rust on: constants, size. Simpler structure (11 vs Rust's 26 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_06",
@@ -94394,7 +94444,8 @@
             "0x423fef: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_06 (Rust): 40 O0 blocks \u2192 28 O2 blocks (1.4:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_06",
@@ -96209,7 +96260,8 @@
             "0x404295: jmp      0x404258"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_06 (C): 24 O0 blocks \u2192 25 O2 blocks (1.0:1). Best method: opcodes (83%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "dg_07",
@@ -100600,7 +100652,8 @@
             "0x424517: call     qword ptr [rip + 0x5a9ab]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_07 (Rust): 60 O0 blocks \u2192 67 O2 blocks (0.9:1). Best method: size (95%), worst: constants (2%). Beats C on: value, size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "dg_07",
@@ -102655,7 +102708,8 @@
             "0x404413: jmp      0x4043f4"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_07 (C): 31 O0 blocks \u2192 25 O2 blocks (1.2:1). Best method: size (80%), worst: constants (12%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size."
     },
     {
       "base_name": "dg_08",
@@ -105076,7 +105130,8 @@
             "0x4249f9: jmp      0x424914"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_08 (Rust): 30 O0 blocks \u2192 43 O2 blocks (0.7:1). Best method: opcodes (73%), worst: constants (0%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_08",
@@ -105945,7 +106000,8 @@
             "0x4044c2: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_08 (C): 11 O0 blocks \u2192 11 O2 blocks (1.0:1). Best method: opcodes (82%), worst: constants (27%). Beats Rust on: value, opcodes, constants. Simpler structure (11 vs Rust's 30 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_09",
@@ -109494,7 +109550,8 @@
             "0x424d85: call     qword ptr [rip + 0x5a135]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_09 (Rust): 53 O0 blocks \u2192 47 O2 blocks (1.1:1). Best method: size (89%), worst: constants (13%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "dg_09",
@@ -110930,7 +110987,8 @@
             "0x4045de: jmp      0x4045bd"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_09 (C): 19 O0 blocks \u2192 18 O2 blocks (1.1:1). Best method: size (83%), worst: constants (17%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (19 vs Rust's 53 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_10",
@@ -115415,7 +115473,8 @@
             "0x425251: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_10 (Rust): 63 O0 blocks \u2192 66 O2 blocks (1.0:1). Best method: size (84%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_10",
@@ -117064,7 +117123,8 @@
             "0x4046f8: jmp      0x4046c4"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_10 (C): 21 O0 blocks \u2192 25 O2 blocks (0.8:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (21 vs Rust's 63 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_11",
@@ -119914,7 +119974,8 @@
             "0x425647: jmp      0x4252f0"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_11 (Rust): 38 O0 blocks \u2192 39 O2 blocks (1.0:1). Best method: size (74%), worst: constants (3%). Loses to C on: value, opcodes, constants, size."
     },
     {
       "base_name": "dg_11",
@@ -121428,7 +121489,8 @@
             "0x40483b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_11 (C): 22 O0 blocks \u2192 18 O2 blocks (1.2:1). Best method: opcodes (89%), worst: constants (28%). Beats Rust on: value, opcodes, constants, size."
     },
     {
       "base_name": "dg_12",
@@ -123820,7 +123882,8 @@
             "0x42585d: jmp      0x4256d4"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_12 (Rust): 38 O0 blocks \u2192 32 O2 blocks (1.2:1). Best method: size (91%), worst: constants (0%). Loses to C on: value, opcodes."
     },
     {
       "base_name": "dg_12",
@@ -125132,7 +125195,8 @@
             "0x40490d: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_12 (C): 17 O0 blocks \u2192 19 O2 blocks (0.9:1). Best method: size (88%), worst: constants (0%). Beats Rust on: value, opcodes. Simpler structure (17 vs Rust's 38 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_13",
@@ -127349,7 +127413,8 @@
             "0x425b21: jmp      0x425b00"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_13 (Rust): 28 O0 blocks \u2192 33 O2 blocks (0.8:1). Best method: size (93%), worst: constants (4%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_13",
@@ -128548,7 +128613,8 @@
             "0x4049e3: jmp      0x4049b8"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_13 (C): 15 O0 blocks \u2192 15 O2 blocks (1.0:1). Best method: size (73%), worst: constants (27%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "dg_14",
@@ -132100,7 +132166,8 @@
             "0x425ff2: call     qword ptr [rip + 0x58ed0]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_14 (Rust): 48 O0 blocks \u2192 53 O2 blocks (0.9:1). Best method: size (69%), worst: constants (0%). Loses to C on: opcodes, constants."
     },
     {
       "base_name": "dg_14",
@@ -133118,7 +133185,8 @@
             "0x404abb: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_14 (C): 12 O0 blocks \u2192 13 O2 blocks (0.9:1). Best method: opcodes (83%), worst: constants (25%). Beats Rust on: opcodes, constants. Simpler structure (12 vs Rust's 48 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_15",
@@ -136820,7 +136888,8 @@
             "0x4263b9: jmp      0x426259"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_15 (Rust): 54 O0 blocks \u2192 52 O2 blocks (1.0:1). Best method: size (90%), worst: constants (4%). Beats C on: size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "dg_15",
@@ -138249,7 +138318,8 @@
             "0x404bb7: jmp      0x404b92"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_15 (C): 19 O0 blocks \u2192 18 O2 blocks (1.1:1). Best method: opcodes (72%), worst: constants (17%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (19 vs Rust's 54 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_16",
@@ -139722,7 +139792,8 @@
             "0x42652a: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_16 (Rust): 36 O0 blocks \u2192 14 O2 blocks (2.6:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes, constants. Large O0\u2192O2 block reduction (36\u219214) means O2 eliminated 22 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "dg_16",
@@ -140973,7 +141044,8 @@
             "0x404c83: jmp      0x404c64"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_16 (C): 16 O0 blocks \u2192 16 O2 blocks (1.0:1). Best method: opcodes (75%), worst: constants (12%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (16 vs Rust's 36 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_17",
@@ -143958,7 +144030,8 @@
             "0x426874: call     qword ptr [rip + 0x58656]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_17 (Rust): 50 O0 blocks \u2192 37 O2 blocks (1.4:1). Best method: size (84%), worst: constants (3%). Beats C on: value, size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "dg_17",
@@ -145527,7 +145600,8 @@
             "0x404db6: jmp      0x404d91"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_17 (C): 21 O0 blocks \u2192 20 O2 blocks (1.1:1). Best method: opcodes (80%), worst: constants (20%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size. Simpler structure (21 vs Rust's 50 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_18",
@@ -149273,7 +149347,8 @@
             "0x426c6d: call     qword ptr [rip + 0x58255]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_18 (Rust): 59 O0 blocks \u2192 53 O2 blocks (1.1:1). Best method: size (77%), worst: constants (0%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "dg_18",
@@ -151327,7 +151402,8 @@
             "0x404f2d: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_18 (C): 28 O0 blocks \u2192 29 O2 blocks (1.0:1). Best method: opcodes (86%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Simpler structure (28 vs Rust's 59 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_19",
@@ -154122,7 +154198,8 @@
             "0x426f5e: call     qword ptr [rip + 0x57f5c]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_19 (Rust): 35 O0 blocks \u2192 52 O2 blocks (0.7:1). Best method: size (94%), worst: constants (9%). Beats C on: size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "dg_19",
@@ -155250,7 +155327,8 @@
             "0x405003: jmp      0x404fe1"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_19 (C): 15 O0 blocks \u2192 14 O2 blocks (1.1:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (15 vs Rust's 35 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "dg_20",
@@ -158404,7 +158482,8 @@
             "0x427208: call     qword ptr [rip + 0x57cba]"
           ]
         }
-      ]
+      ],
+      "explanation": "dg_20 (Rust): 69 O0 blocks \u2192 33 O2 blocks (2.1:1). Best method: size (88%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants. Large O0\u2192O2 block reduction (69\u219233) means O2 eliminated 36 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "dg_20",
@@ -159699,7 +159778,8 @@
             "0x4050da: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "dg_20 (C): 20 O0 blocks \u2192 14 O2 blocks (1.4:1). Best method: opcodes (93%), worst: constants (14%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (20 vs Rust's 69 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_01",
@@ -160797,7 +160877,8 @@
             "0x421111: call     qword ptr [rip + 0x5ddb9]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_01 (Rust): 25 O0 blocks \u2192 12 O2 blocks (2.1:1). Best method: size (92%), worst: constants (0%). Beats C on: opcodes, size. Large O0\u2192O2 block reduction (25\u219212) means O2 eliminated 13 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_01",
@@ -161416,7 +161497,8 @@
             "0x405124: jmp      0x4050ff"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_01 (C): 9 O0 blocks \u2192 8 O2 blocks (1.1:1). Best method: opcodes (50%), worst: constants (0%). Loses to Rust on: opcodes, size. Simpler structure (9 vs Rust's 25 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_02",
@@ -162797,7 +162879,8 @@
             "0x421180: call     qword ptr [rip + 0x5dd4a]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_02 (Rust): 37 O0 blocks \u2192 12 O2 blocks (3.1:1). Best method: size (100%), worst: constants (0%). Beats C on: opcodes, size. Loses to C on: value. Large O0\u2192O2 block reduction (37\u219212) means O2 eliminated 25 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_02",
@@ -163484,7 +163567,8 @@
             "0x405196: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_02 (C): 8 O0 blocks \u2192 9 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, size. Simpler structure (8 vs Rust's 37 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_03",
@@ -166172,7 +166256,8 @@
             "0x4214f0: jmp      0x4214db"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_03 (Rust): 49 O0 blocks \u2192 30 O2 blocks (1.6:1). Best method: opcodes (83%), worst: constants (0%). Beats C on: value, size. Loses to C on: constants."
     },
     {
       "base_name": "bc_03",
@@ -167167,7 +167252,8 @@
             "0x405234: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_03 (C): 14 O0 blocks \u2192 12 O2 blocks (1.2:1). Best method: opcodes (83%), worst: constants (8%). Beats Rust on: constants. Loses to Rust on: value, size. Simpler structure (14 vs Rust's 49 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_04",
@@ -168026,7 +168112,8 @@
             "0x4215f5: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_04 (Rust): 13 O0 blocks \u2192 10 O2 blocks (1.3:1). Best method: size (60%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "bc_04",
@@ -168405,7 +168492,8 @@
             "0x40527e: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_04 (C): 4 O0 blocks \u2192 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 13 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_05",
@@ -169651,7 +169739,8 @@
             "0x4216da: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_05 (Rust): 22 O0 blocks \u2192 15 O2 blocks (1.5:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "bc_05",
@@ -170280,7 +170369,8 @@
             "0x4052d7: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_05 (C): 9 O0 blocks \u2192 8 O2 blocks (1.1:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (9 vs Rust's 22 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_06",
@@ -172000,7 +172090,8 @@
             "0x4217af: call     qword ptr [rip + 0x5d71b]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_06 (Rust): 40 O0 blocks \u2192 18 O2 blocks (2.2:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Large O0\u2192O2 block reduction (40\u219218) means O2 eliminated 22 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_06",
@@ -172928,7 +173019,8 @@
             "0x405398: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_06 (C): 11 O0 blocks \u2192 14 O2 blocks (0.8:1). Best method: opcodes (91%), worst: constants (0%). Loses to Rust on: size. Simpler structure (11 vs Rust's 40 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_07",
@@ -177201,7 +177293,8 @@
             "0x421abd: call     qword ptr [rip + 0x5d405]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_07 (Rust): 99 O0 blocks \u2192 44 O2 blocks (2.2:1). Best method: size (95%), worst: constants (7%). Beats C on: opcodes, size. Loses to C on: constants. Large O0\u2192O2 block reduction (99\u219244) means O2 eliminated 55 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_07",
@@ -178386,7 +178479,8 @@
             "0x4054a6: jmp      0x405482"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_07 (C): 19 O0 blocks \u2192 11 O2 blocks (1.7:1). Best method: opcodes (82%), worst: value (36%). Beats Rust on: constants. Loses to Rust on: opcodes, size. Simpler structure (19 vs Rust's 99 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_08",
@@ -180998,7 +181092,8 @@
             "0x421c7c: call     qword ptr [rip + 0x5d24e]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_08 (Rust): 75 O0 blocks \u2192 19 O2 blocks (3.9:1). Best method: opcodes (100%), worst: constants (5%). Beats C on: opcodes, constants, size. Large O0\u2192O2 block reduction (75\u219219) means O2 eliminated 56 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_08",
@@ -182035,7 +182130,8 @@
             "0x405526: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_08 (C): 16 O0 blocks \u2192 12 O2 blocks (1.3:1). Best method: opcodes (75%), worst: constants (0%). Loses to Rust on: opcodes, constants, size. Simpler structure (16 vs Rust's 75 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_09",
@@ -183347,7 +183443,8 @@
             "0x421d7d: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_09 (Rust): 25 O0 blocks \u2192 16 O2 blocks (1.6:1). Best method: size (94%), worst: constants (0%). Beats C on: opcodes, size. Loses to C on: value."
     },
     {
       "base_name": "bc_09",
@@ -184043,7 +184140,8 @@
             "0x405587: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_09 (C): 9 O0 blocks \u2192 9 O2 blocks (1.0:1). Best method: size (67%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, size. Simpler structure (9 vs Rust's 25 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_10",
@@ -185775,7 +185873,8 @@
             "0x421ec9: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_10 (Rust): 36 O0 blocks \u2192 18 O2 blocks (2.0:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "bc_10",
@@ -186672,7 +186771,8 @@
             "0x405619: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_10 (C): 13 O0 blocks \u2192 10 O2 blocks (1.3:1). Best method: opcodes (100%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (13 vs Rust's 36 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_11",
@@ -188140,7 +188240,8 @@
             "0x421f73: call     qword ptr [rip + 0x5cf57]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_11 (Rust): 35 O0 blocks \u2192 15 O2 blocks (2.3:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value. Large O0\u2192O2 block reduction (35\u219215) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_11",
@@ -188938,7 +189039,8 @@
             "0x405694: jmp      0x405655"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_11 (C): 11 O0 blocks \u2192 9 O2 blocks (1.2:1). Best method: opcodes (78%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: size. Simpler structure (11 vs Rust's 35 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_12",
@@ -193996,7 +194098,8 @@
             "0x422463: jmp      0x4220e9"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_12 (Rust): 63 O0 blocks \u2192 93 O2 blocks (0.7:1). Best method: size (86%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "bc_12",
@@ -196339,7 +196442,8 @@
             "0x4058a9: jmp      0x405871"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_12 (C): 31 O0 blocks \u2192 29 O2 blocks (1.1:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size. Simpler structure (31 vs Rust's 63 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_13",
@@ -198837,7 +198941,8 @@
             "0x422676: call     qword ptr [rip + 0x5c854]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_13 (Rust): 43 O0 blocks \u2192 32 O2 blocks (1.3:1). Best method: size (97%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "bc_13",
@@ -199838,7 +199943,8 @@
             "0x405968: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_13 (C): 12 O0 blocks \u2192 14 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (8%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (12 vs Rust's 43 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_14",
@@ -201117,7 +201223,8 @@
             "0x4227ea: call     qword ptr [rip + 0x5c6e0]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_14 (Rust): 28 O0 blocks \u2192 12 O2 blocks (2.3:1). Best method: opcodes (83%), worst: constants (8%). Beats C on: opcodes. Loses to C on: value. Large O0\u2192O2 block reduction (28\u219212) means O2 eliminated 16 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_14",
@@ -202518,7 +202625,8 @@
             "0x405a77: jmp      0x40598a"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_14 (C): 19 O0 blocks \u2192 17 O2 blocks (1.1:1). Best method: size (82%), worst: constants (6%). Beats Rust on: value. Loses to Rust on: opcodes."
     },
     {
       "base_name": "bc_15",
@@ -204495,7 +204603,8 @@
             "0x42294b: jmp      0x422900"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_15 (Rust): 50 O0 blocks \u2192 17 O2 blocks (2.9:1). Best method: opcodes (88%), worst: constants (6%). Loses to C on: constants, size. Large O0\u2192O2 block reduction (50\u219217) means O2 eliminated 33 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_15",
@@ -205243,7 +205352,8 @@
             "0x405b11: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_15 (C): 11 O0 blocks \u2192 7 O2 blocks (1.6:1). Best method: size (100%), worst: value (43%). Beats Rust on: constants, size. Simpler structure (11 vs Rust's 50 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_16",
@@ -206154,7 +206264,8 @@
             "0x4229bc: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_16 (Rust): 26 O0 blocks \u2192 6 O2 blocks (4.3:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes. Large O0\u2192O2 block reduction (26\u21926) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_16",
@@ -206694,7 +206805,8 @@
             "0x405b59: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_16 (C): 9 O0 blocks \u2192 6 O2 blocks (1.5:1). Best method: opcodes (67%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size. Simpler structure (9 vs Rust's 26 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_17",
@@ -208811,7 +208923,8 @@
             "0x422ae5: call     qword ptr [rip + 0x5c3e5]"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_17 (Rust): 51 O0 blocks \u2192 21 O2 blocks (2.4:1). Best method: opcodes (90%), worst: value (5%). Loses to C on: value, size. Large O0\u2192O2 block reduction (51\u219221) means O2 eliminated 30 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "bc_17",
@@ -209936,7 +210049,8 @@
             "0x405c21: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_17 (C): 14 O0 blocks \u2192 15 O2 blocks (0.9:1). Best method: opcodes (93%), worst: constants (14%). Beats Rust on: value, size. Simpler structure (14 vs Rust's 51 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_18",
@@ -212465,7 +212579,8 @@
             "0x422c5c: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_18 (Rust): 48 O0 blocks \u2192 32 O2 blocks (1.5:1). Best method: size (97%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes."
     },
     {
       "base_name": "bc_18",
@@ -213740,7 +213855,8 @@
             "0x405ce7: jmp      0x405cad"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_18 (C): 19 O0 blocks \u2192 17 O2 blocks (1.1:1). Best method: size (82%), worst: value (0%). Beats Rust on: opcodes. Loses to Rust on: value, size. Simpler structure (19 vs Rust's 48 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_19",
@@ -215026,7 +215142,8 @@
             "0x422db1: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_19 (Rust): 25 O0 blocks \u2192 14 O2 blocks (1.8:1). Best method: size (86%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes."
     },
     {
       "base_name": "bc_19",
@@ -215665,7 +215782,8 @@
             "0x405d4d: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_19 (C): 9 O0 blocks \u2192 8 O2 blocks (1.1:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (9 vs Rust's 25 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "bc_20",
@@ -217712,7 +217830,8 @@
             "0x423144: jmp      0x422f4b"
           ]
         }
-      ]
+      ],
+      "explanation": "bc_20 (Rust): 20 O0 blocks \u2192 38 O2 blocks (0.5:1). Best method: size (80%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes."
     },
     {
       "base_name": "bc_20",
@@ -218876,7 +218995,8 @@
             "0x405e27: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "bc_20 (C): 16 O0 blocks \u2192 13 O2 blocks (1.2:1). Best method: opcodes (77%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size."
     },
     {
       "base_name": "qm_01",
@@ -220228,7 +220348,8 @@
             "0x42cf25: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_01 (Rust): 36 O0 blocks \u2192 13 O2 blocks (2.8:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes. Large O0\u2192O2 block reduction (36\u219213) means O2 eliminated 23 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_01",
@@ -221094,7 +221215,8 @@
             "0x405e88: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_01 (C): 15 O0 blocks \u2192 11 O2 blocks (1.4:1). Best method: opcodes (73%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (15 vs Rust's 36 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_02",
@@ -223250,7 +223372,8 @@
             "0x42d153: jmp      0x42d13b"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_02 (Rust): 23 O0 blocks \u2192 45 O2 blocks (0.5:1). Best method: size (100%), worst: constants (4%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "qm_02",
@@ -224348,7 +224471,8 @@
             "0x405f5f: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_02 (C): 15 O0 blocks \u2192 14 O2 blocks (1.1:1). Best method: size (100%), worst: constants (29%). Beats Rust on: value, opcodes, constants."
     },
     {
       "base_name": "qm_03",
@@ -225024,7 +225148,8 @@
             "0x42d19c: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_03 (Rust): 14 O0 blocks \u2192 7 O2 blocks (2.0:1). Best method: size (71%), worst: constants (0%). Beats C on: size."
     },
     {
       "base_name": "qm_03",
@@ -225570,7 +225695,8 @@
             "0x405fa0: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_03 (C): 7 O0 blocks \u2192 7 O2 blocks (1.0:1). Best method: value (57%), worst: constants (0%). Loses to Rust on: size."
     },
     {
       "base_name": "qm_04",
@@ -226643,7 +226769,8 @@
             "0x42d204: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_04 (Rust): 28 O0 blocks \u2192 9 O2 blocks (3.1:1). Best method: opcodes (100%), worst: constants (11%). Beats C on: value, opcodes. Large O0\u2192O2 block reduction (28\u21929) means O2 eliminated 19 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_04",
@@ -227596,7 +227723,8 @@
             "0x40602a: jmp      0x406006"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_04 (C): 16 O0 blocks \u2192 11 O2 blocks (1.5:1). Best method: size (100%), worst: constants (9%). Loses to Rust on: value, opcodes."
     },
     {
       "base_name": "qm_05",
@@ -229351,7 +229479,8 @@
             "0x42d39d: jmp      0x42d365"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_05 (Rust): 22 O0 blocks \u2192 31 O2 blocks (0.7:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "qm_05",
@@ -230297,7 +230426,8 @@
             "0x406105: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_05 (C): 13 O0 blocks \u2192 12 O2 blocks (1.1:1). Best method: size (83%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "qm_06",
@@ -231601,7 +231731,8 @@
             "0x42d3dc: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_06 (Rust): 49 O0 blocks \u2192 4 O2 blocks (12.2:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes, constants. Large O0\u2192O2 block reduction (49\u21924) means O2 eliminated 45 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_06",
@@ -232104,7 +232235,8 @@
             "0x40615b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_06 (C): 9 O0 blocks \u2192 4 O2 blocks (2.2:1). Best method: opcodes (75%), worst: constants (25%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size. Simpler structure (9 vs Rust's 49 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_07",
@@ -234722,7 +234854,8 @@
             "0x42d642: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_07 (Rust): 38 O0 blocks \u2192 35 O2 blocks (1.1:1). Best method: size (71%), worst: constants (6%). Loses to C on: value, opcodes, constants, size."
     },
     {
       "base_name": "qm_07",
@@ -235694,7 +235827,8 @@
             "0x40622f: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_07 (C): 15 O0 blocks \u2192 11 O2 blocks (1.4:1). Best method: size (91%), worst: constants (27%). Beats Rust on: value, opcodes, constants, size. Simpler structure (15 vs Rust's 38 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_08",
@@ -236437,7 +236571,8 @@
             "0x42d6a9: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_08 (Rust): 13 O0 blocks \u2192 8 O2 blocks (1.6:1). Best method: size (88%), worst: constants (0%). Beats C on: opcodes, size."
     },
     {
       "base_name": "qm_08",
@@ -237085,7 +237220,8 @@
             "0x40627b: jmp      0x40626b"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_08 (C): 9 O0 blocks \u2192 8 O2 blocks (1.1:1). Best method: size (62%), worst: constants (0%). Loses to Rust on: opcodes, size."
     },
     {
       "base_name": "qm_09",
@@ -238215,7 +238351,8 @@
             "0x42d70b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_09 (Rust): 32 O0 blocks \u2192 9 O2 blocks (3.6:1). Best method: size (100%), worst: constants (11%). Beats C on: opcodes, constants, size. Loses to C on: value. Large O0\u2192O2 block reduction (32\u21929) means O2 eliminated 23 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_09",
@@ -239021,7 +239158,8 @@
             "0x4062e3: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_09 (C): 14 O0 blocks \u2192 10 O2 blocks (1.4:1). Best method: opcodes (70%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, constants, size. Simpler structure (14 vs Rust's 32 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_10",
@@ -242353,7 +242491,8 @@
             "0x42d9e8: jmp      0x42d7de"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_10 (Rust): 40 O0 blocks \u2192 60 O2 blocks (0.7:1). Best method: size (92%), worst: constants (5%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "qm_10",
@@ -243508,7 +243647,8 @@
             "0x4063e7: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_10 (C): 17 O0 blocks \u2192 14 O2 blocks (1.2:1). Best method: size (93%), worst: constants (21%). Beats Rust on: value, opcodes, constants. Simpler structure (17 vs Rust's 40 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_11",
@@ -244809,7 +244949,8 @@
             "0x42da5d: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_11 (Rust): 36 O0 blocks \u2192 10 O2 blocks (3.6:1). Best method: size (100%), worst: constants (0%). Beats C on: value, opcodes, size. Large O0\u2192O2 block reduction (36\u219210) means O2 eliminated 26 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_11",
@@ -245954,7 +246095,8 @@
             "0x406495: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_11 (C): 15 O0 blocks \u2192 19 O2 blocks (0.8:1). Best method: size (87%), worst: constants (0%). Loses to Rust on: value, opcodes, size. Simpler structure (15 vs Rust's 36 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_12",
@@ -246901,7 +247043,8 @@
             "0x42dad9: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_12 (Rust): 20 O0 blocks \u2192 10 O2 blocks (2.0:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes."
     },
     {
       "base_name": "qm_12",
@@ -247671,7 +247814,8 @@
             "0x4064fb: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_12 (C): 11 O0 blocks \u2192 10 O2 blocks (1.1:1). Best method: opcodes (80%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size."
     },
     {
       "base_name": "qm_13",
@@ -249125,7 +249269,8 @@
             "0x42db8b: call     qword ptr [rip + 0x513cf]"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_13 (Rust): 30 O0 blocks \u2192 17 O2 blocks (1.8:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes."
     },
     {
       "base_name": "qm_13",
@@ -250003,7 +250148,8 @@
             "0x406555: jmp      0x406547"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_13 (C): 15 O0 blocks \u2192 11 O2 blocks (1.4:1). Best method: size (91%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size."
     },
     {
       "base_name": "qm_14",
@@ -252837,7 +252983,8 @@
             "0x42dd90: jmp      0x42dd34"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_14 (Rust): 59 O0 blocks \u2192 33 O2 blocks (1.8:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "qm_14",
@@ -253696,7 +253843,8 @@
             "0x406622: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_14 (C): 13 O0 blocks \u2192 10 O2 blocks (1.3:1). Best method: opcodes (80%), worst: constants (30%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (13 vs Rust's 59 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_15",
@@ -255424,7 +255572,8 @@
             "0x42defc: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_15 (Rust): 34 O0 blocks \u2192 20 O2 blocks (1.7:1). Best method: size (75%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "qm_15",
@@ -256260,7 +256409,8 @@
             "0x40669e: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_15 (C): 12 O0 blocks \u2192 11 O2 blocks (1.1:1). Best method: opcodes (64%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (12 vs Rust's 34 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_16",
@@ -257272,7 +257422,8 @@
             "0x42df6a: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_16 (Rust): 26 O0 blocks \u2192 8 O2 blocks (3.2:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes. Large O0\u2192O2 block reduction (26\u21928) means O2 eliminated 18 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_16",
@@ -258018,7 +258169,8 @@
             "0x40670b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_16 (C): 11 O0 blocks \u2192 9 O2 blocks (1.2:1). Best method: opcodes (78%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (11 vs Rust's 26 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_17",
@@ -259471,7 +259623,8 @@
             "0x42e02b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_17 (Rust): 38 O0 blocks \u2192 12 O2 blocks (3.2:1). Best method: size (83%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes. Large O0\u2192O2 block reduction (38\u219212) means O2 eliminated 26 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_17",
@@ -260352,7 +260505,8 @@
             "0x406796: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_17 (C): 13 O0 blocks \u2192 11 O2 blocks (1.2:1). Best method: size (73%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (13 vs Rust's 38 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_18",
@@ -262721,7 +262875,8 @@
             "0x42e230: call     qword ptr [rip + 0x50d42]"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_18 (Rust): 32 O0 blocks \u2192 37 O2 blocks (0.9:1). Best method: size (94%), worst: constants (6%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "qm_18",
@@ -263821,7 +263976,8 @@
             "0x40682e: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_18 (C): 18 O0 blocks \u2192 14 O2 blocks (1.3:1). Best method: opcodes (86%), worst: constants (29%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "qm_19",
@@ -266088,7 +266244,8 @@
             "0x42e363: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_19 (Rust): 61 O0 blocks \u2192 20 O2 blocks (3.0:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value. Large O0\u2192O2 block reduction (61\u219220) means O2 eliminated 41 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "qm_19",
@@ -267393,7 +267550,8 @@
             "0x4068d0: jmp      0x406874"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_19 (C): 21 O0 blocks \u2192 17 O2 blocks (1.2:1). Best method: size (76%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: size. Simpler structure (21 vs Rust's 61 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "qm_20",
@@ -269166,7 +269324,8 @@
             "0x42e526: jmp      0x42e505"
           ]
         }
-      ]
+      ],
+      "explanation": "qm_20 (Rust): 23 O0 blocks \u2192 29 O2 blocks (0.8:1). Best method: size (100%), worst: constants (0%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "qm_20",
@@ -270351,7 +270510,8 @@
             "0x4069ae: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "qm_20 (C): 19 O0 blocks \u2192 14 O2 blocks (1.4:1). Best method: size (100%), worst: constants (43%). Beats Rust on: value, opcodes, constants."
     },
     {
       "base_name": "pu_01",
@@ -271421,7 +271581,8 @@
             "0x42b2f9: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_01 (Rust): 17 O0 blocks \u2192 13 O2 blocks (1.3:1). Best method: size (69%), worst: constants (0%). Loses to C on: value, opcodes, size."
     },
     {
       "base_name": "pu_01",
@@ -271809,7 +271970,8 @@
             "0x4069ed: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_01 (C): 4 O0 blocks \u2192 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes, size. Simpler structure (4 vs Rust's 17 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_02",
@@ -273473,7 +273635,8 @@
             "0x42b4ac: call     qword ptr [rip + 0x53a9e]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_02 (Rust): 19 O0 blocks \u2192 25 O2 blocks (0.8:1). Best method: size (79%), worst: constants (5%). Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_02",
@@ -274362,7 +274525,8 @@
             "0x406aa8: jmp      0x406a59"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_02 (C): 11 O0 blocks \u2192 11 O2 blocks (1.0:1). Best method: opcodes (91%), worst: constants (27%). Beats Rust on: value, opcodes, constants."
     },
     {
       "base_name": "pu_03",
@@ -275700,7 +275864,8 @@
             "0x42b5c4: call     qword ptr [rip + 0x53906]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_03 (Rust): 25 O0 blocks \u2192 15 O2 blocks (1.7:1). Best method: opcodes (73%), worst: constants (0%). Beats C on: value."
     },
     {
       "base_name": "pu_03",
@@ -276297,7 +276462,8 @@
             "0x406b0a: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_03 (C): 7 O0 blocks \u2192 9 O2 blocks (0.8:1). Best method: opcodes (71%), worst: constants (0%). Loses to Rust on: value. Simpler structure (7 vs Rust's 25 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_04",
@@ -277555,7 +277721,8 @@
             "0x42b779: jmp      0x42b74e"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_04 (Rust): 11 O0 blocks \u2192 30 O2 blocks (0.4:1). Best method: size (100%), worst: constants (9%). Beats C on: size. Loses to C on: value, constants."
     },
     {
       "base_name": "pu_04",
@@ -278199,7 +278366,8 @@
             "0x406b8f: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_04 (C): 8 O0 blocks \u2192 9 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (38%). Beats Rust on: value, constants. Loses to Rust on: size."
     },
     {
       "base_name": "pu_05",
@@ -278948,7 +279116,8 @@
             "0x42b7c8: call     qword ptr [rip + 0x5377a]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_05 (Rust): 18 O0 blocks \u2192 5 O2 blocks (3.6:1). Best method: size (80%), worst: constants (20%). Beats C on: size. Loses to C on: value, opcodes, constants. Large O0\u2192O2 block reduction (18\u21925) means O2 eliminated 13 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "pu_05",
@@ -279104,7 +279273,8 @@
             "0x406bb9: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_05 (C): 1 O0 blocks \u2192 1 O2 blocks (1.0:1). Best method: value (100%), worst: size (0%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (1 vs Rust's 18 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_06",
@@ -280370,7 +280540,8 @@
             "0x42b933: call     qword ptr [rip + 0x53627]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_06 (Rust): 14 O0 blocks \u2192 22 O2 blocks (0.6:1). Best method: size (93%), worst: constants (7%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_06",
@@ -281045,7 +281216,8 @@
             "0x406c51: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_06 (C): 8 O0 blocks \u2192 9 O2 blocks (0.9:1). Best method: size (88%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "pu_07",
@@ -281952,7 +282124,8 @@
             "0x42b97c: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_07 (Rust): 26 O0 blocks \u2192 6 O2 blocks (4.3:1). Best method: size (100%), worst: constants (0%). Beats C on: opcodes, size. Large O0\u2192O2 block reduction (26\u21926) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods."
     },
     {
       "base_name": "pu_07",
@@ -282438,7 +282611,8 @@
             "0x406ca2: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_07 (C): 6 O0 blocks \u2192 6 O2 blocks (1.0:1). Best method: opcodes (50%), worst: constants (0%). Loses to Rust on: opcodes, size. Simpler structure (6 vs Rust's 26 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_08",
@@ -285518,7 +285692,8 @@
             "0x42bc77: call     qword ptr [rip + 0x532cb]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_08 (Rust): 43 O0 blocks \u2192 42 O2 blocks (1.0:1). Best method: size (81%), worst: constants (2%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_08",
@@ -286906,7 +287081,8 @@
             "0x406dd2: jmp      0x406d50"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_08 (C): 17 O0 blocks \u2192 20 O2 blocks (0.8:1). Best method: size (71%), worst: constants (18%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (17 vs Rust's 43 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_09",
@@ -288052,7 +288228,8 @@
             "0x42bd5a: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_09 (Rust): 15 O0 blocks \u2192 18 O2 blocks (0.8:1). Best method: size (80%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "pu_09",
@@ -288425,7 +288602,8 @@
             "0x406e16: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_09 (C): 4 O0 blocks \u2192 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 15 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_10",
@@ -291445,7 +291623,8 @@
             "0x42bfbd: call     qword ptr [rip + 0x52f85]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_10 (Rust): 47 O0 blocks \u2192 39 O2 blocks (1.2:1). Best method: size (95%), worst: constants (5%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_10",
@@ -292518,7 +292697,8 @@
             "0x406ef9: jmp      0x406e6c"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_10 (C): 13 O0 blocks \u2192 15 O2 blocks (0.9:1). Best method: opcodes (85%), worst: constants (23%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (13 vs Rust's 47 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_11",
@@ -294163,7 +294343,8 @@
             "... +3 more"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_11 (Rust): 31 O0 blocks \u2192 19 O2 blocks (1.6:1). Best method: size (79%), worst: constants (0%). Beats C on: value, opcodes, size."
     },
     {
       "base_name": "pu_11",
@@ -295249,7 +295430,8 @@
             "0x406fb7: jmp      0x406f94"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_11 (C): 15 O0 blocks \u2192 14 O2 blocks (1.1:1). Best method: opcodes (64%), worst: constants (0%). Loses to Rust on: value, opcodes, size. Simpler structure (15 vs Rust's 31 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_12",
@@ -296685,7 +296867,8 @@
             "0x42c24e: jmp      0x42c200"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_12 (Rust): 23 O0 blocks \u2192 18 O2 blocks (1.3:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "pu_12",
@@ -297369,7 +297552,8 @@
             "0x40702c: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_12 (C): 8 O0 blocks \u2192 9 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (8 vs Rust's 23 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_13",
@@ -298839,7 +299023,8 @@
             "0x42c344: call     qword ptr [rip + 0x52b86]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_13 (Rust): 23 O0 blocks \u2192 18 O2 blocks (1.3:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes."
     },
     {
       "base_name": "pu_13",
@@ -299244,7 +299429,8 @@
             "0x40707d: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_13 (C): 4 O0 blocks \u2192 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 23 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_14",
@@ -301299,7 +301485,8 @@
             "0x42c4f2: call     qword ptr [rip + 0x52a58]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_14 (Rust): 36 O0 blocks \u2192 24 O2 blocks (1.5:1). Best method: size (83%), worst: constants (4%). Beats C on: size. Loses to C on: opcodes, constants."
     },
     {
       "base_name": "pu_14",
@@ -302306,7 +302493,8 @@
             "0x407143: jmp      0x40712e"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_14 (C): 13 O0 blocks \u2192 13 O2 blocks (1.0:1). Best method: opcodes (69%), worst: constants (23%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (13 vs Rust's 36 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_15",
@@ -304097,7 +304285,8 @@
             "0x42c657: call     qword ptr [rip + 0x528eb]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_15 (Rust): 37 O0 blocks \u2192 19 O2 blocks (1.9:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_15",
@@ -304629,7 +304818,8 @@
             "0x4071ad: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_15 (C): 6 O0 blocks \u2192 6 O2 blocks (1.0:1). Best method: opcodes (83%), worst: constants (17%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (6 vs Rust's 37 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_16",
@@ -306101,7 +306291,8 @@
             "0x42c85d: jmp      0x42c832"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_16 (Rust): 15 O0 blocks \u2192 31 O2 blocks (0.5:1). Best method: size (100%), worst: constants (7%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_16",
@@ -306893,7 +307084,8 @@
             "0x40723c: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_16 (C): 10 O0 blocks \u2192 11 O2 blocks (0.9:1). Best method: opcodes (90%), worst: constants (50%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size."
     },
     {
       "base_name": "pu_17",
@@ -308343,7 +308535,8 @@
             "0x42c9c6: call     qword ptr [rip + 0x52504]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_17 (Rust): 23 O0 blocks \u2192 17 O2 blocks (1.4:1). Best method: size (82%), worst: constants (0%). Beats C on: size."
     },
     {
       "base_name": "pu_17",
@@ -308921,7 +309114,8 @@
             "0x40729b: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_17 (C): 7 O0 blocks \u2192 8 O2 blocks (0.9:1). Best method: opcodes (71%), worst: constants (0%). Loses to Rust on: size. Simpler structure (7 vs Rust's 23 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_18",
@@ -310916,7 +311110,8 @@
             "0x42cb65: call     qword ptr [rip + 0x523dd]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_18 (Rust): 32 O0 blocks \u2192 24 O2 blocks (1.3:1). Best method: size (96%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_18",
@@ -311856,7 +312051,8 @@
             "0x40735b: jmp      0x407344"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_18 (C): 12 O0 blocks \u2192 12 O2 blocks (1.0:1). Best method: opcodes (67%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (12 vs Rust's 32 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_19",
@@ -312820,7 +313016,8 @@
             "0x42cca5: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_19 (Rust): 18 O0 blocks \u2192 10 O2 blocks (1.8:1). Best method: size (80%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes."
     },
     {
       "base_name": "pu_19",
@@ -313194,7 +313391,8 @@
             "0x40739e: ret      "
           ]
         }
-      ]
+      ],
+      "explanation": "pu_19 (C): 4 O0 blocks \u2192 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 18 blocks) means less Hungarian matching noise."
     },
     {
       "base_name": "pu_20",
@@ -315515,7 +315713,8 @@
             "0x42ce9f: call     qword ptr [rip + 0x520a3]"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_20 (Rust): 42 O0 blocks \u2192 26 O2 blocks (1.6:1). Best method: size (100%), worst: constants (4%). Beats C on: size. Loses to C on: value, opcodes, constants."
     },
     {
       "base_name": "pu_20",
@@ -316496,7 +316695,8 @@
             "0x407473: jmp      0x40745b"
           ]
         }
-      ]
+      ],
+      "explanation": "pu_20 (C): 12 O0 blocks \u2192 12 O2 blocks (1.0:1). Best method: size (83%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (12 vs Rust's 42 blocks) means less Hungarian matching noise."
     }
   ],
   "summary": {
@@ -316511,7 +316711,7 @@
           "c_total": 294,
           "c_accuracy": 0.3401,
           "winner": "C",
-          "explanation": "C wins (C: 29% vs Rust: 34%). C's simple pointer copies yield minimal block structure that survives optimization unchanged. Rust's ownership transfer blocks get reorganized by O2. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels."
+          "explanation": "C wins (Rust: 29%, C: 34%). C functions average 16 O0 blocks vs 16 O2 (1.0:1 ratio), while Rust has 38\u219238 (1.0:1). Fewer blocks means less noise in Hungarian matching. Also, 30% of Rust blocks lack concrete outputs (vs 17% in C) \u2014 move/ownership transfer blocks often produce only pointer shuffling with no arithmetic outputs, leaving value-based matching blind."
         },
         "opcodes": {
           "rust_correct": 383,
@@ -316521,7 +316721,7 @@
           "c_total": 294,
           "c_accuracy": 0.8265,
           "winner": "C",
-          "explanation": "C wins (C: 58% vs Rust: 83%). C's simple pointer copies yield minimal block structure that survives optimization unchanged. Rust's ownership transfer blocks get reorganized by O2. Opcode sets in C blocks are more stable across optimization."
+          "explanation": "C wins (Rust: 58%, C: 83%). C blocks average 16\u219216 (O0\u2192O2), Rust 38\u219238. O2 reorganizes Rust ownership-transfer blocks \u2014 moves become register renames, alloc+copy patterns merge, changing opcode sets. C's pointer copies use consistent mov+lea opcodes at both O-levels."
         },
         "constants": {
           "rust_correct": 7,
@@ -316531,7 +316731,7 @@
           "c_total": 294,
           "c_accuracy": 0.119,
           "winner": "C",
-          "explanation": "C wins (C: 1% vs Rust: 12%). C's simple pointer copies yield minimal block structure that survives optimization unchanged. Rust's ownership transfer blocks get reorganized by O2. C's constant immediates are better preserved at O2."
+          "explanation": "C wins (Rust: 1%, C: 12%). Rust blocks: 1535 total, C blocks: 623 total. Rust's safety machinery uses few embedded constants \u2014 most blocks are pointer arithmetic or call sequences with no immediates. C uses explicit size constants (sizeof, capacity) that survive O2."
         },
         "size": {
           "rust_correct": 513,
@@ -316541,7 +316741,7 @@
           "c_total": 294,
           "c_accuracy": 0.7687,
           "winner": "TIE",
-          "explanation": "TIE: Both languages show similar block matching accuracy."
+          "explanation": "TIE (Rust: 78%, C: 77%). Rust avg 38\u219238 blocks (O0\u2192O2), C avg 16\u219216. Despite Rust having 2.5x more blocks, both languages show similar size accuracy for Ownership & Move functions."
         }
       }
     },
@@ -316556,7 +316756,7 @@
           "c_total": 347,
           "c_accuracy": 0.4035,
           "winner": "C",
-          "explanation": "C wins (C: 31% vs Rust: 40%). C's manual free() calls are simple and predictable across O-levels. Rust's drop glue blocks get inlined or eliminated at O2. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels."
+          "explanation": "C wins (Rust: 31%, C: 40%). C functions average 18 O0 blocks vs 20 O2 (0.9:1 ratio), while Rust has 42\u219239 (1.1:1). Fewer blocks means less noise in Hungarian matching. Also, 29% of Rust blocks lack concrete outputs (vs 20% in C) \u2014 drop glue call-only blocks (drop_in_place<T>) produce no register outputs, and O2 inlines or eliminates them entirely."
         },
         "opcodes": {
           "rust_correct": 417,
@@ -316566,7 +316766,7 @@
           "c_total": 347,
           "c_accuracy": 0.8098,
           "winner": "C",
-          "explanation": "C wins (C: 58% vs Rust: 81%). C's manual free() calls are simple and predictable across O-levels. Rust's drop glue blocks get inlined or eliminated at O2. Opcode sets in C blocks are more stable across optimization."
+          "explanation": "C wins (Rust: 58%, C: 81%). C blocks average 18\u219220 (O0\u2192O2), Rust 42\u219239. O2 inlines Rust's drop_in_place<T> calls into parent blocks, replacing call opcodes with the inlined cleanup code and changing the opcode set entirely. C's free() calls remain as-is."
         },
         "constants": {
           "rust_correct": 17,
@@ -316576,7 +316776,7 @@
           "c_total": 347,
           "c_accuracy": 0.1671,
           "winner": "C",
-          "explanation": "C wins (C: 2% vs Rust: 17%). C's manual free() calls are simple and predictable across O-levels. Rust's drop glue blocks get inlined or eliminated at O2. C's constant immediates are better preserved at O2."
+          "explanation": "C wins (Rust: 2%, C: 17%). Rust blocks: 1631 total, C blocks: 778 total. Rust's safety machinery uses few embedded constants \u2014 most blocks are pointer arithmetic or call sequences with no immediates. C uses explicit size constants (sizeof, capacity) that survive O2."
         },
         "size": {
           "rust_correct": 613,
@@ -316586,7 +316786,7 @@
           "c_total": 347,
           "c_accuracy": 0.7464,
           "winner": "Rust",
-          "explanation": "Rust wins (Rust: 85% vs C: 75%). Rust's drop_in_place<T> calls create distinctive block signatures (callee + cleanup pattern) that survive O2. C's manual free() is indistinguishable from other function calls. Rust's block instruction counts change less between O0 and O2."
+          "explanation": "Rust wins (Rust: 86%, C: 75%). Rust O0\u2192O2 block ratio: 1.1:1 vs C 0.9:1. Rust's drop glue blocks are small (2-4 insns) and stay small at O2 \u2014 they call drop_in_place which is a fixed-size stub. C's computation blocks change size more when O2 inlines and unrolls."
         }
       }
     },
@@ -316601,7 +316801,7 @@
           "c_total": 225,
           "c_accuracy": 0.2489,
           "winner": "TIE",
-          "explanation": "TIE: Both languages show similar block matching accuracy."
+          "explanation": "TIE (Rust: 25%, C: 25%). Rust avg 40\u219224 blocks (O0\u2192O2), C avg 13\u219212. Despite Rust having 3.1x more blocks, both languages show similar value accuracy for Bounds Checking functions."
         },
         "opcodes": {
           "rust_correct": 314,
@@ -316611,7 +316811,7 @@
           "c_total": 225,
           "c_accuracy": 0.7867,
           "winner": "C",
-          "explanation": "C wins (C: 74% vs Rust: 79%). Without bounds checks, C functions have fewer blocks and simpler CFGs. Optimization preserves the core computation blocks. Rust's bounds check blocks are eliminated/merged at O2, disrupting alignment. Opcode sets in C blocks are more stable across optimization."
+          "explanation": "C wins (Rust: 74%, C: 79%). C blocks average 13\u219212 (O0\u2192O2), Rust 40\u219224. Rust bounds checks (cmp+jae+ud2) get eliminated or merged by O2, changing surrounding block opcode sets. C has no bounds checks, so its core computation opcodes are stable."
         },
         "constants": {
           "rust_correct": 8,
@@ -316621,7 +316821,7 @@
           "c_total": 225,
           "c_accuracy": 0.0756,
           "winner": "C",
-          "explanation": "C wins (C: 2% vs Rust: 8%). Without bounds checks, C functions have fewer blocks and simpler CFGs. Optimization preserves the core computation blocks. Rust's bounds check blocks are eliminated/merged at O2, disrupting alignment. C's constant immediates are better preserved at O2."
+          "explanation": "C wins (Rust: 2%, C: 8%). Rust blocks: 1284 total, C blocks: 496 total. Rust bounds checks use the slice length (a register, not a constant) as the comparison operand, so no constant is embedded. C array operations use explicit size literals that persist."
         },
         "size": {
           "rust_correct": 375,
@@ -316631,7 +316831,7 @@
           "c_total": 225,
           "c_accuracy": 0.6889,
           "winner": "Rust",
-          "explanation": "Rust wins (Rust: 88% vs C: 69%). Rust's bounds check blocks (cmp+jae+ud2) have distinctive patterns that persist even under O2 (cannot be fully eliminated without unsafe). C has no bounds checks, fewer blocks to match. Rust's block instruction counts change less between O0 and O2."
+          "explanation": "Rust wins (Rust: 88%, C: 69%). Rust O0\u2192O2 block ratio: 1.7:1 vs C 1.1:1. Rust bounds check blocks are fixed 3-4 instruction patterns (cmp+jae+lea/ud2) that O2 cannot resize, only eliminate. The surviving check blocks anchor size-based matching. C lacks these fixed-size anchors."
         }
       }
     },
@@ -316646,7 +316846,7 @@
           "c_total": 224,
           "c_accuracy": 0.4554,
           "winner": "C",
-          "explanation": "C wins (C: 29% vs Rust: 46%). C's return-code checking is straightforward cmp+branch that optimizes predictably. Rust's ? operator blocks undergo layout changes at O2. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels."
+          "explanation": "C wins (Rust: 29%, C: 46%). C functions average 14 O0 blocks vs 11 O2 (1.2:1 ratio), while Rust has 33\u219221 (1.6:1). Fewer blocks means less noise in Hungarian matching. Also, 34% of Rust blocks lack concrete outputs (vs 27% in C) \u2014 ? operator discriminant-check blocks are small cmp+branch with no computation, producing no matchable outputs."
         },
         "opcodes": {
           "rust_correct": 209,
@@ -316656,7 +316856,7 @@
           "c_total": 224,
           "c_accuracy": 0.7321,
           "winner": "C",
-          "explanation": "C wins (C: 59% vs Rust: 73%). C's return-code checking is straightforward cmp+branch that optimizes predictably. Rust's ? operator blocks undergo layout changes at O2. Opcode sets in C blocks are more stable across optimization."
+          "explanation": "C wins (Rust: 59%, C: 73%). C blocks average 14\u219211 (O0\u2192O2), Rust 33\u219221. Rust's ? operator generates multi-block discriminant check patterns that O2 collapses into fewer blocks with different opcodes. C's if(ret<0) pattern uses the same cmp+jcc at both O-levels."
         },
         "constants": {
           "rust_correct": 9,
@@ -316666,7 +316866,7 @@
           "c_total": 224,
           "c_accuracy": 0.125,
           "winner": "C",
-          "explanation": "C wins (C: 3% vs Rust: 12%). C's return-code checking is straightforward cmp+branch that optimizes predictably. Rust's ? operator blocks undergo layout changes at O2. C's constant immediates are better preserved at O2."
+          "explanation": "C wins (Rust: 3%, C: 12%). Rust blocks: 1071 total, C blocks: 506 total. Rust's error-path blocks reference string addresses (panic messages) that change between O0 and O2 binary layouts. C uses return-code constants (-1, 0) that are trivially stable."
         },
         "size": {
           "rust_correct": 330,
@@ -316676,7 +316876,7 @@
           "c_total": 224,
           "c_accuracy": 0.8036,
           "winner": "Rust",
-          "explanation": "Rust wins (Rust: 93% vs C: 80%). The ? operator generates discriminant-check+branch blocks with consistent patterns (test discriminant \u2192 extract payload \u2192 propagate error). These survive O2 because the error path must remain. Rust's block instruction counts change less between O0 and O2."
+          "explanation": "Rust wins (Rust: 93%, C: 80%). Rust O0\u2192O2 block ratio: 1.6:1 vs C 1.2:1. ? operator blocks follow fixed patterns: test discriminant (2 insns), extract value (2-3 insns), branch (1 insn). O2 preserves these sizes because the error path structure is mandatory. C's return-code blocks are small but O2 merges them into larger blocks."
         }
       }
     },
@@ -316691,7 +316891,7 @@
           "c_total": 169,
           "c_accuracy": 0.4734,
           "winner": "C",
-          "explanation": "C wins (C: 27% vs Rust: 47%). C's error handling is inline (return -1) with no special cold paths. Simpler structure survives optimization better than Rust's panic machinery. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels."
+          "explanation": "C wins (Rust: 27%, C: 47%). C functions average 8 O0 blocks vs 9 O2 (0.9:1 ratio), while Rust has 26\u219221 (1.2:1). Fewer blocks means less noise in Hungarian matching. "
         },
         "opcodes": {
           "rust_correct": 188,
@@ -316701,7 +316901,7 @@
           "c_total": 169,
           "c_accuracy": 0.7337,
           "winner": "C",
-          "explanation": "C wins (C: 51% vs Rust: 73%). C's error handling is inline (return -1) with no special cold paths. Simpler structure survives optimization better than Rust's panic machinery. Opcode sets in C blocks are more stable across optimization."
+          "explanation": "C wins (Rust: 51%, C: 73%). C blocks average 8\u21929 (O0\u2192O2), Rust 26\u219221. Rust panic paths involve call+lea+ud2 sequences that O2 reshuffles into cold sections, changing block boundaries and opcode sets. C's inline error returns (mov+ret) are opcode-stable."
         },
         "constants": {
           "rust_correct": 10,
@@ -316711,7 +316911,7 @@
           "c_total": 169,
           "c_accuracy": 0.1775,
           "winner": "C",
-          "explanation": "C wins (C: 3% vs Rust: 18%). C's error handling is inline (return -1) with no special cold paths. Simpler structure survives optimization better than Rust's panic machinery. C's constant immediates are better preserved at O2."
+          "explanation": "C wins (Rust: 3%, C: 18%). Rust blocks: 936 total, C blocks: 355 total. Rust's error-path blocks reference string addresses (panic messages) that change between O0 and O2 binary layouts. C uses return-code constants (-1, 0) that are trivially stable."
         },
         "size": {
           "rust_correct": 323,
@@ -316721,7 +316921,7 @@
           "c_total": 169,
           "c_accuracy": 0.6746,
           "winner": "Rust",
-          "explanation": "Rust wins (Rust: 88% vs C: 67%). Panic paths generate cold blocks with distinctive callee signatures (core::panicking::*) that are easily matched. These paths are preserved even at O2 because they cannot be proven unreachable. Rust's block instruction counts change less between O0 and O2."
+          "explanation": "Rust wins (Rust: 88%, C: 67%). Rust O0\u2192O2 block ratio: 1.2:1 vs C 0.9:1. Panic-path blocks are cold and untouched by O2 optimization \u2014 their instruction counts are identical at O0 and O2. C has no cold paths, so all blocks are subject to O2 resizing."
         }
       }
     }

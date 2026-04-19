@@ -347,9 +347,11 @@ def gen_function_details():
                 <td>{b['n_insns']}</td><td>{b['n_outputs']}</td>
                 <td class="asm-cell"><code>{asm_text}</code></td></tr>'''
 
+        fn_explanation = fn_data.get('explanation', '')
         details.append(f'''
         <div class="function-detail" id="{detail_id}" style="display:none">
             <h4>{name} ({lang}) — O0: {fn_data['n_o0']} blocks, O2: {fn_data['n_o2']} blocks</h4>
+            <p class="fn-explanation">{fn_explanation}</p>
             <div class="methods-row">{methods_detail}</div>
             <details><summary>Block Details (first 30)</summary>
             <table class="block-table"><thead>
@@ -406,6 +408,8 @@ code {{ font-family: 'Fira Code', monospace; font-size: 0.88em; }}
 details {{ margin: 10px 0; }}
 summary {{ cursor: pointer; color: #58a6ff; padding: 5px; }}
 .fn-row {{ cursor: pointer; }}
+.fn-explanation {{ font-size: 0.88em; color: #8b949e; margin: 5px 0 12px; padding: 8px 12px;
+                   background: #0d1117; border-radius: 4px; border-left: 3px solid #58a6ff; }}
 .fn-row:hover {{ background: #161b22 !important; }}
 .fn-row td {{ transition: background 0.2s; }}
 .nav {{ position: sticky; top: 0; background: #0d1117; padding: 10px 0; z-index: 100; border-bottom: 1px solid #30363d; }}

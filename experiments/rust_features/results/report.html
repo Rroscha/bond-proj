@@ -45,6 +45,8 @@ code { font-family: 'Fira Code', monospace; font-size: 0.88em; }
 details { margin: 10px 0; }
 summary { cursor: pointer; color: #58a6ff; padding: 5px; }
 .fn-row { cursor: pointer; }
+.fn-explanation { font-size: 0.88em; color: #8b949e; margin: 5px 0 12px; padding: 8px 12px;
+                   background: #0d1117; border-radius: 4px; border-left: 3px solid #58a6ff; }
 .fn-row:hover { background: #161b22 !important; }
 .fn-row td { transition: background 0.2s; }
 .nav { position: sticky; top: 0; background: #0d1117; padding: 10px 0; z-index: 100; border-bottom: 1px solid #30363d; }
@@ -235,25 +237,25 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
                 <h4>Value-based</h4>
                 <div class="scores">Rust: 29% (192/659)
                 &nbsp;|&nbsp; C: 34% (100/294)</div>
-                <p class="explanation">C wins (C: 29% vs Rust: 34%). C's simple pointer copies yield minimal block structure that survives optimization unchanged. Rust's ownership transfer blocks get reorganized by O2. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels.</p>
+                <p class="explanation">C wins (Rust: 29%, C: 34%). C functions average 16 O0 blocks vs 16 O2 (1.0:1 ratio), while Rust has 38→38 (1.0:1). Fewer blocks means less noise in Hungarian matching. Also, 30% of Rust blocks lack concrete outputs (vs 17% in C) — move/ownership transfer blocks often produce only pointer shuffling with no arithmetic outputs, leaving value-based matching blind.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Opcodes</h4>
                 <div class="scores">Rust: 58% (383/659)
                 &nbsp;|&nbsp; C: 83% (243/294)</div>
-                <p class="explanation">C wins (C: 58% vs Rust: 83%). C's simple pointer copies yield minimal block structure that survives optimization unchanged. Rust's ownership transfer blocks get reorganized by O2. Opcode sets in C blocks are more stable across optimization.</p>
+                <p class="explanation">C wins (Rust: 58%, C: 83%). C blocks average 16→16 (O0→O2), Rust 38→38. O2 reorganizes Rust ownership-transfer blocks — moves become register renames, alloc+copy patterns merge, changing opcode sets. C's pointer copies use consistent mov+lea opcodes at both O-levels.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Constants</h4>
                 <div class="scores">Rust: 1% (7/659)
                 &nbsp;|&nbsp; C: 12% (35/294)</div>
-                <p class="explanation">C wins (C: 1% vs Rust: 12%). C's simple pointer copies yield minimal block structure that survives optimization unchanged. Rust's ownership transfer blocks get reorganized by O2. C's constant immediates are better preserved at O2.</p>
+                <p class="explanation">C wins (Rust: 1%, C: 12%). Rust blocks: 1535 total, C blocks: 623 total. Rust's safety machinery uses few embedded constants — most blocks are pointer arithmetic or call sequences with no immediates. C uses explicit size constants (sizeof, capacity) that survive O2.</p>
             </div>
             <div class="method-card tie">
                 <h4>Size</h4>
                 <div class="scores">Rust: 78% (513/659)
                 &nbsp;|&nbsp; C: 77% (226/294)</div>
-                <p class="explanation">TIE: Both languages show similar block matching accuracy.</p>
+                <p class="explanation">TIE (Rust: 78%, C: 77%). Rust avg 38→38 blocks (O0→O2), C avg 16→16. Despite Rust having 2.5x more blocks, both languages show similar size accuracy for Ownership & Move functions.</p>
             </div></div>
         </div>
 
@@ -264,25 +266,25 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
                 <h4>Value-based</h4>
                 <div class="scores">Rust: 31% (219/717)
                 &nbsp;|&nbsp; C: 40% (140/347)</div>
-                <p class="explanation">C wins (C: 31% vs Rust: 40%). C's manual free() calls are simple and predictable across O-levels. Rust's drop glue blocks get inlined or eliminated at O2. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels.</p>
+                <p class="explanation">C wins (Rust: 31%, C: 40%). C functions average 18 O0 blocks vs 20 O2 (0.9:1 ratio), while Rust has 42→39 (1.1:1). Fewer blocks means less noise in Hungarian matching. Also, 29% of Rust blocks lack concrete outputs (vs 20% in C) — drop glue call-only blocks (drop_in_place<T>) produce no register outputs, and O2 inlines or eliminates them entirely.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Opcodes</h4>
                 <div class="scores">Rust: 58% (417/717)
                 &nbsp;|&nbsp; C: 81% (281/347)</div>
-                <p class="explanation">C wins (C: 58% vs Rust: 81%). C's manual free() calls are simple and predictable across O-levels. Rust's drop glue blocks get inlined or eliminated at O2. Opcode sets in C blocks are more stable across optimization.</p>
+                <p class="explanation">C wins (Rust: 58%, C: 81%). C blocks average 18→20 (O0→O2), Rust 42→39. O2 inlines Rust's drop_in_place<T> calls into parent blocks, replacing call opcodes with the inlined cleanup code and changing the opcode set entirely. C's free() calls remain as-is.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Constants</h4>
                 <div class="scores">Rust: 2% (17/717)
                 &nbsp;|&nbsp; C: 17% (58/347)</div>
-                <p class="explanation">C wins (C: 2% vs Rust: 17%). C's manual free() calls are simple and predictable across O-levels. Rust's drop glue blocks get inlined or eliminated at O2. C's constant immediates are better preserved at O2.</p>
+                <p class="explanation">C wins (Rust: 2%, C: 17%). Rust blocks: 1631 total, C blocks: 778 total. Rust's safety machinery uses few embedded constants — most blocks are pointer arithmetic or call sequences with no immediates. C uses explicit size constants (sizeof, capacity) that survive O2.</p>
             </div>
             <div class="method-card rust-win">
                 <h4>Size</h4>
                 <div class="scores">Rust: 86% (613/717)
                 &nbsp;|&nbsp; C: 75% (259/347)</div>
-                <p class="explanation">Rust wins (Rust: 85% vs C: 75%). Rust's drop_in_place<T> calls create distinctive block signatures (callee + cleanup pattern) that survive O2. C's manual free() is indistinguishable from other function calls. Rust's block instruction counts change less between O0 and O2.</p>
+                <p class="explanation">Rust wins (Rust: 86%, C: 75%). Rust O0→O2 block ratio: 1.1:1 vs C 0.9:1. Rust's drop glue blocks are small (2-4 insns) and stay small at O2 — they call drop_in_place which is a fixed-size stub. C's computation blocks change size more when O2 inlines and unrolls.</p>
             </div></div>
         </div>
 
@@ -293,25 +295,25 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
                 <h4>Value-based</h4>
                 <div class="scores">Rust: 25% (107/426)
                 &nbsp;|&nbsp; C: 25% (56/225)</div>
-                <p class="explanation">TIE: Both languages show similar block matching accuracy.</p>
+                <p class="explanation">TIE (Rust: 25%, C: 25%). Rust avg 40→24 blocks (O0→O2), C avg 13→12. Despite Rust having 3.1x more blocks, both languages show similar value accuracy for Bounds Checking functions.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Opcodes</h4>
                 <div class="scores">Rust: 74% (314/426)
                 &nbsp;|&nbsp; C: 79% (177/225)</div>
-                <p class="explanation">C wins (C: 74% vs Rust: 79%). Without bounds checks, C functions have fewer blocks and simpler CFGs. Optimization preserves the core computation blocks. Rust's bounds check blocks are eliminated/merged at O2, disrupting alignment. Opcode sets in C blocks are more stable across optimization.</p>
+                <p class="explanation">C wins (Rust: 74%, C: 79%). C blocks average 13→12 (O0→O2), Rust 40→24. Rust bounds checks (cmp+jae+ud2) get eliminated or merged by O2, changing surrounding block opcode sets. C has no bounds checks, so its core computation opcodes are stable.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Constants</h4>
                 <div class="scores">Rust: 2% (8/426)
                 &nbsp;|&nbsp; C: 8% (17/225)</div>
-                <p class="explanation">C wins (C: 2% vs Rust: 8%). Without bounds checks, C functions have fewer blocks and simpler CFGs. Optimization preserves the core computation blocks. Rust's bounds check blocks are eliminated/merged at O2, disrupting alignment. C's constant immediates are better preserved at O2.</p>
+                <p class="explanation">C wins (Rust: 2%, C: 8%). Rust blocks: 1284 total, C blocks: 496 total. Rust bounds checks use the slice length (a register, not a constant) as the comparison operand, so no constant is embedded. C array operations use explicit size literals that persist.</p>
             </div>
             <div class="method-card rust-win">
                 <h4>Size</h4>
                 <div class="scores">Rust: 88% (375/426)
                 &nbsp;|&nbsp; C: 69% (155/225)</div>
-                <p class="explanation">Rust wins (Rust: 88% vs C: 69%). Rust's bounds check blocks (cmp+jae+ud2) have distinctive patterns that persist even under O2 (cannot be fully eliminated without unsafe). C has no bounds checks, fewer blocks to match. Rust's block instruction counts change less between O0 and O2.</p>
+                <p class="explanation">Rust wins (Rust: 88%, C: 69%). Rust O0→O2 block ratio: 1.7:1 vs C 1.1:1. Rust bounds check blocks are fixed 3-4 instruction patterns (cmp+jae+lea/ud2) that O2 cannot resize, only eliminate. The surviving check blocks anchor size-based matching. C lacks these fixed-size anchors.</p>
             </div></div>
         </div>
 
@@ -322,25 +324,25 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
                 <h4>Value-based</h4>
                 <div class="scores">Rust: 29% (102/355)
                 &nbsp;|&nbsp; C: 46% (102/224)</div>
-                <p class="explanation">C wins (C: 29% vs Rust: 46%). C's return-code checking is straightforward cmp+branch that optimizes predictably. Rust's ? operator blocks undergo layout changes at O2. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels.</p>
+                <p class="explanation">C wins (Rust: 29%, C: 46%). C functions average 14 O0 blocks vs 11 O2 (1.2:1 ratio), while Rust has 33→21 (1.6:1). Fewer blocks means less noise in Hungarian matching. Also, 34% of Rust blocks lack concrete outputs (vs 27% in C) — ? operator discriminant-check blocks are small cmp+branch with no computation, producing no matchable outputs.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Opcodes</h4>
                 <div class="scores">Rust: 59% (209/355)
                 &nbsp;|&nbsp; C: 73% (164/224)</div>
-                <p class="explanation">C wins (C: 59% vs Rust: 73%). C's return-code checking is straightforward cmp+branch that optimizes predictably. Rust's ? operator blocks undergo layout changes at O2. Opcode sets in C blocks are more stable across optimization.</p>
+                <p class="explanation">C wins (Rust: 59%, C: 73%). C blocks average 14→11 (O0→O2), Rust 33→21. Rust's ? operator generates multi-block discriminant check patterns that O2 collapses into fewer blocks with different opcodes. C's if(ret<0) pattern uses the same cmp+jcc at both O-levels.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Constants</h4>
                 <div class="scores">Rust: 3% (9/355)
                 &nbsp;|&nbsp; C: 12% (28/224)</div>
-                <p class="explanation">C wins (C: 3% vs Rust: 12%). C's return-code checking is straightforward cmp+branch that optimizes predictably. Rust's ? operator blocks undergo layout changes at O2. C's constant immediates are better preserved at O2.</p>
+                <p class="explanation">C wins (Rust: 3%, C: 12%). Rust blocks: 1071 total, C blocks: 506 total. Rust's error-path blocks reference string addresses (panic messages) that change between O0 and O2 binary layouts. C uses return-code constants (-1, 0) that are trivially stable.</p>
             </div>
             <div class="method-card rust-win">
                 <h4>Size</h4>
                 <div class="scores">Rust: 93% (330/355)
                 &nbsp;|&nbsp; C: 80% (180/224)</div>
-                <p class="explanation">Rust wins (Rust: 93% vs C: 80%). The ? operator generates discriminant-check+branch blocks with consistent patterns (test discriminant → extract payload → propagate error). These survive O2 because the error path must remain. Rust's block instruction counts change less between O0 and O2.</p>
+                <p class="explanation">Rust wins (Rust: 93%, C: 80%). Rust O0→O2 block ratio: 1.6:1 vs C 1.2:1. ? operator blocks follow fixed patterns: test discriminant (2 insns), extract value (2-3 insns), branch (1 insn). O2 preserves these sizes because the error path structure is mandatory. C's return-code blocks are small but O2 merges them into larger blocks.</p>
             </div></div>
         </div>
 
@@ -351,25 +353,25 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
                 <h4>Value-based</h4>
                 <div class="scores">Rust: 27% (101/369)
                 &nbsp;|&nbsp; C: 47% (80/169)</div>
-                <p class="explanation">C wins (C: 27% vs Rust: 47%). C's error handling is inline (return -1) with no special cold paths. Simpler structure survives optimization better than Rust's panic machinery. Value-based matching shows C blocks produce more consistent concrete outputs across O-levels.</p>
+                <p class="explanation">C wins (Rust: 27%, C: 47%). C functions average 8 O0 blocks vs 9 O2 (0.9:1 ratio), while Rust has 26→21 (1.2:1). Fewer blocks means less noise in Hungarian matching. </p>
             </div>
             <div class="method-card c-win">
                 <h4>Opcodes</h4>
                 <div class="scores">Rust: 51% (188/369)
                 &nbsp;|&nbsp; C: 73% (124/169)</div>
-                <p class="explanation">C wins (C: 51% vs Rust: 73%). C's error handling is inline (return -1) with no special cold paths. Simpler structure survives optimization better than Rust's panic machinery. Opcode sets in C blocks are more stable across optimization.</p>
+                <p class="explanation">C wins (Rust: 51%, C: 73%). C blocks average 8→9 (O0→O2), Rust 26→21. Rust panic paths involve call+lea+ud2 sequences that O2 reshuffles into cold sections, changing block boundaries and opcode sets. C's inline error returns (mov+ret) are opcode-stable.</p>
             </div>
             <div class="method-card c-win">
                 <h4>Constants</h4>
                 <div class="scores">Rust: 3% (10/369)
                 &nbsp;|&nbsp; C: 18% (30/169)</div>
-                <p class="explanation">C wins (C: 3% vs Rust: 18%). C's error handling is inline (return -1) with no special cold paths. Simpler structure survives optimization better than Rust's panic machinery. C's constant immediates are better preserved at O2.</p>
+                <p class="explanation">C wins (Rust: 3%, C: 18%). Rust blocks: 936 total, C blocks: 355 total. Rust's error-path blocks reference string addresses (panic messages) that change between O0 and O2 binary layouts. C uses return-code constants (-1, 0) that are trivially stable.</p>
             </div>
             <div class="method-card rust-win">
                 <h4>Size</h4>
                 <div class="scores">Rust: 88% (323/369)
                 &nbsp;|&nbsp; C: 67% (114/169)</div>
-                <p class="explanation">Rust wins (Rust: 88% vs C: 67%). Panic paths generate cold blocks with distinctive callee signatures (core::panicking::*) that are easily matched. These paths are preserved even at O2 because they cannot be proven unreachable. Rust's block instruction counts change less between O0 and O2.</p>
+                <p class="explanation">Rust wins (Rust: 88%, C: 67%). Rust O0→O2 block ratio: 1.2:1 vs C 0.9:1. Panic-path blocks are cold and untouched by O2 optimization — their instruction counts are identical at O0 and O2. C has no cold paths, so all blocks are subject to O2 resizing.</p>
             </div></div>
         </div>
 
@@ -593,6 +595,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_01-Rust" style="display:none">
             <h4>om_01 (Rust) — O0: 66 blocks, O2: 66 blocks</h4>
+            <p class="fn-explanation">om_01 (Rust): 66 O0 blocks → 66 O2 blocks (1.0:1). Best method: size (83%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 14/66 correct (21%)</h5>
@@ -897,6 +900,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_01-C" style="display:none">
             <h4>om_01 (C) — O0: 32 blocks, O2: 37 blocks</h4>
+            <p class="fn-explanation">om_01 (C): 32 O0 blocks → 37 O2 blocks (0.9:1). Best method: opcodes (81%), worst: constants (3%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (32 vs Rust's 66 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/32 correct (28%)</h5>
@@ -1201,6 +1205,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_02-Rust" style="display:none">
             <h4>om_02 (Rust) — O0: 47 blocks, O2: 68 blocks</h4>
+            <p class="fn-explanation">om_02 (Rust): 47 O0 blocks → 68 O2 blocks (0.7:1). Best method: size (83%), worst: constants (2%). Loses to C on: value, opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 14/47 correct (30%)</h5>
@@ -1505,6 +1510,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_02-C" style="display:none">
             <h4>om_02 (C) — O0: 13 blocks, O2: 16 blocks</h4>
+            <p class="fn-explanation">om_02 (C): 13 O0 blocks → 16 O2 blocks (0.8:1). Best method: opcodes (92%), worst: constants (23%). Beats Rust on: value, opcodes, constants, size. Simpler structure (13 vs Rust's 47 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/13 correct (46%)</h5>
@@ -1782,6 +1788,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_03-Rust" style="display:none">
             <h4>om_03 (Rust) — O0: 23 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">om_03 (Rust): 23 O0 blocks → 14 O2 blocks (1.6:1). Best method: size (86%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/14 correct (29%)</h5>
@@ -2074,6 +2081,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_03-C" style="display:none">
             <h4>om_03 (C) — O0: 10 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">om_03 (C): 10 O0 blocks → 8 O2 blocks (1.2:1). Best method: opcodes (100%), worst: constants (12%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (10 vs Rust's 23 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/8 correct (25%)</h5>
@@ -2258,6 +2266,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_04-Rust" style="display:none">
             <h4>om_04 (Rust) — O0: 30 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">om_04 (Rust): 30 O0 blocks → 20 O2 blocks (1.5:1). Best method: size (80%), worst: constants (0%). Loses to C on: constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/20 correct (40%)</h5>
@@ -2562,6 +2571,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_04-C" style="display:none">
             <h4>om_04 (C) — O0: 23 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">om_04 (C): 23 O0 blocks → 18 O2 blocks (1.3:1). Best method: size (100%), worst: constants (33%). Beats Rust on: constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/18 correct (44%)</h5>
@@ -2866,6 +2876,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_05-Rust" style="display:none">
             <h4>om_05 (Rust) — O0: 11 blocks, O2: 43 blocks</h4>
+            <p class="fn-explanation">om_05 (Rust): 11 O0 blocks → 43 O2 blocks (0.3:1). Best method: opcodes (100%), worst: constants (0%). Beats C on: opcodes, size. Loses to C on: value.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/11 correct (27%)</h5>
@@ -3122,6 +3133,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_05-C" style="display:none">
             <h4>om_05 (C) — O0: 22 blocks, O2: 22 blocks</h4>
+            <p class="fn-explanation">om_05 (C): 22 O0 blocks → 22 O2 blocks (1.0:1). Best method: opcodes (77%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 10/22 correct (45%)</h5>
@@ -3426,6 +3438,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_06-Rust" style="display:none">
             <h4>om_06 (Rust) — O0: 29 blocks, O2: 29 blocks</h4>
+            <p class="fn-explanation">om_06 (Rust): 29 O0 blocks → 29 O2 blocks (1.0:1). Best method: size (62%), worst: constants (0%). Loses to C on: value, opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/29 correct (21%)</h5>
@@ -3730,6 +3743,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_06-C" style="display:none">
             <h4>om_06 (C) — O0: 7 blocks, O2: 7 blocks</h4>
+            <p class="fn-explanation">om_06 (C): 7 O0 blocks → 7 O2 blocks (1.0:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: value, opcodes, constants, size. Simpler structure (7 vs Rust's 29 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/7 correct (29%)</h5>
@@ -3890,6 +3904,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_07-Rust" style="display:none">
             <h4>om_07 (Rust) — O0: 35 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">om_07 (Rust): 35 O0 blocks → 15 O2 blocks (2.3:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Large O0→O2 block reduction (35→15) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/15 correct (33%)</h5>
@@ -4194,6 +4209,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_07-C" style="display:none">
             <h4>om_07 (C) — O0: 10 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">om_07 (C): 10 O0 blocks → 10 O2 blocks (1.0:1). Best method: size (80%), worst: constants (0%). Loses to Rust on: size. Simpler structure (10 vs Rust's 35 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/10 correct (30%)</h5>
@@ -4408,6 +4424,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_08-Rust" style="display:none">
             <h4>om_08 (Rust) — O0: 23 blocks, O2: 23 blocks</h4>
+            <p class="fn-explanation">om_08 (Rust): 23 O0 blocks → 23 O2 blocks (1.0:1). Best method: size (57%), worst: constants (0%). Beats C on: value. Loses to C on: opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/23 correct (39%)</h5>
@@ -4712,6 +4729,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_08-C" style="display:none">
             <h4>om_08 (C) — O0: 7 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">om_08 (C): 7 O0 blocks → 9 O2 blocks (0.8:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: opcodes, constants, size. Loses to Rust on: value. Simpler structure (7 vs Rust's 23 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/7 correct (29%)</h5>
@@ -4878,6 +4896,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_09-Rust" style="display:none">
             <h4>om_09 (Rust) — O0: 79 blocks, O2: 72 blocks</h4>
+            <p class="fn-explanation">om_09 (Rust): 79 O0 blocks → 72 O2 blocks (1.1:1). Best method: size (89%), worst: constants (1%). Beats C on: size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 19/72 correct (26%)</h5>
@@ -5182,6 +5201,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_09-C" style="display:none">
             <h4>om_09 (C) — O0: 34 blocks, O2: 32 blocks</h4>
+            <p class="fn-explanation">om_09 (C): 34 O0 blocks → 32 O2 blocks (1.1:1). Best method: opcodes (78%), worst: constants (3%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (34 vs Rust's 79 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/32 correct (28%)</h5>
@@ -5486,6 +5506,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_10-Rust" style="display:none">
             <h4>om_10 (Rust) — O0: 82 blocks, O2: 73 blocks</h4>
+            <p class="fn-explanation">om_10 (Rust): 82 O0 blocks → 73 O2 blocks (1.1:1). Best method: size (63%), worst: constants (0%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 29/73 correct (40%)</h5>
@@ -5790,6 +5811,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_10-C" style="display:none">
             <h4>om_10 (C) — O0: 20 blocks, O2: 22 blocks</h4>
+            <p class="fn-explanation">om_10 (C): 20 O0 blocks → 22 O2 blocks (0.9:1). Best method: opcodes (95%), worst: constants (10%). Beats Rust on: value, opcodes, constants. Simpler structure (20 vs Rust's 82 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/20 correct (45%)</h5>
@@ -6094,6 +6116,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_11-Rust" style="display:none">
             <h4>om_11 (Rust) — O0: 28 blocks, O2: 46 blocks</h4>
+            <p class="fn-explanation">om_11 (Rust): 28 O0 blocks → 46 O2 blocks (0.6:1). Best method: size (79%), worst: constants (0%). Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/28 correct (29%)</h5>
@@ -6398,6 +6421,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_11-C" style="display:none">
             <h4>om_11 (C) — O0: 17 blocks, O2: 19 blocks</h4>
+            <p class="fn-explanation">om_11 (C): 17 O0 blocks → 19 O2 blocks (0.9:1). Best method: opcodes (88%), worst: constants (6%). Beats Rust on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/17 correct (29%)</h5>
@@ -6702,6 +6726,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_12-Rust" style="display:none">
             <h4>om_12 (Rust) — O0: 18 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">om_12 (Rust): 18 O0 blocks → 13 O2 blocks (1.4:1). Best method: size (77%), worst: constants (0%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/13 correct (31%)</h5>
@@ -6982,6 +7007,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_12-C" style="display:none">
             <h4>om_12 (C) — O0: 28 blocks, O2: 27 blocks</h4>
+            <p class="fn-explanation">om_12 (C): 28 O0 blocks → 27 O2 blocks (1.0:1). Best method: opcodes (81%), worst: constants (26%). Beats Rust on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 13/27 correct (48%)</h5>
@@ -7286,6 +7312,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_13-Rust" style="display:none">
             <h4>om_13 (Rust) — O0: 26 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">om_13 (Rust): 26 O0 blocks → 20 O2 blocks (1.3:1). Best method: size (60%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/20 correct (25%)</h5>
@@ -7590,6 +7617,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_13-C" style="display:none">
             <h4>om_13 (C) — O0: 6 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">om_13 (C): 6 O0 blocks → 5 O2 blocks (1.2:1). Best method: opcodes (80%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (6 vs Rust's 26 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/5 correct (60%)</h5>
@@ -7717,6 +7745,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_14-Rust" style="display:none">
             <h4>om_14 (Rust) — O0: 36 blocks, O2: 28 blocks</h4>
+            <p class="fn-explanation">om_14 (Rust): 36 O0 blocks → 28 O2 blocks (1.3:1). Best method: size (86%), worst: constants (0%). Beats C on: value, opcodes, size. Loses to C on: constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/28 correct (25%)</h5>
@@ -8021,6 +8050,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_14-C" style="display:none">
             <h4>om_14 (C) — O0: 10 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">om_14 (C): 10 O0 blocks → 8 O2 blocks (1.2:1). Best method: size (75%), worst: value (0%). Beats Rust on: constants. Loses to Rust on: value, opcodes, size. Simpler structure (10 vs Rust's 36 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 0/8 correct (0%)</h5>
@@ -8205,6 +8235,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_15-Rust" style="display:none">
             <h4>om_15 (Rust) — O0: 29 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">om_15 (Rust): 29 O0 blocks → 15 O2 blocks (1.9:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/15 correct (20%)</h5>
@@ -8509,6 +8540,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_15-C" style="display:none">
             <h4>om_15 (C) — O0: 9 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">om_15 (C): 9 O0 blocks → 9 O2 blocks (1.0:1). Best method: opcodes (89%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size. Simpler structure (9 vs Rust's 29 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/9 correct (11%)</h5>
@@ -8705,6 +8737,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_16-Rust" style="display:none">
             <h4>om_16 (Rust) — O0: 55 blocks, O2: 91 blocks</h4>
+            <p class="fn-explanation">om_16 (Rust): 55 O0 blocks → 91 O2 blocks (0.6:1). Best method: size (91%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 16/55 correct (29%)</h5>
@@ -9009,6 +9042,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_16-C" style="display:none">
             <h4>om_16 (C) — O0: 18 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">om_16 (C): 18 O0 blocks → 20 O2 blocks (0.9:1). Best method: opcodes (89%), worst: constants (33%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (18 vs Rust's 55 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/18 correct (39%)</h5>
@@ -9313,6 +9347,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_17-Rust" style="display:none">
             <h4>om_17 (Rust) — O0: 19 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">om_17 (Rust): 19 O0 blocks → 15 O2 blocks (1.3:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Loses to C on: value.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/15 correct (7%)</h5>
@@ -9617,6 +9652,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_17-C" style="display:none">
             <h4>om_17 (C) — O0: 6 blocks, O2: 6 blocks</h4>
+            <p class="fn-explanation">om_17 (C): 6 O0 blocks → 6 O2 blocks (1.0:1). Best method: size (83%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: size. Simpler structure (6 vs Rust's 19 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/6 correct (33%)</h5>
@@ -9759,6 +9795,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_18-Rust" style="display:none">
             <h4>om_18 (Rust) — O0: 56 blocks, O2: 54 blocks</h4>
+            <p class="fn-explanation">om_18 (Rust): 56 O0 blocks → 54 O2 blocks (1.0:1). Best method: size (63%), worst: constants (0%). Beats C on: value. Loses to C on: opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 20/54 correct (37%)</h5>
@@ -10063,6 +10100,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_18-C" style="display:none">
             <h4>om_18 (C) — O0: 13 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">om_18 (C): 13 O0 blocks → 15 O2 blocks (0.9:1). Best method: opcodes (100%), worst: constants (8%). Beats Rust on: opcodes, constants, size. Loses to Rust on: value. Simpler structure (13 vs Rust's 56 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/13 correct (15%)</h5>
@@ -10337,6 +10375,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_19-Rust" style="display:none">
             <h4>om_19 (Rust) — O0: 26 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">om_19 (Rust): 26 O0 blocks → 18 O2 blocks (1.4:1). Best method: size (83%), worst: constants (6%). Beats C on: constants. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/18 correct (17%)</h5>
@@ -10641,6 +10680,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_19-C" style="display:none">
             <h4>om_19 (C) — O0: 11 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">om_19 (C): 11 O0 blocks → 12 O2 blocks (0.9:1). Best method: size (82%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: constants. Simpler structure (11 vs Rust's 26 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/11 correct (27%)</h5>
@@ -10876,6 +10916,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_20-Rust" style="display:none">
             <h4>om_20 (Rust) — O0: 51 blocks, O2: 43 blocks</h4>
+            <p class="fn-explanation">om_20 (Rust): 51 O0 blocks → 43 O2 blocks (1.2:1). Best method: size (72%), worst: constants (9%). Loses to C on: opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 14/43 correct (33%)</h5>
@@ -11180,6 +11221,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-om_20-C" style="display:none">
             <h4>om_20 (C) — O0: 14 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">om_20 (C): 14 O0 blocks → 11 O2 blocks (1.3:1). Best method: opcodes (82%), worst: constants (27%). Beats Rust on: opcodes, constants, size. Simpler structure (14 vs Rust's 51 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/11 correct (36%)</h5>
@@ -11421,6 +11463,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_01-Rust" style="display:none">
             <h4>dg_01 (Rust) — O0: 53 blocks, O2: 50 blocks</h4>
+            <p class="fn-explanation">dg_01 (Rust): 53 O0 blocks → 50 O2 blocks (1.1:1). Best method: size (86%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 14/50 correct (28%)</h5>
@@ -11725,6 +11768,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_01-C" style="display:none">
             <h4>dg_01 (C) — O0: 25 blocks, O2: 25 blocks</h4>
+            <p class="fn-explanation">dg_01 (C): 25 O0 blocks → 25 O2 blocks (1.0:1). Best method: opcodes (76%), worst: constants (8%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (25 vs Rust's 53 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/25 correct (36%)</h5>
@@ -12029,6 +12073,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_02-Rust" style="display:none">
             <h4>dg_02 (Rust) — O0: 37 blocks, O2: 27 blocks</h4>
+            <p class="fn-explanation">dg_02 (Rust): 37 O0 blocks → 27 O2 blocks (1.4:1). Best method: size (81%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 10/27 correct (37%)</h5>
@@ -12333,6 +12378,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_02-C" style="display:none">
             <h4>dg_02 (C) — O0: 21 blocks, O2: 21 blocks</h4>
+            <p class="fn-explanation">dg_02 (C): 21 O0 blocks → 21 O2 blocks (1.0:1). Best method: opcodes (81%), worst: constants (24%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 10/21 correct (48%)</h5>
@@ -12637,6 +12683,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_03-Rust" style="display:none">
             <h4>dg_03 (Rust) — O0: 5 blocks, O2: 4 blocks</h4>
+            <p class="fn-explanation">dg_03 (Rust): 5 O0 blocks → 4 O2 blocks (1.2:1). Best method: opcodes (75%), worst: constants (0%). Loses to C on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/4 correct (25%)</h5>
@@ -12746,6 +12793,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_03-C" style="display:none">
             <h4>dg_03 (C) — O0: 4 blocks, O2: 55 blocks</h4>
+            <p class="fn-explanation">dg_03 (C): 4 O0 blocks → 55 O2 blocks (0.1:1). Best method: size (100%), worst: constants (0%). Beats Rust on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/4 correct (75%)</h5>
@@ -12918,6 +12966,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_04-Rust" style="display:none">
             <h4>dg_04 (Rust) — O0: 25 blocks, O2: 41 blocks</h4>
+            <p class="fn-explanation">dg_04 (Rust): 25 O0 blocks → 41 O2 blocks (0.6:1). Best method: size (92%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/25 correct (36%)</h5>
@@ -13222,6 +13271,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_04-C" style="display:none">
             <h4>dg_04 (C) — O0: 16 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">dg_04 (C): 16 O0 blocks → 15 O2 blocks (1.1:1). Best method: opcodes (80%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/15 correct (20%)</h5>
@@ -13526,6 +13576,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_05-Rust" style="display:none">
             <h4>dg_05 (Rust) — O0: 26 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">dg_05 (Rust): 26 O0 blocks → 13 O2 blocks (2.0:1). Best method: size (100%), worst: constants (15%). Beats C on: constants, size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/13 correct (31%)</h5>
@@ -13806,6 +13857,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_05-C" style="display:none">
             <h4>dg_05 (C) — O0: 11 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">dg_05 (C): 11 O0 blocks → 14 O2 blocks (0.8:1). Best method: opcodes (91%), worst: constants (9%). Beats Rust on: value, opcodes. Loses to Rust on: constants, size. Simpler structure (11 vs Rust's 26 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/11 correct (45%)</h5>
@@ -14047,6 +14099,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_06-Rust" style="display:none">
             <h4>dg_06 (Rust) — O0: 40 blocks, O2: 28 blocks</h4>
+            <p class="fn-explanation">dg_06 (Rust): 40 O0 blocks → 28 O2 blocks (1.4:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/28 correct (29%)</h5>
@@ -14351,6 +14404,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_06-C" style="display:none">
             <h4>dg_06 (C) — O0: 24 blocks, O2: 25 blocks</h4>
+            <p class="fn-explanation">dg_06 (C): 24 O0 blocks → 25 O2 blocks (1.0:1). Best method: opcodes (83%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 13/24 correct (54%)</h5>
@@ -14655,6 +14709,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_07-Rust" style="display:none">
             <h4>dg_07 (Rust) — O0: 60 blocks, O2: 67 blocks</h4>
+            <p class="fn-explanation">dg_07 (Rust): 60 O0 blocks → 67 O2 blocks (0.9:1). Best method: size (95%), worst: constants (2%). Beats C on: value, size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 23/60 correct (38%)</h5>
@@ -14959,6 +15014,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_07-C" style="display:none">
             <h4>dg_07 (C) — O0: 31 blocks, O2: 25 blocks</h4>
+            <p class="fn-explanation">dg_07 (C): 31 O0 blocks → 25 O2 blocks (1.2:1). Best method: size (80%), worst: constants (12%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/25 correct (32%)</h5>
@@ -15263,6 +15319,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_08-Rust" style="display:none">
             <h4>dg_08 (Rust) — O0: 30 blocks, O2: 43 blocks</h4>
+            <p class="fn-explanation">dg_08 (Rust): 30 O0 blocks → 43 O2 blocks (0.7:1). Best method: opcodes (73%), worst: constants (0%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/30 correct (30%)</h5>
@@ -15567,6 +15624,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_08-C" style="display:none">
             <h4>dg_08 (C) — O0: 11 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">dg_08 (C): 11 O0 blocks → 11 O2 blocks (1.0:1). Best method: opcodes (82%), worst: constants (27%). Beats Rust on: value, opcodes, constants. Simpler structure (11 vs Rust's 30 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/11 correct (45%)</h5>
@@ -15799,6 +15857,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_09-Rust" style="display:none">
             <h4>dg_09 (Rust) — O0: 53 blocks, O2: 47 blocks</h4>
+            <p class="fn-explanation">dg_09 (Rust): 53 O0 blocks → 47 O2 blocks (1.1:1). Best method: size (89%), worst: constants (13%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 15/47 correct (32%)</h5>
@@ -16103,6 +16162,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_09-C" style="display:none">
             <h4>dg_09 (C) — O0: 19 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">dg_09 (C): 19 O0 blocks → 18 O2 blocks (1.1:1). Best method: size (83%), worst: constants (17%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (19 vs Rust's 53 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/18 correct (50%)</h5>
@@ -16407,6 +16467,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_10-Rust" style="display:none">
             <h4>dg_10 (Rust) — O0: 63 blocks, O2: 66 blocks</h4>
+            <p class="fn-explanation">dg_10 (Rust): 63 O0 blocks → 66 O2 blocks (1.0:1). Best method: size (84%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 13/63 correct (21%)</h5>
@@ -16711,6 +16772,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_10-C" style="display:none">
             <h4>dg_10 (C) — O0: 21 blocks, O2: 25 blocks</h4>
+            <p class="fn-explanation">dg_10 (C): 21 O0 blocks → 25 O2 blocks (0.8:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (21 vs Rust's 63 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 10/21 correct (48%)</h5>
@@ -17015,6 +17077,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_11-Rust" style="display:none">
             <h4>dg_11 (Rust) — O0: 38 blocks, O2: 39 blocks</h4>
+            <p class="fn-explanation">dg_11 (Rust): 38 O0 blocks → 39 O2 blocks (1.0:1). Best method: size (74%), worst: constants (3%). Loses to C on: value, opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 11/38 correct (29%)</h5>
@@ -17319,6 +17382,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_11-C" style="display:none">
             <h4>dg_11 (C) — O0: 22 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">dg_11 (C): 22 O0 blocks → 18 O2 blocks (1.2:1). Best method: opcodes (89%), worst: constants (28%). Beats Rust on: value, opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/18 correct (50%)</h5>
@@ -17623,6 +17687,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_12-Rust" style="display:none">
             <h4>dg_12 (Rust) — O0: 38 blocks, O2: 32 blocks</h4>
+            <p class="fn-explanation">dg_12 (Rust): 38 O0 blocks → 32 O2 blocks (1.2:1). Best method: size (91%), worst: constants (0%). Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/32 correct (9%)</h5>
@@ -17927,6 +17992,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_12-C" style="display:none">
             <h4>dg_12 (C) — O0: 17 blocks, O2: 19 blocks</h4>
+            <p class="fn-explanation">dg_12 (C): 17 O0 blocks → 19 O2 blocks (0.9:1). Best method: size (88%), worst: constants (0%). Beats Rust on: value, opcodes. Simpler structure (17 vs Rust's 38 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/17 correct (24%)</h5>
@@ -18231,6 +18297,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_13-Rust" style="display:none">
             <h4>dg_13 (Rust) — O0: 28 blocks, O2: 33 blocks</h4>
+            <p class="fn-explanation">dg_13 (Rust): 28 O0 blocks → 33 O2 blocks (0.8:1). Best method: size (93%), worst: constants (4%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/28 correct (21%)</h5>
@@ -18535,6 +18602,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_13-C" style="display:none">
             <h4>dg_13 (C) — O0: 15 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">dg_13 (C): 15 O0 blocks → 15 O2 blocks (1.0:1). Best method: size (73%), worst: constants (27%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/15 correct (47%)</h5>
@@ -18839,6 +18907,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_14-Rust" style="display:none">
             <h4>dg_14 (Rust) — O0: 48 blocks, O2: 53 blocks</h4>
+            <p class="fn-explanation">dg_14 (Rust): 48 O0 blocks → 53 O2 blocks (0.9:1). Best method: size (69%), worst: constants (0%). Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 15/48 correct (31%)</h5>
@@ -19143,6 +19212,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_14-C" style="display:none">
             <h4>dg_14 (C) — O0: 12 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">dg_14 (C): 12 O0 blocks → 13 O2 blocks (0.9:1). Best method: opcodes (83%), worst: constants (25%). Beats Rust on: opcodes, constants. Simpler structure (12 vs Rust's 48 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/12 correct (33%)</h5>
@@ -19396,6 +19466,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_15-Rust" style="display:none">
             <h4>dg_15 (Rust) — O0: 54 blocks, O2: 52 blocks</h4>
+            <p class="fn-explanation">dg_15 (Rust): 54 O0 blocks → 52 O2 blocks (1.0:1). Best method: size (90%), worst: constants (4%). Beats C on: size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 16/52 correct (31%)</h5>
@@ -19700,6 +19771,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_15-C" style="display:none">
             <h4>dg_15 (C) — O0: 19 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">dg_15 (C): 19 O0 blocks → 18 O2 blocks (1.1:1). Best method: opcodes (72%), worst: constants (17%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (19 vs Rust's 54 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/18 correct (33%)</h5>
@@ -20004,6 +20076,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_16-Rust" style="display:none">
             <h4>dg_16 (Rust) — O0: 36 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">dg_16 (Rust): 36 O0 blocks → 14 O2 blocks (2.6:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes, constants. Large O0→O2 block reduction (36→14) means O2 eliminated 22 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/14 correct (36%)</h5>
@@ -20296,6 +20369,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_16-C" style="display:none">
             <h4>dg_16 (C) — O0: 16 blocks, O2: 16 blocks</h4>
+            <p class="fn-explanation">dg_16 (C): 16 O0 blocks → 16 O2 blocks (1.0:1). Best method: opcodes (75%), worst: constants (12%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (16 vs Rust's 36 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/16 correct (31%)</h5>
@@ -20600,6 +20674,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_17-Rust" style="display:none">
             <h4>dg_17 (Rust) — O0: 50 blocks, O2: 37 blocks</h4>
+            <p class="fn-explanation">dg_17 (Rust): 50 O0 blocks → 37 O2 blocks (1.4:1). Best method: size (84%), worst: constants (3%). Beats C on: value, size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 18/37 correct (49%)</h5>
@@ -20904,6 +20979,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_17-C" style="display:none">
             <h4>dg_17 (C) — O0: 21 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">dg_17 (C): 21 O0 blocks → 20 O2 blocks (1.1:1). Best method: opcodes (80%), worst: constants (20%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size. Simpler structure (21 vs Rust's 50 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/20 correct (30%)</h5>
@@ -21208,6 +21284,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_18-Rust" style="display:none">
             <h4>dg_18 (Rust) — O0: 59 blocks, O2: 53 blocks</h4>
+            <p class="fn-explanation">dg_18 (Rust): 59 O0 blocks → 53 O2 blocks (1.1:1). Best method: size (77%), worst: constants (0%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 18/53 correct (34%)</h5>
@@ -21512,6 +21589,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_18-C" style="display:none">
             <h4>dg_18 (C) — O0: 28 blocks, O2: 29 blocks</h4>
+            <p class="fn-explanation">dg_18 (C): 28 O0 blocks → 29 O2 blocks (1.0:1). Best method: opcodes (86%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Simpler structure (28 vs Rust's 59 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 12/28 correct (43%)</h5>
@@ -21816,6 +21894,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_19-Rust" style="display:none">
             <h4>dg_19 (Rust) — O0: 35 blocks, O2: 52 blocks</h4>
+            <p class="fn-explanation">dg_19 (Rust): 35 O0 blocks → 52 O2 blocks (0.7:1). Best method: size (94%), worst: constants (9%). Beats C on: size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 11/35 correct (31%)</h5>
@@ -22120,6 +22199,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_19-C" style="display:none">
             <h4>dg_19 (C) — O0: 15 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">dg_19 (C): 15 O0 blocks → 14 O2 blocks (1.1:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (15 vs Rust's 35 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/14 correct (36%)</h5>
@@ -22409,6 +22489,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_20-Rust" style="display:none">
             <h4>dg_20 (Rust) — O0: 69 blocks, O2: 33 blocks</h4>
+            <p class="fn-explanation">dg_20 (Rust): 69 O0 blocks → 33 O2 blocks (2.1:1). Best method: size (88%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants. Large O0→O2 block reduction (69→33) means O2 eliminated 36 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 10/33 correct (30%)</h5>
@@ -22713,6 +22794,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-dg_20-C" style="display:none">
             <h4>dg_20 (C) — O0: 20 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">dg_20 (C): 20 O0 blocks → 14 O2 blocks (1.4:1). Best method: opcodes (93%), worst: constants (14%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (20 vs Rust's 69 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/14 correct (50%)</h5>
@@ -23005,6 +23087,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_01-Rust" style="display:none">
             <h4>bc_01 (Rust) — O0: 25 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">bc_01 (Rust): 25 O0 blocks → 12 O2 blocks (2.1:1). Best method: size (92%), worst: constants (0%). Beats C on: opcodes, size. Large O0→O2 block reduction (25→12) means O2 eliminated 13 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/12 correct (25%)</h5>
@@ -23273,6 +23356,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_01-C" style="display:none">
             <h4>bc_01 (C) — O0: 9 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">bc_01 (C): 9 O0 blocks → 8 O2 blocks (1.1:1). Best method: opcodes (50%), worst: constants (0%). Loses to Rust on: opcodes, size. Simpler structure (9 vs Rust's 25 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/8 correct (25%)</h5>
@@ -23454,6 +23538,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_02-Rust" style="display:none">
             <h4>bc_02 (Rust) — O0: 37 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">bc_02 (Rust): 37 O0 blocks → 12 O2 blocks (3.1:1). Best method: size (100%), worst: constants (0%). Beats C on: opcodes, size. Loses to C on: value. Large O0→O2 block reduction (37→12) means O2 eliminated 25 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/12 correct (17%)</h5>
@@ -23722,6 +23807,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_02-C" style="display:none">
             <h4>bc_02 (C) — O0: 8 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">bc_02 (C): 8 O0 blocks → 9 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, size. Simpler structure (8 vs Rust's 37 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/8 correct (38%)</h5>
@@ -23903,6 +23989,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_03-Rust" style="display:none">
             <h4>bc_03 (Rust) — O0: 49 blocks, O2: 30 blocks</h4>
+            <p class="fn-explanation">bc_03 (Rust): 49 O0 blocks → 30 O2 blocks (1.6:1). Best method: opcodes (83%), worst: constants (0%). Beats C on: value, size. Loses to C on: constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/30 correct (30%)</h5>
@@ -24207,6 +24294,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_03-C" style="display:none">
             <h4>bc_03 (C) — O0: 14 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">bc_03 (C): 14 O0 blocks → 12 O2 blocks (1.2:1). Best method: opcodes (83%), worst: constants (8%). Beats Rust on: constants. Loses to Rust on: value, size. Simpler structure (14 vs Rust's 49 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/12 correct (17%)</h5>
@@ -24463,6 +24551,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_04-Rust" style="display:none">
             <h4>bc_04 (Rust) — O0: 13 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">bc_04 (Rust): 13 O0 blocks → 10 O2 blocks (1.3:1). Best method: size (60%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/10 correct (30%)</h5>
@@ -24686,6 +24775,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_04-C" style="display:none">
             <h4>bc_04 (C) — O0: 4 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">bc_04 (C): 4 O0 blocks → 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 13 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/4 correct (50%)</h5>
@@ -24795,6 +24885,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_05-Rust" style="display:none">
             <h4>bc_05 (Rust) — O0: 22 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">bc_05 (Rust): 22 O0 blocks → 15 O2 blocks (1.5:1). Best method: size (93%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/15 correct (7%)</h5>
@@ -25099,6 +25190,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_05-C" style="display:none">
             <h4>bc_05 (C) — O0: 9 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">bc_05 (C): 9 O0 blocks → 8 O2 blocks (1.1:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (9 vs Rust's 22 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/8 correct (25%)</h5>
@@ -25280,6 +25372,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_06-Rust" style="display:none">
             <h4>bc_06 (Rust) — O0: 40 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">bc_06 (Rust): 40 O0 blocks → 18 O2 blocks (2.2:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Large O0→O2 block reduction (40→18) means O2 eliminated 22 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/18 correct (6%)</h5>
@@ -25584,6 +25677,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_06-C" style="display:none">
             <h4>bc_06 (C) — O0: 11 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">bc_06 (C): 11 O0 blocks → 14 O2 blocks (0.8:1). Best method: opcodes (91%), worst: constants (0%). Loses to Rust on: size. Simpler structure (11 vs Rust's 40 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/11 correct (9%)</h5>
@@ -25825,6 +25919,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_07-Rust" style="display:none">
             <h4>bc_07 (Rust) — O0: 99 blocks, O2: 44 blocks</h4>
+            <p class="fn-explanation">bc_07 (Rust): 99 O0 blocks → 44 O2 blocks (2.2:1). Best method: size (95%), worst: constants (7%). Beats C on: opcodes, size. Loses to C on: constants. Large O0→O2 block reduction (99→44) means O2 eliminated 55 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 17/44 correct (39%)</h5>
@@ -26129,6 +26224,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_07-C" style="display:none">
             <h4>bc_07 (C) — O0: 19 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">bc_07 (C): 19 O0 blocks → 11 O2 blocks (1.7:1). Best method: opcodes (82%), worst: value (36%). Beats Rust on: constants. Loses to Rust on: opcodes, size. Simpler structure (19 vs Rust's 99 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/11 correct (36%)</h5>
@@ -26385,6 +26481,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_08-Rust" style="display:none">
             <h4>bc_08 (Rust) — O0: 75 blocks, O2: 19 blocks</h4>
+            <p class="fn-explanation">bc_08 (Rust): 75 O0 blocks → 19 O2 blocks (3.9:1). Best method: opcodes (100%), worst: constants (5%). Beats C on: opcodes, constants, size. Large O0→O2 block reduction (75→19) means O2 eliminated 56 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/19 correct (37%)</h5>
@@ -26689,6 +26786,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_08-C" style="display:none">
             <h4>bc_08 (C) — O0: 16 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">bc_08 (C): 16 O0 blocks → 12 O2 blocks (1.3:1). Best method: opcodes (75%), worst: constants (0%). Loses to Rust on: opcodes, constants, size. Simpler structure (16 vs Rust's 75 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/12 correct (33%)</h5>
@@ -26951,6 +27049,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_09-Rust" style="display:none">
             <h4>bc_09 (Rust) — O0: 25 blocks, O2: 16 blocks</h4>
+            <p class="fn-explanation">bc_09 (Rust): 25 O0 blocks → 16 O2 blocks (1.6:1). Best method: size (94%), worst: constants (0%). Beats C on: opcodes, size. Loses to C on: value.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/16 correct (12%)</h5>
@@ -27255,6 +27354,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_09-C" style="display:none">
             <h4>bc_09 (C) — O0: 9 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">bc_09 (C): 9 O0 blocks → 9 O2 blocks (1.0:1). Best method: size (67%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, size. Simpler structure (9 vs Rust's 25 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/9 correct (22%)</h5>
@@ -27451,6 +27551,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_10-Rust" style="display:none">
             <h4>bc_10 (Rust) — O0: 36 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">bc_10 (Rust): 36 O0 blocks → 18 O2 blocks (2.0:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/18 correct (6%)</h5>
@@ -27755,6 +27856,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_10-C" style="display:none">
             <h4>bc_10 (C) — O0: 13 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">bc_10 (C): 13 O0 blocks → 10 O2 blocks (1.3:1). Best method: opcodes (100%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (13 vs Rust's 36 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/10 correct (20%)</h5>
@@ -27978,6 +28080,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_11-Rust" style="display:none">
             <h4>bc_11 (Rust) — O0: 35 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">bc_11 (Rust): 35 O0 blocks → 15 O2 blocks (2.3:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value. Large O0→O2 block reduction (35→15) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/15 correct (13%)</h5>
@@ -28282,6 +28385,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_11-C" style="display:none">
             <h4>bc_11 (C) — O0: 11 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">bc_11 (C): 11 O0 blocks → 9 O2 blocks (1.2:1). Best method: opcodes (78%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: size. Simpler structure (11 vs Rust's 35 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/9 correct (22%)</h5>
@@ -28484,6 +28588,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_12-Rust" style="display:none">
             <h4>bc_12 (Rust) — O0: 63 blocks, O2: 93 blocks</h4>
+            <p class="fn-explanation">bc_12 (Rust): 63 O0 blocks → 93 O2 blocks (0.7:1). Best method: size (86%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 28/63 correct (44%)</h5>
@@ -28788,6 +28893,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_12-C" style="display:none">
             <h4>bc_12 (C) — O0: 31 blocks, O2: 29 blocks</h4>
+            <p class="fn-explanation">bc_12 (C): 31 O0 blocks → 29 O2 blocks (1.1:1). Best method: opcodes (86%), worst: constants (14%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size. Simpler structure (31 vs Rust's 63 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 11/29 correct (38%)</h5>
@@ -29092,6 +29198,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_13-Rust" style="display:none">
             <h4>bc_13 (Rust) — O0: 43 blocks, O2: 32 blocks</h4>
+            <p class="fn-explanation">bc_13 (Rust): 43 O0 blocks → 32 O2 blocks (1.3:1). Best method: size (97%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/32 correct (19%)</h5>
@@ -29396,6 +29503,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_13-C" style="display:none">
             <h4>bc_13 (C) — O0: 12 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">bc_13 (C): 12 O0 blocks → 14 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (8%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (12 vs Rust's 43 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/12 correct (25%)</h5>
@@ -29652,6 +29760,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_14-Rust" style="display:none">
             <h4>bc_14 (Rust) — O0: 28 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">bc_14 (Rust): 28 O0 blocks → 12 O2 blocks (2.3:1). Best method: opcodes (83%), worst: constants (8%). Beats C on: opcodes. Loses to C on: value. Large O0→O2 block reduction (28→12) means O2 eliminated 16 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/12 correct (17%)</h5>
@@ -29920,6 +30029,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_14-C" style="display:none">
             <h4>bc_14 (C) — O0: 19 blocks, O2: 17 blocks</h4>
+            <p class="fn-explanation">bc_14 (C): 19 O0 blocks → 17 O2 blocks (1.1:1). Best method: size (82%), worst: constants (6%). Beats Rust on: value. Loses to Rust on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/17 correct (29%)</h5>
@@ -30224,6 +30334,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_15-Rust" style="display:none">
             <h4>bc_15 (Rust) — O0: 50 blocks, O2: 17 blocks</h4>
+            <p class="fn-explanation">bc_15 (Rust): 50 O0 blocks → 17 O2 blocks (2.9:1). Best method: opcodes (88%), worst: constants (6%). Loses to C on: constants, size. Large O0→O2 block reduction (50→17) means O2 eliminated 33 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/17 correct (47%)</h5>
@@ -30528,6 +30639,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_15-C" style="display:none">
             <h4>bc_15 (C) — O0: 11 blocks, O2: 7 blocks</h4>
+            <p class="fn-explanation">bc_15 (C): 11 O0 blocks → 7 O2 blocks (1.6:1). Best method: size (100%), worst: value (43%). Beats Rust on: constants, size. Simpler structure (11 vs Rust's 50 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/7 correct (43%)</h5>
@@ -30700,6 +30812,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_16-Rust" style="display:none">
             <h4>bc_16 (Rust) — O0: 26 blocks, O2: 6 blocks</h4>
+            <p class="fn-explanation">bc_16 (Rust): 26 O0 blocks → 6 O2 blocks (4.3:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes. Large O0→O2 block reduction (26→6) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/6 correct (50%)</h5>
@@ -30896,6 +31009,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_16-C" style="display:none">
             <h4>bc_16 (C) — O0: 9 blocks, O2: 6 blocks</h4>
+            <p class="fn-explanation">bc_16 (C): 9 O0 blocks → 6 O2 blocks (1.5:1). Best method: opcodes (67%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size. Simpler structure (9 vs Rust's 26 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/6 correct (17%)</h5>
@@ -31047,6 +31161,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_17-Rust" style="display:none">
             <h4>bc_17 (Rust) — O0: 51 blocks, O2: 21 blocks</h4>
+            <p class="fn-explanation">bc_17 (Rust): 51 O0 blocks → 21 O2 blocks (2.4:1). Best method: opcodes (90%), worst: value (5%). Loses to C on: value, size. Large O0→O2 block reduction (51→21) means O2 eliminated 30 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/21 correct (5%)</h5>
@@ -31351,6 +31466,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_17-C" style="display:none">
             <h4>bc_17 (C) — O0: 14 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">bc_17 (C): 14 O0 blocks → 15 O2 blocks (0.9:1). Best method: opcodes (93%), worst: constants (14%). Beats Rust on: value, size. Simpler structure (14 vs Rust's 51 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/14 correct (29%)</h5>
@@ -31640,6 +31756,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_18-Rust" style="display:none">
             <h4>bc_18 (Rust) — O0: 48 blocks, O2: 32 blocks</h4>
+            <p class="fn-explanation">bc_18 (Rust): 48 O0 blocks → 32 O2 blocks (1.5:1). Best method: size (97%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/32 correct (6%)</h5>
@@ -31944,6 +32061,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_18-C" style="display:none">
             <h4>bc_18 (C) — O0: 19 blocks, O2: 17 blocks</h4>
+            <p class="fn-explanation">bc_18 (C): 19 O0 blocks → 17 O2 blocks (1.1:1). Best method: size (82%), worst: value (0%). Beats Rust on: opcodes. Loses to Rust on: value, size. Simpler structure (19 vs Rust's 48 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 0/17 correct (0%)</h5>
@@ -32248,6 +32366,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_19-Rust" style="display:none">
             <h4>bc_19 (Rust) — O0: 25 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">bc_19 (Rust): 25 O0 blocks → 14 O2 blocks (1.8:1). Best method: size (86%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/14 correct (21%)</h5>
@@ -32540,6 +32659,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_19-C" style="display:none">
             <h4>bc_19 (C) — O0: 9 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">bc_19 (C): 9 O0 blocks → 8 O2 blocks (1.1:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (9 vs Rust's 25 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/8 correct (25%)</h5>
@@ -32721,6 +32841,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_20-Rust" style="display:none">
             <h4>bc_20 (Rust) — O0: 20 blocks, O2: 38 blocks</h4>
+            <p class="fn-explanation">bc_20 (Rust): 20 O0 blocks → 38 O2 blocks (0.5:1). Best method: size (80%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/20 correct (30%)</h5>
@@ -33025,6 +33146,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-bc_20-C" style="display:none">
             <h4>bc_20 (C) — O0: 16 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">bc_20 (C): 16 O0 blocks → 13 O2 blocks (1.2:1). Best method: opcodes (77%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/13 correct (8%)</h5>
@@ -33302,6 +33424,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_01-Rust" style="display:none">
             <h4>qm_01 (Rust) — O0: 36 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">qm_01 (Rust): 36 O0 blocks → 13 O2 blocks (2.8:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes. Large O0→O2 block reduction (36→13) means O2 eliminated 23 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/13 correct (31%)</h5>
@@ -33582,6 +33705,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_01-C" style="display:none">
             <h4>qm_01 (C) — O0: 15 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">qm_01 (C): 15 O0 blocks → 11 O2 blocks (1.4:1). Best method: opcodes (73%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (15 vs Rust's 36 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/11 correct (27%)</h5>
@@ -33826,6 +33950,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_02-Rust" style="display:none">
             <h4>qm_02 (Rust) — O0: 23 blocks, O2: 45 blocks</h4>
+            <p class="fn-explanation">qm_02 (Rust): 23 O0 blocks → 45 O2 blocks (0.5:1). Best method: size (100%), worst: constants (4%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/23 correct (39%)</h5>
@@ -34130,6 +34255,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_02-C" style="display:none">
             <h4>qm_02 (C) — O0: 15 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">qm_02 (C): 15 O0 blocks → 14 O2 blocks (1.1:1). Best method: size (100%), worst: constants (29%). Beats Rust on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/14 correct (64%)</h5>
@@ -34419,6 +34545,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_03-Rust" style="display:none">
             <h4>qm_03 (Rust) — O0: 14 blocks, O2: 7 blocks</h4>
+            <p class="fn-explanation">qm_03 (Rust): 14 O0 blocks → 7 O2 blocks (2.0:1). Best method: size (71%), worst: constants (0%). Beats C on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/7 correct (57%)</h5>
@@ -34600,6 +34727,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_03-C" style="display:none">
             <h4>qm_03 (C) — O0: 7 blocks, O2: 7 blocks</h4>
+            <p class="fn-explanation">qm_03 (C): 7 O0 blocks → 7 O2 blocks (1.0:1). Best method: value (57%), worst: constants (0%). Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/7 correct (57%)</h5>
@@ -34760,6 +34888,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_04-Rust" style="display:none">
             <h4>qm_04 (Rust) — O0: 28 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">qm_04 (Rust): 28 O0 blocks → 9 O2 blocks (3.1:1). Best method: opcodes (100%), worst: constants (11%). Beats C on: value, opcodes. Large O0→O2 block reduction (28→9) means O2 eliminated 19 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/9 correct (33%)</h5>
@@ -34992,6 +35121,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_04-C" style="display:none">
             <h4>qm_04 (C) — O0: 16 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">qm_04 (C): 16 O0 blocks → 11 O2 blocks (1.5:1). Best method: size (100%), worst: constants (9%). Loses to Rust on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/11 correct (18%)</h5>
@@ -35239,6 +35369,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_05-Rust" style="display:none">
             <h4>qm_05 (Rust) — O0: 22 blocks, O2: 31 blocks</h4>
+            <p class="fn-explanation">qm_05 (Rust): 22 O0 blocks → 31 O2 blocks (0.7:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/22 correct (27%)</h5>
@@ -35543,6 +35674,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_05-C" style="display:none">
             <h4>qm_05 (C) — O0: 13 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">qm_05 (C): 13 O0 blocks → 12 O2 blocks (1.1:1). Best method: size (83%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/12 correct (50%)</h5>
@@ -35796,6 +35928,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_06-Rust" style="display:none">
             <h4>qm_06 (Rust) — O0: 49 blocks, O2: 4 blocks</h4>
+            <p class="fn-explanation">qm_06 (Rust): 49 O0 blocks → 4 O2 blocks (12.2:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes, constants. Large O0→O2 block reduction (49→4) means O2 eliminated 45 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/4 correct (75%)</h5>
@@ -35968,6 +36101,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_06-C" style="display:none">
             <h4>qm_06 (C) — O0: 9 blocks, O2: 4 blocks</h4>
+            <p class="fn-explanation">qm_06 (C): 9 O0 blocks → 4 O2 blocks (2.2:1). Best method: opcodes (75%), worst: constants (25%). Beats Rust on: opcodes, constants. Loses to Rust on: value, size. Simpler structure (9 vs Rust's 49 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/4 correct (50%)</h5>
@@ -36089,6 +36223,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_07-Rust" style="display:none">
             <h4>qm_07 (Rust) — O0: 38 blocks, O2: 35 blocks</h4>
+            <p class="fn-explanation">qm_07 (Rust): 38 O0 blocks → 35 O2 blocks (1.1:1). Best method: size (71%), worst: constants (6%). Loses to C on: value, opcodes, constants, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/35 correct (14%)</h5>
@@ -36393,6 +36528,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_07-C" style="display:none">
             <h4>qm_07 (C) — O0: 15 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">qm_07 (C): 15 O0 blocks → 11 O2 blocks (1.4:1). Best method: size (91%), worst: constants (27%). Beats Rust on: value, opcodes, constants, size. Simpler structure (15 vs Rust's 38 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/11 correct (73%)</h5>
@@ -36637,6 +36773,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_08-Rust" style="display:none">
             <h4>qm_08 (Rust) — O0: 13 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">qm_08 (Rust): 13 O0 blocks → 8 O2 blocks (1.6:1). Best method: size (88%), worst: constants (0%). Beats C on: opcodes, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/8 correct (38%)</h5>
@@ -36830,6 +36967,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_08-C" style="display:none">
             <h4>qm_08 (C) — O0: 9 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">qm_08 (C): 9 O0 blocks → 8 O2 blocks (1.1:1). Best method: size (62%), worst: constants (0%). Loses to Rust on: opcodes, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/8 correct (38%)</h5>
@@ -37011,6 +37149,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_09-Rust" style="display:none">
             <h4>qm_09 (Rust) — O0: 32 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">qm_09 (Rust): 32 O0 blocks → 9 O2 blocks (3.6:1). Best method: size (100%), worst: constants (11%). Beats C on: opcodes, constants, size. Loses to C on: value. Large O0→O2 block reduction (32→9) means O2 eliminated 23 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/9 correct (33%)</h5>
@@ -37243,6 +37382,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_09-C" style="display:none">
             <h4>qm_09 (C) — O0: 14 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">qm_09 (C): 14 O0 blocks → 10 O2 blocks (1.4:1). Best method: opcodes (70%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: opcodes, constants, size. Simpler structure (14 vs Rust's 32 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/10 correct (40%)</h5>
@@ -37469,6 +37609,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_10-Rust" style="display:none">
             <h4>qm_10 (Rust) — O0: 40 blocks, O2: 60 blocks</h4>
+            <p class="fn-explanation">qm_10 (Rust): 40 O0 blocks → 60 O2 blocks (0.7:1). Best method: size (92%), worst: constants (5%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/40 correct (22%)</h5>
@@ -37773,6 +37914,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_10-C" style="display:none">
             <h4>qm_10 (C) — O0: 17 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">qm_10 (C): 17 O0 blocks → 14 O2 blocks (1.2:1). Best method: size (93%), worst: constants (21%). Beats Rust on: value, opcodes, constants. Simpler structure (17 vs Rust's 40 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/14 correct (50%)</h5>
@@ -38065,6 +38207,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_11-Rust" style="display:none">
             <h4>qm_11 (Rust) — O0: 36 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">qm_11 (Rust): 36 O0 blocks → 10 O2 blocks (3.6:1). Best method: size (100%), worst: constants (0%). Beats C on: value, opcodes, size. Large O0→O2 block reduction (36→10) means O2 eliminated 26 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/10 correct (40%)</h5>
@@ -38309,6 +38452,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_11-C" style="display:none">
             <h4>qm_11 (C) — O0: 15 blocks, O2: 19 blocks</h4>
+            <p class="fn-explanation">qm_11 (C): 15 O0 blocks → 19 O2 blocks (0.8:1). Best method: size (87%), worst: constants (0%). Loses to Rust on: value, opcodes, size. Simpler structure (15 vs Rust's 36 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/15 correct (27%)</h5>
@@ -38613,6 +38757,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_12-Rust" style="display:none">
             <h4>qm_12 (Rust) — O0: 20 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">qm_12 (Rust): 20 O0 blocks → 10 O2 blocks (2.0:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/10 correct (50%)</h5>
@@ -38857,6 +39002,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_12-C" style="display:none">
             <h4>qm_12 (C) — O0: 11 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">qm_12 (C): 11 O0 blocks → 10 O2 blocks (1.1:1). Best method: opcodes (80%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/10 correct (40%)</h5>
@@ -39074,6 +39220,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_13-Rust" style="display:none">
             <h4>qm_13 (Rust) — O0: 30 blocks, O2: 17 blocks</h4>
+            <p class="fn-explanation">qm_13 (Rust): 30 O0 blocks → 17 O2 blocks (1.8:1). Best method: size (100%), worst: constants (0%). Beats C on: value, size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/17 correct (35%)</h5>
@@ -39378,6 +39525,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_13-C" style="display:none">
             <h4>qm_13 (C) — O0: 15 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">qm_13 (C): 15 O0 blocks → 11 O2 blocks (1.4:1). Best method: size (91%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: value, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/11 correct (27%)</h5>
@@ -39622,6 +39770,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_14-Rust" style="display:none">
             <h4>qm_14 (Rust) — O0: 59 blocks, O2: 33 blocks</h4>
+            <p class="fn-explanation">qm_14 (Rust): 59 O0 blocks → 33 O2 blocks (1.8:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/33 correct (27%)</h5>
@@ -39926,6 +40075,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_14-C" style="display:none">
             <h4>qm_14 (C) — O0: 13 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">qm_14 (C): 13 O0 blocks → 10 O2 blocks (1.3:1). Best method: opcodes (80%), worst: constants (30%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (13 vs Rust's 59 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/10 correct (70%)</h5>
@@ -40149,6 +40299,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_15-Rust" style="display:none">
             <h4>qm_15 (Rust) — O0: 34 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">qm_15 (Rust): 34 O0 blocks → 20 O2 blocks (1.7:1). Best method: size (75%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/20 correct (15%)</h5>
@@ -40453,6 +40604,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_15-C" style="display:none">
             <h4>qm_15 (C) — O0: 12 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">qm_15 (C): 12 O0 blocks → 11 O2 blocks (1.1:1). Best method: opcodes (64%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (12 vs Rust's 34 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/11 correct (36%)</h5>
@@ -40688,6 +40840,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_16-Rust" style="display:none">
             <h4>qm_16 (Rust) — O0: 26 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">qm_16 (Rust): 26 O0 blocks → 8 O2 blocks (3.2:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes. Large O0→O2 block reduction (26→8) means O2 eliminated 18 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/8 correct (25%)</h5>
@@ -40908,6 +41061,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_16-C" style="display:none">
             <h4>qm_16 (C) — O0: 11 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">qm_16 (C): 11 O0 blocks → 9 O2 blocks (1.2:1). Best method: opcodes (78%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (11 vs Rust's 26 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/9 correct (33%)</h5>
@@ -41110,6 +41264,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_17-Rust" style="display:none">
             <h4>qm_17 (Rust) — O0: 38 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">qm_17 (Rust): 38 O0 blocks → 12 O2 blocks (3.2:1). Best method: size (83%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes. Large O0→O2 block reduction (38→12) means O2 eliminated 26 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/12 correct (42%)</h5>
@@ -41378,6 +41533,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_17-C" style="display:none">
             <h4>qm_17 (C) — O0: 13 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">qm_17 (C): 13 O0 blocks → 11 O2 blocks (1.2:1). Best method: size (73%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (13 vs Rust's 38 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/11 correct (55%)</h5>
@@ -41616,6 +41772,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_18-Rust" style="display:none">
             <h4>qm_18 (Rust) — O0: 32 blocks, O2: 37 blocks</h4>
+            <p class="fn-explanation">qm_18 (Rust): 32 O0 blocks → 37 O2 blocks (0.9:1). Best method: size (94%), worst: constants (6%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/32 correct (22%)</h5>
@@ -41920,6 +42077,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_18-C" style="display:none">
             <h4>qm_18 (C) — O0: 18 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">qm_18 (C): 18 O0 blocks → 14 O2 blocks (1.3:1). Best method: opcodes (86%), worst: constants (29%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/14 correct (43%)</h5>
@@ -42212,6 +42370,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_19-Rust" style="display:none">
             <h4>qm_19 (Rust) — O0: 61 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">qm_19 (Rust): 61 O0 blocks → 20 O2 blocks (3.0:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value. Large O0→O2 block reduction (61→20) means O2 eliminated 41 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/20 correct (35%)</h5>
@@ -42516,6 +42675,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_19-C" style="display:none">
             <h4>qm_19 (C) — O0: 21 blocks, O2: 17 blocks</h4>
+            <p class="fn-explanation">qm_19 (C): 21 O0 blocks → 17 O2 blocks (1.2:1). Best method: size (76%), worst: constants (0%). Beats Rust on: value. Loses to Rust on: size. Simpler structure (21 vs Rust's 61 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/17 correct (47%)</h5>
@@ -42820,6 +42980,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_20-Rust" style="display:none">
             <h4>qm_20 (Rust) — O0: 23 blocks, O2: 29 blocks</h4>
+            <p class="fn-explanation">qm_20 (Rust): 23 O0 blocks → 29 O2 blocks (0.8:1). Best method: size (100%), worst: constants (0%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/23 correct (22%)</h5>
@@ -43124,6 +43285,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-qm_20-C" style="display:none">
             <h4>qm_20 (C) — O0: 19 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">qm_20 (C): 19 O0 blocks → 14 O2 blocks (1.4:1). Best method: size (100%), worst: constants (43%). Beats Rust on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 9/14 correct (64%)</h5>
@@ -43416,6 +43578,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_01-Rust" style="display:none">
             <h4>pu_01 (Rust) — O0: 17 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">pu_01 (Rust): 17 O0 blocks → 13 O2 blocks (1.3:1). Best method: size (69%), worst: constants (0%). Loses to C on: value, opcodes, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/13 correct (38%)</h5>
@@ -43696,6 +43859,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_01-C" style="display:none">
             <h4>pu_01 (C) — O0: 4 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">pu_01 (C): 4 O0 blocks → 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes, size. Simpler structure (4 vs Rust's 17 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/4 correct (50%)</h5>
@@ -43805,6 +43969,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_02-Rust" style="display:none">
             <h4>pu_02 (Rust) — O0: 19 blocks, O2: 25 blocks</h4>
+            <p class="fn-explanation">pu_02 (Rust): 19 O0 blocks → 25 O2 blocks (0.8:1). Best method: size (79%), worst: constants (5%). Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/19 correct (32%)</h5>
@@ -44109,6 +44274,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_02-C" style="display:none">
             <h4>pu_02 (C) — O0: 11 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">pu_02 (C): 11 O0 blocks → 11 O2 blocks (1.0:1). Best method: opcodes (91%), worst: constants (27%). Beats Rust on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/11 correct (64%)</h5>
@@ -44341,6 +44507,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_03-Rust" style="display:none">
             <h4>pu_03 (Rust) — O0: 25 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">pu_03 (Rust): 25 O0 blocks → 15 O2 blocks (1.7:1). Best method: opcodes (73%), worst: constants (0%). Beats C on: value.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/15 correct (20%)</h5>
@@ -44645,6 +44812,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_03-C" style="display:none">
             <h4>pu_03 (C) — O0: 7 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">pu_03 (C): 7 O0 blocks → 9 O2 blocks (0.8:1). Best method: opcodes (71%), worst: constants (0%). Loses to Rust on: value. Simpler structure (7 vs Rust's 25 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/7 correct (14%)</h5>
@@ -44811,6 +44979,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_04-Rust" style="display:none">
             <h4>pu_04 (Rust) — O0: 11 blocks, O2: 30 blocks</h4>
+            <p class="fn-explanation">pu_04 (Rust): 11 O0 blocks → 30 O2 blocks (0.4:1). Best method: size (100%), worst: constants (9%). Beats C on: size. Loses to C on: value, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/11 correct (45%)</h5>
@@ -45067,6 +45236,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_04-C" style="display:none">
             <h4>pu_04 (C) — O0: 8 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">pu_04 (C): 8 O0 blocks → 9 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (38%). Beats Rust on: value, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/8 correct (62%)</h5>
@@ -45248,6 +45418,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_05-Rust" style="display:none">
             <h4>pu_05 (Rust) — O0: 18 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">pu_05 (Rust): 18 O0 blocks → 5 O2 blocks (3.6:1). Best method: size (80%), worst: constants (20%). Beats C on: size. Loses to C on: value, opcodes, constants. Large O0→O2 block reduction (18→5) means O2 eliminated 13 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/5 correct (40%)</h5>
@@ -45411,6 +45582,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_05-C" style="display:none">
             <h4>pu_05 (C) — O0: 1 blocks, O2: 1 blocks</h4>
+            <p class="fn-explanation">pu_05 (C): 1 O0 blocks → 1 O2 blocks (1.0:1). Best method: value (100%), worst: size (0%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (1 vs Rust's 18 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/1 correct (100%)</h5>
@@ -45463,6 +45635,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_06-Rust" style="display:none">
             <h4>pu_06 (Rust) — O0: 14 blocks, O2: 22 blocks</h4>
+            <p class="fn-explanation">pu_06 (Rust): 14 O0 blocks → 22 O2 blocks (0.6:1). Best method: size (93%), worst: constants (7%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/14 correct (21%)</h5>
@@ -45755,6 +45928,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_06-C" style="display:none">
             <h4>pu_06 (C) — O0: 8 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">pu_06 (C): 8 O0 blocks → 9 O2 blocks (0.9:1). Best method: size (88%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/8 correct (50%)</h5>
@@ -45936,6 +46110,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_07-Rust" style="display:none">
             <h4>pu_07 (Rust) — O0: 26 blocks, O2: 6 blocks</h4>
+            <p class="fn-explanation">pu_07 (Rust): 26 O0 blocks → 6 O2 blocks (4.3:1). Best method: size (100%), worst: constants (0%). Beats C on: opcodes, size. Large O0→O2 block reduction (26→6) means O2 eliminated 20 safety/cleanup blocks, hurting all matching methods.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/6 correct (33%)</h5>
@@ -46132,6 +46307,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_07-C" style="display:none">
             <h4>pu_07 (C) — O0: 6 blocks, O2: 6 blocks</h4>
+            <p class="fn-explanation">pu_07 (C): 6 O0 blocks → 6 O2 blocks (1.0:1). Best method: opcodes (50%), worst: constants (0%). Loses to Rust on: opcodes, size. Simpler structure (6 vs Rust's 26 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/6 correct (33%)</h5>
@@ -46274,6 +46450,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_08-Rust" style="display:none">
             <h4>pu_08 (Rust) — O0: 43 blocks, O2: 42 blocks</h4>
+            <p class="fn-explanation">pu_08 (Rust): 43 O0 blocks → 42 O2 blocks (1.0:1). Best method: size (81%), worst: constants (2%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/42 correct (10%)</h5>
@@ -46578,6 +46755,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_08-C" style="display:none">
             <h4>pu_08 (C) — O0: 17 blocks, O2: 20 blocks</h4>
+            <p class="fn-explanation">pu_08 (C): 17 O0 blocks → 20 O2 blocks (0.8:1). Best method: size (71%), worst: constants (18%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (17 vs Rust's 43 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 11/17 correct (65%)</h5>
@@ -46882,6 +47060,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_09-Rust" style="display:none">
             <h4>pu_09 (Rust) — O0: 15 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">pu_09 (Rust): 15 O0 blocks → 18 O2 blocks (0.8:1). Best method: size (80%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/15 correct (33%)</h5>
@@ -47186,6 +47365,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_09-C" style="display:none">
             <h4>pu_09 (C) — O0: 4 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">pu_09 (C): 4 O0 blocks → 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 15 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/4 correct (50%)</h5>
@@ -47295,6 +47475,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_10-Rust" style="display:none">
             <h4>pu_10 (Rust) — O0: 47 blocks, O2: 39 blocks</h4>
+            <p class="fn-explanation">pu_10 (Rust): 47 O0 blocks → 39 O2 blocks (1.2:1). Best method: size (95%), worst: constants (5%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 13/39 correct (33%)</h5>
@@ -47599,6 +47780,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_10-C" style="display:none">
             <h4>pu_10 (C) — O0: 13 blocks, O2: 15 blocks</h4>
+            <p class="fn-explanation">pu_10 (C): 13 O0 blocks → 15 O2 blocks (0.9:1). Best method: opcodes (85%), worst: constants (23%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (13 vs Rust's 47 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 8/13 correct (62%)</h5>
@@ -47873,6 +48055,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_11-Rust" style="display:none">
             <h4>pu_11 (Rust) — O0: 31 blocks, O2: 19 blocks</h4>
+            <p class="fn-explanation">pu_11 (Rust): 31 O0 blocks → 19 O2 blocks (1.6:1). Best method: size (79%), worst: constants (0%). Beats C on: value, opcodes, size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/19 correct (32%)</h5>
@@ -48177,6 +48360,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_11-C" style="display:none">
             <h4>pu_11 (C) — O0: 15 blocks, O2: 14 blocks</h4>
+            <p class="fn-explanation">pu_11 (C): 15 O0 blocks → 14 O2 blocks (1.1:1). Best method: opcodes (64%), worst: constants (0%). Loses to Rust on: value, opcodes, size. Simpler structure (15 vs Rust's 31 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/14 correct (14%)</h5>
@@ -48466,6 +48650,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_12-Rust" style="display:none">
             <h4>pu_12 (Rust) — O0: 23 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">pu_12 (Rust): 23 O0 blocks → 18 O2 blocks (1.3:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/18 correct (22%)</h5>
@@ -48770,6 +48955,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_12-C" style="display:none">
             <h4>pu_12 (C) — O0: 8 blocks, O2: 9 blocks</h4>
+            <p class="fn-explanation">pu_12 (C): 8 O0 blocks → 9 O2 blocks (0.9:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (8 vs Rust's 23 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 3/8 correct (38%)</h5>
@@ -48951,6 +49137,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_13-Rust" style="display:none">
             <h4>pu_13 (Rust) — O0: 23 blocks, O2: 18 blocks</h4>
+            <p class="fn-explanation">pu_13 (Rust): 23 O0 blocks → 18 O2 blocks (1.3:1). Best method: size (89%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/18 correct (33%)</h5>
@@ -49255,6 +49442,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_13-C" style="display:none">
             <h4>pu_13 (C) — O0: 4 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">pu_13 (C): 4 O0 blocks → 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: value, opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 23 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/4 correct (50%)</h5>
@@ -49364,6 +49552,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_14-Rust" style="display:none">
             <h4>pu_14 (Rust) — O0: 36 blocks, O2: 24 blocks</h4>
+            <p class="fn-explanation">pu_14 (Rust): 36 O0 blocks → 24 O2 blocks (1.5:1). Best method: size (83%), worst: constants (4%). Beats C on: size. Loses to C on: opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 11/24 correct (46%)</h5>
@@ -49668,6 +49857,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_14-C" style="display:none">
             <h4>pu_14 (C) — O0: 13 blocks, O2: 13 blocks</h4>
+            <p class="fn-explanation">pu_14 (C): 13 O0 blocks → 13 O2 blocks (1.0:1). Best method: opcodes (69%), worst: constants (23%). Beats Rust on: opcodes, constants. Loses to Rust on: size. Simpler structure (13 vs Rust's 36 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/13 correct (46%)</h5>
@@ -49936,6 +50126,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_15-Rust" style="display:none">
             <h4>pu_15 (Rust) — O0: 37 blocks, O2: 19 blocks</h4>
+            <p class="fn-explanation">pu_15 (Rust): 37 O0 blocks → 19 O2 blocks (1.9:1). Best method: size (100%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/19 correct (26%)</h5>
@@ -50240,6 +50431,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_15-C" style="display:none">
             <h4>pu_15 (C) — O0: 6 blocks, O2: 6 blocks</h4>
+            <p class="fn-explanation">pu_15 (C): 6 O0 blocks → 6 O2 blocks (1.0:1). Best method: opcodes (83%), worst: constants (17%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (6 vs Rust's 37 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/6 correct (33%)</h5>
@@ -50382,6 +50574,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_16-Rust" style="display:none">
             <h4>pu_16 (Rust) — O0: 15 blocks, O2: 31 blocks</h4>
+            <p class="fn-explanation">pu_16 (Rust): 15 O0 blocks → 31 O2 blocks (0.5:1). Best method: size (100%), worst: constants (7%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/15 correct (27%)</h5>
@@ -50686,6 +50879,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_16-C" style="display:none">
             <h4>pu_16 (C) — O0: 10 blocks, O2: 11 blocks</h4>
+            <p class="fn-explanation">pu_16 (C): 10 O0 blocks → 11 O2 blocks (0.9:1). Best method: opcodes (90%), worst: constants (50%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 7/10 correct (70%)</h5>
@@ -50903,6 +51097,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_17-Rust" style="display:none">
             <h4>pu_17 (Rust) — O0: 23 blocks, O2: 17 blocks</h4>
+            <p class="fn-explanation">pu_17 (Rust): 23 O0 blocks → 17 O2 blocks (1.4:1). Best method: size (82%), worst: constants (0%). Beats C on: size.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/17 correct (12%)</h5>
@@ -51207,6 +51402,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_17-C" style="display:none">
             <h4>pu_17 (C) — O0: 7 blocks, O2: 8 blocks</h4>
+            <p class="fn-explanation">pu_17 (C): 7 O0 blocks → 8 O2 blocks (0.9:1). Best method: opcodes (71%), worst: constants (0%). Loses to Rust on: size. Simpler structure (7 vs Rust's 23 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 1/7 correct (14%)</h5>
@@ -51370,6 +51566,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_18-Rust" style="display:none">
             <h4>pu_18 (Rust) — O0: 32 blocks, O2: 24 blocks</h4>
+            <p class="fn-explanation">pu_18 (Rust): 32 O0 blocks → 24 O2 blocks (1.3:1). Best method: size (96%), worst: constants (0%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/24 correct (25%)</h5>
@@ -51674,6 +51871,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_18-C" style="display:none">
             <h4>pu_18 (C) — O0: 12 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">pu_18 (C): 12 O0 blocks → 12 O2 blocks (1.0:1). Best method: opcodes (67%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (12 vs Rust's 32 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/12 correct (50%)</h5>
@@ -51924,6 +52122,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_19-Rust" style="display:none">
             <h4>pu_19 (Rust) — O0: 18 blocks, O2: 10 blocks</h4>
+            <p class="fn-explanation">pu_19 (Rust): 18 O0 blocks → 10 O2 blocks (1.8:1). Best method: size (80%), worst: constants (0%). Beats C on: size. Loses to C on: opcodes.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 5/10 correct (50%)</h5>
@@ -52162,6 +52361,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_19-C" style="display:none">
             <h4>pu_19 (C) — O0: 4 blocks, O2: 5 blocks</h4>
+            <p class="fn-explanation">pu_19 (C): 4 O0 blocks → 5 O2 blocks (0.8:1). Best method: opcodes (75%), worst: constants (0%). Beats Rust on: opcodes. Loses to Rust on: size. Simpler structure (4 vs Rust's 18 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 2/4 correct (50%)</h5>
@@ -52271,6 +52471,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_20-Rust" style="display:none">
             <h4>pu_20 (Rust) — O0: 42 blocks, O2: 26 blocks</h4>
+            <p class="fn-explanation">pu_20 (Rust): 42 O0 blocks → 26 O2 blocks (1.6:1). Best method: size (100%), worst: constants (4%). Beats C on: size. Loses to C on: value, opcodes, constants.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 4/26 correct (15%)</h5>
@@ -52575,6 +52776,7 @@ and WHY does each Rust-specific feature help or hurt matching accuracy?</p>
 
         <div class="function-detail" id="detail-pu_20-C" style="display:none">
             <h4>pu_20 (C) — O0: 12 blocks, O2: 12 blocks</h4>
+            <p class="fn-explanation">pu_20 (C): 12 O0 blocks → 12 O2 blocks (1.0:1). Best method: size (83%), worst: constants (25%). Beats Rust on: value, opcodes, constants. Loses to Rust on: size. Simpler structure (12 vs Rust's 42 blocks) means less Hungarian matching noise.</p>
             <div class="methods-row">
             <div class="method-detail">
                 <h5>Value-based: 6/12 correct (50%)</h5>
