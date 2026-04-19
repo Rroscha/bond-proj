@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rust Language Features &amp; Binary Function Matching</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#c9d1d9;--dim:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--orange:#d29922;--purple:#bc8cff;--cyan:#39d353;--rust:#dea584;--c-blue:#79c0ff}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
+.page{min-height:100vh;padding:60px 40px;border-bottom:2px solid var(--border);max-width:1200px;margin:0 auto}
+@media(max-width:800px){.page{padding:30px 16px}}
+h1{font-size:2.8em;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.3em;line-height:1.2}
+h2{font-size:2em;color:var(--accent);margin:1.2em 0 0.6em;border-bottom:1px solid var(--border);padding-bottom:0.3em}
+h3{font-size:1.4em;color:var(--purple);margin:1em 0 0.5em}
+p{margin:0.6em 0;color:var(--text)}
+.subtitle{font-size:1.2em;color:var(--dim);margin-bottom:2em}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:0.8em;font-weight:600;margin:2px}
+.tag-rust{background:rgba(222,165,132,0.15);color:var(--rust);border:1px solid rgba(222,165,132,0.3)}
+.tag-c{background:rgba(121,192,255,0.15);color:var(--c-blue);border:1px solid rgba(121,192,255,0.3)}
+.tag-win{background:rgba(63,185,80,0.15);color:var(--green);border:1px solid rgba(63,185,80,0.3)}
+.tag-lose{background:rgba(248,81,73,0.15);color:var(--red);border:1px solid rgba(248,81,73,0.3)}
+
+/* Overview bars */
+.bar-chart{margin:1.5em 0}
+.bar-row{display:flex;align-items:center;margin:8px 0;gap:10px}
+.bar-label{width:140px;text-align:right;font-size:0.9em;color:var(--dim);flex-shrink:0}
+.bar-track{flex:1;height:32px;background:var(--card);border-radius:6px;position:relative;overflow:hidden;border:1px solid var(--border)}
+.bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:0.8em;font-weight:700;transition:width 0.8s ease}
+.bar-fill.rust{background:linear-gradient(90deg,rgba(222,165,132,0.3),rgba(222,165,132,0.7))}
+.bar-fill.c{background:linear-gradient(90deg,rgba(121,192,255,0.3),rgba(121,192,255,0.7))}
+
+/* Code blocks */
+.code-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1em 0}
+@media(max-width:800px){.code-grid{grid-template-columns:1fr}}
+.code-panel{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.code-header{padding:8px 14px;font-size:0.85em;font-weight:600;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.code-header.rust-header{background:rgba(222,165,132,0.08);color:var(--rust)}
+.code-header.c-header{background:rgba(121,192,255,0.08);color:var(--c-blue)}
+.code-header.asm-header{background:rgba(188,140,255,0.08);color:var(--purple)}
+pre{padding:14px;font-family:'JetBrains Mono','Fira Code','Cascadia Code',monospace;font-size:0.82em;line-height:1.5;overflow-x:auto;margin:0;white-space:pre;color:var(--text)}
+pre .kw{color:#ff7b72}
+pre .fn{color:#d2a8ff}
+pre .str{color:#a5d6ff}
+pre .cmt{color:#8b949e;font-style:italic}
+pre .num{color:#79c0ff}
+pre .addr{color:#7ee787}
+pre .insn{color:#ffa657}
+pre .reg{color:#79c0ff}
+pre .hl{background:rgba(250,200,50,0.12);display:inline}
+
+/* Matching table */
+.match-table{width:100%;border-collapse:collapse;margin:1em 0;font-size:0.85em}
+.match-table th{background:var(--card);color:var(--dim);padding:8px 10px;text-align:left;border-bottom:2px solid var(--border);font-weight:600}
+.match-table td{padding:6px 10px;border-bottom:1px solid var(--border)}
+.match-table tr:hover{background:rgba(88,166,255,0.05)}
+.match-table .addr{font-family:monospace;font-size:0.9em;color:var(--cyan)}
+.match-table .type{font-size:0.85em;padding:2px 8px;border-radius:10px;font-weight:600}
+.type-bc{background:rgba(63,185,80,0.15);color:var(--green)}
+.type-body{background:rgba(139,148,158,0.15);color:var(--dim)}
+.type-drop{background:rgba(248,81,73,0.15);color:var(--red)}
+.type-iter{background:rgba(210,169,34,0.15);color:var(--orange)}
+.type-loop{background:rgba(188,140,255,0.15);color:var(--purple)}
+.type-epi{background:rgba(88,166,255,0.15);color:var(--accent)}
+
+/* Score bar */
+.score-bar{width:100px;height:18px;background:var(--bg);border-radius:9px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:6px;border:1px solid var(--border)}
+.score-fill{height:100%;border-radius:8px}
+.score-good .score-fill{background:linear-gradient(90deg,#238636,#3fb950)}
+.score-partial .score-fill{background:linear-gradient(90deg,#9e6a03,#d29922)}
+.score-poor .score-fill{background:linear-gradient(90deg,#da3633,#f85149)}
+.verdict{font-weight:700;font-size:0.85em}
+.v-good{color:var(--green)}
+.v-partial{color:var(--orange)}
+.v-poor{color:var(--red)}
+.v-unmatched{color:var(--dim);font-style:italic}
+
+/* Diagram */
+.diagram{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin:1.5em 0;text-align:center}
+.diagram svg{max-width:100%}
+.block-vis{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+.block-vis .blk{width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,0.1)}
+.blk-good{background:var(--green)}
+.blk-partial{background:var(--orange)}
+.blk-poor{background:var(--red)}
+.blk-unmatched{background:var(--border)}
+
+/* Callout */
+.callout{background:rgba(88,166,255,0.08);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:1.2em 0}
+.callout.warn{background:rgba(210,169,34,0.08);border-left-color:var(--orange)}
+.callout.good{background:rgba(63,185,80,0.08);border-left-color:var(--green)}
+.callout.bad{background:rgba(248,81,73,0.08);border-left-color:var(--red)}
+.callout strong{color:var(--accent)}
+.callout.warn strong{color:var(--orange)}
+.callout.good strong{color:var(--green)}
+.callout.bad strong{color:var(--red)}
+
+/* Stats row */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:1.5em 0}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.stat-val{font-size:2.2em;font-weight:700;line-height:1}
+.stat-label{font-size:0.85em;color:var(--dim);margin-top:6px}
+.stat-rust .stat-val{color:var(--rust)}
+.stat-c .stat-val{color:var(--c-blue)}
+.stat-delta .stat-val{color:var(--red)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;background:rgba(13,17,23,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:100;padding:8px 20px;display:flex;gap:6px;overflow-x:auto;font-size:0.8em}
+nav a{color:var(--dim);text-decoration:none;padding:4px 10px;border-radius:6px;white-space:nowrap;transition:all 0.2s}
+nav a:hover{color:var(--text);background:var(--card)}
+nav a.active{color:var(--accent);background:rgba(88,166,255,0.1)}
+
+.flex-between{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:0.85em;color:var(--dim)}
+.legend-item{display:flex;align-items:center;gap:5px}
+.legend-dot{width:10px;height:10px;border-radius:2px}
+.anno{position:relative}
+.anno::after{content:attr(data-note);position:absolute;right:-10px;top:-6px;font-size:0.65em;color:var(--orange);font-weight:700}
+</style>
+</head>
+<body>
+
+<nav id="topnav">
+  <a href="#overview">Overview</a>
+  <a href="#how">How It Works</a>
+  <a href="#bc06">bc_06</a>
+  <a href="#bc07">bc_07</a>
+  <a href="#bc09">bc_09</a>
+  <a href="#bc12">bc_12</a>
+  <a href="#em06">em_06</a>
+  <a href="#em20">em_20</a>
+  <a href="#em10">em_10</a>
+  <a href="#em17">em_17</a>
+  <a href="#iter01">iter_01</a>
+  <a href="#iter16">iter_16</a>
+  <a href="#iter14">iter_14</a>
+  <a href="#iter12">iter_12</a>
+  <a href="#opt04">opt_04</a>
+  <a href="#opt09">opt_09</a>
+  <a href="#opt06">opt_06</a>
+  <a href="#opt20">opt_20</a>
+  <a href="#own01">own_01</a>
+  <a href="#own05">own_05</a>
+  <a href="#own03">own_03</a>
+  <a href="#own04">own_04</a>
+  <a href="#findings">Findings</a>
+</nav>
+
+<!-- ========== PAGE: Overview ========== -->
+<div class="page" id="overview" style="padding-top:80px">
+<h1>Rust Language Features &amp; Binary Function Matching</h1>
+<p class="subtitle">How Rust-specific features affect matching accuracy between O0 and O2 binaries &mdash; 100 functions, 20 deep-dives</p>
+
+<div class="stats">
+  <div class="stat-card stat-rust"><div class="stat-val">0.649</div><div class="stat-label">Rust Mean Similarity</div></div>
+  <div class="stat-card stat-c"><div class="stat-val">0.715</div><div class="stat-label">C Mean Similarity</div></div>
+  <div class="stat-card stat-delta"><div class="stat-val">-0.066</div><div class="stat-label">Delta (Rust &minus; C)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--orange)">2455</div><div class="stat-label">Rust O0 Blocks Total</div></div>
+</div>
+
+<h3>Per-Category Comparison</h3>
+<div class="bar-chart">
+  <div class="bar-row"><span class="bar-label">bounds_check</span><div class="bar-track"><div class="bar-fill rust" style="width:73%">Rust 0.730</div></div><div class="bar-track"><div class="bar-fill c" style="width:70%">C 0.700</div></div><span class="tag tag-win">Rust +0.030</span></div>
+  <div class="bar-row"><span class="bar-label">ownership_drop</span><div class="bar-track"><div class="bar-fill rust" style="width:64.5%">0.645</div></div><div class="bar-track"><div class="bar-fill c" style="width:71.8%">0.718</div></div><span class="tag tag-lose">C +0.073</span></div>
+  <div class="bar-row"><span class="bar-label">option_result</span><div class="bar-track"><div class="bar-fill rust" style="width:65.7%">0.657</div></div><div class="bar-track"><div class="bar-fill c" style="width:72.9%">0.729</div></div><span class="tag tag-lose">C +0.072</span></div>
+  <div class="bar-row"><span class="bar-label">iterators</span><div class="bar-track"><div class="bar-fill rust" style="width:59.3%">0.593</div></div><div class="bar-track"><div class="bar-fill c" style="width:67.9%">0.679</div></div><span class="tag tag-lose">C +0.086</span></div>
+  <div class="bar-row"><span class="bar-label">enum_match</span><div class="bar-track"><div class="bar-fill rust" style="width:57.7%">0.577</div></div><div class="bar-track"><div class="bar-fill c" style="width:70.7%">0.707</div></div><span class="tag tag-lose">C +0.130</span></div>
+</div>
+
+<div class="callout">
+  <strong>Key insight:</strong> Rust wins ONLY in bounds_check. Array indexing (<code>data[i]</code>) creates optimization-stable anchor blocks that score 0.85&ndash;1.00. Iterator chains, enum match, and Option method chains all hurt matching because they create blocks defined by <code>call</code> instructions that disappear when inlined at O2.
+</div>
+</div>
+
+<!-- ========== PAGE: How It Works ========== -->
+<div class="page" id="how">
+<h2>How The Matching Works</h2>
+
+<h3>What is a Basic Block?</h3>
+<p>A <strong>basic block</strong> (BB) is a straight-line sequence of machine instructions with one entry and one exit. Think of it as one "step" of execution &mdash; the CPU runs every instruction in a block before jumping to the next.</p>
+
+<div class="diagram">
+<svg width="500" height="200" viewBox="0 0 500 200">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff"/></marker></defs>
+  <rect x="30" y="10" width="140" height="50" rx="8" fill="#1f2937" stroke="#3fb950" stroke-width="2"/>
+  <text x="100" y="40" text-anchor="middle" fill="#3fb950" font-size="13" font-family="monospace">cmp rax, rcx</text>
+  <text x="100" y="55" text-anchor="middle" fill="#8b949e" font-size="10">BOUNDS_CHECK</text>
+  <rect x="250" y="10" width="140" height="50" rx="8" fill="#1f2937" stroke="#d29922" stroke-width="2"/>
+  <text x="320" y="40" text-anchor="middle" fill="#d29922" font-size="13" font-family="monospace">mov, add, push</text>
+  <text x="320" y="55" text-anchor="middle" fill="#8b949e" font-size="10">BODY</text>
+  <rect x="140" y="120" width="140" height="50" rx="8" fill="#1f2937" stroke="#bc8cff" stroke-width="2"/>
+  <text x="210" y="150" text-anchor="middle" fill="#bc8cff" font-size="13" font-family="monospace">add rsp; ret</text>
+  <text x="210" y="165" text-anchor="middle" fill="#8b949e" font-size="10">EPILOGUE</text>
+  <line x1="170" y1="60" x2="260" y2="30" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="100" y1="60" x2="180" y2="120" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="320" y1="60" x2="250" y2="120" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="195" y="85" fill="#8b949e" font-size="10">true</text>
+  <text x="105" y="95" fill="#8b949e" font-size="10">false</text>
+</svg>
+</div>
+
+<h3>Hungarian Algorithm Matching</h3>
+<p>We use the <strong>Hungarian algorithm</strong> to find the optimal 1-to-1 pairing between O0 blocks and O2 blocks. Each pair gets a similarity score (0.0 &ndash; 1.0) based on:</p>
+
+<div class="stats">
+  <div class="stat-card"><div class="stat-val" style="color:var(--accent);font-size:1.4em">Opcodes</div><div class="stat-label">Same instruction types? (mov, cmp, jmp...)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--accent);font-size:1.4em">Constants</div><div class="stat-label">Same numeric values? (0x100, 42...)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--accent);font-size:1.4em">Structure</div><div class="stat-label">Same callee functions? Same # instructions?</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--accent);font-size:1.4em">Size</div><div class="stat-label">Similar instruction count?</div></div>
+</div>
+
+<div class="legend" style="margin-top:1.5em;justify-content:center">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> GOOD &ge; 0.7</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> PARTIAL 0.4&ndash;0.7</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> POOR &lt; 0.4</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--border)"></div> UNMATCHED</div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CATEGORY 1: BOUNDS CHECK -->
+<!-- ============================================================ -->
+
+<!-- bc_06 -->
+<div class="page" id="bc06">
+<h2>Category 1: Bounds Check</h2>
+<h3>bc_06 &mdash; Shell Sort <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.802</span> <span class="tag tag-c">C 0.724</span></div><div style="color:var(--green);font-weight:700">+0.078</div></div>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header rust-header">&#x1f980; Rust Source</div>
+<pre><span class="kw">fn</span> <span class="fn">bc_06</span>(data: &amp;<span class="kw">mut</span> [u64], initial_gap: usize) -&gt; u64 {
+    <span class="kw">let</span> n = data.len();
+    <span class="kw">let mut</span> swaps = 0u64;
+    <span class="kw">let mut</span> gap = initial_gap;
+    <span class="kw">while</span> gap &gt; 0 {
+        <span class="kw">for</span> i <span class="kw">in</span> gap..n {
+            <span class="kw">let</span> temp = data[i];        <span class="cmt">// bounds check!</span>
+            <span class="kw">let mut</span> j = i;
+            <span class="kw">while</span> j &gt;= gap &amp;&amp; <span class="hl">data[j - gap]</span> &gt; temp {
+                <span class="hl">data[j]</span> = <span class="hl">data[j - gap]</span>;  <span class="cmt">// 2 checks</span>
+                j -= gap; swaps += 1;
+            }
+            <span class="hl">data[j]</span> = temp;            <span class="cmt">// bounds check!</span>
+        }
+        gap /= 2;
+    }
+    swaps
+}</pre></div>
+<div class="code-panel"><div class="code-header c-header">C Source</div>
+<pre>uint64_t <span class="fn">bc_06</span>(uint64_t *data, size_t n,
+               size_t initial_gap) {
+    uint64_t swaps = 0;
+    size_t gap = initial_gap;
+    <span class="kw">while</span> (gap &gt; 0) {
+        <span class="kw">for</span> (size_t i = gap; i &lt; n; i++) {
+            uint64_t temp = data[i]; <span class="cmt">// no check</span>
+            size_t j = i;
+            <span class="kw">while</span> (j &gt;= gap &amp;&amp; data[j-gap] &gt; temp) {
+                data[j] = data[j-gap]; <span class="cmt">// no check</span>
+                j -= gap; swaps++;
+            }
+            data[j] = temp;          <span class="cmt">// no check</span>
+        }
+        gap /= 2;
+    }
+    <span class="kw">return</span> swaps;
+}</pre></div>
+</div>
+
+<div class="stats">
+  <div class="stat-card"><div class="stat-val" style="color:var(--rust)">40 &rarr; 18</div><div class="stat-label">Rust: O0 &rarr; O2 blocks</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--c-blue)">11 &rarr; 14</div><div class="stat-label">C: O0 &rarr; O2 blocks</div></div>
+</div>
+
+<p>Rust generates <strong>40 blocks</strong> at O0 because every <code>data[i]</code> produces a separate bounds-check block. These checks are preserved at O2:</p>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header asm-header">Rust O0 &mdash; BOUNDS_CHECK block</div>
+<pre><span class="addr">0x4461bf:</span> <span class="insn">cmp</span>  <span class="reg">rax</span>, <span class="reg">rcx</span>   <span class="cmt">; index vs length</span>
+<span class="addr">0x4461c2:</span> <span class="insn">jb</span>   <span class="num">0x4461e3</span>   <span class="cmt">; jump if in bounds</span></pre></div>
+<div class="code-panel"><div class="code-header asm-header">Rust O2 &mdash; BOUNDS_CHECK block</div>
+<pre><span class="addr">0x422e3f:</span> <span class="insn">cmp</span>  <span class="reg">rax</span>, <span class="reg">rcx</span>   <span class="cmt">; same pattern!</span>
+<span class="addr">0x422e42:</span> <span class="insn">jb</span>   <span class="num">0x422e50</span>   <span class="cmt">; identical structure</span></pre></div>
+</div>
+
+<h3>Rust Block Matching (Hungarian Result)</h3>
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x4461bf</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x422e3f</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x446234</td><td><span class="type type-body">BODY</span></td><td class="addr">0x422ead</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x446284</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x422e50</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:96.4%"></div></div>0.964</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x4462d0</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x422e60</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:94.7%"></div></div>0.947</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x44636a</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x422e75</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:85.5%"></div></div>0.855</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x4461f7</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x422e99</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:71.6%"></div></div>0.716</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td colspan="4" style="color:var(--dim);font-style:italic">... +12 more GOOD matches, 22 UNMATCHED O0 blocks</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<div class="callout good">
+  <strong>Why Rust wins:</strong> Every <code>data[i]</code> generates a mandatory <code>cmp + jb</code> block. The optimizer <em>cannot remove</em> these (safety semantics). They become perfect "anchor" blocks &mdash; identical at O0 and O2. C has no equivalent anchors; its array accesses are just pointer dereferences buried inside larger blocks.
+</div>
+</div>
+
+<!-- bc_07 -->
+<div class="page" id="bc07">
+<h3>bc_07 &mdash; Convolution <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.770</span> <span class="tag tag-c">C 0.630</span></div><div style="color:var(--green);font-weight:700">+0.140</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; 6 array accesses per iteration = 6 bounds checks</div>
+<pre><span class="kw">fn</span> <span class="fn">bc_07</span>(data: &amp;[u64]) -&gt; Vec&lt;i64&gt; {
+    <span class="kw">for</span> i <span class="kw">in</span> 1..n - 1 {
+        <span class="kw">let</span> val = -(<span class="hl">data[i-1]</span> <span class="kw">as</span> i64) + 2 * <span class="hl">data[i]</span> <span class="kw">as</span> i64 - <span class="hl">data[i+1]</span> <span class="kw">as</span> i64;
+        result.push(val);
+    }
+    <span class="kw">for</span> i <span class="kw">in</span> 0..result.len() {
+        <span class="kw">let</span> left  = <span class="kw">if</span> i &gt; 0 { <span class="hl">result[i-1]</span> } <span class="kw">else</span> { <span class="hl">result[i]</span> };
+        <span class="kw">let</span> right = <span class="kw">if</span> i+1 &lt; result.len() { <span class="hl">result[i+1]</span> } <span class="kw">else</span> { <span class="hl">result[i]</span> };
+    }
+}</pre></div>
+
+<div class="stats">
+  <div class="stat-card"><div class="stat-val" style="color:var(--rust)">99 &rarr; 44</div><div class="stat-label">Rust: O0 &rarr; O2 blocks</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--c-blue)">18 &rarr; 11</div><div class="stat-label">C: O0 &rarr; O2 blocks</div></div>
+</div>
+
+<h3>Block Quality Visualization</h3>
+<p style="font-size:0.85em;color:var(--dim)">Each square = one matched block pair. Color = match quality.</p>
+<div class="diagram">
+<p style="color:var(--rust);font-weight:600;margin-bottom:8px">Rust &mdash; 44 matched pairs (55 unmatched O0)</p>
+<div class="block-vis">
+  <div class="blk blk-good" title="1.000"></div><div class="blk blk-good" title="1.000"></div><div class="blk blk-good" title="1.000"></div>
+  <div class="blk blk-good" title="0.993"></div><div class="blk blk-good" title="0.989"></div><div class="blk blk-good" title="0.987"></div>
+  <div class="blk blk-good" title="0.985"></div><div class="blk blk-good" title="0.968"></div><div class="blk blk-good" title="0.964"></div>
+  <div class="blk blk-good" title="0.962"></div><div class="blk blk-good" title="0.954"></div><div class="blk blk-good" title="0.949"></div>
+  <div class="blk blk-good" title="0.875"></div><div class="blk blk-good" title="0.873"></div><div class="blk blk-good" title="0.868"></div>
+  <div class="blk blk-good" title="0.864"></div><div class="blk blk-good" title="0.860"></div><div class="blk blk-good" title="0.858"></div>
+  <div class="blk blk-good" title="0.858"></div><div class="blk blk-good" title="0.847"></div><div class="blk blk-good" title="0.823"></div>
+  <div class="blk blk-good" title="0.731"></div><div class="blk blk-good" title="0.724"></div>
+  <div class="blk blk-partial" title="0.693"></div><div class="blk blk-partial" title="0.691"></div><div class="blk blk-partial" title="0.687"></div>
+  <div class="blk blk-partial" title="0.684"></div>
+  <div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div>
+</div>
+<p style="color:var(--c-blue);font-weight:600;margin:12px 0 8px">C &mdash; 11 matched pairs (7 unmatched O0)</p>
+<div class="block-vis">
+  <div class="blk blk-good" title="0.825"></div><div class="blk blk-good" title="0.774"></div><div class="blk blk-good" title="0.736"></div><div class="blk blk-good" title="0.700"></div>
+  <div class="blk blk-partial" title="0.674"></div><div class="blk blk-partial" title="0.627"></div><div class="blk blk-partial" title="0.601"></div><div class="blk blk-partial" title="0.563"></div><div class="blk blk-partial" title="0.531"></div><div class="blk blk-partial" title="0.458"></div><div class="blk blk-partial" title="0.446"></div>
+  <div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div><div class="blk blk-unmatched"></div>
+</div>
+</div>
+</div>
+
+<!-- bc_09 -->
+<div class="page" id="bc09">
+<h3>bc_09 &mdash; Bubble Sort <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.720</span> <span class="tag tag-c">C 0.651</span></div><div style="color:var(--green);font-weight:700">+0.069</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; data.swap() generates 2 bounds checks per swap</div>
+<pre><span class="kw">fn</span> <span class="fn">bc_09</span>(data: &amp;<span class="kw">mut</span> [u64]) -&gt; u64 {
+    <span class="kw">loop</span> {
+        <span class="kw">let mut</span> swapped = <span class="kw">false</span>;
+        <span class="kw">for</span> i <span class="kw">in</span> 1..n {
+            <span class="kw">if</span> <span class="hl">data[i - 1]</span> &gt; <span class="hl">data[i]</span> {    <span class="cmt">// 2 bounds checks</span>
+                data.swap(i - 1, i);       <span class="cmt">// 2 more bounds checks</span>
+                swapped = <span class="kw">true</span>;
+            }
+        }
+        passes += 1;
+        <span class="kw">if</span> !swapped { <span class="kw">break</span>; }
+    }
+}</pre></div>
+
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x4472d1</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x42346d</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:98.3%"></div></div>0.983</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x447353</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x423427</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:93.8%"></div></div>0.938</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x447322</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x423419</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:86%"></div></div>0.860</td><td class="verdict v-good">GOOD</td></tr>
+</tbody>
+</table>
+<p>BOUNDS_CHECK blocks are consistently the top matches at 0.983, 0.938, 0.860. C's best is 0.987 for <em>one</em> block, but averages lower overall.</p>
+</div>
+
+<!-- bc_12 -->
+<div class="page" id="bc12">
+<h3>bc_12 &mdash; Running Median <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.793</span> <span class="tag tag-c">C 0.734</span></div><div style="color:var(--green);font-weight:700">+0.059</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; binary_search, partition_point, insert all have bounds checks</div>
+<pre><span class="kw">fn</span> <span class="fn">bc_12</span>(data: &amp;[u64], window: usize) -&gt; Vec&lt;u64&gt; {
+    win.sort();
+    result.push(<span class="hl">win[window / 2]</span>);
+    <span class="kw">for</span> i <span class="kw">in</span> window..n {
+        <span class="kw">let</span> old = <span class="hl">data[i - window]</span>;
+        <span class="kw">if let</span> Ok(pos) = win.binary_search(&amp;old) {
+            win.remove(pos);      <span class="cmt">// bounds check inside</span>
+        }
+        win.insert(insert_pos, new_val);  <span class="cmt">// bounds check</span>
+        result.push(<span class="hl">win[window / 2]</span>);
+    }
+}</pre></div>
+
+<div class="stats">
+  <div class="stat-card"><div class="stat-val" style="color:var(--rust)">63 &rarr; 93</div><div class="stat-label">Rust: O0 &rarr; O2 (O2 larger!)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">8 &times;</div><div class="stat-label">Perfect 1.000 matches</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">0.968</div><div class="stat-label">Top BOUNDS_CHECK score</div></div>
+</div>
+
+<div class="callout good"><strong>O2 has more blocks than O0!</strong> The optimizer inlines <code>binary_search</code> and <code>partition_point</code>, exploding them into many specialized blocks. Despite this, bounds-check anchors still score 0.968 and 0.959.</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CATEGORY 2: ENUM MATCH -->
+<!-- ============================================================ -->
+
+<!-- em_06 -->
+<div class="page" id="em06">
+<h2>Category 2: Enum Match</h2>
+<h3>em_06 &mdash; Constant Folding <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.734</span> <span class="tag tag-c">C 0.819</span></div><div style="color:var(--red);font-weight:700">&minus;0.085</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; match on recursive Expr enum</div>
+<pre><span class="kw">fn</span> <span class="fn">em_06</span>(expr: &amp;Expr) -&gt; Expr {
+    <span class="kw">match</span> expr {
+        Expr::Lit(n) =&gt; Expr::Lit(*n),
+        Expr::Var(s) =&gt; Expr::Var(s.clone()),
+        Expr::BinOp(l, op, r) =&gt; {
+            <span class="kw">let</span> lf = em_06(l);  <span class="cmt">// recursive</span>
+            <span class="kw">let</span> rf = em_06(r);  <span class="cmt">// recursive</span>
+            <span class="kw">match</span> (&amp;lf, op, &amp;rf) {
+                (Expr::Lit(a), Op::Add, Expr::Lit(b)) =&gt; Expr::Lit(a + b),
+                <span class="cmt">// ... 8 more patterns</span>
+            }
+        }
+        <span class="cmt">// ...</span>
+    }
+}</pre></div>
+
+<div class="stats">
+  <div class="stat-card" style="border-color:var(--red)"><div class="stat-val" style="color:var(--red)">1 &rarr; 1</div><div class="stat-label">Rust: O0 &rarr; O2 blocks</div></div>
+  <div class="stat-card" style="border-color:var(--green)"><div class="stat-val" style="color:var(--green)">82 &rarr; 66</div><div class="stat-label">C: O0 &rarr; O2 blocks</div></div>
+</div>
+
+<p>The most dramatic asymmetry in the entire experiment. Rust: <strong>1 block</strong>. C: <strong>82 blocks</strong>.</p>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header asm-header">Rust O0 &mdash; the ONLY visible block</div>
+<pre><span class="addr">0x44b7b0:</span> <span class="insn">sub</span>  <span class="reg">rsp</span>, <span class="num">0x378</span>
+<span class="addr">0x44b7ef:</span> <span class="insn">mov</span>  <span class="reg">rax</span>, [<span class="reg">rsi</span>]  <span class="cmt">; load enum tag</span>
+<span class="addr">0x44b7fc:</span> <span class="insn">mov</span>  <span class="reg">rcx</span>, <span class="reg">rax</span>
+<span class="addr">0x44b7ff:</span> <span class="insn">add</span>  <span class="reg">rcx</span>, <span class="reg">rdx</span>     <span class="cmt">; compute offset</span>
+  ... ends with <span class="insn">jmp</span> <span class="reg">rax</span>        <span class="cmt">; INDIRECT JUMP</span></pre></div>
+<div class="code-panel"><div class="code-header asm-header">C O0 &mdash; cascading cmp+je (sample of 82)</div>
+<pre><span class="addr">0x409cd0:</span> <span class="insn">cmp</span>  <span class="reg">eax</span>, <span class="num">3</span>       <span class="cmt">; case 3?</span>
+<span class="addr">0x409cd3:</span> <span class="insn">je</span>   <span class="num">0x40a0e1</span>
+<span class="addr">0x409cd9:</span> <span class="insn">cmp</span>  <span class="reg">eax</span>, <span class="num">3</span>       <span class="cmt">; > 3?</span>
+<span class="addr">0x409cdc:</span> <span class="insn">ja</span>   <span class="num">0x40a14d</span>
+<span class="addr">0x409ce2:</span> <span class="insn">cmp</span>  <span class="reg">eax</span>, <span class="num">2</span>       <span class="cmt">; case 2?</span>
+<span class="addr">0x409ce5:</span> <span class="insn">je</span>   <span class="num">0x409d4f</span></pre></div>
+</div>
+
+<div class="callout bad">
+  <strong>Why Rust has only 1 block:</strong> Rust compiles <code>match</code> to a <strong>jump table</strong> with an indirect <code>jmp rax</code>. angr's CFGFast cannot follow indirect jumps, so all case handlers are invisible. C uses cascading <code>cmp + je</code> instructions &mdash; each becomes a discoverable block. C's 13 blocks score a perfect 1.000.
+</div>
+</div>
+
+<!-- em_20 -->
+<div class="page" id="em20">
+<h3>em_20 &mdash; Distribution <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.647</span> <span class="tag tag-c">C 0.799</span></div><div style="color:var(--red);font-weight:700">&minus;0.152</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; a*(b+c) =&gt; a*b + a*c via recursive match</div>
+<pre><span class="kw">fn</span> <span class="fn">em_20</span>(expr: &amp;Expr) -&gt; Expr {
+    <span class="kw">match</span> expr {
+        Expr::BinOp(l, Op::Mul, r) =&gt; {
+            <span class="kw">let</span> lf = em_20(l);
+            <span class="kw">let</span> rf = em_20(r);
+            <span class="kw">if let</span> Expr::BinOp(b, Op::Add, c) = &amp;rf {
+                <span class="cmt">// distribute: a*(b+c) => a*b + a*c</span>
+                ...
+            }
+        }
+    }
+}</pre></div>
+
+<div class="stats">
+  <div class="stat-card" style="border-color:var(--red)"><div class="stat-val" style="color:var(--red)">1 &rarr; 1</div><div class="stat-label">Rust: same jump-table problem</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--c-blue)">30 &rarr; 25</div><div class="stat-label">C: O0 &rarr; O2 blocks</div></div>
+</div>
+<p>Same pattern as em_06: Rust's jump table means only 1 visible block (score 0.647). C's explicit switch gives many matchable blocks.</p>
+</div>
+
+<!-- em_10 -->
+<div class="page" id="em10">
+<h3>em_10 &mdash; Command Executor <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.648</span> <span class="tag tag-c">C 0.700</span></div><div style="color:var(--red);font-weight:700">&minus;0.052</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; match on Cmd variants with Vec environment</div>
+<pre><span class="kw">fn</span> <span class="fn">em_10</span>(cmds: &amp;[Cmd]) -&gt; i64 {
+    <span class="kw">let mut</span> env: Vec&lt;(String, CVal)&gt; = Vec::new();
+    <span class="kw">for</span> cmd <span class="kw">in</span> cmds {
+        <span class="kw">match</span> cmd {
+            Cmd::Set(name, val) =&gt; { env.push(...); }
+            Cmd::Add(a, b, dst) =&gt; { <span class="cmt">/* lookup */</span> }
+            Cmd::Print(name) =&gt; { <span class="cmt">/* output */</span> }
+            Cmd::If(cond, then, els) =&gt; {
+                output += em_10(then);  <span class="cmt">// recursive</span>
+            }
+        }
+    }
+}</pre></div>
+
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x44d460</td><td><span class="type type-drop">DROP_GLUE</span></td><td class="addr">0x4267f1</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:87.8%"></div></div>0.878</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x44d425</td><td><span class="type type-body">BODY</span></td><td class="addr">0x426104</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:85.2%"></div></div>0.852</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x44d3f6</td><td><span class="type type-body">BODY</span></td><td class="addr">0x426040</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-partial"><div class="score-fill" style="width:49.8%"></div></div>0.498</td><td class="verdict v-partial">PARTIAL</td></tr>
+<tr><td class="addr">0x44d330</td><td><span class="type type-body">BODY</span></td><td class="addr">0x426075</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-partial"><div class="score-fill" style="width:46.4%"></div></div>0.464</td><td class="verdict v-partial">PARTIAL</td></tr>
+</tbody>
+</table>
+<p>Rust has 9 blocks (not 1) because it iterates a slice, but still far fewer than C's 38. The DROP_GLUE block (<code>drop_in_place&lt;Vec&gt;</code>) is actually the best match at 0.878.</p>
+</div>
+
+<!-- em_17 -->
+<div class="page" id="em17">
+<h3>em_17 &mdash; Linearity Check <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.674</span> <span class="tag tag-c">C 0.491</span></div><div style="color:var(--green);font-weight:700">+0.183</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; simple bool return, minimal blocks</div>
+<pre><span class="kw">fn</span> <span class="fn">em_17</span>(expr: &amp;Expr) -&gt; bool {
+    <span class="kw">match</span> expr {
+        Expr::Lit(_) | Expr::Var(_) =&gt; <span class="kw">true</span>,
+        Expr::BinOp(l, Op::Add, r) | Expr::BinOp(l, Op::Sub, r) =&gt; em_17(l) &amp;&amp; em_17(r),
+        Expr::BinOp(_, Op::Mul, _) | Expr::BinOp(_, Op::Div, _) =&gt; <span class="kw">false</span>,
+        Expr::UnaryMinus(inner) =&gt; em_17(inner),
+        Expr::Call(_, args) =&gt; args.iter().all(em_17),
+    }
+}</pre></div>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header asm-header">C O0 &mdash; calls helper function</div>
+<pre><span class="addr">0x40c222:</span> <span class="insn">mov</span>  <span class="reg">rdi</span>, <span class="reg">rax</span>
+<span class="addr">0x40c225:</span> <span class="insn">call</span> <span class="num">0x40c0f8</span>  <span class="cmt">; call is_linear</span></pre></div>
+<div class="code-panel"><div class="code-header asm-header">C O2 &mdash; fully inlined, just a jump</div>
+<pre><span class="addr">0x409f00:</span> <span class="insn">jmp</span>  <span class="num">0x4024a0</span>  <span class="cmt">; that's it!</span></pre></div>
+</div>
+
+<div class="callout good"><strong>Why Rust wins:</strong> Both have 1 block, but Rust's tag-loading pattern survives optimization (score 0.674). C's O2 version collapses to a single <code>jmp</code> &mdash; the call-to-helper pattern is completely destroyed (score 0.491).</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CATEGORY 3: ITERATORS -->
+<!-- ============================================================ -->
+
+<!-- iter_01 -->
+<div class="page" id="iter01">
+<h2>Category 3: Iterators</h2>
+<h3>iter_01 &mdash; Filter + Enumerate + Collect <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.566</span> <span class="tag tag-c">C 0.763</span></div><div style="color:var(--red);font-weight:700">&minus;0.197</div></div>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header rust-header">&#x1f980; Rust &mdash; iterator chain</div>
+<pre><span class="kw">fn</span> <span class="fn">iter_01</span>(data: &amp;[u64], threshold: u64) -&gt; u64 {
+    <span class="kw">let</span> above: Vec&lt;_&gt; = data.<span class="fn">iter</span>()
+        .<span class="fn">enumerate</span>()
+        .<span class="fn">filter</span>(|(_, &amp;v)| v &gt; threshold)
+        .<span class="fn">collect</span>();
+    <span class="cmt">// ... sum + product</span>
+}</pre></div>
+<div class="code-panel"><div class="code-header c-header">C &mdash; explicit loop</div>
+<pre>uint64_t <span class="fn">iter_01</span>(<span class="kw">const</span> uint64_t *data,
+                  size_t len, uint64_t threshold) {
+    <span class="kw">for</span> (size_t i = 0; i &lt; len; i++) {
+        <span class="kw">if</span> (data[i] &gt; threshold) {
+            buf[count] = i;
+            vals[count] = data[i];
+            count++;
+        }
+    }
+}</pre></div>
+</div>
+
+<h3>Rust O0: Each adapter = separate call</h3>
+<div class="code-panel" style="margin:1em 0"><div class="code-header asm-header">Rust O0 blocks &mdash; 4 consecutive calls</div>
+<pre><span class="cmt">; Block 1</span>
+<span class="addr">0x45b3df:</span> <span class="insn">call</span> <span class="num">0x4910a0</span>  <span class="cmt">; slice::iter()</span>
+
+<span class="cmt">; Block 2</span>
+<span class="addr">0x45b3f4:</span> <span class="insn">call</span> <span class="num">0x47f3d0</span>  <span class="cmt">; Iterator::enumerate()</span>
+
+<span class="cmt">; Block 3</span>
+<span class="addr">0x45b413:</span> <span class="insn">call</span> <span class="num">0x48dcb0</span>  <span class="cmt">; Iterator::filter()</span>
+
+<span class="cmt">; Block 4</span>
+<span class="addr">0x45b42a:</span> <span class="insn">call</span> <span class="num">0x47cc30</span>  <span class="cmt">; Iterator::collect()</span>
+
+<span class="cmt">; At O2: ALL of the above are INLINED into a single loop.</span>
+<span class="cmt">; The call instructions DISAPPEAR completely.</span></pre></div>
+
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x45b445</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42f76b</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:86.6%"></div></div>0.866</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x45b3f9</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42f74b</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-partial"><div class="score-fill" style="width:43.7%"></div></div>0.437</td><td class="verdict v-partial">PARTIAL</td></tr>
+<tr><td class="addr">0x45b418</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42f790</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-poor"><div class="score-fill" style="width:30.2%"></div></div>0.302</td><td class="verdict v-poor">POOR</td></tr>
+<tr><td class="addr">0x45b598</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42f780</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-poor"><div class="score-fill" style="width:25.1%"></div></div>0.251</td><td class="verdict v-poor">POOR</td></tr>
+<tr><td colspan="4" style="color:var(--dim)">7 blocks UNMATCHED (O0 only)</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<div class="callout bad"><strong>Core problem:</strong> O0 blocks are defined by their <code>call</code> target (<code>Iterator::filter</code>). At O2, that call is inlined &mdash; the block now contains the actual comparison logic instead. O0 and O2 blocks share <em>almost nothing</em>. Meanwhile, C's explicit <code>for</code> loop scores 3 blocks at 1.000.</div>
+</div>
+
+<!-- iter_16 -->
+<div class="page" id="iter16">
+<h3>iter_16 &mdash; Chunks + Group Stats <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.691</span> <span class="tag tag-c">C 0.766</span></div><div style="color:var(--red);font-weight:700">&minus;0.075</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; 3-layer iterator chain</div>
+<pre><span class="kw">fn</span> <span class="fn">iter_16</span>(data: &amp;[u64], group_size: usize) -&gt; u64 {
+    <span class="kw">let</span> groups: Vec&lt;&amp;[u64]&gt; = data.<span class="fn">chunks</span>(group_size).<span class="fn">collect</span>();
+    <span class="kw">let</span> sums: Vec&lt;u64&gt; = groups.<span class="fn">iter</span>().<span class="fn">map</span>(|g| g.iter().sum()).<span class="fn">collect</span>();
+    <span class="kw">let</span> maxes: Vec&lt;u64&gt; = groups.<span class="fn">iter</span>()
+        .<span class="fn">map</span>(|g| g.iter().max().copied().unwrap_or(0)).<span class="fn">collect</span>();
+    sums.<span class="fn">iter</span>().<span class="fn">zip</span>(maxes.iter())
+        .<span class="fn">map</span>(|(&amp;s, &amp;m)| s.wrapping_add(m)).<span class="fn">sum</span>()
+}</pre></div>
+
+<div class="stats">
+  <div class="stat-card"><div class="stat-val" style="color:var(--rust)">41 &rarr; 59</div><div class="stat-label">Rust O0 &rarr; O2 (O2 larger)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--orange)">0.691</div><div class="stat-label">Mean similarity</div></div>
+</div>
+<p>Three separate <code>collect()</code> calls at O0 get restructured into tight arithmetic loops at O2. The block count goes <em>up</em> at O2 from massive inlining.</p>
+</div>
+
+<!-- iter_14 -->
+<div class="page" id="iter14">
+<h3>iter_14 &mdash; filter_map + fold <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.598</span> <span class="tag tag-c">C 0.664</span></div><div style="color:var(--red);font-weight:700">&minus;0.066</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; closure inlining creates extreme asymmetry</div>
+<pre><span class="kw">let</span> result = data.<span class="fn">iter</span>()
+    .<span class="fn">enumerate</span>()
+    .<span class="fn">filter_map</span>(|(i, &amp;v)| {
+        <span class="kw">if</span> v &gt; i <span class="kw">as</span> u64 { Some(v - i <span class="kw">as</span> u64) } <span class="kw">else</span> { None }
+    })
+    .<span class="fn">fold</span>(0u64, |acc, v| acc.wrapping_add(v * v));</pre></div>
+
+<div class="stats">
+  <div class="stat-card" style="border-color:var(--red)"><div class="stat-val" style="color:var(--red)">10 &rarr; 31</div><div class="stat-label">Rust: O0 &rarr; O2 (3x expansion!)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--red)">21</div><div class="stat-label">O2-only unmatched blocks</div></div>
+</div>
+<p>10 O0 blocks vs 31 O2 blocks: <strong>21 O2 blocks have no partner at all</strong>. The inlining of closures creates entirely new blocks with no O0 equivalent.</p>
+</div>
+
+<!-- iter_12 -->
+<div class="page" id="iter12">
+<h3>iter_12 &mdash; scan + windows <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.613</span> <span class="tag tag-c">C 0.743</span></div><div style="color:var(--red);font-weight:700">&minus;0.130</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; scan() + windows() chain</div>
+<pre><span class="kw">let</span> running: Vec&lt;u64&gt; = data.<span class="fn">iter</span>()
+    .<span class="fn">scan</span>(0u64, |state, &amp;x| { *state += x; Some(*state) })
+    .<span class="fn">collect</span>();
+<span class="kw">let</span> crossings = running.<span class="fn">windows</span>(2)
+    .<span class="fn">filter</span>(|w| (w[0] &lt; threshold) != (w[1] &lt; threshold))
+    .<span class="fn">count</span>() <span class="kw">as</span> u64;</pre></div>
+
+<p>9 UNMATCHED O0 blocks including DROP_GLUE for the intermediate <code>running</code> Vec. C's explicit loops with <code>malloc</code> score BOUNDS_CHECK matches at 1.000 and 0.949.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- CATEGORY 4: OPTION/RESULT -->
+<!-- ============================================================ -->
+
+<!-- opt_04 -->
+<div class="page" id="opt04">
+<h2>Category 4: Option / Result</h2>
+<h3>opt_04 &mdash; ? Operator in Loop <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.780</span> <span class="tag tag-c">C 0.736</span></div><div style="color:var(--green);font-weight:700">+0.044</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; ? generates branch blocks like bounds checks</div>
+<pre><span class="kw">fn</span> <span class="fn">opt_04</span>(data: &amp;[u64], target: u64) -&gt; Option&lt;(usize, u64)&gt; {
+    <span class="kw">for</span> start <span class="kw">in</span> 0..data.len() - win_size + 1 {
+        <span class="kw">for</span> j <span class="kw">in</span> 0..win_size {
+            <span class="kw">let</span> val = data.get(start + j)<span class="hl">?</span>;  <span class="cmt">// ? = branch block!</span>
+            win_sum += val;
+            <span class="kw">if</span> *val &lt;= target { all_above = <span class="kw">false</span>; }
+        }
+        <span class="kw">if</span> all_above { <span class="kw">return</span> Some((start, win_sum)); }
+    }
+    None
+}</pre></div>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header asm-header">Rust O0 &mdash; ? becomes BOUNDS_CHECK</div>
+<pre><span class="addr">0x452bea:</span> <span class="insn">cmp</span>  [<span class="reg">rsp</span>+0x40], <span class="num">1</span>  <span class="cmt">; is it Some?</span>
+<span class="addr">0x452bf3:</span> <span class="insn">jne</span>  <span class="num">0x452c3f</span>       <span class="cmt">; None: propagate</span></pre></div>
+<div class="code-panel"><div class="code-header asm-header">Rust O2 &mdash; same check survives</div>
+<pre><span class="addr">0x4293ca:</span> <span class="insn">test</span> <span class="reg">rax</span>, <span class="reg">rax</span>      <span class="cmt">; null check</span>
+<span class="addr">0x4293cd:</span> <span class="insn">je</span>   <span class="num">0x4293f1</span>       <span class="cmt">; None: return</span></pre></div>
+</div>
+
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x452bea</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x4293ca</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:90%"></div></div>0.900</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x452c65</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x4293d4</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:89.2%"></div></div>0.892</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x452d5e</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x4293bc</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:85.2%"></div></div>0.852</td><td class="verdict v-good">GOOD</td></tr>
+</tbody>
+</table>
+
+<div class="callout good"><strong>Key insight:</strong> The <code>?</code> operator creates branch blocks functionally identical to bounds checks &mdash; a <code>cmp/test + conditional jump</code> that the compiler must preserve. These score 0.85&ndash;0.90. Same anchoring mechanism as <code>data[i]</code>!</div>
+</div>
+
+<!-- opt_09 -->
+<div class="page" id="opt09">
+<h3>opt_09 &mdash; Two ? in While Loop <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.723</span> <span class="tag tag-c">C 0.700</span></div><div style="color:var(--green);font-weight:700">+0.023</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; two-pointer with ? per access</div>
+<pre><span class="kw">fn</span> <span class="fn">opt_09</span>(data: &amp;[u64], target_sum: u64) -&gt; Option&lt;(usize, usize)&gt; {
+    <span class="kw">while</span> lo &lt; hi {
+        <span class="kw">let</span> left  = data.get(lo)<span class="hl">?</span>;  <span class="cmt">// BOUNDS_CHECK</span>
+        <span class="kw">let</span> right = data.get(hi)<span class="hl">?</span>;  <span class="cmt">// BOUNDS_CHECK</span>
+        <span class="kw">let</span> sum = left.wrapping_add(*right);
+        <span class="kw">if</span> sum == target_sum { <span class="kw">return</span> Some((lo, hi)); }
+        <span class="kw">else if</span> sum &lt; target_sum { lo += 1; }
+        <span class="kw">else</span> { hi -= 1; }
+    }
+}</pre></div>
+<p>Two <code>?</code> per iteration produce two BOUNDS_CHECK anchors scoring 0.857 and 0.739. More reliable than C's plain pointer arithmetic.</p>
+</div>
+
+<!-- opt_06 -->
+<div class="page" id="opt06">
+<h3>opt_06 &mdash; Option Method Chain <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.593</span> <span class="tag tag-c">C 0.786</span></div><div style="color:var(--red);font-weight:700">&minus;0.193</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; .map().filter().unwrap_or() chain</div>
+<pre><span class="kw">let</span> first_even = data.iter().<span class="fn">find</span>(|&amp;&amp;x| x % 2 == 0);
+<span class="kw">let</span> doubled = first_even.<span class="fn">map</span>(|&amp;v| v * 2);
+<span class="kw">let</span> clamped = doubled.<span class="fn">filter</span>(|&amp;v| v &lt; 100);
+<span class="kw">let</span> base = clamped.<span class="fn">unwrap_or</span>(42);</pre></div>
+
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x4531ef</td><td><span class="type type-body">BODY</span></td><td class="addr">0x429768</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:73.4%"></div></div>0.734</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x4531d0</td><td><span class="type type-body">BODY</span></td><td class="addr">0x429750</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-partial"><div class="score-fill" style="width:49.2%"></div></div>0.492</td><td class="verdict v-partial">PARTIAL</td></tr>
+<tr><td class="addr">0x453210</td><td><span class="type type-body">BODY</span></td><td class="addr">0x429785</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-partial"><div class="score-fill" style="width:44.4%"></div></div>0.444</td><td class="verdict v-partial">PARTIAL</td></tr>
+</tbody>
+</table>
+
+<div class="callout warn"><strong>? vs method chains:</strong> The <code>?</code> operator (opt_04) generates explicit branch blocks (score 0.85+). But <code>.map().filter().unwrap_or()</code> compiles to function calls that get inlined at O2 &mdash; same problem as iterators. <em>Use <code>?</code> for matchable code, not method chains.</em></div>
+</div>
+
+<!-- opt_20 -->
+<div class="page" id="opt20">
+<h3>opt_20 &mdash; split + parse + map_or <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.676</span> <span class="tag tag-c">C 0.835</span></div><div style="color:var(--red);font-weight:700">&minus;0.159</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; split + parse + map_or chain</div>
+<pre><span class="kw">for</span> part <span class="kw">in</span> s.split(',') {
+    <span class="kw">match</span> trimmed.parse::&lt;u64&gt;() {
+        Ok(val) =&gt; {
+            max_val = Some(max_val.<span class="fn">map_or</span>(val, |m| m.max(val)));
+            min_val = Some(min_val.<span class="fn">map_or</span>(val, |m| m.min(val)));
+        }
+        Err(_) =&gt; {}
+    }
+}</pre></div>
+
+<p>C achieves 0.835 with 6 blocks at 1.000. Rust's <code>map_or</code> calls get inlined, breaking the call-signature match. Best Rust matches are two at 1.000 (simple comparison blocks), but the method-chain blocks score 0.5&ndash;0.6.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- CATEGORY 5: OWNERSHIP/DROP -->
+<!-- ============================================================ -->
+
+<!-- own_01 -->
+<div class="page" id="own01">
+<h2>Category 5: Ownership &amp; Drop</h2>
+<h3>own_01 &mdash; Matrix with Custom Drop <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.704</span> <span class="tag tag-c">C 0.627</span></div><div style="color:var(--green);font-weight:700">+0.077</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; explicit indexing (NOT iterators) + custom Drop</div>
+<pre><span class="kw">fn</span> <span class="fn">own_01</span>(n: u64) -&gt; u64 {
+    <span class="kw">let mut</span> mat = OwnedMatrix::new(n, n);
+    <span class="kw">for</span> r <span class="kw">in</span> 0..n {
+        <span class="kw">for</span> c <span class="kw">in</span> 2..n {
+            <span class="kw">let</span> val = mat.<span class="fn">get</span>(r, c-1) + mat.<span class="fn">get</span>(r, c-2); <span class="cmt">// bounds checks!</span>
+            mat.<span class="fn">set</span>(r, c, val);                          <span class="cmt">// bounds check!</span>
+        }
+    }
+    total
+    <span class="cmt">// mat drops here: OwnedMatrix::drop zeroes data</span>
+}</pre></div>
+
+<table class="match-table">
+<thead><tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x45543a</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42b07b</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x45563c</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42b16a</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x455652</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x42af5a</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:95.4%"></div></div>0.954</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x455516</td><td><span class="type type-drop">DROP_GLUE</span></td><td class="addr">0x42af6b</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-partial"><div class="score-fill" style="width:62.7%"></div></div>0.627</td><td class="verdict v-partial">PARTIAL</td></tr>
+</tbody>
+</table>
+
+<div class="callout good"><strong>Explicit indexing + ownership = best of both worlds.</strong> The <code>mat.get(r, c)</code> calls generate bounds-check anchors (0.954). The <code>Drop</code> glue adds moderate signal (0.627). When Rust code uses indexing instead of iterators, it matches as well as or better than C.</div>
+</div>
+
+<!-- own_05 -->
+<div class="page" id="own05">
+<h3>own_05 &mdash; Merge Sorted Vecs <span class="tag tag-win">Rust WINS</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.780</span> <span class="tag tag-c">C 0.720</span></div><div style="color:var(--green);font-weight:700">+0.060</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; explicit a[i], b[j] indexing on owned Vecs</div>
+<pre><span class="kw">fn</span> <span class="fn">own_05</span>(a: Vec&lt;u64&gt;, b: Vec&lt;u64&gt;) -&gt; Vec&lt;u64&gt; {
+    <span class="kw">while</span> i &lt; a.len() &amp;&amp; j &lt; b.len() {
+        <span class="kw">if</span> <span class="hl">a[i]</span> &lt;= <span class="hl">b[j]</span> { result.push(<span class="hl">a[i]</span>); i += 1; }
+        <span class="kw">else</span> { result.push(<span class="hl">b[j]</span>); j += 1; }
+    }
+    <span class="cmt">// a, b consumed (moved), result returned</span>
+}</pre></div>
+
+<div class="stats">
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">4 &times;</div><div class="stat-label">Perfect 1.000 matches</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">0.986</div><div class="stat-label">Top BOUNDS_CHECK</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--orange)">0.976</div><div class="stat-label">DROP_GLUE score</div></div>
+</div>
+<p>Explicit indexing creates bounds-check anchors. The DROP_GLUE for consumed <code>a</code> and <code>b</code> also scores well at 0.976.</p>
+</div>
+
+<!-- own_03 -->
+<div class="page" id="own03">
+<h3>own_03 &mdash; String Split + Transform <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.689</span> <span class="tag tag-c">C 0.752</span></div><div style="color:var(--red);font-weight:700">&minus;0.063</div></div>
+
+<div class="code-panel" style="margin:1em 0"><div class="code-header rust-header">&#x1f980; Rust &mdash; iterator chain in an ownership context</div>
+<pre><span class="kw">let</span> words: Vec&lt;String&gt; = s.<span class="fn">split_whitespace</span>()
+    .<span class="fn">map</span>(|w| w.to_string())
+    .<span class="fn">collect</span>();  <span class="cmt">// iterator-fusion problem!</span></pre></div>
+
+<p>Even though this is categorized as "ownership", the <code>.split_whitespace().map().collect()</code> chain is the real culprit. Same iterator-fusion degradation. Multiple String drops create extra DROP_GLUE blocks with no O2 equivalents.</p>
+
+<div class="callout warn"><strong>The dominant factor is iterator usage, not ownership.</strong> When ownership functions use iterator chains, they suffer the same degradation as pure iterator functions.</div>
+</div>
+
+<!-- own_04 -->
+<div class="page" id="own04">
+<h3>own_04 &mdash; Box Linked List <span class="tag tag-lose">Rust LOSES</span></h3>
+<div class="flex-between"><div><span class="tag tag-rust">Rust 0.711</span> <span class="tag tag-c">C 0.802</span></div><div style="color:var(--red);font-weight:700">&minus;0.091</div></div>
+
+<div class="code-grid">
+<div class="code-panel"><div class="code-header rust-header">&#x1f980; Rust &mdash; Box linked list</div>
+<pre><span class="kw">enum</span> List { Cons(u64, Box&lt;List&gt;), Nil }
+<span class="kw">for</span> i <span class="kw">in</span> (0..n).rev() {
+    head = List::Cons(val, Box::new(head));
+}
+<span class="cmt">// head drops recursively: each Box freed</span></pre></div>
+<div class="code-panel"><div class="code-header c-header">C &mdash; malloc linked list</div>
+<pre><span class="kw">for</span> (uint64_t i = n; i-- &gt; 0;) {
+    Node *node = malloc(<span class="kw">sizeof</span>(Node));
+    node-&gt;val = i*i + 1;
+    node-&gt;next = head;
+    head = node;
+}
+<span class="cmt">// manual free loop</span></pre></div>
+</div>
+
+<table class="match-table">
+<thead><tr><th colspan="6" style="text-align:center;color:var(--rust)">Rust Matching (26 O0 &rarr; 13 O2)</th></tr>
+<tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x4561a0</td><td><span class="type type-body">BODY</span></td><td class="addr">0x42bb30</td><td><span class="type type-loop">LOOP_HEADER</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:98.7%"></div></div>0.987</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x4563b8</td><td><span class="type type-drop">DROP_GLUE</span></td><td class="addr">0x42bba2</td><td><span class="type type-drop">DROP_GLUE</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:76.5%"></div></div>0.765</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td colspan="4" style="color:var(--dim)">13 UNMATCHED O0 blocks</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<table class="match-table" style="margin-top:1em">
+<thead><tr><th colspan="6" style="text-align:center;color:var(--c-blue)">C Matching (11 O0 &rarr; 14 O2)</th></tr>
+<tr><th>O0 Block</th><th>Type</th><th>O2 Block</th><th>Type</th><th>Similarity</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="addr">0x4071ed</td><td><span class="type type-body">BODY</span></td><td class="addr">0x4073da</td><td><span class="type type-body">BODY</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x4072d9</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td class="addr">0x4073d5</td><td><span class="type type-bc">BOUNDS_CHECK</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td class="addr">0x407309</td><td><span class="type type-epi">PROLOGUE</span></td><td class="addr">0x4074bf</td><td><span class="type type-epi">PROLOGUE</span></td><td><div class="score-bar score-good"><div class="score-fill" style="width:100%"></div></div>1.000</td><td class="verdict v-good">GOOD</td></tr>
+<tr><td colspan="4" style="color:var(--dim)">... 6 total at 1.000</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<p>C's <code>malloc</code>/<code>free</code> calls produce stable patterns (6 blocks at 1.000). Rust's Box allocations and recursive Drop generate 13 unmatched O0 blocks.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- FINDINGS -->
+<!-- ============================================================ -->
+
+<div class="page" id="findings">
+<h2>Key Findings</h2>
+
+<h3 style="color:var(--green)">Features That HELP Matching</h3>
+
+<div class="callout good" style="margin:0.8em 0">
+  <strong>1. Bounds checks from <code>data[i]</code></strong><br>
+  Each array access &rarr; <code>cmp + conditional_jump</code> block, nearly identical at O0 and O2. Scores 0.85&ndash;1.00 consistently. The single most valuable anchor.
+</div>
+
+<div class="callout good" style="margin:0.8em 0">
+  <strong>2. The <code>?</code> operator</strong><br>
+  Generates explicit branch blocks that check discriminant tags. Structurally similar to bounds checks. Scores 0.85&ndash;0.90.
+</div>
+
+<div class="callout good" style="margin:0.8em 0">
+  <strong>3. Explicit indexing in ownership code</strong><br>
+  <code>a[i]</code> and <code>b[j]</code> on owned Vecs get the same bounds-check benefit. Drop glue adds moderate signal (0.6&ndash;0.9).
+</div>
+
+<h3 style="color:var(--red)">Features That HURT Matching</h3>
+
+<div class="callout bad" style="margin:0.8em 0">
+  <strong>1. Iterator chains</strong><br>
+  <code>.iter().filter().map().collect()</code> &mdash; each adapter is a <code>call</code> at O0, fully inlined at O2. O0 and O2 blocks share almost nothing. Worst offender.
+</div>
+
+<div class="callout bad" style="margin:0.8em 0">
+  <strong>2. <code>match</code> on recursive enums</strong><br>
+  Compiles to jump tables with indirect <code>jmp rax</code>. CFGFast cannot follow &rarr; only 1 visible block. Worst category (delta &minus;0.130).
+</div>
+
+<div class="callout bad" style="margin:0.8em 0">
+  <strong>3. Option method chains</strong><br>
+  <code>.map().filter().unwrap_or()</code> &mdash; same inlining problem as iterators. Use <code>?</code> instead for better matching.
+</div>
+
+<h3>The Core Pattern</h3>
+<div class="diagram" style="padding:30px">
+<svg width="700" height="220" viewBox="0 0 700 220">
+  <defs>
+    <marker id="a2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#f85149"/></marker>
+    <marker id="a3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#3fb950"/></marker>
+  </defs>
+  <!-- O0 side -->
+  <rect x="20" y="30" width="180" height="40" rx="6" fill="#1f2937" stroke="#dea584" stroke-width="2"/>
+  <text x="110" y="55" text-anchor="middle" fill="#dea584" font-size="13" font-weight="600">Rust O0 Block</text>
+  <rect x="30" y="80" width="160" height="25" rx="4" fill="#1a2332"/>
+  <text x="110" y="97" text-anchor="middle" fill="#8b949e" font-size="11" font-family="monospace">call Iterator::filter</text>
+  <rect x="30" y="110" width="160" height="25" rx="4" fill="#1a2332"/>
+  <text x="110" y="127" text-anchor="middle" fill="#8b949e" font-size="11" font-family="monospace">call Iterator::collect</text>
+
+  <!-- Arrow: call disappears -->
+  <line x1="200" y1="92" x2="300" y2="60" stroke="#f85149" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#a2)"/>
+  <text x="250" y="65" fill="#f85149" font-size="10" text-anchor="middle">inlined away</text>
+
+  <!-- O2 side -->
+  <rect x="310" y="30" width="180" height="40" rx="6" fill="#1f2937" stroke="#79c0ff" stroke-width="2"/>
+  <text x="400" y="55" text-anchor="middle" fill="#79c0ff" font-size="13" font-weight="600">Rust O2 Block</text>
+  <rect x="320" y="80" width="160" height="25" rx="4" fill="#1a2332"/>
+  <text x="400" y="97" text-anchor="middle" fill="#8b949e" font-size="11" font-family="monospace">cmp rax, rcx; jbe</text>
+  <rect x="320" y="110" width="160" height="25" rx="4" fill="#1a2332"/>
+  <text x="400" y="127" text-anchor="middle" fill="#8b949e" font-size="11" font-family="monospace">add, mul, mov ...</text>
+
+  <!-- Anchor blocks -->
+  <rect x="20" y="155" width="180" height="40" rx="6" fill="#1f2937" stroke="#3fb950" stroke-width="2"/>
+  <text x="110" y="180" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="600">O0 BOUNDS_CHECK</text>
+
+  <line x1="200" y1="175" x2="310" y2="175" stroke="#3fb950" stroke-width="2" marker-end="url(#a3)"/>
+  <text x="255" y="168" fill="#3fb950" font-size="10" text-anchor="middle">survives!</text>
+
+  <rect x="310" y="155" width="180" height="40" rx="6" fill="#1f2937" stroke="#3fb950" stroke-width="2"/>
+  <text x="400" y="180" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="600">O2 BOUNDS_CHECK</text>
+
+  <!-- Score labels -->
+  <text x="570" y="55" fill="#f85149" font-size="14" font-weight="700">0.30</text>
+  <text x="570" y="75" fill="#8b949e" font-size="11">call &ne; inline</text>
+  <text x="570" y="180" fill="#3fb950" font-size="14" font-weight="700">0.95</text>
+  <text x="570" y="200" fill="#8b949e" font-size="11">cmp = cmp</text>
+</svg>
+</div>
+
+<p style="text-align:center;font-size:1.1em;margin-top:1em">
+  <strong>Structural patterns</strong> (comparisons, branches) survive optimization.<br>
+  <strong>Function calls</strong> to generic library code do not.
+</p>
+</div>
+
+<script>
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('.page[id]');
+const navLinks = document.querySelectorAll('#topnav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`#topnav a[href="#${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

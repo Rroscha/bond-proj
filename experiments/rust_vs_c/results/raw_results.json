@@ -1,0 +1,5143 @@
+{
+  "rust": [
+    {
+      "func_name": "core::ptr::drop_in_place<core::iter::adapters::map::map_fold<&rust_bench::Expr,rust_bench::Expr,(),rust_bench::em_06,core::iter::traits::iterator::Iterator::for_each::call<rust_bench::Expr,alloc::vec::Vec<rust_bench::Expr>::extend_trusted<core::iter::adapters::map::Map<core::slice::iter::Iter<rust_bench::Expr>,rust_bench::em_06>>::{{closure}}>::{{closure}}>::{{closure}}>",
+      "category": "enum_match",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.27949735449735447,
+      "per_feature_sims": {
+        "opcodes": 0.2,
+        "constants": 0.0,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.9210526315789473,
+        "instruction_count": 0.16666666666666663,
+        "callee_names": 0.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_07",
+      "category": "enum_match",
+      "num_blocks_o0": 8,
+      "num_blocks_o2": 4,
+      "mean_block_similarity": 0.5865479653188332,
+      "per_feature_sims": {
+        "opcodes": 0.5714285714285714,
+        "constants": 0.25,
+        "concrete_values": 0.25,
+        "dataflow_edges": 0.8506868003438549,
+        "instruction_count": 0.765090811965812,
+        "string_refs": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 8
+      },
+      "block_type_counts_o2": {
+        "BODY": 4
+      }
+    },
+    {
+      "func_name": "core::ptr::drop_in_place<core::iter::adapters::map::map_fold<&rust_bench::Expr,alloc::string::String,(),rust_bench::em_08,core::iter::traits::iterator::Iterator::for_each::call<alloc::string::String,alloc::vec::Vec<alloc::string::String>::extend_trusted<core::iter::adapters::map::Map<core::slice::iter::Iter<rust_bench::Expr>,rust_bench::em_08>>::{{closure}}>::{{closure}}>::{{closure}}>",
+      "category": "enum_match",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.2780554708930204,
+      "per_feature_sims": {
+        "opcodes": 0.2,
+        "constants": 0.0,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.89171974522293,
+        "instruction_count": 0.17647058823529416,
+        "callee_names": 0.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_09",
+      "category": "enum_match",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 4,
+      "mean_block_similarity": 0.7604239266642202,
+      "per_feature_sims": {
+        "opcodes": 0.5317460317460317,
+        "dataflow_edges": 0.8981097662079256,
+        "instruction_count": 0.8833333333333333,
+        "concrete_values": 0.34259259259259256,
+        "constants": 0.75,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "BOUNDS_CHECK": 1,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 1,
+        "BODY": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::em_10::lookup",
+      "category": "enum_match",
+      "num_blocks_o0": 23,
+      "num_blocks_o2": 7,
+      "mean_block_similarity": 0.7145855343975117,
+      "per_feature_sims": {
+        "opcodes": 0.6904761904761905,
+        "concrete_values": 0.3611111111111111,
+        "dataflow_edges": 0.9391005950519931,
+        "instruction_count": 0.7543650793650795,
+        "callee_names": 0.0,
+        "constants": 0.4,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 19,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_11",
+      "category": "enum_match",
+      "num_blocks_o0": 45,
+      "num_blocks_o2": 44,
+      "mean_block_similarity": 0.6915787061798109,
+      "per_feature_sims": {
+        "opcodes": 0.5255411255411254,
+        "dataflow_edges": 0.9363132126864507,
+        "instruction_count": 0.8319979109476076,
+        "concrete_values": 0.12200607200607201,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 39,
+        "LOOP_HEADER": 3,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 27,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 15
+      }
+    },
+    {
+      "func_name": "rust_bench::em_12::collect",
+      "category": "enum_match",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.6895554014486054,
+      "per_feature_sims": {
+        "opcodes": 0.7777777777777778,
+        "constants": 0.4,
+        "concrete_values": 0.06666666666666667,
+        "dataflow_edges": 0.81875,
+        "instruction_count": 0.8571428571428572,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_13",
+      "category": "enum_match",
+      "num_blocks_o0": 5,
+      "num_blocks_o2": 4,
+      "mean_block_similarity": 0.6009714528347339,
+      "per_feature_sims": {
+        "opcodes": 0.35119047619047616,
+        "concrete_values": 0.3838383838383838,
+        "dataflow_edges": 0.9187280912696487,
+        "instruction_count": 0.8125,
+        "constants": 0.16666666666666666,
+        "string_refs": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 4,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 1,
+        "BODY": 3
+      }
+    },
+    {
+      "func_name": "core::ptr::drop_in_place<core::iter::adapters::map::map_fold<&rust_bench::Expr,rust_bench::Expr,(),rust_bench::em_14,core::iter::traits::iterator::Iterator::for_each::call<rust_bench::Expr,alloc::vec::Vec<rust_bench::Expr>::extend_trusted<core::iter::adapters::map::Map<core::slice::iter::Iter<rust_bench::Expr>,rust_bench::em_14>>::{{closure}}>::{{closure}}>::{{closure}}>",
+      "category": "enum_match",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.27883244206773616,
+      "per_feature_sims": {
+        "opcodes": 0.2,
+        "constants": 0.0,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.92,
+        "instruction_count": 0.16666666666666663,
+        "callee_names": 0.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_15",
+      "category": "enum_match",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 6,
+      "mean_block_similarity": 0.6010375512353875,
+      "per_feature_sims": {
+        "opcodes": 0.5773809523809523,
+        "concrete_values": 0.35000000000000003,
+        "dataflow_edges": 0.9127711721210526,
+        "instruction_count": 0.7319444444444444,
+        "string_refs": 0.0,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 5,
+        "BOUNDS_CHECK": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_16",
+      "category": "enum_match",
+      "num_blocks_o0": 23,
+      "num_blocks_o2": 5,
+      "mean_block_similarity": 0.6093033616137823,
+      "per_feature_sims": {
+        "opcodes": 0.6557142857142857,
+        "concrete_values": 0.29357142857142854,
+        "dataflow_edges": 0.9179347952198633,
+        "instruction_count": 0.7998099415204678,
+        "constants": 0.0,
+        "string_refs": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 20,
+        "LOOP_HEADER": 1,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 5
+      }
+    },
+    {
+      "func_name": "rust_bench::em_17",
+      "category": "enum_match",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.6741442019683355,
+      "per_feature_sims": {
+        "opcodes": 0.6666666666666666,
+        "constants": 0.5,
+        "concrete_values": 0.07142857142857142,
+        "dataflow_edges": 0.78125,
+        "instruction_count": 0.8421052631578947,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_18",
+      "category": "enum_match",
+      "num_blocks_o0": 39,
+      "num_blocks_o2": 26,
+      "mean_block_similarity": 0.7301208917230468,
+      "per_feature_sims": {
+        "opcodes": 0.5772033522033522,
+        "dataflow_edges": 0.9315332318507339,
+        "instruction_count": 0.8843945270415858,
+        "concrete_values": 0.07630385487528343,
+        "callee_names": 0.0,
+        "constants": 0.16666666666666666
+      },
+      "block_type_counts_o0": {
+        "BODY": 33,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 15,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 9
+      }
+    },
+    {
+      "func_name": "rust_bench::em_19::{{closure}}",
+      "category": "enum_match",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 7,
+      "mean_block_similarity": 0.5249300065876152,
+      "per_feature_sims": {
+        "opcodes": 0.30000000000000004,
+        "constants": 0.0,
+        "concrete_values": 0.5,
+        "dataflow_edges": 0.9711538461538461,
+        "instruction_count": 0.9166666666666667,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 1
+      }
+    },
+    {
+      "func_name": "core::ptr::drop_in_place<core::iter::adapters::map::map_fold<&rust_bench::Expr,rust_bench::Expr,(),rust_bench::em_20,core::iter::traits::iterator::Iterator::for_each::call<rust_bench::Expr,alloc::vec::Vec<rust_bench::Expr>::extend_trusted<core::iter::adapters::map::Map<core::slice::iter::Iter<rust_bench::Expr>,rust_bench::em_20>>::{{closure}}>::{{closure}}>::{{closure}}>",
+      "category": "enum_match",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.27446236559139786,
+      "per_feature_sims": {
+        "opcodes": 0.2,
+        "constants": 0.0,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.8993288590604027,
+        "instruction_count": 0.16666666666666663,
+        "callee_names": 0.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_01::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 20,
+      "mean_block_similarity": 0.6227272727272727,
+      "per_feature_sims": {
+        "opcodes": 0.25,
+        "concrete_values": 1.0,
+        "dataflow_edges": 0.9935483870967742,
+        "instruction_count": 0.6666666666666667
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 15,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_02",
+      "category": "iterators",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.6471624117004492,
+      "per_feature_sims": {
+        "opcodes": 0.38142857142857145,
+        "dataflow_edges": 0.9143842811777596,
+        "instruction_count": 0.8717883565709654,
+        "concrete_values": 0.1492063492063492,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "LOOP_HEADER": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_03::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 43,
+      "mean_block_similarity": 0.5469469469469469,
+      "per_feature_sims": {
+        "opcodes": 0.1111111111111111,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.8481012658227848,
+        "instruction_count": 0.8
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 27,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 12,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_04::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 18,
+      "mean_block_similarity": 0.5654186795491144,
+      "per_feature_sims": {
+        "opcodes": 0.125,
+        "concrete_values": 0.125,
+        "dataflow_edges": 0.9171974522292994,
+        "instruction_count": 0.7777777777777778
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 16,
+        "BOUNDS_CHECK": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_05::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 13,
+      "mean_block_similarity": 0.5647729286611918,
+      "per_feature_sims": {
+        "opcodes": 0.2502164502164502,
+        "concrete_values": 0.15093240093240093,
+        "dataflow_edges": 0.8826006157472797,
+        "instruction_count": 0.8385198135198135,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 11
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_06",
+      "category": "iterators",
+      "num_blocks_o0": 21,
+      "num_blocks_o2": 18,
+      "mean_block_similarity": 0.640535459051627,
+      "per_feature_sims": {
+        "opcodes": 0.425,
+        "concrete_values": 0.15359477124183007,
+        "dataflow_edges": 0.9179231302045303,
+        "instruction_count": 0.8273029439696108,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 17,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 1,
+        "DROP_GLUE": 1,
+        "BOUNDS_CHECK": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 11,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_07::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 47,
+      "mean_block_similarity": 0.6822344322344321,
+      "per_feature_sims": {
+        "opcodes": 0.25,
+        "concrete_values": 0.125,
+        "dataflow_edges": 0.8773006134969326,
+        "instruction_count": 1.0
+      },
+      "block_type_counts_o0": {
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 28,
+        "BOUNDS_CHECK": 17,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_08::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 13,
+      "mean_block_similarity": 0.5271672771672772,
+      "per_feature_sims": {
+        "opcodes": 0.42857142857142855,
+        "constants": 0.0,
+        "concrete_values": 0.16666666666666666,
+        "dataflow_edges": 0.8974358974358975,
+        "instruction_count": 0.8888888888888888
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 10,
+        "BOUNDS_CHECK": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_09",
+      "category": "iterators",
+      "num_blocks_o0": 31,
+      "num_blocks_o2": 21,
+      "mean_block_similarity": 0.6677115752739677,
+      "per_feature_sims": {
+        "opcodes": 0.5389455782312924,
+        "dataflow_edges": 0.9281935953709618,
+        "instruction_count": 0.8858843537414968,
+        "concrete_values": 0.24990503323836658,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 21,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 7,
+        "BODY": 12,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_10::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 7,
+      "mean_block_similarity": 0.6154324226785458,
+      "per_feature_sims": {
+        "opcodes": 0.3976190476190476,
+        "constants": 0.2,
+        "concrete_values": 0.2845238095238095,
+        "dataflow_edges": 0.9280031887935113,
+        "instruction_count": 0.8833333333333334,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_11::{{closure}}::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 146,
+      "mean_block_similarity": 0.6160493585323554,
+      "per_feature_sims": {
+        "opcodes": 0.475,
+        "constants": 0.25,
+        "concrete_values": 0.03125,
+        "dataflow_edges": 0.9014084507042254,
+        "instruction_count": 0.9285714285714286,
+        "callee_names": 0.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "PANIC_PATH": 1,
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 78,
+        "BOUNDS_CHECK": 53,
+        "ITERATOR_STATE": 6,
+        "LOOP_HEADER": 8,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_12::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.5086857203569911,
+      "per_feature_sims": {
+        "opcodes": 0.75,
+        "constants": 0.0,
+        "concrete_values": 0.16666666666666666,
+        "dataflow_edges": 0.9,
+        "instruction_count": 0.46153846153846156
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 6
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_13::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 38,
+      "mean_block_similarity": 0.6235579842137219,
+      "per_feature_sims": {
+        "opcodes": 0.2222222222222222,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.8717948717948718,
+        "instruction_count": 0.8888888888888888
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 24,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 9
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_14::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 8,
+      "num_blocks_o2": 31,
+      "mean_block_similarity": 0.7296853249041436,
+      "per_feature_sims": {
+        "opcodes": 0.65625,
+        "dataflow_edges": 0.9439279770735858,
+        "instruction_count": 0.859172077922078,
+        "concrete_values": 0.06938775510204082,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 20,
+        "LOOP_HEADER": 3,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_15::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 35,
+      "mean_block_similarity": 0.6434399864567463,
+      "per_feature_sims": {
+        "opcodes": 0.2,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.9177215189873418,
+        "instruction_count": 0.9090909090909091,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 25,
+        "BOUNDS_CHECK": 8,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_16::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 59,
+      "mean_block_similarity": 0.588474025974026,
+      "per_feature_sims": {
+        "opcodes": 0.75,
+        "constants": 0.0,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.8620689655172413,
+        "instruction_count": 0.8181818181818181
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 37,
+        "BOUNDS_CHECK": 17,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_17::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 68,
+      "mean_block_similarity": 0.6269230769230769,
+      "per_feature_sims": {
+        "opcodes": 0.2,
+        "constants": 1.0,
+        "concrete_values": 0.5,
+        "dataflow_edges": 0.8674698795180723,
+        "instruction_count": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 32,
+        "LOOP_HEADER": 7,
+        "BOUNDS_CHECK": 29
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_18::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.6473856209150327,
+      "per_feature_sims": {
+        "opcodes": 0.25,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.9230769230769231,
+        "instruction_count": 0.8333333333333334
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 16,
+        "BOUNDS_CHECK": 12
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_19::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 58,
+      "mean_block_similarity": 0.6048689138576779,
+      "per_feature_sims": {
+        "opcodes": 0.16666666666666666,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.9,
+        "instruction_count": 0.8333333333333334
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 18,
+        "BODY": 33,
+        "LOOP_HEADER": 5,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::iter_20::{{closure}}",
+      "category": "iterators",
+      "num_blocks_o0": 3,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.600303506686272,
+      "per_feature_sims": {
+        "opcodes": 0.4666666666666666,
+        "concrete_values": 0.1361111111111111,
+        "dataflow_edges": 0.8862767777536807,
+        "instruction_count": 0.9333333333333332,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 19,
+        "BOUNDS_CHECK": 8,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_01::{{closure}}",
+      "category": "option_result",
+      "num_blocks_o0": 3,
+      "num_blocks_o2": 19,
+      "mean_block_similarity": 0.6811478273580773,
+      "per_feature_sims": {
+        "opcodes": 0.5777777777777778,
+        "constants": 0.0,
+        "dataflow_edges": 0.958664021164021,
+        "instruction_count": 1.0,
+        "concrete_values": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 7,
+        "BODY": 4,
+        "ITERATOR_STATE": 3,
+        "EPILOGUE": 5
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_02",
+      "category": "option_result",
+      "num_blocks_o0": 31,
+      "num_blocks_o2": 32,
+      "mean_block_similarity": 0.633190422113313,
+      "per_feature_sims": {
+        "opcodes": 0.4385944700460829,
+        "dataflow_edges": 0.9097926645462063,
+        "instruction_count": 0.8580947726109016,
+        "concrete_values": 0.11444494464452448,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 27,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 12,
+        "BODY": 15,
+        "LOOP_HEADER": 3,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_03",
+      "category": "option_result",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.6598255480320473,
+      "per_feature_sims": {
+        "opcodes": 0.41805555555555557,
+        "concrete_values": 0.15555555555555556,
+        "dataflow_edges": 0.9223883717054183,
+        "instruction_count": 0.8338293650793651,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 6,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_04",
+      "category": "option_result",
+      "num_blocks_o0": 32,
+      "num_blocks_o2": 9,
+      "mean_block_similarity": 0.7797649998815199,
+      "per_feature_sims": {
+        "opcodes": 0.6666666666666666,
+        "concrete_values": 0.03333333333333333,
+        "dataflow_edges": 0.9093782818242288,
+        "instruction_count": 0.8518518518518519,
+        "constants": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 22,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 3,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_05",
+      "category": "option_result",
+      "num_blocks_o0": 53,
+      "num_blocks_o2": 56,
+      "mean_block_similarity": 0.658933148273829,
+      "per_feature_sims": {
+        "opcodes": 0.387466307277628,
+        "dataflow_edges": 0.9558710477920899,
+        "instruction_count": 0.8719377058999701,
+        "concrete_values": 0.18848238482384824,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 46,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 1,
+        "DROP_GLUE": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 23,
+        "BOUNDS_CHECK": 25,
+        "PROLOGUE": 1,
+        "LOOP_HEADER": 5,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_06::{{closure}}",
+      "category": "option_result",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.5380952380952381,
+      "per_feature_sims": {
+        "opcodes": 0.2857142857142857,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.9533333333333334,
+        "instruction_count": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 4,
+        "BOUNDS_CHECK": 5,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_07",
+      "category": "option_result",
+      "num_blocks_o0": 21,
+      "num_blocks_o2": 54,
+      "mean_block_similarity": 0.7261110708157554,
+      "per_feature_sims": {
+        "opcodes": 0.6198412698412697,
+        "dataflow_edges": 0.935369683480002,
+        "instruction_count": 0.7415605558462701,
+        "concrete_values": 0.24348370927318294,
+        "callee_names": 0.0,
+        "constants": 0.2
+      },
+      "block_type_counts_o0": {
+        "BODY": 20,
+        "LOOP_HEADER": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 20,
+        "BOUNDS_CHECK": 23,
+        "LOOP_HEADER": 5,
+        "PROLOGUE": 3,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_08",
+      "category": "option_result",
+      "num_blocks_o0": 22,
+      "num_blocks_o2": 20,
+      "mean_block_similarity": 0.6460314681343273,
+      "per_feature_sims": {
+        "opcodes": 0.41773809523809524,
+        "dataflow_edges": 0.8974669178419272,
+        "instruction_count": 0.8330555555555554,
+        "concrete_values": 0.22059485062581033,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 13,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_09",
+      "category": "option_result",
+      "num_blocks_o0": 32,
+      "num_blocks_o2": 9,
+      "mean_block_similarity": 0.7227626739046459,
+      "per_feature_sims": {
+        "opcodes": 0.41666666666666663,
+        "concrete_values": 0.24074074074074078,
+        "dataflow_edges": 0.9269062700653357,
+        "instruction_count": 0.9592592592592593,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 27,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 2,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_10::{{closure}}",
+      "category": "option_result",
+      "num_blocks_o0": 7,
+      "num_blocks_o2": 70,
+      "mean_block_similarity": 0.7565624268192949,
+      "per_feature_sims": {
+        "opcodes": 0.7979591836734693,
+        "dataflow_edges": 0.7856300913177199,
+        "instruction_count": 0.6385487528344672,
+        "concrete_values": 0.125,
+        "callee_names": 0.0,
+        "constants": 1.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 38,
+        "LOOP_HEADER": 7,
+        "BOUNDS_CHECK": 25
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_11::{{closure}}",
+      "category": "option_result",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.6116459538129821,
+      "per_feature_sims": {
+        "opcodes": 0.3739682539682539,
+        "concrete_values": 0.10142450142450142,
+        "dataflow_edges": 0.9174345165509517,
+        "instruction_count": 0.7191835016835018,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 10,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_12",
+      "category": "option_result",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 25,
+      "mean_block_similarity": 0.6439810642817481,
+      "per_feature_sims": {
+        "opcodes": 0.46830357142857143,
+        "dataflow_edges": 0.9336201734392224,
+        "instruction_count": 0.7025094696969696,
+        "concrete_values": 0.19285714285714287,
+        "callee_names": 0.0,
+        "constants": 0.1
+      },
+      "block_type_counts_o0": {
+        "BODY": 14,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 10,
+        "BODY": 13,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_13",
+      "category": "option_result",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 5,
+      "mean_block_similarity": 0.7038193428204321,
+      "per_feature_sims": {
+        "opcodes": 0.5033333333333333,
+        "concrete_values": 0.04,
+        "dataflow_edges": 0.9208207391568948,
+        "instruction_count": 0.7404761904761905
+      },
+      "block_type_counts_o0": {
+        "BODY": 8,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 2,
+        "BOUNDS_CHECK": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_14",
+      "category": "option_result",
+      "num_blocks_o0": 29,
+      "num_blocks_o2": 74,
+      "mean_block_similarity": 0.7558462282547944,
+      "per_feature_sims": {
+        "opcodes": 0.5528735632183908,
+        "dataflow_edges": 0.9358841987341608,
+        "instruction_count": 0.839467856912076,
+        "concrete_values": 0.1264659582841401,
+        "constants": 0.6,
+        "callee_names": 0.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 25,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 31,
+        "BOUNDS_CHECK": 28,
+        "LOOP_HEADER": 8,
+        "ITERATOR_STATE": 7
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_15",
+      "category": "option_result",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.6689564020438455,
+      "per_feature_sims": {
+        "opcodes": 0.39534391534391544,
+        "dataflow_edges": 0.9239904424844378,
+        "instruction_count": 0.8894749694749695,
+        "concrete_values": 0.05171957671957672,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 3,
+        "PROLOGUE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_01",
+      "category": "bounds_check",
+      "num_blocks_o0": 37,
+      "num_blocks_o2": 25,
+      "mean_block_similarity": 0.7491088487520484,
+      "per_feature_sims": {
+        "opcodes": 0.5786666666666667,
+        "dataflow_edges": 0.9199466385739045,
+        "instruction_count": 0.9139591567852438,
+        "concrete_values": 0.10201315568962628,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 29,
+        "LOOP_HEADER": 2,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 9,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_02",
+      "category": "bounds_check",
+      "num_blocks_o0": 33,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.699599909344966,
+      "per_feature_sims": {
+        "opcodes": 0.47813852813852814,
+        "concrete_values": 0.11666666666666665,
+        "dataflow_edges": 0.9499416992493764,
+        "instruction_count": 0.8171717171717172,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 27,
+        "ITERATOR_STATE": 2,
+        "BOUNDS_CHECK": 2,
+        "LOOP_HEADER": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 6
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_03",
+      "category": "bounds_check",
+      "num_blocks_o0": 61,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.6913920804815664,
+      "per_feature_sims": {
+        "opcodes": 0.5862879767291532,
+        "dataflow_edges": 0.9358094138134073,
+        "instruction_count": 0.8497727986858423,
+        "concrete_values": 0.1676107226107226,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 49,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 18,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 6,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_04",
+      "category": "bounds_check",
+      "num_blocks_o0": 50,
+      "num_blocks_o2": 34,
+      "mean_block_similarity": 0.7711465137584641,
+      "per_feature_sims": {
+        "opcodes": 0.714861853832442,
+        "dataflow_edges": 0.9277435201321352,
+        "instruction_count": 0.7740716799540329,
+        "concrete_values": 0.2946011396011396,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 42,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 21,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 8,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_05",
+      "category": "bounds_check",
+      "num_blocks_o0": 40,
+      "num_blocks_o2": 23,
+      "mean_block_similarity": 0.76845206685581,
+      "per_feature_sims": {
+        "opcodes": 0.613768115942029,
+        "dataflow_edges": 0.9359045592359244,
+        "instruction_count": 0.8952380952380952,
+        "concrete_values": 0.23627450980392156,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 33,
+        "LOOP_HEADER": 1,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 13,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 8
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_06",
+      "category": "bounds_check",
+      "num_blocks_o0": 40,
+      "num_blocks_o2": 18,
+      "mean_block_similarity": 0.8024024313076797,
+      "per_feature_sims": {
+        "opcodes": 0.7037037037037037,
+        "dataflow_edges": 0.9253762872537501,
+        "instruction_count": 0.8929894179894179,
+        "concrete_values": 0.22407407407407406,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 32,
+        "BOUNDS_CHECK": 5,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_07",
+      "category": "bounds_check",
+      "num_blocks_o0": 99,
+      "num_blocks_o2": 44,
+      "mean_block_similarity": 0.7704460253527171,
+      "per_feature_sims": {
+        "opcodes": 0.6618686868686868,
+        "dataflow_edges": 0.9396513500834097,
+        "instruction_count": 0.9115478271728271,
+        "concrete_values": 0.2193043884220355,
+        "callee_names": 0.0,
+        "constants": 0.15555555555555556
+      },
+      "block_type_counts_o0": {
+        "BODY": 85,
+        "ITERATOR_STATE": 5,
+        "LOOP_HEADER": 4,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 32,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_08",
+      "category": "bounds_check",
+      "num_blocks_o0": 75,
+      "num_blocks_o2": 19,
+      "mean_block_similarity": 0.7611596510843825,
+      "per_feature_sims": {
+        "opcodes": 0.7842105263157895,
+        "dataflow_edges": 0.9312333006912921,
+        "instruction_count": 0.7751783304414882,
+        "concrete_values": 0.21418269230769232,
+        "callee_names": 0.0,
+        "constants": 0.05555555555555555
+      },
+      "block_type_counts_o0": {
+        "BODY": 63,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 2,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 8
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_09",
+      "category": "bounds_check",
+      "num_blocks_o0": 25,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.7199182301133865,
+      "per_feature_sims": {
+        "opcodes": 0.44375,
+        "concrete_values": 0.1416161616161616,
+        "dataflow_edges": 0.9028612947739412,
+        "instruction_count": 0.9233630952380952,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 17,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 7,
+        "BOUNDS_CHECK": 7,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_10",
+      "category": "bounds_check",
+      "num_blocks_o0": 58,
+      "num_blocks_o2": 33,
+      "mean_block_similarity": 0.7247298496266928,
+      "per_feature_sims": {
+        "opcodes": 0.5486685032139579,
+        "dataflow_edges": 0.9279724202512819,
+        "instruction_count": 0.8751942501942501,
+        "concrete_values": 0.04747023809523809,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 48,
+        "BOUNDS_CHECK": 5,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 21,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 11
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_11",
+      "category": "bounds_check",
+      "num_blocks_o0": 27,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.7755330743182033,
+      "per_feature_sims": {
+        "opcodes": 0.5688888888888888,
+        "concrete_values": 0.08,
+        "dataflow_edges": 0.9251074237346281,
+        "instruction_count": 0.8851851851851851,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 21,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 7,
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_12::{{closure}}",
+      "category": "bounds_check",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 93,
+      "mean_block_similarity": 0.6843520710924026,
+      "per_feature_sims": {
+        "opcodes": 0.2857142857142857,
+        "concrete_values": 1.0,
+        "dataflow_edges": 0.9565217391304348,
+        "instruction_count": 0.8888888888888888
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 56,
+        "LOOP_HEADER": 10,
+        "BOUNDS_CHECK": 27
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_13",
+      "category": "bounds_check",
+      "num_blocks_o0": 22,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.6577291768668682,
+      "per_feature_sims": {
+        "opcodes": 0.40476190476190477,
+        "dataflow_edges": 0.9164187975950125,
+        "instruction_count": 0.8771078921078922,
+        "concrete_values": 0.06489151873767257,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 16,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 6,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 4,
+        "PROLOGUE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_14",
+      "category": "bounds_check",
+      "num_blocks_o0": 29,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.7626121739099654,
+      "per_feature_sims": {
+        "opcodes": 0.5770833333333333,
+        "dataflow_edges": 0.9414339076282321,
+        "instruction_count": 0.8197916666666667,
+        "concrete_values": 0.1476190476190476,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 24,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 6,
+        "BODY": 9,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_15",
+      "category": "bounds_check",
+      "num_blocks_o0": 55,
+      "num_blocks_o2": 34,
+      "mean_block_similarity": 0.6700197339915241,
+      "per_feature_sims": {
+        "opcodes": 0.5073529411764705,
+        "concrete_values": 0.12471264367816094,
+        "dataflow_edges": 0.8991142225138711,
+        "instruction_count": 0.8066231652135526,
+        "callee_names": 0.0,
+        "constants": 0.08333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 47,
+        "ITERATOR_STATE": 3,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 3,
+        "DROP_GLUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 23,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 9,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_16",
+      "category": "bounds_check",
+      "num_blocks_o0": 40,
+      "num_blocks_o2": 33,
+      "mean_block_similarity": 0.7029536925029894,
+      "per_feature_sims": {
+        "opcodes": 0.5831586169821463,
+        "dataflow_edges": 0.9326078952745749,
+        "instruction_count": 0.7691125583171038,
+        "concrete_values": 0.24459031709031712,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 33,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 21,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 9
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_17",
+      "category": "bounds_check",
+      "num_blocks_o0": 44,
+      "num_blocks_o2": 24,
+      "mean_block_similarity": 0.7579929528279084,
+      "per_feature_sims": {
+        "opcodes": 0.4923611111111111,
+        "concrete_values": 0.07708333333333334,
+        "dataflow_edges": 0.9335840074764833,
+        "instruction_count": 0.8916666666666666,
+        "callee_names": 0.0,
+        "constants": 1.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 34,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 5,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 14,
+        "BODY": 9,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_18",
+      "category": "bounds_check",
+      "num_blocks_o0": 98,
+      "num_blocks_o2": 39,
+      "mean_block_similarity": 0.7511482538114472,
+      "per_feature_sims": {
+        "opcodes": 0.6378917378917378,
+        "concrete_values": 0.1438852813852814,
+        "dataflow_edges": 0.910126007147448,
+        "instruction_count": 0.9103361026437949,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 84,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 4,
+        "EPILOGUE": 1,
+        "DROP_GLUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 24,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 10,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_19",
+      "category": "bounds_check",
+      "num_blocks_o0": 42,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.6649939397023962,
+      "per_feature_sims": {
+        "opcodes": 0.5186507936507937,
+        "concrete_values": 0.12099567099567099,
+        "dataflow_edges": 0.8647966442547141,
+        "instruction_count": 0.7419839011944275,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 31,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 6,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 7,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::bc_20",
+      "category": "bounds_check",
+      "num_blocks_o0": 68,
+      "num_blocks_o2": 61,
+      "mean_block_similarity": 0.657749043585115,
+      "per_feature_sims": {
+        "opcodes": 0.4817980744210252,
+        "dataflow_edges": 0.8428470709642856,
+        "instruction_count": 0.9035678802072244,
+        "concrete_values": 0.156608005521049,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 63,
+        "EPILOGUE": 1,
+        "LOOP_HEADER": 3,
+        "DROP_GLUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 38,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 16,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::em_01",
+      "category": "enum_match",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 4,
+      "mean_block_similarity": 0.6568489087273041,
+      "per_feature_sims": {
+        "opcodes": 0.22619047619047616,
+        "concrete_values": 0.1361111111111111,
+        "dataflow_edges": 0.8710699501022419,
+        "instruction_count": 0.96875,
+        "constants": 0.5,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 1,
+        "BODY": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::em_02",
+      "category": "enum_match",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.7811942959001783,
+      "per_feature_sims": {
+        "opcodes": 0.6666666666666666,
+        "constants": 0.6666666666666666,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.881578947368421,
+        "instruction_count": 1.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::em_03",
+      "category": "enum_match",
+      "num_blocks_o0": 22,
+      "num_blocks_o2": 4,
+      "mean_block_similarity": 0.664704987035285,
+      "per_feature_sims": {
+        "opcodes": 0.22619047619047616,
+        "concrete_values": 0.025,
+        "dataflow_edges": 0.8839301681924633,
+        "instruction_count": 0.9833333333333334,
+        "constants": 0.5,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 20,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 1,
+        "BODY": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::em_04::depth",
+      "category": "enum_match",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 18,
+      "mean_block_similarity": 0.622029702970297,
+      "per_feature_sims": {
+        "opcodes": 0.3,
+        "constants": 0.5,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.8260869565217391,
+        "instruction_count": 1.0,
+        "string_refs": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 7,
+        "BODY": 8,
+        "BOUNDS_CHECK": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::em_05",
+      "category": "enum_match",
+      "num_blocks_o0": 53,
+      "num_blocks_o2": 41,
+      "mean_block_similarity": 0.6225752213464093,
+      "per_feature_sims": {
+        "opcodes": 0.3028745644599303,
+        "dataflow_edges": 0.9457145197946883,
+        "instruction_count": 0.9265624619283155,
+        "concrete_values": 0.19023569023569026,
+        "callee_names": 0.0,
+        "constants": 0.047619047619047616
+      },
+      "block_type_counts_o0": {
+        "BODY": 50,
+        "LOOP_HEADER": 1,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 17,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 20
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_16",
+      "category": "option_result",
+      "num_blocks_o0": 22,
+      "num_blocks_o2": 17,
+      "mean_block_similarity": 0.6732955491488872,
+      "per_feature_sims": {
+        "opcodes": 0.3959617180205416,
+        "dataflow_edges": 0.9066950614470016,
+        "instruction_count": 0.9269482151835093,
+        "concrete_values": 0.23015873015873017,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 17,
+        "LOOP_HEADER": 2,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 11,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_17",
+      "category": "option_result",
+      "num_blocks_o0": 39,
+      "num_blocks_o2": 52,
+      "mean_block_similarity": 0.7088184154402984,
+      "per_feature_sims": {
+        "opcodes": 0.4971833721833722,
+        "dataflow_edges": 0.9371619673355676,
+        "instruction_count": 0.8163117865040942,
+        "concrete_values": 0.08478231837606837,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 36,
+        "ITERATOR_STATE": 1,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 26,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 21
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_18::{{closure}}",
+      "category": "option_result",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 24,
+      "mean_block_similarity": 0.49548555872088007,
+      "per_feature_sims": {
+        "opcodes": 0.25,
+        "constants": 0.0,
+        "concrete_values": 0.1,
+        "dataflow_edges": 0.967948717948718,
+        "instruction_count": 0.8333333333333334,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 15,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_19",
+      "category": "option_result",
+      "num_blocks_o0": 25,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.7519812515525688,
+      "per_feature_sims": {
+        "opcodes": 0.5595238095238095,
+        "dataflow_edges": 0.9020260159891441,
+        "instruction_count": 0.8109126984126984,
+        "concrete_values": 0.14074074074074075,
+        "constants": 1.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 22,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 6,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::opt_20::{{closure}}",
+      "category": "option_result",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.48067071751437884,
+      "per_feature_sims": {
+        "opcodes": 0.05555555555555555,
+        "constants": 0.0,
+        "dataflow_edges": 0.9778481012658228,
+        "instruction_count": 1.0,
+        "concrete_values": 0.0625,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 13,
+        "LOOP_HEADER": 3,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_01",
+      "category": "ownership_drop",
+      "num_blocks_o0": 52,
+      "num_blocks_o2": 42,
+      "mean_block_similarity": 0.7035570732778981,
+      "per_feature_sims": {
+        "opcodes": 0.5035147392290249,
+        "dataflow_edges": 0.91643244403191,
+        "instruction_count": 0.8691326375149908,
+        "concrete_values": 0.03438995215311005,
+        "callee_names": 0.0,
+        "constants": 0.19230769230769232
+      },
+      "block_type_counts_o0": {
+        "BODY": 42,
+        "LOOP_HEADER": 5,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 1,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 25,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 10,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::own_02",
+      "category": "ownership_drop",
+      "num_blocks_o0": 59,
+      "num_blocks_o2": 62,
+      "mean_block_similarity": 0.6755675715782338,
+      "per_feature_sims": {
+        "opcodes": 0.4942695722356739,
+        "dataflow_edges": 0.9409273900963911,
+        "instruction_count": 0.8287377406021474,
+        "concrete_values": 0.12306878306878306,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 44,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 4,
+        "DROP_GLUE": 3,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 36,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 20,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_03::{{closure}}",
+      "category": "ownership_drop",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 55,
+      "mean_block_similarity": 0.5042339948280543,
+      "per_feature_sims": {
+        "opcodes": 0.2111111111111111,
+        "constants": 0.0,
+        "concrete_values": 0.5952380952380952,
+        "dataflow_edges": 0.9490445859872612,
+        "instruction_count": 0.9642857142857143,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 36,
+        "BOUNDS_CHECK": 13,
+        "LOOP_HEADER": 6
+      }
+    },
+    {
+      "func_name": "core::ptr::drop_in_place<alloc::boxed::Box<rust_bench::own_04::List>>",
+      "category": "ownership_drop",
+      "num_blocks_o0": 4,
+      "num_blocks_o2": 4,
+      "mean_block_similarity": 0.5647401087095217,
+      "per_feature_sims": {
+        "opcodes": 0.4583333333333333,
+        "concrete_values": 0.03571428571428571,
+        "dataflow_edges": 0.9419874737553824,
+        "instruction_count": 0.5952380952380952,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "DROP_GLUE": 1,
+        "BODY": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 2,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_05",
+      "category": "ownership_drop",
+      "num_blocks_o0": 75,
+      "num_blocks_o2": 46,
+      "mean_block_similarity": 0.7795588407884774,
+      "per_feature_sims": {
+        "opcodes": 0.6330227743271222,
+        "dataflow_edges": 0.9380963624566833,
+        "instruction_count": 0.8873823640127989,
+        "concrete_values": 0.2824346405228758,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 57,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 6,
+        "DROP_GLUE": 2,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 29,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 12
+      }
+    },
+    {
+      "func_name": "rust_bench::own_06",
+      "category": "ownership_drop",
+      "num_blocks_o0": 44,
+      "num_blocks_o2": 56,
+      "mean_block_similarity": 0.7597691192027248,
+      "per_feature_sims": {
+        "opcodes": 0.5642316017316017,
+        "dataflow_edges": 0.9338096176598186,
+        "instruction_count": 0.8808441558441559,
+        "concrete_values": 0.06669973544973545,
+        "callee_names": 0.0,
+        "constants": 0.0625
+      },
+      "block_type_counts_o0": {
+        "BODY": 38,
+        "LOOP_HEADER": 1,
+        "DROP_GLUE": 3,
+        "EPILOGUE": 1,
+        "BOUNDS_CHECK": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 35,
+        "BOUNDS_CHECK": 14,
+        "LOOP_HEADER": 5,
+        "ITERATOR_STATE": 1,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "core::ptr::drop_in_place<alloc::boxed::Box<rust_bench::own_07::TreeNode>>",
+      "category": "ownership_drop",
+      "num_blocks_o0": 4,
+      "num_blocks_o2": 7,
+      "mean_block_similarity": 0.6211289473119216,
+      "per_feature_sims": {
+        "opcodes": 0.49999999999999994,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.964604462474645,
+        "instruction_count": 0.7,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "DROP_GLUE": 1,
+        "BODY": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 3,
+        "DROP_GLUE": 2,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_08",
+      "category": "ownership_drop",
+      "num_blocks_o0": 67,
+      "num_blocks_o2": 61,
+      "mean_block_similarity": 0.5816205022981696,
+      "per_feature_sims": {
+        "opcodes": 0.4051717408274785,
+        "dataflow_edges": 0.9395336504308733,
+        "instruction_count": 0.7448143829614926,
+        "concrete_values": 0.11804766115110941,
+        "callee_names": 0.0,
+        "constants": 0.013157894736842105
+      },
+      "block_type_counts_o0": {
+        "BODY": 60,
+        "LOOP_HEADER": 3,
+        "DROP_GLUE": 3,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 31,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 24,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_09::{{closure}}",
+      "category": "ownership_drop",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 61,
+      "mean_block_similarity": 0.5493807772958672,
+      "per_feature_sims": {
+        "opcodes": 0.16666666666666666,
+        "constants": 0.25,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.9074074074074074,
+        "instruction_count": 0.9545454545454546,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 39,
+        "BOUNDS_CHECK": 14,
+        "LOOP_HEADER": 8
+      }
+    },
+    {
+      "func_name": "rust_bench::own_10::{{closure}}::{{closure}}",
+      "category": "ownership_drop",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 19,
+      "mean_block_similarity": 0.5372875122589081,
+      "per_feature_sims": {
+        "opcodes": 0.25,
+        "constants": 0.0,
+        "concrete_values": 0.0,
+        "dataflow_edges": 0.9618055555555556,
+        "instruction_count": 1.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 13,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 3
+      }
+    },
+    {
+      "func_name": "rust_bench::own_11",
+      "category": "ownership_drop",
+      "num_blocks_o0": 38,
+      "num_blocks_o2": 36,
+      "mean_block_similarity": 0.6795801491005266,
+      "per_feature_sims": {
+        "opcodes": 0.5233585858585859,
+        "dataflow_edges": 0.9453874274318758,
+        "instruction_count": 0.8169106214610601,
+        "concrete_values": 0.24572649572649574,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 31,
+        "BOUNDS_CHECK": 2,
+        "LOOP_HEADER": 3,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 22,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 11
+      }
+    },
+    {
+      "func_name": "rust_bench::own_12",
+      "category": "ownership_drop",
+      "num_blocks_o0": 55,
+      "num_blocks_o2": 61,
+      "mean_block_similarity": 0.6802627683320407,
+      "per_feature_sims": {
+        "opcodes": 0.485,
+        "dataflow_edges": 0.9459330016561653,
+        "instruction_count": 0.7881096681096682,
+        "concrete_values": 0.0984255823541538,
+        "callee_names": 0.0,
+        "string_refs": 0.0,
+        "constants": 0.0125
+      },
+      "block_type_counts_o0": {
+        "BODY": 48,
+        "LOOP_HEADER": 2,
+        "DROP_GLUE": 4,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 43,
+        "BOUNDS_CHECK": 11,
+        "LOOP_HEADER": 5,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::own_13",
+      "category": "ownership_drop",
+      "num_blocks_o0": 52,
+      "num_blocks_o2": 33,
+      "mean_block_similarity": 0.7765869707974593,
+      "per_feature_sims": {
+        "opcodes": 0.5601731601731602,
+        "dataflow_edges": 0.9433906816709218,
+        "instruction_count": 0.9343893480257117,
+        "concrete_values": 0.16459627329192547,
+        "callee_names": 0.0,
+        "constants": 0.13888888888888887
+      },
+      "block_type_counts_o0": {
+        "BODY": 41,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 4,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 16,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 11,
+        "ITERATOR_STATE": 1,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_14",
+      "category": "ownership_drop",
+      "num_blocks_o0": 34,
+      "num_blocks_o2": 18,
+      "mean_block_similarity": 0.7463977915866445,
+      "per_feature_sims": {
+        "opcodes": 0.6064814814814814,
+        "dataflow_edges": 0.932142725829701,
+        "instruction_count": 0.8632716049382716,
+        "concrete_values": 0.3316239316239316,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 23,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 4,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 6
+      }
+    },
+    {
+      "func_name": "rust_bench::own_15::{{closure}}",
+      "category": "ownership_drop",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 55,
+      "mean_block_similarity": 0.7023199023199024,
+      "per_feature_sims": {
+        "opcodes": 0.3333333333333333,
+        "concrete_values": 1.0,
+        "dataflow_edges": 0.927710843373494,
+        "instruction_count": 0.9
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 37,
+        "LOOP_HEADER": 6,
+        "BOUNDS_CHECK": 12
+      }
+    },
+    {
+      "func_name": "rust_bench::own_16",
+      "category": "ownership_drop",
+      "num_blocks_o0": 103,
+      "num_blocks_o2": 65,
+      "mean_block_similarity": 0.7597257829534774,
+      "per_feature_sims": {
+        "opcodes": 0.5434199134199135,
+        "dataflow_edges": 0.9321106050735463,
+        "instruction_count": 0.9256105006105005,
+        "concrete_values": 0.1634700176366843,
+        "callee_names": 0.0,
+        "constants": 0.1111111111111111
+      },
+      "block_type_counts_o0": {
+        "BODY": 82,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 10,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1,
+        "ITERATOR_STATE": 5
+      },
+      "block_type_counts_o2": {
+        "BODY": 41,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 18,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_17::{{closure}}",
+      "category": "ownership_drop",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 46,
+      "mean_block_similarity": 0.5231898310023311,
+      "per_feature_sims": {
+        "opcodes": 0.35,
+        "constants": 0.0,
+        "concrete_values": 0.5,
+        "dataflow_edges": 0.9559748427672956,
+        "instruction_count": 0.8846153846153846,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 28,
+        "BOUNDS_CHECK": 13,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_18",
+      "category": "ownership_drop",
+      "num_blocks_o0": 74,
+      "num_blocks_o2": 61,
+      "mean_block_similarity": 0.6677261675431683,
+      "per_feature_sims": {
+        "opcodes": 0.5131218508267689,
+        "dataflow_edges": 0.9463249824376108,
+        "instruction_count": 0.760987828200943,
+        "concrete_values": 0.1592105263157895,
+        "callee_names": 0.0,
+        "constants": 0.020833333333333332
+      },
+      "block_type_counts_o0": {
+        "BODY": 60,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 5,
+        "DROP_GLUE": 6,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 41,
+        "BOUNDS_CHECK": 13,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 2,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "rust_bench::own_19::{{closure}}",
+      "category": "ownership_drop",
+      "num_blocks_o0": 1,
+      "num_blocks_o2": 56,
+      "mean_block_similarity": 0.5853567853567854,
+      "per_feature_sims": {
+        "opcodes": 0.14285714285714285,
+        "concrete_values": 0.16666666666666666,
+        "dataflow_edges": 0.83125,
+        "instruction_count": 0.8888888888888888
+      },
+      "block_type_counts_o0": {
+        "BODY": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 30,
+        "LOOP_HEADER": 5,
+        "BOUNDS_CHECK": 19,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "rust_bench::own_20",
+      "category": "ownership_drop",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 46,
+      "mean_block_similarity": 0.7585043995740021,
+      "per_feature_sims": {
+        "opcodes": 0.6202380952380953,
+        "dataflow_edges": 0.9568555803817947,
+        "instruction_count": 0.8489478114478115,
+        "concrete_values": 0.10701754385964912,
+        "callee_names": 0.0,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 20,
+        "LOOP_HEADER": 2,
+        "DROP_GLUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 21,
+        "BOUNDS_CHECK": 20,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 3
+      }
+    }
+  ],
+  "c": [
+    {
+      "func_name": "bc_01",
+      "category": "bounds_check",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.663634511265466,
+      "per_feature_sims": {
+        "opcodes": 0.662878787878788,
+        "concrete_values": 0.11111111111111112,
+        "dataflow_edges": 0.8858872625535245,
+        "instruction_count": 0.6853535353535354,
+        "constants": 0.2,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 4,
+        "BOUNDS_CHECK": 2,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 3,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_02",
+      "category": "bounds_check",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 7,
+      "mean_block_similarity": 0.6706008705679591,
+      "per_feature_sims": {
+        "opcodes": 0.5642857142857143,
+        "concrete_values": 0.04897959183673469,
+        "dataflow_edges": 0.9304553552942175,
+        "instruction_count": 0.6844456701599558,
+        "constants": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 3,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_03",
+      "category": "bounds_check",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 17,
+      "mean_block_similarity": 0.6709211930977667,
+      "per_feature_sims": {
+        "opcodes": 0.5551835317460316,
+        "concrete_values": 0.03172123015873016,
+        "dataflow_edges": 0.8048620499425556,
+        "instruction_count": 0.8797077922077923,
+        "constants": 0.05555555555555555,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 9,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 3
+      }
+    },
+    {
+      "func_name": "bc_04",
+      "category": "bounds_check",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.6798013158628925,
+      "per_feature_sims": {
+        "opcodes": 0.5760204081632653,
+        "dataflow_edges": 0.9200599766654793,
+        "instruction_count": 0.7074863278644792,
+        "concrete_values": 0.13425925925925927,
+        "constants": 0.16666666666666666,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 7,
+        "BOUNDS_CHECK": 6,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "bc_05",
+      "category": "bounds_check",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.7343671355590357,
+      "per_feature_sims": {
+        "opcodes": 0.7064625850340136,
+        "concrete_values": 0.06746031746031746,
+        "dataflow_edges": 0.9184827677066728,
+        "instruction_count": 0.7159297052154194,
+        "constants": 0.3333333333333333,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 8,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 6,
+        "LOOP_HEADER": 2,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "bc_06",
+      "category": "bounds_check",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 14,
+      "mean_block_similarity": 0.7236105129507202,
+      "per_feature_sims": {
+        "opcodes": 0.5428571428571429,
+        "concrete_values": 0.23426573426573427,
+        "dataflow_edges": 0.9046369956963285,
+        "instruction_count": 0.7377450980392157
+      },
+      "block_type_counts_o0": {
+        "BODY": 4,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 4,
+        "LOOP_HEADER": 3,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 3,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_07",
+      "category": "bounds_check",
+      "num_blocks_o0": 19,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.6304437449788,
+      "per_feature_sims": {
+        "opcodes": 0.638924963924964,
+        "concrete_values": 0.086002886002886,
+        "dataflow_edges": 0.8995789930797642,
+        "instruction_count": 0.7323776728322183,
+        "constants": 0.1875,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 14,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 1
+      }
+    },
+    {
+      "func_name": "bc_08",
+      "category": "bounds_check",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 13,
+      "mean_block_similarity": 0.7753375836110441,
+      "per_feature_sims": {
+        "opcodes": 0.617948717948718,
+        "dataflow_edges": 0.9383941838032827,
+        "instruction_count": 0.745992469069392,
+        "concrete_values": 0.04242424242424243,
+        "constants": 1.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 10,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 5,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "bc_09",
+      "category": "bounds_check",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 9,
+      "mean_block_similarity": 0.650535308572086,
+      "per_feature_sims": {
+        "opcodes": 0.5092592592592592,
+        "concrete_values": 0.125,
+        "dataflow_edges": 0.9285217513329483,
+        "instruction_count": 0.6655540819333923,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 3,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 2,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "bc_10",
+      "category": "bounds_check",
+      "num_blocks_o0": 18,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.67130488460511,
+      "per_feature_sims": {
+        "opcodes": 0.5751488095238095,
+        "concrete_values": 0.14206349206349206,
+        "dataflow_edges": 0.9149710149111212,
+        "instruction_count": 0.6796213624338624,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 9,
+        "LOOP_HEADER": 2,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_11",
+      "category": "bounds_check",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.7023303440979771,
+      "per_feature_sims": {
+        "opcodes": 0.46147186147186153,
+        "concrete_values": 0.2,
+        "dataflow_edges": 0.9343386884680249,
+        "instruction_count": 0.717948717948718
+      },
+      "block_type_counts_o0": {
+        "BODY": 2,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 5,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 4,
+        "PROLOGUE": 1,
+        "LOOP_HEADER": 2,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_12",
+      "category": "bounds_check",
+      "num_blocks_o0": 27,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.7341508299617137,
+      "per_feature_sims": {
+        "opcodes": 0.6917107583774249,
+        "concrete_values": 0.1881155881155881,
+        "dataflow_edges": 0.9178131641253381,
+        "instruction_count": 0.7151464987497952,
+        "constants": 0.5277777777777778,
+        "callee_names": 0.7142857142857143
+      },
+      "block_type_counts_o0": {
+        "BODY": 20,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 16,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 5
+      }
+    },
+    {
+      "func_name": "bc_13",
+      "category": "bounds_check",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 8,
+      "mean_block_similarity": 0.6701615616486432,
+      "per_feature_sims": {
+        "opcodes": 0.5875,
+        "concrete_values": 0.1375,
+        "dataflow_edges": 0.9371103529069484,
+        "instruction_count": 0.7083333333333334,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 1,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 4,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 2,
+        "PROLOGUE": 1,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_14",
+      "category": "bounds_check",
+      "num_blocks_o0": 8,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.7194084267019952,
+      "per_feature_sims": {
+        "opcodes": 0.7074404761904762,
+        "concrete_values": 0.0625,
+        "dataflow_edges": 0.9007009278072768,
+        "instruction_count": 0.6159027777777778
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_15",
+      "category": "bounds_check",
+      "num_blocks_o0": 17,
+      "num_blocks_o2": 13,
+      "mean_block_similarity": 0.7386800343540288,
+      "per_feature_sims": {
+        "opcodes": 0.5958791208791209,
+        "concrete_values": 0.06652421652421653,
+        "dataflow_edges": 0.9137335249890233,
+        "instruction_count": 0.832051282051282,
+        "constants": 0.36666666666666664,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 7,
+        "EPILOGUE": 2,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 2,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_16",
+      "category": "bounds_check",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 17,
+      "mean_block_similarity": 0.6791128762173771,
+      "per_feature_sims": {
+        "opcodes": 0.6182539682539682,
+        "concrete_values": 0.15873015873015875,
+        "dataflow_edges": 0.9022413797917083,
+        "instruction_count": 0.6779014169770472,
+        "constants": 0.0,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "bc_17",
+      "category": "bounds_check",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.6834066884793969,
+      "per_feature_sims": {
+        "opcodes": 0.6230769230769232,
+        "dataflow_edges": 0.9200480690211834,
+        "instruction_count": 0.5778423499577345,
+        "concrete_values": 0.10533910533910534,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 6,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "PROLOGUE": 2,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "bc_18",
+      "category": "bounds_check",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.7497613675822163,
+      "per_feature_sims": {
+        "opcodes": 0.6031481481481483,
+        "dataflow_edges": 0.908657560132827,
+        "instruction_count": 0.8500529100529101,
+        "concrete_values": 0.30136054421768715,
+        "constants": 0.5,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 16,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 10,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "bc_19",
+      "category": "bounds_check",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.7083342257838403,
+      "per_feature_sims": {
+        "opcodes": 0.6095238095238095,
+        "concrete_values": 0.2888888888888889,
+        "dataflow_edges": 0.9163053866961796,
+        "instruction_count": 0.7357208267922555,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 7,
+        "BODY": 4,
+        "LOOP_HEADER": 1,
+        "EPILOGUE": 3
+      }
+    },
+    {
+      "func_name": "bc_20",
+      "category": "bounds_check",
+      "num_blocks_o0": 18,
+      "num_blocks_o2": 22,
+      "mean_block_similarity": 0.6858675717455976,
+      "per_feature_sims": {
+        "opcodes": 0.687037037037037,
+        "dataflow_edges": 0.8212337292768591,
+        "instruction_count": 0.7067719680464779,
+        "concrete_values": 0.10962962962962962,
+        "constants": 0.22916666666666666,
+        "callee_names": 0.4
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 12,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 1,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "em_01",
+      "category": "enum_match",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 14,
+      "mean_block_similarity": 0.6951802466137417,
+      "per_feature_sims": {
+        "opcodes": 0.46726190476190477,
+        "dataflow_edges": 0.9415476778091791,
+        "instruction_count": 0.8425388337153044,
+        "concrete_values": 0.10606060606060606,
+        "constants": 0.13888888888888887,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 3,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 10,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "em_02",
+      "category": "enum_match",
+      "num_blocks_o0": 33,
+      "num_blocks_o2": 29,
+      "mean_block_similarity": 0.7503530570588339,
+      "per_feature_sims": {
+        "opcodes": 0.6058292282430212,
+        "concrete_values": 0.3727272727272727,
+        "dataflow_edges": 0.9415975520194617,
+        "instruction_count": 0.8442528735632183,
+        "constants": 0.3333333333333333,
+        "callee_names": 0.42857142857142855
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 6,
+        "BODY": 19,
+        "BOUNDS_CHECK": 8
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 9,
+        "BODY": 18,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "em_03",
+      "category": "enum_match",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.7143122181347534,
+      "per_feature_sims": {
+        "opcodes": 0.6240079365079364,
+        "dataflow_edges": 0.9409495181274963,
+        "instruction_count": 0.7684343434343436,
+        "concrete_values": 0.0,
+        "constants": 0.2857142857142857
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 7,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 6,
+        "BODY": 5,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "em_04",
+      "category": "enum_match",
+      "num_blocks_o0": 3,
+      "num_blocks_o2": 3,
+      "mean_block_similarity": 0.4998453074052669,
+      "per_feature_sims": {
+        "opcodes": 0.48333333333333334,
+        "concrete_values": 0.3333333333333333,
+        "dataflow_edges": 0.8808036205623117,
+        "instruction_count": 0.5568181818181818,
+        "callee_names": 0.3333333333333333,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 3
+      }
+    },
+    {
+      "func_name": "em_05",
+      "category": "enum_match",
+      "num_blocks_o0": 19,
+      "num_blocks_o2": 20,
+      "mean_block_similarity": 0.7022139290324853,
+      "per_feature_sims": {
+        "opcodes": 0.619674185463659,
+        "dataflow_edges": 0.9202332930237014,
+        "instruction_count": 0.818500797448166,
+        "concrete_values": 0.18335537918871253,
+        "constants": 0.3181818181818182,
+        "callee_names": 0.6
+      },
+      "block_type_counts_o0": {
+        "BODY": 10,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 6
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 6,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "iter_11",
+      "category": "iterators",
+      "num_blocks_o0": 48,
+      "num_blocks_o2": 36,
+      "mean_block_similarity": 0.759537437584175,
+      "per_feature_sims": {
+        "opcodes": 0.6693121693121693,
+        "dataflow_edges": 0.9330165363645333,
+        "instruction_count": 0.8859347442680776,
+        "concrete_values": 0.3387096774193548,
+        "constants": 0.1875
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 7,
+        "BOUNDS_CHECK": 25,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 15,
+        "ITERATOR_STATE": 4,
+        "PROLOGUE": 1,
+        "BODY": 14,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "iter_12",
+      "category": "iterators",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.7426161137783942,
+      "per_feature_sims": {
+        "opcodes": 0.696957671957672,
+        "dataflow_edges": 0.9349262078002951,
+        "instruction_count": 0.821127946127946,
+        "concrete_values": 0.10034965034965036,
+        "constants": 0.3333333333333333,
+        "callee_names": 0.6666666666666666
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 7,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "iter_13",
+      "category": "iterators",
+      "num_blocks_o0": 8,
+      "num_blocks_o2": 8,
+      "mean_block_similarity": 0.6421034800877398,
+      "per_feature_sims": {
+        "opcodes": 0.5458333333333334,
+        "concrete_values": 0.18055555555555555,
+        "dataflow_edges": 0.8899990710014211,
+        "instruction_count": 0.628469304388422,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 4,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "iter_14",
+      "category": "iterators",
+      "num_blocks_o0": 12,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.6644860985443816,
+      "per_feature_sims": {
+        "opcodes": 0.4928571428571428,
+        "concrete_values": 0.20505050505050504,
+        "dataflow_edges": 0.933767760414581,
+        "instruction_count": 0.7320346320346321,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 5,
+        "BODY": 4,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "iter_15",
+      "category": "iterators",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 21,
+      "mean_block_similarity": 0.7193448323030998,
+      "per_feature_sims": {
+        "opcodes": 0.5323015873015872,
+        "dataflow_edges": 0.8868782825759265,
+        "instruction_count": 0.8397115384615386,
+        "concrete_values": 0.31666666666666665,
+        "constants": 0.3125
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 8,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 8,
+        "ITERATOR_STATE": 3,
+        "PROLOGUE": 1,
+        "BODY": 7,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "iter_16",
+      "category": "iterators",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.7660717755574684,
+      "per_feature_sims": {
+        "opcodes": 0.7264285714285714,
+        "concrete_values": 0.058301282051282044,
+        "dataflow_edges": 0.921479080458235,
+        "instruction_count": 0.7946031746031746,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "BOUNDS_CHECK": 2,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "iter_17",
+      "category": "iterators",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.733026005257969,
+      "per_feature_sims": {
+        "opcodes": 0.6743589743589743,
+        "dataflow_edges": 0.9221020851682188,
+        "instruction_count": 0.7240842490842491,
+        "constants": 0.5,
+        "concrete_values": 0.29398148148148145,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 7,
+        "BOUNDS_CHECK": 6,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "iter_18",
+      "category": "iterators",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 8,
+      "mean_block_similarity": 0.7742904602746058,
+      "per_feature_sims": {
+        "opcodes": 0.515625,
+        "dataflow_edges": 0.9439741148074482,
+        "instruction_count": 0.8555555555555556,
+        "concrete_values": 0.19907407407407407,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 4,
+        "PROLOGUE": 1,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 2,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "iter_19",
+      "category": "iterators",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 6,
+      "mean_block_similarity": 0.586400539639316,
+      "per_feature_sims": {
+        "opcodes": 0.4234126984126984,
+        "concrete_values": 0.3991341991341991,
+        "dataflow_edges": 0.8861647443302617,
+        "instruction_count": 0.7039473684210527,
+        "constants": 0.2222222222222222,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 6
+      }
+    },
+    {
+      "func_name": "iter_20",
+      "category": "iterators",
+      "num_blocks_o0": 10,
+      "num_blocks_o2": 8,
+      "mean_block_similarity": 0.6352390331586486,
+      "per_feature_sims": {
+        "opcodes": 0.44375,
+        "concrete_values": 0.14285714285714285,
+        "dataflow_edges": 0.924612644828645,
+        "instruction_count": 0.7294184981684981,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 2,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "opt_01",
+      "category": "option_result",
+      "num_blocks_o0": 21,
+      "num_blocks_o2": 17,
+      "mean_block_similarity": 0.743656048745795,
+      "per_feature_sims": {
+        "opcodes": 0.6357142857142857,
+        "dataflow_edges": 0.9626048884097957,
+        "instruction_count": 0.676890756302521,
+        "concrete_values": 0.2076923076923077
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 5,
+        "ITERATOR_STATE": 2,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 8,
+        "EPILOGUE": 5
+      }
+    },
+    {
+      "func_name": "opt_02",
+      "category": "option_result",
+      "num_blocks_o0": 38,
+      "num_blocks_o2": 45,
+      "mean_block_similarity": 0.8155789593685355,
+      "per_feature_sims": {
+        "opcodes": 0.7615830115830114,
+        "dataflow_edges": 0.9301397246045082,
+        "instruction_count": 0.824937343358396,
+        "concrete_values": 0.23261648745519717,
+        "constants": 0.36363636363636365,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 15,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 15,
+        "ITERATOR_STATE": 4,
+        "PROLOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 25,
+        "BODY": 17,
+        "PROLOGUE": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "opt_03",
+      "category": "option_result",
+      "num_blocks_o0": 15,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.7286097670463495,
+      "per_feature_sims": {
+        "opcodes": 0.6722222222222222,
+        "dataflow_edges": 0.9477618983771633,
+        "instruction_count": 0.7340277777777778,
+        "concrete_values": 0.14074074074074072,
+        "constants": 0.25
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 5,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 6,
+        "BODY": 5,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "opt_04",
+      "category": "option_result",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.7362527364540332,
+      "per_feature_sims": {
+        "opcodes": 0.6328571428571428,
+        "dataflow_edges": 0.9167011933288973,
+        "instruction_count": 0.9317821067821068,
+        "concrete_values": 0.1380952380952381,
+        "constants": 0.2
+      },
+      "block_type_counts_o0": {
+        "BODY": 4,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 3,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 4,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "opt_05",
+      "category": "option_result",
+      "num_blocks_o0": 33,
+      "num_blocks_o2": 40,
+      "mean_block_similarity": 0.7756612174676982,
+      "per_feature_sims": {
+        "opcodes": 0.7193362193362193,
+        "concrete_values": 0.3392857142857143,
+        "dataflow_edges": 0.9190838584573305,
+        "instruction_count": 0.827631291267655,
+        "constants": 0.3645833333333333,
+        "callee_names": 0.42857142857142855
+      },
+      "block_type_counts_o0": {
+        "BODY": 16,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 10,
+        "ITERATOR_STATE": 3,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 19,
+        "BOUNDS_CHECK": 16,
+        "PROLOGUE": 2,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "opt_06",
+      "category": "option_result",
+      "num_blocks_o0": 29,
+      "num_blocks_o2": 13,
+      "mean_block_similarity": 0.7858421485488567,
+      "per_feature_sims": {
+        "opcodes": 0.5897435897435896,
+        "concrete_values": 0.16666666666666666,
+        "dataflow_edges": 0.9674004013534346,
+        "instruction_count": 0.8296703296703297,
+        "constants": 0.75
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 15
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 6,
+        "BODY": 4,
+        "LOOP_HEADER": 1,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "opt_07",
+      "category": "option_result",
+      "num_blocks_o0": 30,
+      "num_blocks_o2": 40,
+      "mean_block_similarity": 0.7864754445681201,
+      "per_feature_sims": {
+        "opcodes": 0.7356878306878306,
+        "concrete_values": 0.2995555555555556,
+        "dataflow_edges": 0.9225894446887839,
+        "instruction_count": 0.828080808080808,
+        "constants": 0.39285714285714285,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 14,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 12,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 18,
+        "BODY": 18,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "opt_08",
+      "category": "option_result",
+      "num_blocks_o0": 17,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.6912513096689117,
+      "per_feature_sims": {
+        "opcodes": 0.5516666666666666,
+        "concrete_values": 0.2611111111111111,
+        "dataflow_edges": 0.9234694162591813,
+        "instruction_count": 0.8372510822510822,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 3,
+        "BODY": 4,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "opt_09",
+      "category": "option_result",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 9,
+      "mean_block_similarity": 0.7003333850777482,
+      "per_feature_sims": {
+        "opcodes": 0.45185185185185184,
+        "concrete_values": 0.31428571428571433,
+        "dataflow_edges": 0.9581475077291685,
+        "instruction_count": 0.7351851851851853
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 3,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 3,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "opt_10",
+      "category": "option_result",
+      "num_blocks_o0": 33,
+      "num_blocks_o2": 31,
+      "mean_block_similarity": 0.7537616197092688,
+      "per_feature_sims": {
+        "opcodes": 0.6327956989247312,
+        "dataflow_edges": 0.9291911933072186,
+        "instruction_count": 0.7796839361355491,
+        "constants": 0.4,
+        "concrete_values": 0.17542735042735044
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 13,
+        "ITERATOR_STATE": 2,
+        "PROLOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 16,
+        "PROLOGUE": 2,
+        "ITERATOR_STATE": 2,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "opt_11",
+      "category": "option_result",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.6422060570053865,
+      "per_feature_sims": {
+        "opcodes": 0.49000000000000005,
+        "concrete_values": 0.05,
+        "dataflow_edges": 0.9203821271263214,
+        "instruction_count": 0.6103571428571429,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 4,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "opt_12",
+      "category": "option_result",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.5800281823492953,
+      "per_feature_sims": {
+        "opcodes": 0.5037037037037037,
+        "concrete_values": 0.13333333333333333,
+        "dataflow_edges": 0.9310242870628063,
+        "instruction_count": 0.5342592592592593,
+        "constants": 0.2
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 6,
+        "BODY": 4
+      }
+    },
+    {
+      "func_name": "opt_13",
+      "category": "option_result",
+      "num_blocks_o0": 7,
+      "num_blocks_o2": 5,
+      "mean_block_similarity": 0.6988866233352055,
+      "per_feature_sims": {
+        "opcodes": 0.5357142857142857,
+        "dataflow_edges": 0.9092091358320517,
+        "instruction_count": 0.711111111111111,
+        "concrete_values": 0.03571428571428571
+      },
+      "block_type_counts_o0": {
+        "BODY": 3,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 1
+      }
+    },
+    {
+      "func_name": "opt_14",
+      "category": "option_result",
+      "num_blocks_o0": 38,
+      "num_blocks_o2": 46,
+      "mean_block_similarity": 0.7720033436839193,
+      "per_feature_sims": {
+        "opcodes": 0.7794723294723294,
+        "constants": 0.3819444444444444,
+        "concrete_values": 0.262037037037037,
+        "dataflow_edges": 0.9290580461952116,
+        "instruction_count": 0.8165726817042609,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 14,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 17,
+        "ITERATOR_STATE": 4,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 18,
+        "PROLOGUE": 3,
+        "BOUNDS_CHECK": 19,
+        "ITERATOR_STATE": 3,
+        "LOOP_HEADER": 3
+      }
+    },
+    {
+      "func_name": "opt_15",
+      "category": "option_result",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 10,
+      "mean_block_similarity": 0.7380484809910286,
+      "per_feature_sims": {
+        "opcodes": 0.6369047619047619,
+        "dataflow_edges": 0.9052567585916943,
+        "instruction_count": 0.8432900432900434,
+        "concrete_values": 0.09259259259259259,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2,
+        "EPILOGUE": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 4,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "opt_16",
+      "category": "option_result",
+      "num_blocks_o0": 17,
+      "num_blocks_o2": 7,
+      "mean_block_similarity": 0.7625450370313996,
+      "per_feature_sims": {
+        "opcodes": 0.5802721088435374,
+        "dataflow_edges": 0.9153743161605034,
+        "instruction_count": 0.8547619047619047,
+        "concrete_values": 0.1875
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 3,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 3,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "opt_17",
+      "category": "option_result",
+      "num_blocks_o0": 17,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.7211715043058601,
+      "per_feature_sims": {
+        "opcodes": 0.6283549783549783,
+        "constants": 0.6,
+        "concrete_values": 0.2751282051282051,
+        "dataflow_edges": 0.9266198499838928,
+        "instruction_count": 0.7265840220385675,
+        "callee_names": 0.6
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 3
+      }
+    },
+    {
+      "func_name": "opt_18",
+      "category": "option_result",
+      "num_blocks_o0": 25,
+      "num_blocks_o2": 22,
+      "mean_block_similarity": 0.735612252041527,
+      "per_feature_sims": {
+        "opcodes": 0.6212908303817394,
+        "dataflow_edges": 0.9412017759252994,
+        "instruction_count": 0.8217532467532466,
+        "concrete_values": 0.2876068376068376,
+        "constants": 0.22727272727272727
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 13,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 8,
+        "ITERATOR_STATE": 2,
+        "PROLOGUE": 1,
+        "BODY": 9,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "opt_19",
+      "category": "option_result",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 9,
+      "mean_block_similarity": 0.7292323613224482,
+      "per_feature_sims": {
+        "opcodes": 0.5671957671957671,
+        "dataflow_edges": 0.966044832414528,
+        "instruction_count": 0.6666666666666667,
+        "concrete_values": 0.14285714285714285,
+        "constants": 1.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 6,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 4,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 2,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "opt_20",
+      "category": "option_result",
+      "num_blocks_o0": 37,
+      "num_blocks_o2": 47,
+      "mean_block_similarity": 0.8348892218001592,
+      "per_feature_sims": {
+        "opcodes": 0.8017857142857141,
+        "dataflow_edges": 0.9310769864976112,
+        "instruction_count": 0.8728603603603604,
+        "constants": 0.43589743589743585,
+        "concrete_values": 0.22059386973180076,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 15,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 16,
+        "ITERATOR_STATE": 3,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 25,
+        "BODY": 16,
+        "PROLOGUE": 2,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "own_01",
+      "category": "ownership_drop",
+      "num_blocks_o0": 17,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.6267173138084888,
+      "per_feature_sims": {
+        "opcodes": 0.5676190476190476,
+        "concrete_values": 0.07555555555555556,
+        "dataflow_edges": 0.9005979217221046,
+        "instruction_count": 0.7479823444529325,
+        "constants": 0.13333333333333333,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 6
+      },
+      "block_type_counts_o2": {
+        "BODY": 5,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 3,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "own_02",
+      "category": "ownership_drop",
+      "num_blocks_o0": 15,
+      "num_blocks_o2": 20,
+      "mean_block_similarity": 0.718401489627191,
+      "per_feature_sims": {
+        "opcodes": 0.672142857142857,
+        "dataflow_edges": 0.915134200806856,
+        "instruction_count": 0.6853652751423149,
+        "concrete_values": 0.16306706114398423,
+        "constants": 0.41666666666666663,
+        "callee_names": 0.6666666666666666
+      },
+      "block_type_counts_o0": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 6,
+        "LOOP_HEADER": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 8,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "own_03",
+      "category": "ownership_drop",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 26,
+      "mean_block_similarity": 0.7521555655559756,
+      "per_feature_sims": {
+        "opcodes": 0.764186507936508,
+        "dataflow_edges": 0.8873364317073591,
+        "instruction_count": 0.8087466931216932,
+        "constants": 0.46875,
+        "concrete_values": 0.218922305764411,
+        "callee_names": 0.38461538461538464
+      },
+      "block_type_counts_o0": {
+        "BODY": 14,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 7
+      },
+      "block_type_counts_o2": {
+        "BODY": 17,
+        "BOUNDS_CHECK": 6,
+        "LOOP_HEADER": 2,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "own_04",
+      "category": "ownership_drop",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 14,
+      "mean_block_similarity": 0.8017089104212896,
+      "per_feature_sims": {
+        "opcodes": 0.7277056277056277,
+        "dataflow_edges": 0.9505647822457332,
+        "instruction_count": 0.7344474153297683,
+        "concrete_values": 0.3666666666666667,
+        "constants": 0.4444444444444444,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 4,
+        "BODY": 6,
+        "LOOP_HEADER": 3,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "own_05",
+      "category": "ownership_drop",
+      "num_blocks_o0": 21,
+      "num_blocks_o2": 25,
+      "mean_block_similarity": 0.7198515681493567,
+      "per_feature_sims": {
+        "opcodes": 0.6416855631141345,
+        "dataflow_edges": 0.9334179690769993,
+        "instruction_count": 0.6807523009203681,
+        "constants": 0.4166666666666667,
+        "concrete_values": 0.049707602339181284,
+        "callee_names": 1.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 5
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 8,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 3,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "own_06",
+      "category": "ownership_drop",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 24,
+      "mean_block_similarity": 0.6820994854360575,
+      "per_feature_sims": {
+        "opcodes": 0.678021978021978,
+        "concrete_values": 0.13797313797313795,
+        "dataflow_edges": 0.8855437869748346,
+        "instruction_count": 0.8454156954156955,
+        "constants": 0.2037037037037037,
+        "callee_names": 0.14285714285714285
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 14,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "own_07",
+      "category": "ownership_drop",
+      "num_blocks_o0": 4,
+      "num_blocks_o2": 54,
+      "mean_block_similarity": 0.7094059326725958,
+      "per_feature_sims": {
+        "opcodes": 0.7375,
+        "concrete_values": 0.5192307692307693,
+        "dataflow_edges": 0.8916119951873964,
+        "instruction_count": 0.69375,
+        "callee_names": 0.6666666666666666,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 38,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 14
+      }
+    },
+    {
+      "func_name": "own_08",
+      "category": "ownership_drop",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 24,
+      "mean_block_similarity": 0.7547838501937664,
+      "per_feature_sims": {
+        "opcodes": 0.731547619047619,
+        "concrete_values": 0.2363636363636364,
+        "dataflow_edges": 0.915511543332346,
+        "instruction_count": 0.7772481684981686,
+        "constants": 0.5454545454545454,
+        "callee_names": 0.625
+      },
+      "block_type_counts_o0": {
+        "BODY": 13,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 15,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "own_09",
+      "category": "ownership_drop",
+      "num_blocks_o0": 26,
+      "num_blocks_o2": 24,
+      "mean_block_similarity": 0.7733109262081325,
+      "per_feature_sims": {
+        "opcodes": 0.7423611111111111,
+        "concrete_values": 0.23054079758625212,
+        "dataflow_edges": 0.9432980513374541,
+        "instruction_count": 0.8016674297924299,
+        "constants": 0.19166666666666665,
+        "callee_names": 0.2
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 5,
+        "ITERATOR_STATE": 2,
+        "BOUNDS_CHECK": 7
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 7,
+        "PROLOGUE": 2,
+        "ITERATOR_STATE": 3,
+        "LOOP_HEADER": 3
+      }
+    },
+    {
+      "func_name": "own_10",
+      "category": "ownership_drop",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 21,
+      "mean_block_similarity": 0.7199629932153515,
+      "per_feature_sims": {
+        "opcodes": 0.7149073149073149,
+        "dataflow_edges": 0.9091512553286653,
+        "instruction_count": 0.8131170416884702,
+        "concrete_values": 0.13950617283950617,
+        "constants": 0.1577922077922078,
+        "callee_names": 0.16666666666666666
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 7,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 4,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "own_11",
+      "category": "ownership_drop",
+      "num_blocks_o0": 15,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.6845031762646362,
+      "per_feature_sims": {
+        "opcodes": 0.6174603174603174,
+        "dataflow_edges": 0.9163844840121695,
+        "instruction_count": 0.7283342658817042,
+        "concrete_values": 0.2747863247863248,
+        "constants": 0.16666666666666666,
+        "callee_names": 0.25
+      },
+      "block_type_counts_o0": {
+        "BODY": 10,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 4
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "own_12",
+      "category": "ownership_drop",
+      "num_blocks_o0": 27,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.7570201424527379,
+      "per_feature_sims": {
+        "opcodes": 0.7290123456790124,
+        "dataflow_edges": 0.9278790183321871,
+        "instruction_count": 0.8401234567901235,
+        "constants": 0.4351851851851852,
+        "concrete_values": 0.1595238095238095,
+        "callee_names": 0.35714285714285715
+      },
+      "block_type_counts_o0": {
+        "BODY": 14,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 9,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 17,
+        "BOUNDS_CHECK": 8,
+        "LOOP_HEADER": 2,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "own_13",
+      "category": "ownership_drop",
+      "num_blocks_o0": 25,
+      "num_blocks_o2": 22,
+      "mean_block_similarity": 0.7525193202719976,
+      "per_feature_sims": {
+        "opcodes": 0.6281385281385281,
+        "concrete_values": 0.16287878787878787,
+        "dataflow_edges": 0.9231058286278653,
+        "instruction_count": 0.8407467532467533,
+        "constants": 0.5,
+        "callee_names": 0.2
+      },
+      "block_type_counts_o0": {
+        "BODY": 13,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 6,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "own_14",
+      "category": "ownership_drop",
+      "num_blocks_o0": 12,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.7093579702157506,
+      "per_feature_sims": {
+        "opcodes": 0.6599206349206349,
+        "concrete_values": 0.09305555555555556,
+        "dataflow_edges": 0.8913827533762091,
+        "instruction_count": 0.6775132275132276,
+        "constants": 0.55,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 6,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 3
+      }
+    },
+    {
+      "func_name": "own_15",
+      "category": "ownership_drop",
+      "num_blocks_o0": 34,
+      "num_blocks_o2": 40,
+      "mean_block_similarity": 0.7425855190399668,
+      "per_feature_sims": {
+        "opcodes": 0.7334033613445378,
+        "dataflow_edges": 0.9255984081190317,
+        "instruction_count": 0.7880212302721864,
+        "concrete_values": 0.18070245726495726,
+        "constants": 0.25555555555555554,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 16,
+        "LOOP_HEADER": 7,
+        "BOUNDS_CHECK": 11
+      },
+      "block_type_counts_o2": {
+        "BODY": 21,
+        "BOUNDS_CHECK": 13,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 4
+      }
+    },
+    {
+      "func_name": "own_16",
+      "category": "ownership_drop",
+      "num_blocks_o0": 29,
+      "num_blocks_o2": 26,
+      "mean_block_similarity": 0.7148337454927992,
+      "per_feature_sims": {
+        "opcodes": 0.6273809523809525,
+        "dataflow_edges": 0.9310048443057196,
+        "instruction_count": 0.7625471963933502,
+        "concrete_values": 0.15693229082266516,
+        "constants": 0.09090909090909091,
+        "callee_names": 0.25
+      },
+      "block_type_counts_o0": {
+        "BODY": 15,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 8,
+        "PROLOGUE": 2,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 10,
+        "BOUNDS_CHECK": 11,
+        "LOOP_HEADER": 3,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "own_17",
+      "category": "ownership_drop",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 17,
+      "mean_block_similarity": 0.6947801194087866,
+      "per_feature_sims": {
+        "opcodes": 0.6415966386554621,
+        "concrete_values": 0.27841605392156865,
+        "dataflow_edges": 0.9202342935270983,
+        "instruction_count": 0.8011904761904763,
+        "constants": 0.3333333333333333,
+        "callee_names": 0.5555555555555556
+      },
+      "block_type_counts_o0": {
+        "BODY": 15,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 12,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 2
+      }
+    },
+    {
+      "func_name": "own_18",
+      "category": "ownership_drop",
+      "num_blocks_o0": 26,
+      "num_blocks_o2": 28,
+      "mean_block_similarity": 0.788209475215509,
+      "per_feature_sims": {
+        "opcodes": 0.8185897435897436,
+        "dataflow_edges": 0.9282482364869883,
+        "instruction_count": 0.8138903831211525,
+        "concrete_values": 0.19212962962962962,
+        "constants": 0.36363636363636365,
+        "callee_names": 0.36363636363636365
+      },
+      "block_type_counts_o0": {
+        "BODY": 18,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 16,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 3
+      }
+    },
+    {
+      "func_name": "own_19",
+      "category": "ownership_drop",
+      "num_blocks_o0": 30,
+      "num_blocks_o2": 31,
+      "mean_block_similarity": 0.7780238489142325,
+      "per_feature_sims": {
+        "opcodes": 0.6860714285714287,
+        "constants": 0.7142857142857143,
+        "concrete_values": 0.07388888888888888,
+        "dataflow_edges": 0.9192471398069547,
+        "instruction_count": 0.8025877825877825,
+        "callee_names": 0.6
+      },
+      "block_type_counts_o0": {
+        "BODY": 13,
+        "BOUNDS_CHECK": 11,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 13,
+        "BOUNDS_CHECK": 14,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "own_20",
+      "category": "ownership_drop",
+      "num_blocks_o0": 14,
+      "num_blocks_o2": 17,
+      "mean_block_similarity": 0.7394011859162211,
+      "per_feature_sims": {
+        "opcodes": 0.7253401360544217,
+        "dataflow_edges": 0.9232237690789598,
+        "instruction_count": 0.7168606612685561,
+        "constants": 0.4,
+        "concrete_values": 0.13717948717948716,
+        "callee_names": 0.6666666666666666
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 4,
+        "LOOP_HEADER": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 6,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "em_06",
+      "category": "enum_match",
+      "num_blocks_o0": 82,
+      "num_blocks_o2": 66,
+      "mean_block_similarity": 0.8188336450562057,
+      "per_feature_sims": {
+        "opcodes": 0.7808080808080807,
+        "constants": 0.6574074074074073,
+        "dataflow_edges": 0.9444388588696091,
+        "instruction_count": 0.7844877344877346,
+        "concrete_values": 0.33866666666666667,
+        "callee_names": 0.55
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 4,
+        "BODY": 47,
+        "BOUNDS_CHECK": 30,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 8,
+        "BODY": 29,
+        "BOUNDS_CHECK": 29
+      }
+    },
+    {
+      "func_name": "em_07",
+      "category": "enum_match",
+      "num_blocks_o0": 31,
+      "num_blocks_o2": 30,
+      "mean_block_similarity": 0.6834138588142616,
+      "per_feature_sims": {
+        "opcodes": 0.7115873015873014,
+        "dataflow_edges": 0.931232379605094,
+        "instruction_count": 0.7079371445547917,
+        "concrete_values": 0.06111111111111111,
+        "constants": 0.29305555555555557,
+        "callee_names": 0.15384615384615385
+      },
+      "block_type_counts_o0": {
+        "BODY": 25,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 4,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 23,
+        "BOUNDS_CHECK": 5,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "em_08",
+      "category": "enum_match",
+      "num_blocks_o0": 3,
+      "num_blocks_o2": 3,
+      "mean_block_similarity": 0.7113049932048648,
+      "per_feature_sims": {
+        "opcodes": 0.7999999999999999,
+        "constants": 0.39999999999999997,
+        "concrete_values": 0.7333333333333334,
+        "dataflow_edges": 0.9342334739803094,
+        "instruction_count": 0.7714285714285715,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 2,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "em_09",
+      "category": "enum_match",
+      "num_blocks_o0": 26,
+      "num_blocks_o2": 19,
+      "mean_block_similarity": 0.802353817236874,
+      "per_feature_sims": {
+        "opcodes": 0.6543859649122807,
+        "constants": 0.3333333333333333,
+        "dataflow_edges": 0.9633640907064164,
+        "instruction_count": 0.8896800825593395,
+        "concrete_values": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 12,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 9,
+        "BODY": 9,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "em_10",
+      "category": "enum_match",
+      "num_blocks_o0": 38,
+      "num_blocks_o2": 29,
+      "mean_block_similarity": 0.7002887151279596,
+      "per_feature_sims": {
+        "opcodes": 0.6208538587848932,
+        "constants": 0.46,
+        "dataflow_edges": 0.9418498419145941,
+        "instruction_count": 0.6649841059323818,
+        "concrete_values": 0.03874269005847954,
+        "callee_names": 0.4444444444444444
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 17,
+        "BODY": 16,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 2,
+        "BODY": 19,
+        "BOUNDS_CHECK": 8
+      }
+    },
+    {
+      "func_name": "em_11",
+      "category": "enum_match",
+      "num_blocks_o0": 32,
+      "num_blocks_o2": 34,
+      "mean_block_similarity": 0.7324350219758753,
+      "per_feature_sims": {
+        "opcodes": 0.6466889880952381,
+        "dataflow_edges": 0.9461537370645678,
+        "instruction_count": 0.8053361742424243,
+        "concrete_values": 0.07062937062937064,
+        "constants": 0.2222222222222222,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "LOOP_HEADER": 6,
+        "BOUNDS_CHECK": 14,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 13,
+        "BOUNDS_CHECK": 14,
+        "LOOP_HEADER": 5,
+        "PROLOGUE": 2
+      }
+    },
+    {
+      "func_name": "em_12",
+      "category": "enum_match",
+      "num_blocks_o0": 13,
+      "num_blocks_o2": 13,
+      "mean_block_similarity": 0.6306254218423922,
+      "per_feature_sims": {
+        "opcodes": 0.5858974358974358,
+        "dataflow_edges": 0.8860677767529719,
+        "instruction_count": 0.82603550295858,
+        "concrete_values": 0.22231404958677684,
+        "constants": 0.037037037037037035,
+        "callee_names": 0.25
+      },
+      "block_type_counts_o0": {
+        "BODY": 6,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 5
+      },
+      "block_type_counts_o2": {
+        "BODY": 8,
+        "BOUNDS_CHECK": 3,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "em_13",
+      "category": "enum_match",
+      "num_blocks_o0": 16,
+      "num_blocks_o2": 14,
+      "mean_block_similarity": 0.6708699043901422,
+      "per_feature_sims": {
+        "opcodes": 0.5068027210884355,
+        "concrete_values": 0.0934065934065934,
+        "dataflow_edges": 0.9384889146058774,
+        "instruction_count": 0.784887136672851,
+        "constants": 0.13888888888888887,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 3,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 11,
+        "BOUNDS_CHECK": 2,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "em_14",
+      "category": "enum_match",
+      "num_blocks_o0": 29,
+      "num_blocks_o2": 25,
+      "mean_block_similarity": 0.7615140069024021,
+      "per_feature_sims": {
+        "opcodes": 0.7559999999999999,
+        "constants": 0.4907407407407407,
+        "dataflow_edges": 0.9506800895156339,
+        "instruction_count": 0.769,
+        "concrete_values": 0.3288888888888889,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 4,
+        "BODY": 17,
+        "BOUNDS_CHECK": 8
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 5,
+        "BODY": 10,
+        "BOUNDS_CHECK": 9,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "em_15",
+      "category": "enum_match",
+      "num_blocks_o0": 66,
+      "num_blocks_o2": 49,
+      "mean_block_similarity": 0.799195700602253,
+      "per_feature_sims": {
+        "opcodes": 0.7320213799805637,
+        "constants": 0.4421052631578948,
+        "dataflow_edges": 0.9727836776329271,
+        "instruction_count": 0.7959542724848846,
+        "concrete_values": 0.15555555555555556,
+        "callee_names": 0.6363636363636364
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 9,
+        "BOUNDS_CHECK": 32,
+        "BODY": 23,
+        "ITERATOR_STATE": 1,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 6,
+        "BODY": 23,
+        "BOUNDS_CHECK": 18,
+        "ITERATOR_STATE": 1,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "em_16",
+      "category": "enum_match",
+      "num_blocks_o0": 78,
+      "num_blocks_o2": 74,
+      "mean_block_similarity": 0.7389420159606149,
+      "per_feature_sims": {
+        "opcodes": 0.6346846846846848,
+        "dataflow_edges": 0.9366669298524631,
+        "instruction_count": 0.7751374751374751,
+        "constants": 0.5290849673202614,
+        "concrete_values": 0.13200938495056141,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 41,
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 30,
+        "ITERATOR_STATE": 1,
+        "PROLOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 30,
+        "BODY": 31,
+        "LOOP_HEADER": 5,
+        "ITERATOR_STATE": 7,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "em_17",
+      "category": "enum_match",
+      "num_blocks_o0": 2,
+      "num_blocks_o2": 1,
+      "mean_block_similarity": 0.490990990990991,
+      "per_feature_sims": {
+        "opcodes": 0.0,
+        "dataflow_edges": 1.0,
+        "instruction_count": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 1
+      }
+    },
+    {
+      "func_name": "em_18",
+      "category": "enum_match",
+      "num_blocks_o0": 20,
+      "num_blocks_o2": 15,
+      "mean_block_similarity": 0.7172211496726095,
+      "per_feature_sims": {
+        "opcodes": 0.6211111111111111,
+        "constants": 0.17857142857142858,
+        "dataflow_edges": 0.9224686768319873,
+        "instruction_count": 0.8288785288785289,
+        "concrete_values": 0.13715277777777776,
+        "callee_names": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 11,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 7,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 2
+      }
+    },
+    {
+      "func_name": "em_19",
+      "category": "enum_match",
+      "num_blocks_o0": 61,
+      "num_blocks_o2": 59,
+      "mean_block_similarity": 0.8129675461709781,
+      "per_feature_sims": {
+        "opcodes": 0.7790960451977401,
+        "constants": 0.5586206896551724,
+        "dataflow_edges": 0.9524209678578711,
+        "instruction_count": 0.797545565932904,
+        "concrete_values": 0.10923520923520923,
+        "callee_names": 0.47058823529411764
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 4,
+        "BOUNDS_CHECK": 25,
+        "BODY": 31,
+        "PROLOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 8,
+        "BODY": 30,
+        "BOUNDS_CHECK": 20,
+        "PROLOGUE": 1
+      }
+    },
+    {
+      "func_name": "em_20",
+      "category": "enum_match",
+      "num_blocks_o0": 30,
+      "num_blocks_o2": 25,
+      "mean_block_similarity": 0.7986867698460776,
+      "per_feature_sims": {
+        "opcodes": 0.7680000000000001,
+        "constants": 0.8214285714285714,
+        "dataflow_edges": 0.9362368621887833,
+        "instruction_count": 0.7428412698412697,
+        "concrete_values": 0.5248412698412698,
+        "callee_names": 0.5833333333333334
+      },
+      "block_type_counts_o0": {
+        "LOOP_HEADER": 4,
+        "BODY": 19,
+        "BOUNDS_CHECK": 7
+      },
+      "block_type_counts_o2": {
+        "LOOP_HEADER": 5,
+        "BODY": 14,
+        "BOUNDS_CHECK": 6
+      }
+    },
+    {
+      "func_name": "iter_01",
+      "category": "iterators",
+      "num_blocks_o0": 17,
+      "num_blocks_o2": 18,
+      "mean_block_similarity": 0.7633293212930031,
+      "per_feature_sims": {
+        "opcodes": 0.7030812324929971,
+        "constants": 0.6,
+        "dataflow_edges": 0.9194417525175681,
+        "instruction_count": 0.7698542518611723,
+        "concrete_values": 0.2677083333333333,
+        "callee_names": 0.5
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "LOOP_HEADER": 3,
+        "BOUNDS_CHECK": 5
+      },
+      "block_type_counts_o2": {
+        "BODY": 10,
+        "BOUNDS_CHECK": 6,
+        "ITERATOR_STATE": 1,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "iter_02",
+      "category": "iterators",
+      "num_blocks_o0": 8,
+      "num_blocks_o2": 5,
+      "mean_block_similarity": 0.7257236422790185,
+      "per_feature_sims": {
+        "opcodes": 0.5783333333333334,
+        "constants": 1.0,
+        "concrete_values": 0.1,
+        "dataflow_edges": 0.9231008241604348,
+        "instruction_count": 0.6708020050125313
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 3,
+        "EPILOGUE": 2
+      }
+    },
+    {
+      "func_name": "iter_03",
+      "category": "iterators",
+      "num_blocks_o0": 24,
+      "num_blocks_o2": 16,
+      "mean_block_similarity": 0.6780199439155431,
+      "per_feature_sims": {
+        "opcodes": 0.6663690476190476,
+        "concrete_values": 0.17087301587301587,
+        "dataflow_edges": 0.9113450500629299,
+        "instruction_count": 0.8649553571428572,
+        "constants": 0.09090909090909091,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 12,
+        "BOUNDS_CHECK": 7,
+        "LOOP_HEADER": 4,
+        "ITERATOR_STATE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 9,
+        "BOUNDS_CHECK": 3,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 3
+      }
+    },
+    {
+      "func_name": "iter_04",
+      "category": "iterators",
+      "num_blocks_o0": 15,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.7001078653290435,
+      "per_feature_sims": {
+        "opcodes": 0.5943722943722944,
+        "concrete_values": 0.291358024691358,
+        "dataflow_edges": 0.9438117868922732,
+        "instruction_count": 0.7348484848484849,
+        "constants": 0.08333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 10,
+        "LOOP_HEADER": 2,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 2
+      },
+      "block_type_counts_o2": {
+        "BODY": 4,
+        "BOUNDS_CHECK": 3,
+        "PROLOGUE": 1,
+        "ITERATOR_STATE": 2,
+        "LOOP_HEADER": 1
+      }
+    },
+    {
+      "func_name": "iter_05",
+      "category": "iterators",
+      "num_blocks_o0": 15,
+      "num_blocks_o2": 11,
+      "mean_block_similarity": 0.654962101918864,
+      "per_feature_sims": {
+        "opcodes": 0.5564935064935065,
+        "constants": 0.4,
+        "concrete_values": 0.047658402203856746,
+        "dataflow_edges": 0.887511622861635,
+        "instruction_count": 0.7157647907647909
+      },
+      "block_type_counts_o0": {
+        "BODY": 7,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 4,
+        "ITERATOR_STATE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BODY": 7,
+        "LOOP_HEADER": 3,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "iter_06",
+      "category": "iterators",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 5,
+      "mean_block_similarity": 0.6609844568307849,
+      "per_feature_sims": {
+        "opcodes": 0.4333333333333333,
+        "concrete_values": 0.275,
+        "dataflow_edges": 0.917593823121015,
+        "instruction_count": 0.917948717948718,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 4,
+        "LOOP_HEADER": 1,
+        "ITERATOR_STATE": 1,
+        "BOUNDS_CHECK": 1,
+        "EPILOGUE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 2,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "iter_07",
+      "category": "iterators",
+      "num_blocks_o0": 27,
+      "num_blocks_o2": 31,
+      "mean_block_similarity": 0.7544210743801388,
+      "per_feature_sims": {
+        "opcodes": 0.720679012345679,
+        "concrete_values": 0.22478632478632476,
+        "dataflow_edges": 0.9175128556319777,
+        "instruction_count": 0.7662551440329217,
+        "constants": 0.4
+      },
+      "block_type_counts_o0": {
+        "BODY": 9,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 13,
+        "ITERATOR_STATE": 3
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 17,
+        "BODY": 12,
+        "LOOP_HEADER": 2
+      }
+    },
+    {
+      "func_name": "iter_08",
+      "category": "iterators",
+      "num_blocks_o0": 9,
+      "num_blocks_o2": 6,
+      "mean_block_similarity": 0.6467563664355299,
+      "per_feature_sims": {
+        "opcodes": 0.4472222222222222,
+        "constants": 0.6666666666666666,
+        "concrete_values": 0.16666666666666666,
+        "dataflow_edges": 0.9264960450963837,
+        "instruction_count": 0.5031746031746032
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 1,
+        "PROLOGUE": 1,
+        "EPILOGUE": 1
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 2,
+        "BODY": 2,
+        "LOOP_HEADER": 1,
+        "EPILOGUE": 1
+      }
+    },
+    {
+      "func_name": "iter_09",
+      "category": "iterators",
+      "num_blocks_o0": 15,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.7308825862331321,
+      "per_feature_sims": {
+        "opcodes": 0.5902777777777778,
+        "dataflow_edges": 0.9343328405828406,
+        "instruction_count": 0.8856481481481482,
+        "concrete_values": 0.018181818181818184,
+        "constants": 0.0
+      },
+      "block_type_counts_o0": {
+        "BODY": 5,
+        "LOOP_HEADER": 1,
+        "BOUNDS_CHECK": 7,
+        "ITERATOR_STATE": 2
+      },
+      "block_type_counts_o2": {
+        "BOUNDS_CHECK": 6,
+        "BODY": 5,
+        "ITERATOR_STATE": 1
+      }
+    },
+    {
+      "func_name": "iter_10",
+      "category": "iterators",
+      "num_blocks_o0": 11,
+      "num_blocks_o2": 12,
+      "mean_block_similarity": 0.6577450414899645,
+      "per_feature_sims": {
+        "opcodes": 0.6099567099567099,
+        "concrete_values": 0.06691919191919192,
+        "dataflow_edges": 0.9157985048033784,
+        "instruction_count": 0.66524064171123,
+        "constants": 0.25,
+        "callee_names": 0.3333333333333333
+      },
+      "block_type_counts_o0": {
+        "BODY": 6,
+        "LOOP_HEADER": 2,
+        "BOUNDS_CHECK": 3
+      },
+      "block_type_counts_o2": {
+        "BODY": 6,
+        "BOUNDS_CHECK": 3,
+        "LOOP_HEADER": 2,
+        "EPILOGUE": 1
+      }
+    }
+  ]
+}

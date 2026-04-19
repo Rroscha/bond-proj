@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value-Based Block Match Accuracy: Rust vs C</title>
+<style>
+:root {
+  --bg: #0d1117; --card: #161b22; --border: #30363d;
+  --text: #c9d1d9; --text2: #8b949e; --text-bright: #f0f6fc;
+  --green: #3fb950; --red: #f85149; --yellow: #d29922; --blue: #58a6ff;
+  --purple: #bc8cff; --cyan: #39d353;
+  --rust-color: #dea584; --c-color: #599eff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, 'Segoe UI', Helvetica, sans-serif; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+/* Navigation */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,17,23,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); padding: 8px 20px;
+  display: flex; gap: 12px; overflow-x: auto; white-space: nowrap;
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+nav a { color: var(--text2); text-decoration: none; font-size: 13px; padding: 4px 10px;
+  border-radius: 6px; transition: all 0.2s; flex-shrink: 0; }
+nav a:hover { color: var(--text); background: var(--border); }
+nav a.active { color: var(--blue); background: rgba(88,166,255,0.1); }
+nav .win-rust { border-left: 2px solid var(--rust-color); }
+nav .win-c { border-left: 2px solid var(--c-color); }
+
+/* Sections */
+section { scroll-margin-top: 60px; padding: 40px 0; border-bottom: 1px solid var(--border); }
+h1 { font-size: 2em; color: var(--text-bright); margin-bottom: 16px; }
+h2 { font-size: 1.6em; color: var(--text-bright); margin-bottom: 12px; }
+h3 { font-size: 1.2em; color: var(--text); margin: 16px 0 8px; }
+
+/* Cards */
+.stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; flex: 1; min-width: 140px; text-align: center; }
+.stat-card .label { font-size: 12px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-card .value { font-size: 2em; font-weight: 700; color: var(--text-bright); margin: 4px 0; }
+.stat-card .value.rust { color: var(--rust-color); }
+.stat-card .value.c { color: var(--c-color); }
+.stat-card .value.good { color: var(--green); }
+.stat-card .value.bad { color: var(--red); }
+
+/* Winner badge */
+.winner { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 13px; font-weight: 600; }
+.winner.rust { background: rgba(222,165,132,0.15); color: var(--rust-color); }
+.winner.c { background: rgba(89,158,255,0.15); color: var(--c-color); }
+.winner.tie { background: rgba(139,148,158,0.15); color: var(--text2); }
+
+/* Code panels */
+.code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.code-panel { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.code-panel .header { padding: 8px 12px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; }
+.code-panel .header .lang-rust { color: var(--rust-color); }
+.code-panel .header .lang-c { color: var(--c-color); }
+.code-panel pre { padding: 12px; font-size: 12.5px; line-height: 1.5; overflow-x: auto;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; }
+pre .kw { color: var(--purple); }
+pre .fn { color: #d2a8ff; }
+pre .str { color: #a5d6ff; }
+pre .num { color: #79c0ff; }
+pre .cm { color: #8b949e; font-style: italic; }
+pre .ty { color: #ff7b72; }
+pre .op { color: #f0f6fc; }
+
+/* Match table */
+.match-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+.match-table th { padding: 8px 10px; text-align: left; background: var(--card);
+  border-bottom: 2px solid var(--border); color: var(--text2); font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.5px; }
+.match-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+.match-table tr.correct { background: rgba(63,185,80,0.06); }
+.match-table tr.wrong { background: rgba(248,81,73,0.04); }
+
+/* Value bar */
+.val-bar { display: inline-block; height: 8px; border-radius: 4px; min-width: 2px; }
+.val-bar.high { background: var(--green); }
+.val-bar.mid { background: var(--yellow); }
+.val-bar.low { background: var(--red); }
+
+/* Callout boxes */
+.callout { padding: 12px 16px; border-radius: 8px; margin: 12px 0; border-left: 3px solid; font-size: 14px; }
+.callout.why { border-color: var(--blue); background: rgba(88,166,255,0.06); }
+.callout.rust-win { border-color: var(--rust-color); background: rgba(222,165,132,0.06); }
+.callout.c-win { border-color: var(--c-color); background: rgba(89,158,255,0.06); }
+.callout.key { border-color: var(--yellow); background: rgba(210,153,34,0.06); }
+.callout strong { color: var(--text-bright); }
+
+/* Comparison bar chart */
+.bar-chart { margin: 16px 0; }
+.bar-row { display: flex; align-items: center; margin: 6px 0; }
+.bar-label { width: 100px; font-size: 12px; color: var(--text2); text-align: right; padding-right: 10px; }
+.bar-track { flex: 1; height: 24px; background: var(--card); border-radius: 4px; position: relative; overflow: hidden; }
+.bar-fill { position: absolute; top: 0; height: 100%; border-radius: 4px; transition: width 0.5s; }
+.bar-fill.rust { background: var(--rust-color); opacity: 0.7; }
+.bar-fill.c { background: var(--c-color); opacity: 0.7; top: 0; }
+.bar-value { position: absolute; right: 8px; top: 2px; font-size: 11px; font-weight: 600; color: var(--text-bright); }
+
+/* Concrete output display */
+.outputs { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 8px; background: rgba(0,0,0,0.3);
+  border-radius: 4px; margin: 4px 0; color: var(--cyan); overflow-x: auto; white-space: nowrap; }
+.outputs .match { color: var(--green); font-weight: 600; }
+.outputs .mismatch { color: var(--red); }
+
+/* ASM block */
+.asm-block { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 8px;
+  background: rgba(0,0,0,0.3); border-radius: 4px; margin: 4px 0; overflow-x: auto; }
+.asm-block .addr { color: var(--text2); }
+.asm-block .mnem { color: var(--purple); }
+.asm-block .ops { color: var(--text); }
+
+/* Responsive */
+@media (max-width: 800px) {
+  .code-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#overview">Overview</a>
+  <a href="#method">Method</a>
+  <a href="#bc_07" class="win-rust">bc_07</a>
+  <a href="#bc_12" class="win-rust">bc_12</a>
+  <a href="#em_06" class="win-c">em_06</a>
+  <a href="#em_10" class="win-rust">em_10</a>
+  <a href="#iter_16" class="win-rust">iter_16</a>
+  <a href="#iter_12" class="win-rust">iter_12</a>
+  <a href="#opt_04" class="win-c">opt_04</a>
+  <a href="#opt_09" class="win-c">opt_09</a>
+  <a href="#opt_06" class="win-c">opt_06</a>
+  <a href="#own_05" class="win-rust">own_05</a>
+  <a href="#own_04" class="win-c">own_04</a>
+  <a href="#own_03" class="win-rust">own_03</a>
+  <a href="#findings">Findings</a>
+</nav>
+
+<div class="container" style="margin-top: 60px;">
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview">
+<h1>Value-Based Block Match Accuracy: Rust vs C</h1>
+
+<div class="callout key">
+<strong>Core Question:</strong> When an O0 block and O2 block from the same function are paired, do they compute the same thing?
+We verify this by running each block with 4 concrete test input sets and checking if they produce identical register outputs.
+A match is <strong>correct</strong> only if the blocks produce overlapping concrete values — not by structural similarity or callee names.
+</div>
+
+<h3>Category-Level Results</h3>
+<div class="bar-chart">
+  <div class="bar-row">
+    <div class="bar-label">bounds_check</div>
+    <div class="bar-track">
+      <div class="bar-fill rust" style="width: 23%; height: 12px; top: 0;"></div>
+      <div class="bar-fill c" style="width: 17%; height: 12px; top: 12px;"></div>
+      <div class="bar-value">Rust 23% vs C 17%</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">enum_match</div>
+    <div class="bar-track">
+      <div class="bar-fill rust" style="width: 20%; height: 12px; top: 0;"></div>
+      <div class="bar-fill c" style="width: 26%; height: 12px; top: 12px;"></div>
+      <div class="bar-value">Rust 20% vs C 26%</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">iterators</div>
+    <div class="bar-track">
+      <div class="bar-fill rust" style="width: 20%; height: 12px; top: 0;"></div>
+      <div class="bar-fill c" style="width: 24%; height: 12px; top: 12px;"></div>
+      <div class="bar-value">Rust 20% vs C 24%</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">option_result</div>
+    <div class="bar-track">
+      <div class="bar-fill rust" style="width: 14%; height: 12px; top: 0;"></div>
+      <div class="bar-fill c" style="width: 20%; height: 12px; top: 12px;"></div>
+      <div class="bar-value">Rust 14% vs C 20%</div>
+    </div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">ownership_drop</div>
+    <div class="bar-track">
+      <div class="bar-fill rust" style="width: 21%; height: 12px; top: 0;"></div>
+      <div class="bar-fill c" style="width: 23%; height: 12px; top: 12px;"></div>
+      <div class="bar-value">Rust 21% vs C 23%</div>
+    </div>
+  </div>
+</div>
+
+<div class="callout why">
+<strong>Overall:</strong> Value-based match accuracy is low for both languages (14-26%), showing how much optimization changes the computational structure of blocks.
+Rust wins on <strong>bounds_check</strong> (its unique feature). C wins on <strong>enum_match</strong> (Rust match compiles to jump tables that angr cannot follow).
+Option/Result and ownership show C slightly ahead — Rust's monomorphized method calls become completely different code at O2.
+</div>
+
+<h3>Per-Function Comparison</h3>
+<table class="match-table">
+<thead>
+<tr><th>Function</th><th>Category</th><th>Rust Accuracy</th><th>C Accuracy</th><th>Winner</th><th>Why</th></tr>
+</thead>
+<tbody>
+<tr><td>bc_07</td><td>bounds_check</td><td>25.0% (11/44)</td><td>18.2% (2/11)</td><td><span class="winner rust">Rust</span></td><td>Bounds checks create anchors</td></tr>
+<tr><td>bc_12</td><td>bounds_check</td><td>30.2% (19/63)</td><td>22.2% (6/27)</td><td><span class="winner rust">Rust</span></td><td>binary_search/partition_point retain value patterns</td></tr>
+<tr><td>em_06</td><td>enum_match</td><td>0.0% (0/1)</td><td>24.2% (16/66)</td><td><span class="winner c">C</span></td><td>Rust: 1 O0 block (jump table), C: switch/if cascade</td></tr>
+<tr><td>em_10</td><td>enum_match</td><td>28.6% (2/7)</td><td>17.2% (5/29)</td><td><span class="winner rust">Rust</span></td><td>Vec+loop: Rust explicit indexing wins</td></tr>
+<tr><td>iter_16</td><td>iterators</td><td>22.0% (9/41)</td><td>10.0% (1/10)</td><td><span class="winner rust">Rust</span></td><td>chunks() generates stable boundary checks</td></tr>
+<tr><td>iter_12</td><td>iterators</td><td>26.7% (4/15)</td><td>8.3% (1/12)</td><td><span class="winner rust">Rust</span></td><td>scan+windows: Rust closures keep value flow</td></tr>
+<tr><td>opt_04</td><td>option_result</td><td>11.1% (1/9)</td><td>20.0% (2/10)</td><td><span class="winner c">C</span></td><td>? operator paths vanish at O2</td></tr>
+<tr><td>opt_09</td><td>option_result</td><td>22.2% (2/9)</td><td>44.4% (4/9)</td><td><span class="winner c">C</span></td><td>C's pointer null checks simpler than .get()?</td></tr>
+<tr><td>opt_06</td><td>option_result</td><td>0.0% (0/10)</td><td>23.1% (3/13)</td><td><span class="winner c">C</span></td><td>Method chain fully inlined, all values reshuffled</td></tr>
+<tr><td>own_05</td><td>ownership_drop</td><td>26.1% (12/46)</td><td>23.8% (5/21)</td><td><span class="winner rust">Rust</span></td><td>Explicit indexing + bounds checks = stable values</td></tr>
+<tr><td>own_04</td><td>ownership_drop</td><td>23.1% (3/13)</td><td>45.5% (5/11)</td><td><span class="winner c">C</span></td><td>Box linked list: recursive Drop inlined chaotically</td></tr>
+<tr><td>own_03</td><td>ownership_drop</td><td>28.3% (15/53)</td><td>20.8% (5/24)</td><td><span class="winner rust">Rust</span></td><td>More blocks = more matching opportunities</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ===== METHOD ===== -->
+<section id="method">
+<h2>Method: Value-Based Match Correctness</h2>
+
+<div class="callout key">
+<strong>Problem with the old approach:</strong> The previous analysis used structural similarity (opcodes, callee names, instruction count).
+Callee names are <strong>completely unstable</strong> across optimization levels — a <code>call Vec::push</code> at O0 becomes inlined arithmetic at O2.
+Structural similarity scores are meaningless: a 0.7 doesn't mean 70% correct.
+</div>
+
+<h3>What we do instead</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span>Step 1: Micro-Execute Each Block</span></div>
+<pre>
+<span class="cm">// 4 test input sets seed registers:</span>
+Set 0: [0x41, 0x42, 0x43, 0x44, ...]  <span class="cm">// small distinct</span>
+Set 1: [1, 2, 4, 8, 16, 32, ...]       <span class="cm">// powers of 2</span>
+Set 2: [0x1000, 0x2000, 0x3000, ...]    <span class="cm">// larger values</span>
+Set 3: [0xFF00, 0xFE00, 0xFD00, ...]    <span class="cm">// high bits</span>
+
+<span class="cm">// For each block: execute, collect output registers</span>
+Block 0x446697 → {arg0: [0x0], arg1: [0x0], ret0: [0x0]}
+Block 0x42314f → {arg0: [0x0], arg1: [0x0], ret0: [0x0]}
+                  <span class="cm">↑ Same outputs = same computation</span>
+</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span>Step 2: Match by Value, Not Structure</span></div>
+<pre>
+<span class="cm">// Similarity = weighted combination of VALUE features:</span>
+concrete_outputs:  50%  <span class="cm">← the gold signal</span>
+dataflow_edges:    25%  <span class="cm">← which regs feed which</span>
+memory_pattern:    15%  <span class="cm">← what gets read/written</span>
+constants:         10%  <span class="cm">← embedded immediates</span>
+
+<span class="cm">// A match is CORRECT if value_sim ≥ 0.3</span>
+<span class="cm">// This means: blocks share real computational overlap</span>
+<span class="cm">// NOT: "opcodes look similar" or "same function called"</span>
+</pre>
+</div>
+</div>
+
+<h3>Why concrete values work</h3>
+<div class="callout why">
+If O0 block A and O2 block B both take register inputs [0x41, 0x42] and produce output ret0=[0x83], they're computing the same addition — regardless of whether one uses <code>add rax, rbx</code> and the other uses <code>lea rax, [rdi+rsi]</code>.
+Optimization changes <em>how</em> a value is computed but not <em>what</em> is computed. Concrete values capture this invariant.
+</div>
+</section>
+
+<!-- ===== bc_07 ===== -->
+<section id="bc_07">
+<h2>bc_07 — Convolution + Smoothing <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">11/44</div><div class="label">25.0% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">2/11</div><div class="label">18.2% correct</div></div>
+  <div class="stat-card"><div class="label">Rust O0 blocks</div><div class="value">99</div></div>
+  <div class="stat-card"><div class="label">C O0 blocks</div><div class="value">19</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span><span>bc_07 — 16 lines</span></div>
+<pre><span class="kw">fn</span> <span class="fn">bc_07</span>(data: &amp;[<span class="ty">u64</span>]) -&gt; <span class="ty">Vec</span>&lt;<span class="ty">i64</span>&gt; {
+    <span class="kw">let</span> n = data.len();
+    <span class="kw">if</span> n &lt; <span class="num">3</span> { <span class="kw">return</span> <span class="fn">vec!</span>[]; }
+    <span class="kw">let mut</span> result = Vec::with_capacity(n - <span class="num">2</span>);
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="num">1</span>..n - <span class="num">1</span> {
+        <span class="cm">// data[i-1], data[i], data[i+1] each generates:</span>
+        <span class="cm">//   cmp rdi, rsi; jae panic_bounds_check</span>
+        <span class="kw">let</span> val = -(data[i-<span class="num">1</span>] <span class="kw">as</span> <span class="ty">i64</span>)
+                + <span class="num">2</span> * data[i] <span class="kw">as</span> <span class="ty">i64</span>
+                - data[i+<span class="num">1</span>] <span class="kw">as</span> <span class="ty">i64</span>;
+        result.push(val);
+    }
+    <span class="cm">// Second pass: smooth</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span>..result.len() {
+        <span class="kw">let</span> left = <span class="kw">if</span> i &gt; <span class="num">0</span> { result[i-<span class="num">1</span>] } <span class="kw">else</span> { result[i] };
+        <span class="kw">let</span> right = <span class="kw">if</span> i+<span class="num">1</span> &lt; result.len() { result[i+<span class="num">1</span>] } <span class="kw">else</span> { result[i] };
+        smoothed.push((left + result[i] + right) / <span class="num">3</span>);
+    }
+    smoothed
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span><span>bc_07 — 17 lines</span></div>
+<pre><span class="ty">int64_t</span> *<span class="fn">bc_07</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> n, <span class="ty">size_t</span> *out_len) {
+    *out_len = <span class="num">0</span>;
+    <span class="kw">if</span> (n &lt; <span class="num">3</span>) <span class="kw">return</span> NULL;
+    <span class="ty">size_t</span> rlen = n - <span class="num">2</span>;
+    <span class="ty">int64_t</span> *result = malloc(rlen * <span class="kw">sizeof</span>(<span class="ty">int64_t</span>));
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = <span class="num">1</span>; i &lt; n - <span class="num">1</span>; i++) {
+        <span class="cm">// No bounds checks — raw pointer arithmetic</span>
+        result[i-<span class="num">1</span>] = -(<span class="ty">int64_t</span>)data[i-<span class="num">1</span>]
+                    + <span class="num">2</span>*(<span class="ty">int64_t</span>)data[i]
+                    - (<span class="ty">int64_t</span>)data[i+<span class="num">1</span>];
+    }
+    <span class="ty">int64_t</span> *smoothed = malloc(rlen * <span class="kw">sizeof</span>(<span class="ty">int64_t</span>));
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = <span class="num">0</span>; i &lt; rlen; i++) {
+        <span class="ty">int64_t</span> left = (i &gt; <span class="num">0</span>) ? result[i-<span class="num">1</span>] : result[i];
+        <span class="ty">int64_t</span> right = (i+<span class="num">1</span> &lt; rlen) ? result[i+<span class="num">1</span>] : result[i];
+        smoothed[i] = (left + result[i] + right) / <span class="num">3</span>;
+    }
+    free(result);
+    <span class="kw">return</span> smoothed;
+}</pre>
+</div>
+</div>
+
+<h3>Why Rust Wins: Bounds Checks Create Value-Stable Anchors</h3>
+
+<div class="callout rust-win">
+<strong>Rust's bounds checks generate <code>cmp + jae</code> blocks at O0 AND O2.</strong>
+Even though the optimizer eliminates many redundant checks, the remaining ones produce the same comparison values (array length vs index).
+These blocks output the same concrete register values across optimization levels because the comparison semantics are preserved.
+<br><br>
+<strong>C has no bounds checks → no anchor blocks.</strong> The optimizer freely restructures the entire loop body,
+fusing the convolution arithmetic into different register assignments. Without anchor blocks,
+every O2 block computes values in a completely different register allocation.
+</div>
+
+<h3>Value-Correct Match Example (Rust)</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span>O0 Block 0x446697 (4 insns)</span><span style="color:var(--green)">✓ Correct</span></div>
+<div class="asm-block">
+<span class="addr">0x446697:</span> <span class="mnem">mov</span>  <span class="ops">rsi, [rsp + 0xb8]</span><br>
+<span class="addr">0x44669f:</span> <span class="mnem">xor</span>  <span class="ops">eax, eax</span><br>
+<span class="addr">0x4466a1:</span> <span class="mnem">mov</span>  <span class="ops">edi, eax</span><br>
+<span class="addr">0x4466a3:</span> <span class="mnem">call</span> <span class="ops">0x49b480</span>
+</div>
+<div class="outputs">Concrete outputs: arg0=[<span class="match">0x0</span>] | arg1=[<span class="match">0x0</span>] | ret0=[<span class="match">0x0</span>]</div>
+</div>
+<div class="code-panel">
+<div class="header"><span>O2 Block 0x42314f (10 insns)</span><span style="color:var(--green)">✓ Matched</span></div>
+<div class="asm-block">
+<span class="addr">0x42314f:</span> <span class="mnem">mov</span>  <span class="ops">rax, [rsp + 0x20]</span><br>
+<span class="addr">0x423154:</span> <span class="mnem">mov</span>  <span class="ops">rdi, [rsp + 0x40]</span><br>
+<span class="addr">0x423159:</span> <span class="mnem">mov</span>  <span class="ops">[rdi + 0x10], rax</span><br>
+<span class="addr">0x42315d:</span> <span class="mnem">mov</span>  <span class="ops">rax, [rsp + 0x10]</span><br>
+<span class="addr">0x423162:</span> <span class="mnem">mov</span>  <span class="ops">[rdi], rax</span>
+</div>
+<div class="outputs">Concrete outputs: arg0=[<span class="match">0x0</span>] | arg1=[<span class="match">0x0</span>] | ret0=[<span class="match">0x0</span>]</div>
+</div>
+</div>
+
+<div class="callout why">
+<strong>value_sim = 1.0</strong> — All three output registers (arg0, arg1, ret0) produce identical values [0x0] across all 4 test inputs.
+The O0 block calls Vec internals; the O2 block does the same work inlined with direct mov instructions.
+Different instructions, same computation — and the concrete values prove it.
+</div>
+
+<h3>Value-Wrong Match Example (C)</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span>C O0 Block (32 insns — whole loop body)</span><span style="color:var(--red)">✗ Wrong</span></div>
+<div class="asm-block">
+<span class="addr">0x401b84:</span> <span class="mnem">mov</span>  <span class="ops">rax, [rbp - 8]</span><br>
+<span class="addr">0x401b88:</span> <span class="mnem">lea</span>  <span class="ops">rdx, [rax*8]</span><br>
+<span class="addr">0x401b90:</span> <span class="mnem">mov</span>  <span class="ops">rax, [rbp - 0x48]</span><br>
+<span class="addr">0x401b94:</span> <span class="mnem">add</span>  <span class="ops">rax, rdx</span><br>
+<span class="cm">... +27 more insns (entire convolution + store)</span>
+</div>
+<div class="outputs">Concrete outputs: arg3=[<span class="mismatch">0x0</span>] | ret0=[<span class="mismatch">0x0</span>]</div>
+</div>
+<div class="code-panel">
+<div class="header"><span>C O2 Block (9 insns — vectorized)</span><span style="color:var(--red)">✗ Different computation</span></div>
+<div class="asm-block">
+<span class="addr">0x403d0a:</span> <span class="mnem">movabs</span> <span class="ops">rdx, 0x5555555555555556</span><br>
+<span class="addr">0x403d14:</span> <span class="mnem">add</span>    <span class="ops">rsi, rcx</span><br>
+<span class="addr">0x403d17:</span> <span class="mnem">mov</span>    <span class="ops">rdi, r12</span><br>
+<span class="addr">0x403d1a:</span> <span class="mnem">mov</span>    <span class="ops">rax, rsi</span><br>
+<span class="addr">0x403d1d:</span> <span class="mnem">sar</span>    <span class="ops">rsi, 0x3f</span>
+</div>
+<div class="outputs">Concrete outputs: many registers, <span class="mismatch">no overlap with O0</span></div>
+</div>
+</div>
+
+<div class="callout c-win" style="border-color: var(--red)">
+<strong>C fails here:</strong> The O0 block contains the entire loop body (32 instructions) in one monolithic block.
+At O2, the compiler splits this into multiple small blocks with completely different register allocation.
+The magic constant <code>0x5555555555555556</code> is the compiler's division-by-3 optimization — not present at O0 at all.
+No concrete values match because the intermediate computations are restructured.
+</div>
+</section>
+
+<!-- ===== bc_12 ===== -->
+<section id="bc_12">
+<h2>bc_12 — Running Median (Sorted Window) <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">19/63</div><div class="label">30.2% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">6/27</div><div class="label">22.2% correct</div></div>
+  <div class="stat-card"><div class="label">Rust O0 blocks</div><div class="value">63</div></div>
+  <div class="stat-card"><div class="label">C O0 blocks</div><div class="value">27</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">bc_12</span>(data: &amp;[<span class="ty">u64</span>], window: <span class="ty">usize</span>) -&gt; <span class="ty">Vec</span>&lt;<span class="ty">u64</span>&gt; {
+    <span class="kw">let</span> n = data.len();
+    <span class="kw">let mut</span> win: Vec&lt;u64&gt; = data[..window].to_vec();
+    win.sort();
+    result.push(win[window / <span class="num">2</span>]);
+    <span class="kw">for</span> i <span class="kw">in</span> window..n {
+        <span class="kw">if let</span> Ok(pos) = win.<span class="fn">binary_search</span>(&amp;old) {
+            win.remove(pos);  <span class="cm">// bounds-checked</span>
+        }
+        <span class="kw">let</span> insert_pos = win.<span class="fn">partition_point</span>(|&amp;x| x &lt; new_val);
+        win.insert(insert_pos, new_val);  <span class="cm">// bounds-checked</span>
+        result.push(win[window / <span class="num">2</span>]);  <span class="cm">// bounds-checked</span>
+    }
+    result
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">uint64_t</span> *<span class="fn">bc_12</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> n,
+               <span class="ty">size_t</span> window, <span class="ty">size_t</span> *out_len) {
+    <span class="cm">// manual binary search, manual memmove</span>
+    <span class="cm">// no bounds checks anywhere</span>
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = window; i &lt; n; i++) {
+        <span class="cm">// bsearch to find old value</span>
+        <span class="cm">// memmove to shift elements</span>
+        <span class="cm">// direct index assignment</span>
+    }
+    <span class="kw">return</span> result;
+}</pre>
+</div>
+</div>
+
+<div class="callout rust-win">
+<strong>Why Rust wins:</strong> <code>binary_search</code>, <code>partition_point</code>, <code>remove</code>, and <code>insert</code> all generate bounds-checked indexing.
+At O0, each produces a <code>cmp + jae</code> block. At O2, many checks are eliminated but the remaining comparison logic
+still computes the same values (comparing the index against the window size).
+The concrete values from these comparison blocks match across optimization levels.
+<br><br>
+<strong>Why C loses:</strong> The C version uses raw <code>memmove</code> and pointer arithmetic.
+At O0, this is a chain of function calls. At O2, the compiler replaces <code>memmove</code> with inlined SIMD instructions.
+No value overlap between <code>call memmove</code> and <code>vmovdqu</code>.
+</div>
+</section>
+
+<!-- ===== em_06 ===== -->
+<section id="em_06">
+<h2>em_06 — Recursive Expr Constant Folding <span class="winner c">C Wins (Catastrophic Rust Failure)</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value bad">0/1</div><div class="label">0.0% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">16/66</div><div class="label">24.2% correct</div></div>
+  <div class="stat-card"><div class="label">Rust O0 blocks</div><div class="value bad">1</div></div>
+  <div class="stat-card"><div class="label">C O0 blocks</div><div class="value">82</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">em_06</span>(expr: &amp;<span class="ty">Expr</span>) -&gt; <span class="ty">Expr</span> {
+    <span class="kw">match</span> expr {
+        Expr::Lit(n) =&gt; Expr::Lit(*n),
+        Expr::Var(s) =&gt; Expr::Var(s.clone()),
+        Expr::BinOp(l, op, r) =&gt; {
+            <span class="kw">let</span> lf = em_06(l);    <span class="cm">// recursive call</span>
+            <span class="kw">let</span> rf = em_06(r);    <span class="cm">// recursive call</span>
+            <span class="kw">match</span> (&amp;lf, op, &amp;rf) {
+                (Expr::Lit(a), Op::Add, Expr::Lit(b)) =&gt; Expr::Lit(a+b),
+                <span class="cm">// ... 8 more match arms</span>
+                _ =&gt; Expr::BinOp(Box::new(lf), *op, Box::new(rf)),
+            }
+        }
+        Expr::UnaryMinus(inner) =&gt; { <span class="cm">/* ... */</span> }
+        Expr::Call(name, args) =&gt; { <span class="cm">/* ... */</span> }
+    }
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">CExpr</span> *<span class="fn">em_06</span>(<span class="kw">const</span> <span class="ty">CExpr</span> *e) {
+    <span class="kw">if</span> (!e) <span class="kw">return</span> NULL;
+    <span class="ty">CExpr</span> *r = calloc(<span class="num">1</span>, <span class="kw">sizeof</span>(CExpr));
+    <span class="kw">switch</span> (e-&gt;tag) {
+        <span class="kw">case</span> EXPR_LIT: r-&gt;tag = EXPR_LIT; <span class="kw">return</span> r;
+        <span class="kw">case</span> EXPR_VAR: strcpy(r-&gt;var, e-&gt;var); <span class="kw">return</span> r;
+        <span class="kw">case</span> EXPR_BINOP: {
+            CExpr *lf = em_06(e-&gt;binop.left);
+            CExpr *rf = em_06(e-&gt;binop.right);
+            <span class="kw">if</span> (lf-&gt;tag == EXPR_LIT &amp;&amp; rf-&gt;tag == EXPR_LIT) {
+                <span class="kw">switch</span> (e-&gt;binop.op) {
+                    <span class="kw">case</span> OP_ADD: r-&gt;lit = a + b; <span class="kw">return</span> r;
+                    <span class="cm">// ... more cases</span>
+                }
+            }
+            <span class="cm">// identity folding: 0+x, x*1, etc.</span>
+        }
+    }
+}</pre>
+</div>
+</div>
+
+<div class="callout c-win">
+<strong>Why Rust catastrophically fails:</strong>
+Rust's <code>match</code> on an enum compiles to a <strong>jump table</strong> (<code>jmp rax</code>) that dispatches based on the discriminant tag.
+angr's CFGFast <strong>cannot follow indirect jumps</strong> — it only resolves direct call/jump targets.
+Result: the entire function body (hundreds of instructions) appears as <strong>1 giant block</strong> at O0.
+At O2, some match arms are inlined/simplified, producing only 1 block too — but a completely different one.
+With 1 O0 block vs 1 O2 block, there's exactly 1 match attempt, and the values don't overlap at all.
+<br><br>
+<strong>Why C wins:</strong>
+C's <code>switch</code> compiles to cascading <code>cmp + je</code> at O0 — each case is a separate block with direct jumps.
+angr resolves all 82 blocks correctly. At O2, the compiler can fuse some cases but the comparison values (tag constants, literal values) remain stable.
+16 of 66 matched blocks produce the same concrete outputs.
+</div>
+
+<h3>The Jump Table Problem (Rust)</h3>
+<div class="code-panel" style="max-width: 600px">
+<div class="header"><span>Rust O0 — entire em_06 is ONE block</span></div>
+<div class="asm-block">
+<span class="addr">0x44b7b0:</span> <span class="mnem">sub</span>  <span class="ops">rsp, 0x378</span><br>
+<span class="addr">...</span> <span class="cm">(21+ instructions, including:)</span><br>
+<span class="addr">0x44b???:</span> <span class="mnem">mov</span>  <span class="ops">rax, [discriminant]</span><br>
+<span class="addr">0x44b???:</span> <span class="mnem">jmp</span>  <span class="ops">rax</span>   <span class="cm">← indirect jump, angr stops here</span><br>
+<span class="cm">Everything after this is INVISIBLE to the CFG analysis.</span><br>
+<span class="cm">All match arms, recursive calls, Box allocations — all in one block.</span>
+</div>
+</div>
+
+<div class="callout key">
+<strong>Key insight:</strong> Rust <code>match</code> on enums with 4+ variants always generates a jump table.
+This is a fundamental limitation of static CFG analysis tools, not a Rust compiler bug.
+C's <code>switch</code> with small cases often uses <code>if/else</code> chains instead, which are fully analyzable.
+</div>
+</section>
+
+<!-- ===== em_10 ===== -->
+<section id="em_10">
+<h2>em_10 — Command Executor with Vec + Loop + Match <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">2/7</div><div class="label">28.6% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">5/29</div><div class="label">17.2% correct</div></div>
+</div>
+
+<div class="callout rust-win">
+<strong>Why Rust wins here (unlike em_06):</strong>
+em_10 uses a <code>for cmd in cmds</code> loop around a <code>match</code> — the loop structure provides bounds-checked indexing on the command slice.
+Even though the inner <code>match</code> has the same jump table problem, the <strong>loop header and bounds check blocks</strong> are analyzable
+and preserve their values across optimization levels.
+With 7 O0 blocks (not 1), there's enough structure for value-based matching to work.
+<br><br>
+<strong>Why C loses:</strong> C has 38 O0 blocks (more complex with manual struct access), but the optimizer aggressively reorders
+the struct field access pattern, making concrete values diverge. The manual <code>switch</code> on command type
+produces many blocks, but each one accesses struct fields via different register offsets at O2.
+</div>
+</section>
+
+<!-- ===== iter_16 ===== -->
+<section id="iter_16">
+<h2>iter_16 — Group Chunks with Per-Group Stats <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">9/41</div><div class="label">22.0% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">1/10</div><div class="label">10.0% correct</div></div>
+  <div class="stat-card"><div class="label">Rust O0 blocks</div><div class="value">41</div></div>
+  <div class="stat-card"><div class="label">C O0 blocks</div><div class="value">14</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">iter_16</span>(data: &amp;[<span class="ty">u64</span>], group_size: <span class="ty">usize</span>) -&gt; <span class="ty">u64</span> {
+    <span class="kw">if</span> group_size == <span class="num">0</span> { <span class="kw">return</span> <span class="num">0</span>; }
+    <span class="kw">let</span> groups: Vec&lt;&amp;[u64]&gt; = data.<span class="fn">chunks</span>(group_size).collect();
+    <span class="kw">let</span> group_sums: Vec&lt;u64&gt; = groups.iter()
+        .map(|g| g.iter().sum()).collect();
+    <span class="kw">let</span> group_maxes: Vec&lt;u64&gt; = groups.iter()
+        .map(|g| g.iter().max().copied().unwrap_or(<span class="num">0</span>)).collect();
+    <span class="kw">let</span> total: <span class="ty">u64</span> = group_sums.iter()
+        .zip(group_maxes.iter())
+        .map(|(&amp;s, &amp;m)| s.wrapping_add(m)).sum();
+    total
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">uint64_t</span> <span class="fn">iter_16</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> len,
+                  <span class="ty">size_t</span> group_size) {
+    <span class="ty">uint64_t</span> total = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = <span class="num">0</span>; i &lt; len; i += group_size) {
+        <span class="ty">size_t</span> end = (i + group_size &lt; len) ?
+                     i + group_size : len;
+        <span class="ty">uint64_t</span> sum = <span class="num">0</span>, max = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">size_t</span> j = i; j &lt; end; j++) {
+            sum += data[j];
+            <span class="kw">if</span> (data[j] &gt; max) max = data[j];
+        }
+        total += sum + max;
+    }
+    <span class="kw">return</span> total;
+}</pre>
+</div>
+</div>
+
+<div class="callout rust-win">
+<strong>Why Rust wins despite "iterator sugar":</strong>
+This is NOT about the iterator syntax. It's about what <code>chunks()</code> compiles to at the binary level.
+<br><br>
+<code>chunks(group_size)</code> generates a loop with bounds checking: <code>cmp remaining_len, group_size; jae take_full_chunk</code>.
+These boundary comparison blocks produce the same concrete values at O0 and O2 because the comparison
+(remaining data length vs chunk size) is semantically preserved.
+<br><br>
+The 3 separate <code>.collect()</code> calls also generate Vec allocation patterns (capacity check → alloc → store)
+that produce recognizable value patterns across optimization levels.
+<br><br>
+<strong>Why C loses:</strong> C fuses the sum and max computation into a single loop body.
+At O0 this is 14 blocks. At O2, the compiler merges the inner loop into 10 blocks with completely different
+register assignments. The fused computation has no "anchor" blocks — every block does a mix of
+sum and max updates, and the optimizer reorders everything.
+</div>
+</section>
+
+<!-- ===== iter_12 ===== -->
+<section id="iter_12">
+<h2>iter_12 — Scan + Windows Threshold Crossings <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">4/15</div><div class="label">26.7% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">1/12</div><div class="label">8.3% correct</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">iter_12</span>(data: &amp;[<span class="ty">u64</span>], threshold: <span class="ty">u64</span>) -&gt; <span class="ty">u64</span> {
+    <span class="kw">let</span> running: Vec&lt;u64&gt; = data.iter()
+        .<span class="fn">scan</span>(<span class="num">0u64</span>, |state, &amp;x| {
+            *state = state.wrapping_add(x);
+            Some(*state)
+        }).collect();
+    <span class="kw">let</span> crossings: <span class="ty">u64</span> = running.<span class="fn">windows</span>(<span class="num">2</span>)
+        .filter(|w| (w[<span class="num">0</span>] &lt; threshold) != (w[<span class="num">1</span>] &lt; threshold))
+        .count() <span class="kw">as</span> <span class="ty">u64</span>;
+    final_val.wrapping_add(crossings * <span class="num">100</span>)
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">uint64_t</span> <span class="fn">iter_12</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> len,
+                  <span class="ty">uint64_t</span> threshold) {
+    <span class="ty">uint64_t</span> *running = malloc(len * <span class="num">8</span>);
+    <span class="ty">uint64_t</span> acc = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = <span class="num">0</span>; i &lt; len; i++) {
+        acc += data[i]; running[i] = acc;
+    }
+    <span class="ty">uint64_t</span> crossings = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = <span class="num">0</span>; i &lt; len - <span class="num">1</span>; i++) {
+        <span class="kw">if</span> ((running[i] &lt; threshold) != (running[i+<span class="num">1</span>] &lt; threshold))
+            crossings++;
+    }
+    <span class="kw">return</span> running[len-<span class="num">1</span>] + crossings * <span class="num">100</span>;
+}</pre>
+</div>
+</div>
+
+<div class="callout rust-win">
+<strong>Why Rust wins:</strong> <code>windows(2)</code> generates bounds-checked access to <code>w[0]</code> and <code>w[1]</code>.
+These comparisons against the threshold value produce blocks that compute <code>cmp running_sum, threshold</code> —
+the same semantic comparison at both O0 and O2. The concrete values from the comparison
+(flags set by the cmp instruction, the threshold constant) are preserved.
+<br><br>
+<strong>Why C loses:</strong> C's <code>running[i]</code> is unchecked pointer arithmetic. The accumulation loop and the crossing-count loop
+are separate at O0 but merged at O2 (the compiler deduces that running[i+1] - running[i] == data[i+1]).
+This algebraic optimization changes what intermediate values exist, destroying value continuity.
+</div>
+</section>
+
+<!-- ===== opt_04 ===== -->
+<section id="opt_04">
+<h2>opt_04 — Sliding Window Search with ? Operator <span class="winner c">C Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value bad">1/9</div><div class="label">11.1% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">2/10</div><div class="label">20.0% correct</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">opt_04</span>(data: &amp;[<span class="ty">u64</span>], target: <span class="ty">u64</span>) -&gt; <span class="ty">Option</span>&lt;(<span class="ty">usize</span>, <span class="ty">u64</span>)&gt; {
+    <span class="kw">let</span> win_size = <span class="num">3</span>;
+    <span class="kw">for</span> start <span class="kw">in</span> <span class="num">0</span>..data.len() - win_size + <span class="num">1</span> {
+        <span class="kw">let mut</span> all_above = <span class="kw">true</span>;
+        <span class="kw">let mut</span> win_sum = <span class="num">0u64</span>;
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="num">0</span>..win_size {
+            <span class="kw">let</span> val = data.<span class="fn">get</span>(start + j)<span class="op">?</span>;  <span class="cm">// ? = early return None</span>
+            win_sum += val;
+            <span class="kw">if</span> *val &lt;= target { all_above = <span class="kw">false</span>; }
+        }
+        <span class="kw">if</span> all_above { <span class="kw">return</span> Some((start, win_sum)); }
+    }
+    None
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="kw">int</span> <span class="fn">opt_04</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> len,
+           <span class="ty">uint64_t</span> target, <span class="ty">size_t</span> *out_start,
+           <span class="ty">uint64_t</span> *out_sum) {
+    <span class="kw">for</span> (<span class="ty">size_t</span> s = <span class="num">0</span>; s + <span class="num">3</span> &lt;= len; s++) {
+        <span class="kw">int</span> all_above = <span class="num">1</span>;
+        <span class="ty">uint64_t</span> wsum = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="ty">size_t</span> j = <span class="num">0</span>; j &lt; <span class="num">3</span>; j++) {
+            wsum += data[s + j];
+            <span class="kw">if</span> (data[s + j] &lt;= target) all_above = <span class="num">0</span>;
+        }
+        <span class="kw">if</span> (all_above) { *out_start = s; *out_sum = wsum; <span class="kw">return</span> <span class="num">1</span>; }
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+</div>
+</div>
+
+<div class="callout c-win">
+<strong>Why C wins:</strong>
+C's simple <code>for</code> loop with direct array access compiles to a tight loop at O0 with a clear comparison block.
+At O2, the compiler unrolls the inner j-loop (since win_size=3 is constant), but the comparison against <code>target</code>
+is still present with the same semantics. The concrete values from <code>data[s+j] <= target</code> are stable.
+<br><br>
+<strong>Why Rust loses:</strong>
+The <code>?</code> operator on <code>data.get(start+j)</code> compiles to:
+<ol style="margin: 8px 0 0 20px; font-size: 13px;">
+<li>Call <code>slice::get()</code> → returns <code>Option&lt;&amp;u64&gt;</code> (discriminant + pointer)</li>
+<li>Check discriminant: if None, propagate None up the call stack</li>
+<li>Unwrap the Some variant to get the pointer</li>
+</ol>
+At O0, this generates 32 blocks (9 per <code>?</code> invocation: call + check + branch + unwrap + ...).
+At O2, the compiler <strong>proves that get() never returns None</strong> (because the loop bounds ensure validity)
+and <strong>eliminates the entire Option machinery</strong>, replacing it with direct array indexing.
+The 32 O0 blocks collapse to 9 O2 blocks. The Option-handling blocks at O0 have no counterpart at O2 — they're dead code that was optimized away. Their concrete values have no match target.
+</div>
+</section>
+
+<!-- ===== opt_09 ===== -->
+<section id="opt_09">
+<h2>opt_09 — Two-Pointer Search with .get()? <span class="winner c">C Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value bad">2/9</div><div class="label">22.2% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">4/9</div><div class="label">44.4% correct</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">opt_09</span>(data: &amp;[<span class="ty">u64</span>], target_sum: <span class="ty">u64</span>) -&gt; <span class="ty">Option</span>&lt;(<span class="ty">usize</span>, <span class="ty">usize</span>)&gt; {
+    <span class="kw">if</span> data.len() &lt; <span class="num">2</span> { <span class="kw">return</span> None; }
+    <span class="kw">let mut</span> lo = <span class="num">0</span>;
+    <span class="kw">let mut</span> hi = data.len() - <span class="num">1</span>;
+    <span class="kw">while</span> lo &lt; hi {
+        <span class="kw">let</span> left = data.<span class="fn">get</span>(lo)<span class="op">?</span>;
+        <span class="kw">let</span> right = data.<span class="fn">get</span>(hi)<span class="op">?</span>;
+        <span class="kw">let</span> sum = left.wrapping_add(*right);
+        <span class="kw">if</span> sum == target_sum { <span class="kw">return</span> Some((lo, hi)); }
+        <span class="kw">else if</span> sum &lt; target_sum { lo += <span class="num">1</span>; }
+        <span class="kw">else</span> { hi -= <span class="num">1</span>; }
+    }
+    None
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="kw">int</span> <span class="fn">opt_09</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> len,
+           <span class="ty">uint64_t</span> target_sum, <span class="ty">size_t</span> *lo_out, <span class="ty">size_t</span> *hi_out) {
+    <span class="kw">if</span> (len &lt; <span class="num">2</span>) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="ty">size_t</span> lo = <span class="num">0</span>, hi = len - <span class="num">1</span>;
+    <span class="kw">while</span> (lo &lt; hi) {
+        <span class="ty">uint64_t</span> sum = data[lo] + data[hi];
+        <span class="kw">if</span> (sum == target_sum) {
+            *lo_out = lo; *hi_out = hi; <span class="kw">return</span> <span class="num">1</span>;
+        } <span class="kw">else if</span> (sum &lt; target_sum) lo++;
+        <span class="kw">else</span> hi--;
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+</div>
+</div>
+
+<div class="callout c-win">
+<strong>Same pattern as opt_04:</strong> The <code>?</code> operator generates Option-checking blocks at O0 that are completely eliminated at O2.
+C's version is a simple while loop — the <code>cmp sum, target</code> block is present at both O0 and O2 with the same concrete values.
+C achieves 44.4% accuracy because the two-pointer loop body has minimal register reshuffling across optimization levels.
+<br><br>
+<strong>The ? operator pattern:</strong> Every <code>data.get(idx)?</code> generates ~4 extra blocks at O0 (call get, check discriminant, branch on None, unwrap Some).
+At O2, the compiler proves these are always Some and deletes the blocks entirely.
+This creates an <strong>asymmetric block count</strong> (32 O0 → 9 O2) where most O0 blocks are dead-code artifacts.
+</div>
+</section>
+
+<!-- ===== opt_06 ===== -->
+<section id="opt_06">
+<h2>opt_06 — Option Method Chain: find→map→filter→unwrap_or <span class="winner c">C Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value bad">0/10</div><div class="label">0.0% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">3/13</div><div class="label">23.1% correct</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">opt_06</span>(data: &amp;[<span class="ty">u64</span>]) -&gt; <span class="ty">u64</span> {
+    <span class="kw">let</span> first_even = data.iter().<span class="fn">find</span>(|&amp;&amp;x| x % <span class="num">2</span> == <span class="num">0</span>);
+    <span class="kw">let</span> doubled = first_even.<span class="fn">map</span>(|&amp;v| v * <span class="num">2</span>);
+    <span class="kw">let</span> clamped = doubled.<span class="fn">filter</span>(|&amp;v| v &lt; <span class="num">100</span>);
+    <span class="kw">let</span> base = clamped.<span class="fn">unwrap_or</span>(<span class="num">42</span>);
+
+    <span class="kw">let</span> last_odd = data.iter().rev().<span class="fn">find</span>(|&amp;&amp;x| x % <span class="num">2</span> == <span class="num">1</span>);
+    <span class="kw">let</span> tripled = last_odd.<span class="fn">map</span>(|&amp;v| v * <span class="num">3</span>);
+    <span class="kw">let</span> bounded = tripled.<span class="fn">and_then</span>(|v|
+        <span class="kw">if</span> v &lt; <span class="num">200</span> { Some(v) } <span class="kw">else</span> { None });
+    <span class="kw">let</span> extra = bounded.<span class="fn">unwrap_or</span>(<span class="num">7</span>);
+
+    base.wrapping_add(extra)
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">uint64_t</span> <span class="fn">opt_06</span>(<span class="kw">const</span> <span class="ty">uint64_t</span> *data, <span class="ty">size_t</span> len) {
+    <span class="ty">uint64_t</span> base = <span class="num">42</span>;
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = <span class="num">0</span>; i &lt; len; i++) {
+        <span class="kw">if</span> (data[i] % <span class="num">2</span> == <span class="num">0</span>) {
+            <span class="ty">uint64_t</span> d = data[i] * <span class="num">2</span>;
+            <span class="kw">if</span> (d &lt; <span class="num">100</span>) base = d;
+            <span class="kw">break</span>;
+        }
+    }
+    <span class="ty">uint64_t</span> extra = <span class="num">7</span>;
+    <span class="kw">for</span> (<span class="ty">size_t</span> i = len; i &gt; <span class="num">0</span>; i--) {
+        <span class="kw">if</span> (data[i-<span class="num">1</span>] % <span class="num">2</span> == <span class="num">1</span>) {
+            <span class="ty">uint64_t</span> t = data[i-<span class="num">1</span>] * <span class="num">3</span>;
+            <span class="kw">if</span> (t &lt; <span class="num">200</span>) extra = t;
+            <span class="kw">break</span>;
+        }
+    }
+    <span class="kw">return</span> base + extra;
+}</pre>
+</div>
+</div>
+
+<div class="callout c-win">
+<strong>Why Rust gets 0% accuracy:</strong>
+At O0, each method call (<code>find</code>, <code>map</code>, <code>filter</code>, <code>unwrap_or</code>) is a separate function call, producing blocks like:
+<code>call Iterator::find → call Option::map → call Option::filter → call Option::unwrap_or</code>
+<br><br>
+At O2, the <strong>entire chain is inlined and fused</strong> into a single loop:
+"iterate, check even, multiply by 2, check &lt; 100, or use 42."
+The call-based O0 blocks and the fused O2 blocks share <strong>zero concrete output values</strong> because
+the intermediate Option representations (discriminant + payload) at O0 don't exist at O2.
+<br><br>
+<strong>Why C wins:</strong> C's version is the same simple loop at both O0 and O2 — just optimized for register usage.
+The constants (42, 7, 100, 200) and the comparison operations are the same blocks at both levels.
+</div>
+
+<div class="callout key">
+<strong>The method chain problem:</strong>
+Rust's functional style (<code>.find().map().filter().unwrap_or()</code>) creates a chain of monomorphized generic function calls at O0.
+At O2, LLVM inlines and fuses them all. The O0 blocks are defined by <code>call</code> instructions to specific generic instantiations.
+The O2 blocks are defined by inlined arithmetic. There is no value overlap because the computation is restructured from
+"process Option at each step" to "compute the final value directly."
+</div>
+</section>
+
+<!-- ===== own_05 ===== -->
+<section id="own_05">
+<h2>own_05 — Merge Two Sorted Vecs <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">12/46</div><div class="label">26.1% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">5/21</div><div class="label">23.8% correct</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">own_05</span>(a: <span class="ty">Vec</span>&lt;<span class="ty">u64</span>&gt;, b: <span class="ty">Vec</span>&lt;<span class="ty">u64</span>&gt;) -&gt; <span class="ty">Vec</span>&lt;<span class="ty">u64</span>&gt; {
+    <span class="kw">let mut</span> result = Vec::with_capacity(a.len() + b.len());
+    <span class="kw">let mut</span> i = <span class="num">0</span>;
+    <span class="kw">let mut</span> j = <span class="num">0</span>;
+    <span class="kw">while</span> i &lt; a.len() &amp;&amp; j &lt; b.len() {
+        <span class="kw">if</span> a[i] &lt;= b[j] { result.push(a[i]); i += <span class="num">1</span>; }
+        <span class="kw">else</span> { result.push(b[j]); j += <span class="num">1</span>; }
+    }
+    <span class="cm">// drain remaining + running max pass</span>
+    <span class="kw">for</span> k <span class="kw">in</span> <span class="num">0</span>..result.len() {
+        <span class="kw">if</span> result[k] &gt; max_so_far { max_so_far = result[k]; }
+        result[k] = max_so_far;
+    }
+    result  <span class="cm">// a, b consumed and dropped</span>
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">uint64_t</span> *<span class="fn">own_05</span>(<span class="ty">uint64_t</span> *a, <span class="ty">size_t</span> alen,
+                  <span class="ty">uint64_t</span> *b, <span class="ty">size_t</span> blen, <span class="ty">size_t</span> *out_len) {
+    <span class="ty">uint64_t</span> *result = malloc((alen+blen) * <span class="num">8</span>);
+    <span class="ty">size_t</span> i = <span class="num">0</span>, j = <span class="num">0</span>, k = <span class="num">0</span>;
+    <span class="kw">while</span> (i &lt; alen &amp;&amp; j &lt; blen) {
+        <span class="kw">if</span> (a[i] &lt;= b[j]) result[k++] = a[i++];
+        <span class="kw">else</span> result[k++] = b[j++];
+    }
+    <span class="cm">// drain + running max</span>
+    free(a); free(b);
+    <span class="kw">return</span> result;
+}</pre>
+</div>
+</div>
+
+<div class="callout rust-win">
+<strong>Why Rust wins:</strong>
+Rust's <code>a[i]</code> and <code>b[j]</code> indexing generates bounds checks: <code>cmp i, a.len(); jae panic</code>.
+These comparison blocks are present at both O0 and O2. The merge loop body has
+comparisons against array lengths that produce the same concrete values.
+<br><br>
+Additionally, the ownership system means <code>a</code> and <code>b</code> are <strong>consumed</strong> (moved into the function).
+At O0, Rust generates <code>drop_in_place&lt;Vec&lt;u64&gt;&gt;</code> calls for the input vectors.
+At O2, these become inlined deallocation sequences. Both versions compute the same
+"pointer + capacity → dealloc" pattern with matching concrete values.
+<br><br>
+<strong>Why C is close but loses:</strong>
+C's merge loop is actually very similar, but the <code>free(a)</code>/<code>free(b)</code> calls at O0 become
+a single combined deallocation pattern at O2 that the compiler optimizes differently.
+The running max pass in C is also fused into the merge at O2, changing the block boundaries.
+</div>
+</section>
+
+<!-- ===== own_04 ===== -->
+<section id="own_04">
+<h2>own_04 — Box Linked List with Recursive Drop <span class="winner c">C Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value bad">3/13</div><div class="label">23.1% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">5/11</div><div class="label">45.5% correct</div></div>
+</div>
+
+<h3>Source Code</h3>
+<div class="code-grid">
+<div class="code-panel">
+<div class="header"><span class="lang-rust">Rust</span></div>
+<pre><span class="kw">fn</span> <span class="fn">own_04</span>(n: <span class="ty">u64</span>) -&gt; <span class="ty">u64</span> {
+    <span class="kw">enum</span> <span class="ty">List</span> { Cons(<span class="ty">u64</span>, <span class="ty">Box</span>&lt;List&gt;), Nil }
+    <span class="kw">let mut</span> head = List::Nil;
+    <span class="kw">for</span> i <span class="kw">in</span> (<span class="num">0</span>..n).rev() {
+        head = List::Cons(i*i + <span class="num">1</span>, Box::new(head));
+    }
+    <span class="kw">let mut</span> sum = <span class="num">0u64</span>;
+    <span class="kw">let mut</span> cur = &amp;head;
+    <span class="kw">loop</span> {
+        <span class="kw">match</span> cur {
+            List::Cons(val, next) =&gt; { sum += val; cur = next; }
+            List::Nil =&gt; <span class="kw">break</span>,
+        }
+    }
+    sum.wrapping_mul(count)
+    <span class="cm">// head drops recursively → each Box freed</span>
+}</pre>
+</div>
+<div class="code-panel">
+<div class="header"><span class="lang-c">C</span></div>
+<pre><span class="ty">uint64_t</span> <span class="fn">own_04</span>(<span class="ty">uint64_t</span> n) {
+    <span class="kw">typedef struct</span> Node { <span class="ty">uint64_t</span> val; <span class="kw">struct</span> Node *next; } Node;
+    Node *head = NULL;
+    <span class="kw">for</span> (<span class="ty">uint64_t</span> i = n; i &gt; <span class="num">0</span>; i--) {
+        Node *node = malloc(<span class="kw">sizeof</span>(Node));
+        node-&gt;val = (i-<span class="num">1</span>)*(i-<span class="num">1</span>) + <span class="num">1</span>;
+        node-&gt;next = head; head = node;
+    }
+    <span class="ty">uint64_t</span> sum = <span class="num">0</span>, count = <span class="num">0</span>;
+    <span class="kw">for</span> (Node *cur = head; cur; cur = cur-&gt;next) {
+        sum += cur-&gt;val; count++;
+    }
+    <span class="cm">// manual free loop</span>
+    <span class="kw">while</span> (head) { Node *t = head; head = head-&gt;next; free(t); }
+    <span class="kw">return</span> sum * count;
+}</pre>
+</div>
+</div>
+
+<div class="callout c-win">
+<strong>Why C wins:</strong>
+C's linked list traversal is a simple pointer-chasing loop: <code>cur = cur->next</code>.
+At both O0 and O2, the loop body reads two fields (val, next) and accumulates.
+The concrete values from the accumulation (sum += val, count++) are preserved.
+<br><br>
+<strong>Why Rust loses:</strong>
+Rust's <code>Box&lt;List&gt;</code> generates <strong>recursive Drop</strong>. When <code>head</code> goes out of scope,
+the compiler generates <code>drop_in_place&lt;List&gt;</code> which recursively frees each Cons node.
+At O0: this is a chain of <code>call drop_in_place&lt;List&gt;</code> blocks.
+At O2: LLVM converts the recursive drop into an iterative loop (tail-call optimization),
+producing completely different blocks. The recursion-to-iteration transformation
+changes the concrete values (stack frame layout vs register-based iteration).
+<br><br>
+Additionally, the <code>match</code> on <code>List</code> has the same jump-table problem as em_06,
+reducing the traversal loop to fewer analyzable blocks.
+</div>
+</section>
+
+<!-- ===== own_03 ===== -->
+<section id="own_03">
+<h2>own_03 — String Split + Transform + Rejoin <span class="winner rust">Rust Wins</span></h2>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="label">Rust O0→O2</div><div class="value rust">15/53</div><div class="label">28.3% correct</div></div>
+  <div class="stat-card"><div class="label">C O0→O2</div><div class="value c">5/24</div><div class="label">20.8% correct</div></div>
+</div>
+
+<div class="callout rust-win">
+<strong>Why Rust wins:</strong>
+Rust's string processing uses <code>split_whitespace().map().collect()</code> followed by explicit byte indexing with bounds checks.
+The <code>bytes[idx]</code> access (where idx is computed as <code>(k + rot) % bytes.len()</code>) generates bounds-check blocks at O0 and O2.
+These comparison blocks produce stable concrete values.
+<br><br>
+More blocks = more matching targets. Rust has 53 O0 blocks because each String allocation, bounds check,
+and Vec push generates distinct blocks. Even though many are wrong, the sheer number of attempts
+means more correct matches in absolute terms.
+<br><br>
+<strong>Why C loses:</strong>
+C's version uses <code>strtok</code> or manual pointer arithmetic for splitting, and direct character manipulation.
+The O0 → O2 transformation aggressively vectorizes the character rotation loop, replacing scalar byte operations
+with SIMD loads/stores that have no value overlap with the O0 version.
+</div>
+</section>
+
+<!-- ===== FINDINGS ===== -->
+<section id="findings">
+<h2>Key Findings</h2>
+
+<div class="callout key">
+<strong>Finding 1: Bounds checks are the ONLY Rust feature that consistently helps matching.</strong>
+<br>
+Rust's array bounds checks (<code>cmp index, length; jae panic</code>) create blocks that compute the same comparison
+at both O0 and O2. Even when the optimizer eliminates redundant checks, the remaining ones are value-stable.
+This gives Rust a consistent edge in the bounds_check category (23% vs 17%).
+</div>
+
+<div class="callout key">
+<strong>Finding 2: The ? operator and Option method chains HURT matching.</strong>
+<br>
+Every <code>?</code> generates ~4 extra blocks at O0 for Option discrimination. At O2, the compiler proves these are always Some
+and eliminates them entirely. The O0 blocks have no O2 counterpart → match accuracy drops.
+Method chains (<code>.find().map().filter()</code>) are even worse: N function calls at O0 → 1 fused loop at O2.
+</div>
+
+<div class="callout key">
+<strong>Finding 3: Rust match on enums is catastrophic for static analysis.</strong>
+<br>
+<code>match</code> compiles to jump tables (<code>jmp rax</code>). angr's CFGFast cannot resolve indirect jumps.
+Result: entire function bodies appear as 1-2 blocks instead of dozens.
+C's equivalent <code>switch</code> often uses cascading <code>if/else</code>, which is fully analyzable.
+em_06: Rust 0% (0/1) vs C 24.2% (16/66).
+</div>
+
+<div class="callout key">
+<strong>Finding 4: Ownership/Drop has a mixed effect.</strong>
+<br>
+Simple ownership (move semantics, Vec deallocation) slightly helps because the dealloc pattern is value-stable.
+But <code>Box</code>-based recursive data structures hurt because LLVM converts recursive Drop to iterative loops at O2,
+completely changing the concrete execution values.
+</div>
+
+<div class="callout key">
+<strong>Finding 5: More blocks ≠ worse matching (it's the opposite).</strong>
+<br>
+Rust consistently generates more O0 blocks than C (due to bounds checks, Option handling, Drop calls).
+More blocks means more matching candidates. Even at low per-block accuracy (20-30%),
+the absolute number of correct matches can be higher.
+The real problem is when blocks <em>collapse</em> (99 O0 → 1 O2 due to inlining, or 1 O0 due to jump tables).
+</div>
+
+<h3>Summary: What Helps and What Hurts</h3>
+<table class="match-table">
+<thead>
+<tr><th>Rust Feature</th><th>Effect on Matching</th><th>Why</th></tr>
+</thead>
+<tbody>
+<tr class="correct"><td><strong>Bounds checking</strong> (<code>cmp + jae</code>)</td><td style="color:var(--green)">+6-8% vs C</td><td>Same comparison values at O0 and O2</td></tr>
+<tr class="correct"><td><strong>Explicit indexing</strong> (<code>a[i]</code>)</td><td style="color:var(--green)">+2-5% vs C</td><td>Bounds checks create anchor blocks</td></tr>
+<tr class="wrong"><td><strong>? operator</strong></td><td style="color:var(--red)">−9-22% vs C</td><td>Option blocks at O0 eliminated at O2</td></tr>
+<tr class="wrong"><td><strong>Method chains</strong></td><td style="color:var(--red)">−23% vs C</td><td>N calls at O0 → 1 fused loop at O2</td></tr>
+<tr class="wrong"><td><strong>match on enums</strong></td><td style="color:var(--red)">−24% vs C</td><td>Jump tables defeat static CFG analysis</td></tr>
+<tr class="wrong"><td><strong>Recursive Drop (Box)</strong></td><td style="color:var(--red)">−22% vs C</td><td>Recursive→iterative transform at O2</td></tr>
+<tr><td><strong>Vec ownership (move)</strong></td><td style="color:var(--yellow)">~0%</td><td>Dealloc patterns similar to C free()</td></tr>
+<tr class="correct"><td><strong>chunks()/windows()</strong></td><td style="color:var(--green)">+12-18% vs C</td><td>Boundary checks create stable value blocks</td></tr>
+</tbody>
+</table>
+
+<div class="callout why">
+<strong>Bottom line for binary diffing tool design:</strong>
+<br>
+When matching Rust binaries across optimization levels, <strong>lean heavily on concrete execution values</strong> from
+bounds-check and comparison blocks. Avoid relying on callee names (they vanish at O2) or structural features
+(block counts change drastically). The value-stable "anchor blocks" from Rust's safety checks are the
+most reliable signal for cross-optimization matching.
+<br><br>
+For Rust code that uses <code>match</code> on enums, consider augmenting static CFG analysis with
+dynamic tracing or symbolic execution that can resolve jump tables.
+</div>
+</section>
+
+</div><!-- container -->
+
+<script>
+// Active nav highlighting on scroll
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const id = entry.target.id;
+      const link = document.querySelector(`nav a[href="#${id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-60px 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

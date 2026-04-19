@@ -1,0 +1,19 @@
+[package]
+name = "rust-features-bench"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rust_bench"
+path = "src/main.rs"
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+[profile.release]
+opt-level = 2
+debug = true
+lto = false
+codegen-units = 16
+panic = "unwind"

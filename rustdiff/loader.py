@@ -116,12 +116,15 @@ class RustBinaryLoader:
         """Extract the CFG for a single function as a DiGraph.
 
         Nodes are basic block addresses. Edges represent control flow.
+        Uses both angr's successor info and fall-through inference to
+        capture edges that angr's CFGFast misses (e.g., call fall-throughs).
         """
         if func_addr not in self.be.fast_cfg.functions:
             return nx.DiGraph()
 
         func = self.be.fast_cfg.functions[func_addr]
         g = nx.DiGraph()
+        block_addrs_set = set(func.block_addrs)
 
         for block_addr in func.block_addrs:
             node = self.be.get_fast_cfg_node(block_addr)
@@ -135,41 +138,36 @@ class RustBinaryLoader:
             )
 
         for block_addr in func.block_addrs:
+            # Add edges from angr's CFG successors (within this function)
             for succ_addr in self.be.get_bb_successors(block_addr):
                 if succ_addr in g:
                     g.add_edge(block_addr, succ_addr)
+
+            # Add fall-through edge: block_addr + block_size -> next block
+            node = self.be.get_fast_cfg_node(block_addr)
+            if node is not None and node.block is not None:
+                fall_through = block_addr + node.block.size
+                if fall_through in block_addrs_set and fall_through != block_addr:
+                    g.add_edge(block_addr, fall_through)
 
         return g
 
     def get_blocks_for_function(self, func_addr: int) -> list:
         """Get angr Block objects for all basic blocks in a function.
 
-        Returns list of (block_addr, angr.Block) pairs via BFS from entry.
+        Returns list of (block_addr, angr.Block) pairs for all blocks
+        in the function, sorted by address.
         """
         if func_addr not in self.be.fast_cfg.functions:
             return []
 
         func = self.be.fast_cfg.functions[func_addr]
         blocks = []
-        visited = set()
-        queue = [func_addr]
 
-        while queue:
-            addr = queue.pop(0)
-            if addr in visited:
-                continue
-            visited.add(addr)
-
-            if addr not in func.block_addrs_set:
-                continue
-
+        for addr in sorted(func.block_addrs):
             node = self.be.get_fast_cfg_node(addr)
             if node is not None and node.block is not None:
                 blocks.append((addr, node.block))
-
-            for succ in self.be.get_bb_successors(addr):
-                if succ not in visited and succ in func.block_addrs_set:
-                    queue.append(succ)
 
         return blocks
 
