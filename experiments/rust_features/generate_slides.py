@@ -457,21 +457,23 @@ bc_r = get_fn('bc_08', 'Rust')
 bc_c = get_fn('bc_08', 'C')
 
 # ── Left: Rust source + assembly ──
-add_code_box(sl, LEFT, Inches(1.5), BLK_W, Inches(1.5),
+add_code_box(sl, LEFT, Inches(1.5), BLK_W, Inches(1.8),
     'for i in 1..n-1 {\n'
-    '    if data[i] > data[i-1]    // ← bounds check\n'
-    '    && data[i] > data[i+1] {  // ← bounds check\n'
-    '        let mut lmin = data[i]; // ← bounds check\n'
+    '    if data[i] > data[i-1]     // data[i]: cmp i,len; jae panic\n'
+    '    && data[i] > data[i+1] {   // data[i-1]: cmp (i-1),len; jae panic\n'
+    '        let mut lmin = data[i]; // data[i+1]: cmp (i+1),len; jae panic\n'
     '        for j in (0..i).rev() {\n'
-    '            if data[j] < lmin   // ← bounds check',
-    font_size=10, title='Rust source — each data[x] inserts a bounds check', title_color=RUST_CLR)
+    '            if data[j] < lmin   // data[j]: cmp j,len; jae panic\n'
+    '// Each data[x] → compiler inserts: load index, load len,\n'
+    '//   cmp index,len; jae panic_handler. Success → access memory.',
+    font_size=10, title='Rust source — every data[x] inserts a bounds check (index < len)', title_color=RUST_CLR)
 
 r_bc_o0 = get_blocks_by_type(bc_r, 'O0', 'BOUNDS_CHECK')
 _y = Inches(3.15)
 add_textbox(sl, LEFT, _y, BLK_W, Inches(0.3),
-            'Rust assembly — 3 of 9 bounds check blocks (all identical opcodes):', font_size=12, color=YELLOW, bold=True)
+            'Rust assembly — 3 of 9 bounds check blocks (cmp index,len; jae panic):', font_size=12, color=YELLOW, bold=True)
 _y += Inches(0.3)
-bc_labels = ['← data[i] > data[i-1]', '← data[i] > data[i+1]', '← data[j] < lmin']
+bc_labels = ['← data[i] access: cmp index, len', '← data[i-1] access: cmp index, len', '← data[i+1] access: cmp index, len']
 for idx in range(min(3, len(r_bc_o0))):
     blk = r_bc_o0[idx]
     h = asm_box_height(blk)
@@ -493,25 +495,30 @@ add_code_box(sl, MID, Inches(1.5), Inches(3.5), Inches(1.2),
     '        uint64_t lmin = data[i];',
     font_size=10, title='C source — raw pointer, no checks', title_color=C_CLR)
 
-# Show 2 diverse C blocks
+# Show 2 diverse C blocks — pick blocks with different opcode sets to show diversity
 c_blks = get_blocks(bc_c, 'O0')
 _y_c = Inches(2.85)
 add_textbox(sl, MID, _y_c, Inches(3.5), Inches(0.3),
-            'C assembly — diverse block types:', font_size=12, color=YELLOW, bold=True)
+            'C assembly — no bounds checks, blocks are diverse:', font_size=12, color=YELLOW, bold=True)
 _y_c += Inches(0.3)
 _c_shown = 0
+_c_seen_ops = set()
 for b in c_blks:
-    if b['n_insns'] >= 3 and b['n_insns'] <= 5 and _c_shown < 2:
+    ops_key = tuple(sorted(set(b.get('opcodes', []))))
+    src = b.get('src_lines', [])
+    src_label = f'line {src[0]}' if src else ''
+    if 3 <= b['n_insns'] <= 8 and ops_key not in _c_seen_ops and _c_shown < 2:
+        _c_seen_ops.add(ops_key)
         h = asm_box_height(b)
         add_code_box(sl, MID, _y_c, Inches(3.5), h,
             fmt_asm_full(b), font_size=9,
-            title=f'{b["type"]} ({b["n_insns"]} insns)',
+            title=f'{b["n_insns"]} insns ({src_label})',
             title_color=C_CLR)
         _y_c += h + Inches(0.05)
         _c_shown += 1
 
 add_textbox(sl, MID, _y_c, Inches(3.5), Inches(0.5),
-            '↑ Different opcodes per block → matcher distinguishes them',
+            '↑ No bounds checks — blocks have different opcodes',
             font_size=12, color=GREEN, bold=True)
 
 # ── Results panel ──
@@ -528,10 +535,11 @@ for m_name, m_label in [('value', 'Value'), ('opcodes', 'Opcodes'), ('constants'
              f'{m_label}: R {ra:.0%} | C {ca:.0%}', font_size=12, font_color=WHITE)
     _yr += 0.5
 add_textbox(sl, Inches(10.1), Inches(_yr + 0.2), RES_W - Inches(0.2), Inches(2.5),
-            '9 identical bounds check blocks\n'
-            '→ matcher pairs wrong ones\n'
-            'with high confidence.\n\n'
-            'C has no bounds checks →\n'
+            '9 bounds check blocks:\n'
+            'each does cmp index,len;\n'
+            'jae panic. All identical\n'
+            'opcodes {cmp, jcc, mov}.\n\n'
+            'C: raw pointer, no checks →\n'
             'diverse opcodes → easy to match.',
             font_size=11, color=GRAY)
 
@@ -578,77 +586,106 @@ _bc08_notes.text = (
     "\n"
     "=== SLIDE ASSEMBLY BLOCKS — COMPLETE + SOURCE MAPPING ===\n"
     "\n"
-    "--- Rust BOUNDS_CHECK block 1 (slide label: data[i] > data[i-1]) ---\n"
+    "Each bounds check block does: load index, load slice.len(), cmp, jae panic.\n"
+    "If index < len: fall through to actual memory access (success).\n"
+    "If index >= len: jump to panic handler (lea panic_msg + call panic).\n"
+    "\n"
+    "--- Rust BOUNDS_CHECK block 1 (for data[i] access on line 968) ---\n"
     "Source line 968: if data[i] > data[i - 1] && data[i] > data[i + 1]\n"
+    "  rax = index (i), rcx = slice.len(). If i < len, continue; else panic.\n"
     "0x46f085: mov      rax, qword ptr [rsp + 0x68]\n"
     "0x46f08a: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f092: cmp      rax, rcx\n"
     "0x46f095: jb       0x46f0ae\n"
+    "  → jb (jump if below): index < len → success, proceed to access data[i]\n"
     "\n"
-    "--- Rust BOUNDS_CHECK block 2 (slide label: data[i] > data[i+1]) ---\n"
+    "--- Rust BOUNDS_CHECK block 2 (for data[i-1] access on line 968) ---\n"
     "Source line 968: if data[i] > data[i - 1] && data[i] > data[i + 1]\n"
+    "  rax = index (i-1 or i+1), rcx = slice.len(). If >= len, jump to panic.\n"
     "0x46f0ed: mov      rax, qword ptr [rsp + 0x70]\n"
     "0x46f0f2: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f0fa: cmp      rax, rcx\n"
     "0x46f0fd: jae      0x46f128\n"
+    "  → jae (jump if above/equal): index >= len → panic\n"
+    "  Target 0x46f128 is: lea rdx,[rip+panic_msg]; call panic_handler\n"
     "\n"
-    "--- Rust BOUNDS_CHECK block 3 (slide label: data[j] < lmin) ---\n"
-    "Source line 968: if data[i] > data[i - 1] && data[i] > data[i + 1]\n"
+    "--- Rust BOUNDS_CHECK block 3 (for data[i+1] access on line 968) ---\n"
+    "Source line 968: same line, third array access\n"
     "0x46f14a: mov      rax, qword ptr [rsp + 0x58]\n"
     "0x46f14f: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f157: cmp      rax, rcx\n"
     "0x46f15a: jb       0x46f173\n"
     "\n"
     "--- Remaining 6 Rust BOUNDS_CHECK blocks (not shown on slide) ---\n"
-    "Block 4 [line 969: let mut left_min = data[i]]:\n"
+    "Block 4 [line 969: let mut left_min = data[i] — check i < len]:\n"
     "0x46f1b2: mov      rax, qword ptr [rsp + 0x70]\n"
     "0x46f1b7: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f1bf: cmp      rax, rcx\n"
     "0x46f1c2: jae      0x46f1f2\n"
     "\n"
-    "Block 5 [line 974: if data[i] - left_min >= min_prominence]:\n"
+    "Block 5 [line 974: if data[i] - left_min — check i < len]:\n"
     "0x46f2ae: mov      rax, qword ptr [rsp + 0x70]\n"
     "0x46f2b3: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f2bb: cmp      rax, rcx\n"
     "0x46f2be: jb       0x46f3fa\n"
     "\n"
-    "Block 6 [line 972: if data[j] > data[i] { break; }]:\n"
+    "Block 6 [line 972: if data[j] > data[i] — check j < len]:\n"
     "0x46f308: mov      rax, qword ptr [rsp + 0x18]\n"
     "0x46f30d: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f315: cmp      rax, rcx\n"
     "0x46f318: jb       0x46f36b\n"
     "\n"
-    "Block 7 [line 971: if data[j] < left_min { left_min = data[j]; }]:\n"
+    "Block 7 [line 971: if data[j] < left_min — check j < len]:\n"
     "0x46f31c: mov      rax, qword ptr [rsp + 0x18]\n"
     "0x46f321: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f329: cmp      rax, rcx\n"
     "0x46f32c: jae      0x46f349\n"
     "\n"
-    "Block 8 [line 974: if data[i] - left_min >= min_prominence]:\n"
+    "Block 8 [line 974: data[i] access — check i < len]:\n"
     "0x46f447: mov      rax, qword ptr [rsp + 8]\n"
     "0x46f44c: mov      rcx, qword ptr [rsp + 0xa0]\n"
     "0x46f454: cmp      rax, rcx\n"
     "0x46f457: jae      0x46f473\n"
     "\n"
-    "Block 9 [line 975: peaks.push((i, data[i]))]:\n"
+    "Block 9 [line 975: peaks.push((i, data[i])) — check i < len]:\n"
     "0x46f473: mov      rax, qword ptr [rsp + 0x70]\n"
     "0x46f478: mov      rcx, qword ptr [rsp + 0xa8]\n"
     "0x46f480: cmp      rax, rcx\n"
     "0x46f483: jae      0x46f4a5\n"
     "\n"
-    "--- C block 1 shown (BOUNDS_CHECK, 3 insns) ---\n"
-    "Source line 773: for (size_t j = i; j > 0; j--)\n"
-    "0x405571: sub      qword ptr [rbp - 0x20], 1\n"
-    "0x405576: cmp      qword ptr [rbp - 0x20], 0\n"
-    "0x40557b: jne      0x40550a\n"
+    "--- Example panic target (where jae jumps to on bounds check failure) ---\n"
+    "Target of block 2's jae 0x46f128:\n"
+    "0x46f128: mov      rsi, qword ptr [rsp + 0xa8]\n"
+    "0x46f130: mov      rdi, qword ptr [rsp + 0x70]\n"
+    "0x46f135: lea      rdx, [rip + 0x58cf4]\n"
+    "0x46f13c: mov      rax, qword ptr [rip + 0x5d43d]\n"
+    "0x46f143: call     rax\n"
+    "  → loads panic message (\"index out of bounds\") and calls core::panicking::panic_bounds_check\n"
     "\n"
-    "--- C block 2 shown (ITERATOR_STATE, 5 insns) ---\n"
-    "Source line 770: for (size_t i = 1; i+1 < n; i++)\n"
-    "0x4055a5: add      qword ptr [rbp - 0x10], 1\n"
-    "0x4055aa: mov      rax, qword ptr [rbp - 0x10]\n"
-    "0x4055ae: add      rax, 1\n"
-    "0x4055b2: cmp      qword ptr [rbp - 0x30], rax\n"
-    "0x4055b6: ja       0x405478"
+    "--- C block 1 shown (8 insns) ---\n"
+    "Source lines 768-770: function prologue + variable init + for loop start\n"
+    "  C has NO array bounds checking — raw pointer access.\n"
+    "0x405453: push     rbp\n"
+    "0x405454: mov      rbp, rsp\n"
+    "0x405457: mov      qword ptr [rbp - 0x28], rdi\n"
+    "0x40545b: mov      qword ptr [rbp - 0x30], rsi\n"
+    "0x40545f: mov      qword ptr [rbp - 0x38], rdx\n"
+    "0x405463: mov      qword ptr [rbp - 8], 0\n"
+    "0x40546b: mov      qword ptr [rbp - 0x10], 1\n"
+    "0x405473: jmp      0x4055aa\n"
+    "\n"
+    "--- C block 2 shown (8 insns) ---\n"
+    "Source line 774: if (data[j-1] < lmin) lmin = data[j-1];\n"
+    "  Direct pointer arithmetic: shl+lea to compute offset, then load.\n"
+    "  No cmp-index-vs-length — just raw memory access.\n"
+    "0x40550a: mov      rax, qword ptr [rbp - 0x20]\n"
+    "0x40550e: shl      rax, 3\n"
+    "0x405512: lea      rdx, [rax - 8]\n"
+    "0x405516: mov      rax, qword ptr [rbp - 0x28]\n"
+    "0x40551a: add      rax, rdx\n"
+    "0x40551d: mov      rax, qword ptr [rax]\n"
+    "0x405520: cmp      qword ptr [rbp - 0x18], rax\n"
+    "0x405524: jbe      0x405540"
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -669,7 +706,7 @@ add_code_box(sl, LEFT, Inches(1.5), BLK_W, Inches(1.3),
     '    let last = data.last()?;            // ← ? generates 2 blocks\n'
     '    let mid = data.get(mid_idx)?;       // ← ? generates 2 blocks\n'
     '    let range = last.checked_sub(*first)?;\n'
-    '    // ... 7 uses of ? total',
+    '    // ... 6 uses of ? total',
     font_size=10, title='Rust — each ? inserts: discriminant check + error return', title_color=RUST_CLR)
 
 qm_r_blks = get_blocks(qm_r, 'O0')
@@ -692,7 +729,7 @@ for b in qm_r_blks:
 
 _y = Inches(2.95)
 add_textbox(sl, LEFT, _y, BLK_W, Inches(0.3),
-            f'Rust assembly — {len(_qm_err_blocks)} identical error-return blocks (of 53 total):', font_size=12, color=YELLOW, bold=True)
+            f'Rust assembly — {len(_qm_err_blocks)} identical error-return blocks (of {len(qm_r_blks)} O0 blocks):', font_size=12, color=YELLOW, bold=True)
 _y += Inches(0.3)
 
 # Show the check block first
@@ -732,15 +769,20 @@ add_code_box(sl, MID, Inches(1.5), Inches(3.5), Inches(1.4),
 c_blks = get_blocks(qm_c, 'O0')
 _y_c = Inches(2.65)
 add_textbox(sl, MID, _y_c, Inches(3.5), Inches(0.3),
-            f'C assembly — {len(c_blks)} blocks, 92% unique opcodes:', font_size=12, color=YELLOW, bold=True)
+            f'C assembly — {len(c_blks)} O0 blocks, diverse opcodes:', font_size=12, color=YELLOW, bold=True)
 _y_c += Inches(0.3)
 _c_shown = 0
+_c_seen_ops2 = set()
 for b in c_blks:
-    if 2 <= b['n_insns'] <= 8 and _c_shown < 3:
+    ops_key = tuple(sorted(set(b.get('opcodes', []))))
+    src = b.get('src_lines', [])
+    src_label = f'line {src[0]}' if src else ''
+    if 2 <= b['n_insns'] <= 8 and ops_key not in _c_seen_ops2 and _c_shown < 3:
+        _c_seen_ops2.add(ops_key)
         h = asm_box_height(b)
         add_code_box(sl, MID, _y_c, Inches(3.5), h,
             fmt_asm_full(b), font_size=9,
-            title=f'{b["type"]} ({b["n_insns"]} insns)',
+            title=f'{b["n_insns"]} insns ({src_label})',
             title_color=C_CLR)
         _y_c += h + Inches(0.05)
         _c_shown += 1
@@ -762,11 +804,11 @@ for m_name, m_label in [('value', 'Value'), ('opcodes', 'Opcodes'), ('constants'
              f'{m_label}: R {ra:.0%} | C {ca:.0%}', font_size=12, font_color=WHITE)
     _yr += 0.5
 add_textbox(sl, Inches(10.1), Inches(_yr + 0.2), RES_W - Inches(0.2), Inches(2.5),
-            '53 Rust blocks, only 28% unique\n'
-            'opcode sets.\n\n'
-            '7 uses of ? → 7+ identical\n'
-            'error-propagation blocks.\n\n'
-            'C: 13 blocks, 92% unique.\n'
+            '49 Rust O0 blocks, only 22%\n'
+            'unique opcode sets.\n\n'
+            '6 uses of ? → 8 identical\n'
+            'error-return blocks.\n\n'
+            'C: 9 O0 blocks, 89% unique.\n'
             'No ? operator → diverse blocks.',
             font_size=11, color=GRAY)
 
@@ -886,52 +928,56 @@ _qm06_notes.text = (
 sl = prs.slides.add_slide(prs.slide_layouts[6])
 set_slide_bg(sl)
 slide_title(sl, 'Example: Panic Paths (pu_08)',
-            '.unwrap() expands into check + extract + panic-call — all sharing the same opcodes')
+            '.unwrap() inserts check + panic blocks — panic blocks look like normal call blocks')
 
 pu_r = get_fn('pu_08', 'Rust')
 pu_c = get_fn('pu_08', 'C')
 
 # ── Left: Rust source + assembly ──
-add_code_box(sl, LEFT, Inches(1.5), BLK_W, Inches(1.3),
-    'let first = parts.first().unwrap(); // ← 3 blocks\n'
-    'let last = parts.last().unwrap();   // ← 3 blocks\n'
-    'let mid = parts.get(parts.len()/2)\n'
-    '                .unwrap();          // ← 3 blocks',
-    font_size=10, title='Rust — each .unwrap() generates 3 blocks', title_color=RUST_CLR)
+add_code_box(sl, LEFT, Inches(1.5), BLK_W, Inches(1.5),
+    'fn pu_08(s: &str) -> u64 {\n'
+    '    let parts: Vec<&str> = s.split_whitespace().collect();\n'
+    '    let first = parts.first().unwrap(); // check+panic\n'
+    '    let last = parts.last().unwrap();   // check+panic\n'
+    '    let mid = parts.get(parts.len()/2).unwrap(); // check+panic\n'
+    '// Each .unwrap(): check discriminant → if None, call panic\n'
+    '// Panic block uses {lea, mov, call} — same as normal calls',
+    font_size=10, title='Rust source — .unwrap() inserts check + panic blocks', title_color=RUST_CLR)
 
 _pu_blks = get_blocks(pu_r, 'O0')
 
-# Find blocks for the 3 steps
+# Find the check block (at 0x47bf85)
 _pu_check = None
 for b in _pu_blks:
-    asm_text = ' '.join(b.get('asm', []))
-    if ('test' in asm_text or 'cmp' in asm_text) and ('je' in asm_text or 'jne' in asm_text) and b['n_insns'] <= 10:
+    if b['addr'] == '0x47bf85':
         _pu_check = b
         break
 
-_pu_extract = None
-for b in _pu_blks:
-    asm_text = ' '.join(b.get('asm', []))
-    if 'call' in asm_text and 'rip' not in asm_text and 'lea' in asm_text and 3 <= b['n_insns'] <= 5:
-        _pu_extract = b
-        break
-
+# Find the panic block (at 0x47bfb4)
 _pu_panic = None
 for b in _pu_blks:
-    asm_text = ' '.join(b.get('asm', []))
-    if 'lea' in asm_text and 'rip' in asm_text and 'call' in asm_text and b['n_insns'] <= 4:
+    if b['addr'] == '0x47bfb4':
         _pu_panic = b
         break
 
-_y = Inches(2.95)
+# Find a normal function call block for contrast (e.g. collect() call)
+_pu_normal = None
+for b in _pu_blks:
+    src = b.get('src_lines', [])
+    asm_text = ' '.join(b.get('asm', []))
+    if 'call' in asm_text and 'rip' not in asm_text and 'lea' in asm_text and 3 <= b['n_insns'] <= 5:
+        _pu_normal = b
+        break
+
+_y = Inches(3.15)
 add_textbox(sl, LEFT, _y, BLK_W, Inches(0.3),
-            'Rust assembly — what one .unwrap() expands to:', font_size=12, color=YELLOW, bold=True)
+            'Rust assembly — .unwrap() expansion + a normal call block:', font_size=12, color=YELLOW, bold=True)
 _y += Inches(0.3)
 
 _unwrap_parts = [
-    ('Step 1: check if None', _pu_check, PURPLE),
-    ('Step 2: extract value — opcodes: {call, lea, mov}', _pu_extract, C_CLR),
-    ('Step 3: panic if None — opcodes: {call, lea, mov} ← SAME!', _pu_panic, RED),
+    ('check: is Option None? (cmp rdx,0 → if None, fall to panic)', _pu_check, PURPLE),
+    ('panic block: lea panic_msg + call panic — opcodes: {call, lea, mov}', _pu_panic, RED),
+    ('normal call block (collect) — opcodes: {call, lea, mov} ← SAME!', _pu_normal, C_CLR),
 ]
 for label, blk, clr in _unwrap_parts:
     if blk:
@@ -942,7 +988,7 @@ for label, blk, clr in _unwrap_parts:
         _y += h + Inches(0.05)
 
 add_textbox(sl, LEFT, _y, BLK_W, Inches(0.5),
-            '↑ Steps 2 & 3: same opcodes — matcher can\'t see call target → confuses panic with normal calls',
+            '↑ Panic block and normal call block: same opcodes {call, lea, mov} — matcher can\'t distinguish',
             font_size=12, color=RED, bold=True)
 
 # ── Right: C source + assembly ──
@@ -959,15 +1005,20 @@ add_code_box(sl, MID, Inches(1.5), Inches(3.5), Inches(1.5),
 c_blks = get_blocks(pu_c, 'O0')
 _y_c = Inches(2.85)
 add_textbox(sl, MID, _y_c, Inches(3.5), Inches(0.3),
-            'C assembly — diverse block types:', font_size=12, color=YELLOW, bold=True)
+            'C assembly — no panic paths, blocks are diverse:', font_size=12, color=YELLOW, bold=True)
 _y_c += Inches(0.3)
 _c_shown = 0
+_c_seen_ops3 = set()
 for b in c_blks:
-    if 2 <= b['n_insns'] <= 5 and _c_shown < 2:
+    ops_key = tuple(sorted(set(b.get('opcodes', []))))
+    src = b.get('src_lines', [])
+    src_label = f'line {src[0]}' if src else ''
+    if 2 <= b['n_insns'] <= 6 and ops_key not in _c_seen_ops3 and _c_shown < 2:
+        _c_seen_ops3.add(ops_key)
         h = asm_box_height(b)
         add_code_box(sl, MID, _y_c, Inches(3.5), h,
             fmt_asm_full(b), font_size=9,
-            title=f'{b["type"]} ({b["n_insns"]} insns)',
+            title=f'{b["n_insns"]} insns ({src_label})',
             title_color=C_CLR)
         _y_c += h + Inches(0.05)
         _c_shown += 1
@@ -978,7 +1029,7 @@ add_textbox(sl, MID, _y_c, Inches(3.5), Inches(0.5),
 
 # Bottom stat
 add_textbox(sl, LEFT, Inches(6.7), Inches(9.5), Inches(0.4),
-            'pu_08: 43 O0 blocks, only 10 unique opcode sets. 11 share {call, lea, mov}, 12 share {jmp, mov}. Only 2/43 correct.',
+            'pu_08 Rust O0: 43 blocks, only 10 unique opcode sets. 11× {call, lea, mov}, 12× {jmp, mov}. Matcher can\'t tell them apart.',
             font_size=13, color=WHITE)
 
 # ── Results panel ──
@@ -994,10 +1045,11 @@ for m_name, m_label in [('value', 'Value'), ('opcodes', 'Opcodes'), ('constants'
              f'{m_label}: R {ra:.0%} | C {ca:.0%}', font_size=12, font_color=WHITE)
     _yr += 0.5
 add_textbox(sl, Inches(10.1), Inches(_yr + 0.2), RES_W - Inches(0.2), Inches(2.5),
-            '3× .unwrap() = 9+ blocks\n'
-            'all sharing {call, lea, mov}.\n\n'
-            'Only 2/43 matched correctly.\n\n'
-            'C has no panic paths →\n'
+            '3× .unwrap() = 3 panic blocks\n'
+            'each with {call, lea, mov}.\n\n'
+            '11 blocks share {call, lea, mov}\n'
+            '(panic + normal calls mixed).\n\n'
+            'C: no panic paths →\n'
             'blocks are diverse.',
             font_size=11, color=GRAY)
 
@@ -1034,8 +1086,10 @@ _pu08_notes.text = (
     "\n"
     "=== SLIDE ASSEMBLY BLOCKS — COMPLETE + SOURCE MAPPING ===\n"
     "\n"
-    "--- Rust: Step 1 check block (shown on slide) ---\n"
+    "--- Rust: check block (0x47bf85) — is Option None? (shown on slide) ---\n"
     "Source: compiler-generated for parts.first().unwrap() (line 1603)\n"
+    "  cmp rdx,0: checks if Option is None. If not None → jne to 0x47bfc8 (success).\n"
+    "  If None → falls through to panic block at 0x47bfb4.\n"
     "0x47bf85: mov      rax, qword ptr [rsp + 0xc0]\n"
     "0x47bf8d: mov      qword ptr [rsp + 0x288], rax\n"
     "0x47bf95: mov      rdx, qword ptr [rsp + 0x288]\n"
@@ -1046,20 +1100,24 @@ _pu08_notes.text = (
     "0x47bfac: test     rax, 1\n"
     "0x47bfb2: jne      0x47bfc8\n"
     "\n"
-    "--- Rust: Step 2 extract block (shown on slide) ---\n"
+    "--- Rust: panic block (0x47bfb4) — lea panic_msg + call panic (shown on slide) ---\n"
+    "Source: compiler-generated for .unwrap() panic path (line 1603)\n"
+    "  Opcodes: {call, lea, mov} — SAME as normal function calls.\n"
+    "  This is the key problem: matcher can't distinguish panic from real calls.\n"
+    "0x47bfb4: lea      rdi, [rip + 0x4d39d]\n"
+    "0x47bfbb: mov      rax, qword ptr [rip + 0x506fe]\n"
+    "0x47bfc2: call     rax\n"
+    "\n"
+    "--- Rust: normal call block — collect() (shown on slide for CONTRAST) ---\n"
     "Source line 1602: let parts: Vec<&str> = s.split_whitespace().collect();\n"
+    "  Opcodes: {call, lea, mov} — SAME as the panic block above!\n"
+    "  This demonstrates why the matcher pairs them incorrectly.\n"
     "0x47bf02: mov      rsi, qword ptr [rsp + 0xc8]\n"
     "0x47bf0a: lea      rdi, [rsp + 0xe8]\n"
     "0x47bf12: mov      qword ptr [rsp + 0xd0], rdi\n"
     "0x47bf1a: call     0x42efa0\n"
     "\n"
-    "--- Rust: Step 3 panic block (shown on slide) ---\n"
-    "Source: compiler-generated for .unwrap() panic path (line 1603)\n"
-    "0x47bfb4: lea      rdi, [rip + 0x4d39d]\n"
-    "0x47bfbb: mov      rax, qword ptr [rip + 0x506fe]\n"
-    "0x47bfc2: call     rax\n"
-    "\n"
-    "--- C block 1 shown (BODY, 5 insns) ---\n"
+    "--- C block 1 shown ---\n"
     "Source lines 1282-1283: strncpy(copy, s, 1023); copy[1023] = '\\0';\n"
     "0x407fd6: mov      byte ptr [rbp - 0x831], 0\n"
     "0x407fdd: lea      rax, [rbp - 0xc30]\n"
@@ -1067,7 +1125,7 @@ _pu08_notes.text = (
     "0x407fe9: mov      rdi, rax\n"
     "0x407fec: call     0x401110\n"
     "\n"
-    "--- C block 2 shown (BODY, 2 insns) ---\n"
+    "--- C block 2 shown ---\n"
     "Source line 1283: strtok loop — store result and continue\n"
     "0x407ff1: mov      qword ptr [rbp - 0x10], rax\n"
     "0x407ff5: jmp      0x408022"
