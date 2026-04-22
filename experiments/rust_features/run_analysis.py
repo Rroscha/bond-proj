@@ -31,8 +31,94 @@ from rustdiff.loader import RustBinaryLoader
 from rustdiff.micro_exec.block_executor import BlockMicroExecutor
 from rustdiff.fingerprint.function_fingerprint import FunctionFingerprint
 from rustdiff.analysis.block_case_analysis import classify_block
+from elftools.elf.elffile import ELFFile
 import numpy as np
 from scipy.optimize import linear_sum_assignment
+
+
+# ── DWARF line-mapping ground truth ────────────────────────────────────────
+
+class DWARFLineMapper:
+    """Extract address → source line mapping from DWARF debug info."""
+
+    def __init__(self, binary_path):
+        self.entries = []  # sorted list of (addr, file, line)
+        self._load(binary_path)
+
+    def _load(self, path):
+        with open(path, 'rb') as f:
+            elf = ELFFile(f)
+            if not elf.has_dwarf_info():
+                return
+            # Detect PIE rebase: angr loads PIE binaries at 0x400000
+            is_pie = elf.header.e_type == 'ET_DYN'
+            self.base_delta = 0x400000 if is_pie else 0
+            di = elf.get_dwarf_info()
+            for cu in di.iter_CUs():
+                lp = di.line_program_for_CU(cu)
+                if lp is None:
+                    continue
+                file_entries = lp['file_entry']
+                file_map = {}
+                for i, fe in enumerate(file_entries):
+                    name = fe.name.decode() if isinstance(fe.name, bytes) else fe.name
+                    file_map[i + 1] = name
+                for entry in lp.get_entries():
+                    s = entry.state
+                    if s and not s.end_sequence and s.line > 0:
+                        fname = file_map.get(s.file, '')
+                        angr_addr = s.address + self.base_delta
+                        self.entries.append((angr_addr, fname, s.line))
+        self.entries.sort()
+
+    def lines_for_range(self, start_addr, end_addr, source_filter=None):
+        """Return set of (file, line) for addresses in [start_addr, end_addr)."""
+        lines = set()
+        for addr, fname, line in self.entries:
+            if addr >= end_addr:
+                break
+            if addr >= start_addr:
+                if source_filter is None or source_filter in fname:
+                    lines.add((fname, line))
+        return lines
+
+
+def get_block_addr_range(loader, block_addr):
+    """Get (start, end) address range for a basic block."""
+    node = loader.be.get_fast_cfg_node(block_addr)
+    if not node or not node.block:
+        return block_addr, block_addr + 1
+    insns = list(node.block.capstone.insns)
+    if not insns:
+        return block_addr, block_addr + 1
+    last = insns[-1]
+    return block_addr, last.address + last.size
+
+
+def build_block_line_sets(loader, dwarf_mapper, block_addrs, source_filter=None):
+    """For each block addr, compute its set of source lines."""
+    result = {}
+    for addr in block_addrs:
+        start, end = get_block_addr_range(loader, addr)
+        lines = dwarf_mapper.lines_for_range(start, end, source_filter)
+        result[addr] = {line for _, line in lines}
+    return result
+
+
+def build_groundtruth_matrix(lines_o0, lines_o2, addrs_o0, addrs_o2):
+    """Build a boolean matrix: gt[i][j] = True if O0 block i and O2 block j
+    share at least one source line (i.e., they correspond to the same code)."""
+    n1, n2 = len(addrs_o0), len(addrs_o2)
+    gt = np.zeros((n1, n2), dtype=bool)
+    for i, a1 in enumerate(addrs_o0):
+        s1 = lines_o0.get(a1, set())
+        if not s1:
+            continue
+        for j, a2 in enumerate(addrs_o2):
+            s2 = lines_o2.get(a2, set())
+            if s1 & s2:
+                gt[i][j] = True
+    return gt
 
 EXP_DIR = Path(__file__).resolve().parent
 
@@ -161,13 +247,20 @@ METHODS = {
 }
 
 
-def run_matching(sigs_o0, sigs_o2, sim_fn, threshold):
+def run_matching(sigs_o0, sigs_o2, sim_fn, threshold, gt_matrix=None):
+    """Match blocks via Hungarian, evaluate against DWARF ground truth.
+
+    gt_matrix: boolean numpy array [n_o0 × n_o2].  gt_matrix[i][j] = True means
+               O0 block i and O2 block j map to overlapping source lines.
+               If None, falls back to threshold-based self-evaluation.
+    """
     addrs1 = sorted(sigs_o0.keys())
     addrs2 = sorted(sigs_o2.keys())
     n1, n2 = len(addrs1), len(addrs2)
 
     if n1 == 0 or n2 == 0:
-        return {'matched': 0, 'correct': 0, 'accuracy': 0.0, 'pairs': []}
+        return {'matched': 0, 'correct': 0, 'accuracy': 0.0, 'pairs': [],
+                'gt_available': gt_matrix is not None}
 
     sim_matrix = np.zeros((n1, n2))
     for i, a1 in enumerate(addrs1):
@@ -180,7 +273,10 @@ def run_matching(sigs_o0, sigs_o2, sim_fn, threshold):
     correct = 0
     for r, c in zip(row_ind, col_ind):
         s = sim_matrix[r, c]
-        is_correct = s >= threshold
+        if gt_matrix is not None:
+            is_correct = bool(gt_matrix[r, c])
+        else:
+            is_correct = s >= threshold
         if is_correct:
             correct += 1
         pairs.append({
@@ -196,11 +292,12 @@ def run_matching(sigs_o0, sigs_o2, sim_fn, threshold):
         'correct': correct,
         'accuracy': correct / n_matched if n_matched > 0 else 0.0,
         'pairs': sorted(pairs, key=lambda p: -p['similarity']),
+        'gt_available': gt_matrix is not None,
     }
 
 
 def analyze_function(base_name, lang, loader_o0, loader_o2, exec_o0, exec_o2,
-                     find_fn):
+                     find_fn, dwarf_o0=None, dwarf_o2=None, source_filter=None):
     addr_o0, name_o0 = find_fn(loader_o0, base_name)
     addr_o2, name_o2 = find_fn(loader_o2, base_name)
 
@@ -215,16 +312,41 @@ def analyze_function(base_name, lang, loader_o0, loader_o2, exec_o0, exec_o2,
     n_o0 = len(sigs_o0)
     n_o2 = len(sigs_o2)
 
+    # Build DWARF ground truth if mappers are available
+    gt_matrix = None
+    gt_coverage = {}
+    addrs_o0 = sorted(sigs_o0.keys())
+    addrs_o2 = sorted(sigs_o2.keys())
+    if dwarf_o0 and dwarf_o2 and addrs_o0 and addrs_o2:
+        lines_o0 = build_block_line_sets(loader_o0, dwarf_o0, addrs_o0, source_filter)
+        lines_o2 = build_block_line_sets(loader_o2, dwarf_o2, addrs_o2, source_filter)
+        gt_matrix = build_groundtruth_matrix(lines_o0, lines_o2, addrs_o0, addrs_o2)
+        o0_has_lines = sum(1 for a in addrs_o0 if lines_o0.get(a))
+        o2_has_lines = sum(1 for a in addrs_o2 if lines_o2.get(a))
+        gt_matchable = int(gt_matrix.any(axis=1).sum())
+        gt_coverage = {
+            'o0_with_lines': o0_has_lines,
+            'o2_with_lines': o2_has_lines,
+            'o0_total': len(addrs_o0),
+            'o2_total': len(addrs_o2),
+            'gt_matchable_o0': gt_matchable,
+        }
+
     method_results = {}
     for method_name, spec in METHODS.items():
         method_results[method_name] = run_matching(
-            sigs_o0, sigs_o2, spec['sim_fn'], spec['threshold']
+            sigs_o0, sigs_o2, spec['sim_fn'], spec['threshold'], gt_matrix
         )
 
+    # Build per-block source lines for JSON output
+    lines_o0_map = {}
+    lines_o2_map = {}
+    if dwarf_o0 and dwarf_o2:
+        lines_o0_map = build_block_line_sets(loader_o0, dwarf_o0, addrs_o0, source_filter)
+        lines_o2_map = build_block_line_sets(loader_o2, dwarf_o2, addrs_o2, source_filter)
+
     block_details = []
-    addrs1 = sorted(sigs_o0.keys())
-    addrs2 = sorted(sigs_o2.keys())
-    for a1 in addrs1:
+    for a1 in addrs_o0:
         sig = sigs_o0[a1]
         bt = classify_block(sig, cfg_o0, a1).name
         block_details.append({
@@ -238,8 +360,9 @@ def analyze_function(base_name, lang, loader_o0, loader_o2, exec_o0, exec_o2,
             'opcodes': list(sig.opcode_sequence)[:20],
             'constants': [hex(c) for c in sig.constants[:10]],
             'asm': _dump_asm(loader_o0, a1),
+            'src_lines': sorted(lines_o0_map.get(a1, set())),
         })
-    for a2 in addrs2:
+    for a2 in addrs_o2:
         sig = sigs_o2[a2]
         bt = classify_block(sig, cfg_o2, a2).name
         block_details.append({
@@ -253,6 +376,7 @@ def analyze_function(base_name, lang, loader_o0, loader_o2, exec_o0, exec_o2,
             'opcodes': list(sig.opcode_sequence)[:20],
             'constants': [hex(c) for c in sig.constants[:10]],
             'asm': _dump_asm(loader_o2, a2),
+            'src_lines': sorted(lines_o2_map.get(a2, set())),
         })
 
     return {
@@ -264,11 +388,13 @@ def analyze_function(base_name, lang, loader_o0, loader_o2, exec_o0, exec_o2,
         'name_o2': name_o2,
         'n_o0': n_o0,
         'n_o2': n_o2,
+        'gt_coverage': gt_coverage,
         'methods': {
             mn: {
                 'matched': mr['matched'],
                 'correct': mr['correct'],
                 'accuracy': round(mr['accuracy'], 4),
+                'gt_available': mr.get('gt_available', False),
                 'pairs': [
                     {
                         'addr_o0': f"0x{p['addr_o0']:x}",
@@ -578,6 +704,16 @@ def main():
     c_o0 = RustBinaryLoader(str(EXP_DIR / 'c_bench_O0'))
     c_o2 = RustBinaryLoader(str(EXP_DIR / 'c_bench_O2'))
 
+    sys.stderr.write("Loading DWARF line info...\n")
+    dwarf_rust_o0 = DWARFLineMapper(str(EXP_DIR / 'rust_O0'))
+    dwarf_rust_o2 = DWARFLineMapper(str(EXP_DIR / 'rust_O2'))
+    dwarf_c_o0 = DWARFLineMapper(str(EXP_DIR / 'c_bench_O0'))
+    dwarf_c_o2 = DWARFLineMapper(str(EXP_DIR / 'c_bench_O2'))
+    sys.stderr.write(f"  Rust O0: {len(dwarf_rust_o0.entries)} line entries\n")
+    sys.stderr.write(f"  Rust O2: {len(dwarf_rust_o2.entries)} line entries\n")
+    sys.stderr.write(f"  C O0: {len(dwarf_c_o0.entries)} line entries\n")
+    sys.stderr.write(f"  C O2: {len(dwarf_c_o2.entries)} line entries\n")
+
     sys.stderr.write("Creating micro-executors...\n")
     rust_exec_o0 = BlockMicroExecutor(rust_o0)
     rust_exec_o2 = BlockMicroExecutor(rust_o2)
@@ -594,11 +730,13 @@ def main():
 
         rust_r = analyze_function(
             base_name, 'Rust', rust_o0, rust_o2,
-            rust_exec_o0, rust_exec_o2, find_func_addr_rust
+            rust_exec_o0, rust_exec_o2, find_func_addr_rust,
+            dwarf_rust_o0, dwarf_rust_o2, 'main.rs'
         )
         c_r = analyze_function(
             base_name, 'C', c_o0, c_o2,
-            c_exec_o0, c_exec_o2, find_func_addr_c
+            c_exec_o0, c_exec_o2, find_func_addr_c,
+            dwarf_c_o0, dwarf_c_o2, 'bench.c'
         )
 
         if rust_r:
