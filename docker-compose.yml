@@ -1,0 +1,21 @@
+# One-command reproduction.
+#
+#   docker compose run --rm rustdiff
+#
+# Output is written to ./experiments/rust_features/results/analysis_data.json
+# on the host.
+
+services:
+  rustdiff:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+    image: rustdiff:latest
+    platform: linux/amd64
+    volumes:
+      # Mount results dir so analysis_data.json ends up on the host.
+      - ./experiments/rust_features/results:/app/experiments/rust_features/results
+    # Default command already set in Dockerfile; override here for convenience.
+    command: ["python", "experiments/rust_features/run_analysis.py"]

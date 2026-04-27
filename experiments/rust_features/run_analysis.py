@@ -15,6 +15,7 @@ where the similarity exceeds a threshold.
 Outputs JSON data for HTML report generation.
 """
 import sys
+import os
 import re
 import json
 import warnings
@@ -23,6 +24,10 @@ warnings.filterwarnings('ignore')
 logging.disable(logging.WARNING)
 from pathlib import Path
 from collections import defaultdict
+
+# Demo / quick mode: run only 2 functions per feature (10 total) so the
+# whole pipeline finishes in ~30 s. Enable with --quick or RUSTDIFF_QUICK=1.
+QUICK = ('--quick' in sys.argv) or os.environ.get('RUSTDIFF_QUICK') == '1'
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -130,7 +135,8 @@ FEATURE_NAMES = {
     'qm': '? Operator (Option/Result)',
     'pu': 'Panic/Unwind Paths',
 }
-ALL_FUNCS = [f'{p}_{i:02d}' for p in PREFIXES for i in range(1, 21)]
+_N_PER_FEATURE = 2 if QUICK else 20
+ALL_FUNCS = [f'{p}_{i:02d}' for p in PREFIXES for i in range(1, _N_PER_FEATURE + 1)]
 
 RUST_FUNC_RE = re.compile(r'rust_features\d*::(\w+)')
 C_FUNC_RE = re.compile(r'\b(om_\d{2}|dg_\d{2}|bc_\d{2}|qm_\d{2}|pu_\d{2})\b')
@@ -698,6 +704,11 @@ def build_data_driven_explanations(all_results, summary):
 
 
 def main():
+    if QUICK:
+        sys.stderr.write(
+            f"[quick mode] running {_N_PER_FEATURE} functions per feature "
+            f"({len(ALL_FUNCS)} total)\n"
+        )
     sys.stderr.write("Loading 4 binaries...\n")
     rust_o0 = RustBinaryLoader(str(EXP_DIR / 'rust_O0'))
     rust_o2 = RustBinaryLoader(str(EXP_DIR / 'rust_O2'))

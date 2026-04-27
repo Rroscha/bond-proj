@@ -1,121 +1,235 @@
-# RustDiff
+# RustDiff — Final Project Submission
 
-RustDiff studies how Rust language features affect binary basic-block matching accuracy compared to equivalent C code. It compiles 100 Rust functions and 100 semantically equivalent C functions at O0 and O2 (both with DWARF debug info), extracts basic blocks via angr, matches O0 blocks to O2 blocks using 3 independent similarity methods (value-based micro-execution, opcode Jaccard, constant Jaccard), and validates matches against DWARF ground truth.
+**TL;DR for the grader.** This project measures how much Rust-specific
+language features (ownership/moves, drop glue, bounds checks, `?` operator,
+panic paths) hurt cross-optimization-level basic-block matching. It compiles
+100 Rust functions and 100 semantically-equivalent C functions at `-O0` and
+`-O2`, matches O0↔O2 basic blocks with four independent similarity methods
+(value-based micro-execution, opcode Jaccard, constant Jaccard, instruction
+count), and scores each match against **DWARF line-info ground truth**.
 
-## Tested Rust features (20 functions each)
+> **Easiest way to reproduce: one docker command** (see
+> [§ Reproduce with Docker](#reproduce-with-docker)).
 
-| Prefix | Feature | What Rust generates |
-|--------|---------|---------------------|
-| `bc_` | Bounds Checking | `data[i]` → `cmp index, len; jae panic` |
-| `dg_` | Drop Glue (RAII) | auto `drop_in_place<T>` calls |
-| `qm_` | ? Operator | Option/Result → discriminant check + error return |
-| `pu_` | Panic / Unwrap | `.unwrap()` → check + panic blocks |
+## Demo
 
-## Project structure
+![demo](docs/demo.gif)
 
-```
-rustdiff/                       # core library
-  loader.py                     # angr-based binary loader
-  micro_exec/                   # block-level concrete execution
-  fingerprint/                  # function fingerprinting
-  analysis/                     # block classification, alignment
-  matching/                     # similarity & Hungarian matching
+~60 s terminal capture of `scripts/demo.sh`: builds nothing
+(pre-built `rustdiff` image) and runs `docker run … --quick`
+(2 functions per feature, 10 total) → prints the feature × method
+summary and writes `analysis_data.json`. Drop `--quick` for the full
+100-function run (~4 min).
 
-experiments/rust_features/      # the main experiment
-  rust_crate/                   # Rust source (src/main.rs, 100 functions)
-  c_src/bench.c                 # C source (100 equivalent functions)
-  rust_O0, rust_O2              # compiled Rust binaries (ELF x86-64)
-  c_bench_O0, c_bench_O2       # compiled C binaries (ELF x86-64)
-  run_analysis.py               # main analysis script → analysis_data.json
-  generate_report.py            # JSON → HTML report
-  generate_slides.py            # JSON → PowerPoint slides
-  results/
-    analysis_data.json          # full analysis output
-    report.html                 # HTML report
-    slides.pptx                 # presentation slides
+Source: [`docs/demo.cast`](docs/demo.cast) (play with `asciinema play docs/demo.cast`).
 
-eval/                           # DWARF ground truth utilities
-tests/                          # unit tests
-```
+---
 
-## Requirements
+## What to look at first
 
-- Python >= 3.12
-- Rust toolchain (tested with rustc 1.92.0)
-- GCC (tested with gcc 11.4.1)
-- Linux x86-64
+| You want to… | File |
+|---|---|
+| See the final results as a table | [`experiments/rust_features/results/report.html`](experiments/rust_features/results/report.html) (open in browser) |
+| See the presentation slides | [`experiments/rust_features/results/rustdiff.pptx`](experiments/rust_features/results/rustdiff.pptx) |
+| See the raw numbers | [`experiments/rust_features/results/analysis_data.json`](experiments/rust_features/results/analysis_data.json) |
+| Read the write-up | [`docs/report.md`](docs/report.md) |
+| Read the driver script | [`experiments/rust_features/run_analysis.py`](experiments/rust_features/run_analysis.py) |
+| Read the core micro-execution code | [`rustdiff/micro_exec/block_executor.py`](rustdiff/micro_exec/block_executor.py) |
+| See the 100 Rust test functions | [`experiments/rust_features/rust_crate/src/main.rs`](experiments/rust_features/rust_crate/src/main.rs) |
+| See the 100 C test functions | [`experiments/rust_features/c_src/bench.c`](experiments/rust_features/c_src/bench.c) |
 
-## Setup
+## Headline result
+
+Match accuracy, Rust vs C, per feature × method (higher = the method could
+re-identify O0 blocks in the O2 binary; ground truth = shared DWARF source
+line):
+
+| Feature | value | opcodes | constants | size |
+|---|---|---|---|---|
+| Ownership & Move          | R: 3 %  / C: 38 % | R: 9 %  / C: 54 % | R: 4 %  / C: 65 % | R: 3 %  / C: 32 % |
+| Drop Glue (RAII)          | R: 6 %  / C: 44 % | R: 7 %  / C: 48 % | R: 7 %  / C: 58 % | R: 4 %  / C: 26 % |
+| Bounds Checking           | R: 9 %  / C: 41 % | R: 20 % / C: 53 % | R: 9 %  / C: 58 % | R: 11 % / C: 36 % |
+| `?` Operator              | R: 6 %  / C: 50 % | R: 17 % / C: 52 % | R: 9 %  / C: 38 % | R: 6 %  / C: 28 % |
+| Panic / Unwind            | R: 7 %  / C: 59 % | R: 16 % / C: 67 % | R: 11 % / C: 89 % | R: 8 %  / C: 60 % |
+
+**Takeaway.** Across every feature and every similarity method, Rust binaries
+are dramatically harder to block-match across optimization levels than the
+C equivalents (typical gap: 5–8×). Drop glue and panic paths are the biggest
+offenders — O2 eliminates, inlines, or reshuffles them in ways that break
+every similarity signal we tried.
+
+---
+
+## Reproduce with Docker
+
+No Python, no Rust toolchain, no submodule setup needed — everything is
+baked into the image.
 
 ```bash
-# 1. Clone
-git clone <repo-url> && cd bond-proj
+git clone --recurse-submodules https://github.com/Rroscha/bond-proj
+cd bond-proj
 
-# 2. Create virtual environment and install dependencies
-python3 -m venv .venv
+# Build (~5 min, one-time)
+docker build -t rustdiff .
+
+# Run the full analysis (~4 min on a laptop).
+# Output JSON is written back to ./experiments/rust_features/results/
+# on the host.
+docker run --rm \
+    -v "$PWD/experiments/rust_features/results:/app/experiments/rust_features/results" \
+    rustdiff
+
+# Or, for a 60-second sanity check (2 functions per feature = 10 total):
+docker run --rm \
+    -v "$PWD/experiments/rust_features/results:/app/experiments/rust_features/results" \
+    rustdiff python experiments/rust_features/run_analysis.py --quick
+```
+
+Or, equivalently, with compose:
+
+```bash
+docker compose run --rm rustdiff
+```
+
+When it finishes:
+
+```
+experiments/rust_features/results/analysis_data.json   # raw data, ~8 MB
+```
+
+The pre-generated `report.html` and `rustdiff.pptx` in that folder are the
+artifacts from my own run; rerunning produces an updated `analysis_data.json`
+that matches them.
+
+---
+
+## Reproduce without Docker (local install)
+
+```bash
+git clone --recurse-submodules https://github.com/Rroscha/bond-proj
+cd bond-proj
+
+python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+
+# Pin the angr family at 9.2.138 (the version this code was written against).
+# The repo's requirements.txt lists a newer angr that is NOT API-compatible
+# with the vSim submodule; the Docker image installs the pins below.
+pip install \
+    "angr==9.2.138" "claripy==9.2.138" "pyvex==9.2.138" \
+    "cle==9.2.138"  "archinfo==9.2.138" "pycparser<2.22" \
+    "networkx==3.3" "numpy==2.2.4" "pandas==2.2.3" \
+    "scipy==1.15.2" "scikit-learn==1.6.1" "tqdm==4.66.5" \
+    "matplotlib==3.10.1" "pyelftools==0.32" "python-pptx==1.0.2"
 pip install -e .
+
+# rustfilt is used to demangle Rust symbols
+cargo install rustfilt       # requires a Rust toolchain
+
+.venv/bin/python experiments/rust_features/run_analysis.py
 ```
 
-## Reproduce results
-
-Pre-compiled binaries are already included in the repo (`experiments/rust_features/rust_O0`, `rust_O2`, `c_bench_O0`, `c_bench_O2`), so you can skip compilation and directly run the analysis.
-
-### (Optional) Recompile binaries from source
+The four target binaries (`rust_O0`, `rust_O2`, `c_bench_O0`, `c_bench_O2`,
+all ELF x86-64) are checked into `experiments/rust_features/` so compilation
+is **not** required. If you want to rebuild them:
 
 ```bash
-cd experiments/rust_features
-
-# ── Rust: O0 (debug) and O2 (release) ──
-# Cargo.toml already sets: debug=2, panic="unwind", lto=false
-cd rust_crate
-cargo build                     # O0 binary → target/debug/rust_features
-cargo build --release           # O2 binary → target/release/rust_features
-cd ..
+cd experiments/rust_features/rust_crate && cargo build && cargo build --release && cd ..
 cp rust_crate/target/debug/rust_features   rust_O0
 cp rust_crate/target/release/rust_features rust_O2
-
-# ── C: O0 and O2 ──
 gcc -O0 -g -o c_bench_O0 c_src/bench.c
 gcc -O2 -g -o c_bench_O2 c_src/bench.c
 ```
 
-Key compiler flags:
-- `-g` / `debug=2`: DWARF debug info for ground truth (does not affect optimization)
-- `panic="unwind"`: keep panic paths in binary (not `abort`)
-- `lto=false`: no cross-function inlining that would destroy function boundaries
+Key flags: `-g` / `debug=2` for DWARF ground truth, `panic="unwind"`
+(keep panic paths), `lto=false` (keep function boundaries).
 
-### Run the analysis
+---
 
-```bash
-cd /path/to/bond-proj
+## How it works (one page)
 
-# Activate venv
-source .venv/bin/activate
+1. **Load binaries.** `RustBinaryLoader` (`rustdiff/loader.py`) wraps vSim's
+   `BinExecutor` to get an angr `Project` + `CFGFast`, then demangles Rust
+   symbols with `rustfilt` and filters out `core::` / `std::` / compiler-
+   generated helpers.
+2. **Micro-execute each basic block.** `BlockMicroExecutor`
+   (`rustdiff/micro_exec/block_executor.py`) runs every block concretely
+   with 4 different register-input sets and records:
+   - concrete output values per register
+   - data-flow edges (which input regs feed which output regs)
+   - memory access pattern (offset, size, r/w, kind)
+   - constants and a normalized opcode sequence
+   - callees and string references
+3. **Score each (O0-block, O2-block) pair** with four independent methods:
+   - **value** — weighted blend of concrete-output match, data-flow, memory, constants
+   - **opcodes** — Jaccard on normalized opcode sets
+   - **constants** — Jaccard on immediate constants
+   - **size** — 1 − |Δ insn count| / max
+4. **Hungarian matching** (`scipy.optimize.linear_sum_assignment`) picks the
+   best 1-to-1 assignment between O0 and O2 blocks.
+5. **DWARF ground truth.** `DWARFLineMapper` reads `.debug_line` with
+   `pyelftools`. A matched pair `(b_O0, b_O2)` is *correct* iff the two
+   blocks' address ranges map to at least one shared source line.
+6. **Accuracy** = correct pairs / `min(n_O0, n_O2)`.
 
-# Run analysis (~10-30 min depending on hardware)
-# Loads 4 binaries, micro-executes all blocks, runs Hungarian matching
-.venv/bin/python experiments/rust_features/run_analysis.py
+---
+
+## The 100 Rust functions (5 features × 20)
+
+| Prefix | Feature | What Rust generates |
+|---|---|---|
+| `om_` | Ownership & Move  | move semantics, `Vec`/`String` ownership transfer |
+| `dg_` | Drop Glue (RAII)  | auto `drop_in_place<T>` calls at scope end |
+| `bc_` | Bounds Checking   | `data[i]` → `cmp idx, len; jae panic_bounds_check` |
+| `qm_` | `?` Operator      | `Option`/`Result` → discriminant check + early return |
+| `pu_` | Panic / Unwrap    | `.unwrap()` → check + call to `core::panicking::*` |
+
+Each `main.rs` function has a semantically-equivalent `bench.c` twin
+(same prefix, same number, e.g. `bc_07`).
+
+---
+
+## Repo layout
+
+```
+rustdiff/                       core library
+  loader.py                     angr-based binary loader + Rust demangling
+  micro_exec/                   per-block concrete execution
+  fingerprint/                  function-level signature aggregation
+  matching/                     similarity + Hungarian matching
+  analysis/                     block classification, alignment, ablation
+  rust/                         demangle / filter / monomorphize
+
+experiments/rust_features/      the main experiment (this project)
+  rust_crate/src/main.rs        100 Rust functions
+  c_src/bench.c                 100 C twins
+  rust_O0 rust_O2               pre-compiled Rust binaries (ELF x86-64)
+  c_bench_O0 c_bench_O2         pre-compiled C binaries
+  run_analysis.py               driver → analysis_data.json
+  generate_report.py            JSON → HTML
+  generate_slides.py            JSON → PPTX
+  results/                      pre-generated artifacts
+
+eval/                           reusable ground-truth / metrics utilities
+vendor/vSim/                    submodule: OSUSecLab/vSim (angr wrapper)
+docs/report.md                  written report
+Dockerfile, docker-compose.yml  one-command reproduction
 ```
 
-Output: `experiments/rust_features/results/analysis_data.json`
+---
 
-This JSON contains per-function data for all 200 functions (100 Rust + 100 C): block counts, per-block assembly + opcodes + constants + source lines, matching pairs for each method, accuracy scores, and DWARF ground truth coverage.
+## Requirements
 
+* Python 3.12
+* Linux x86-64 (the checked-in binaries are ELF x86-64)
+* For Docker reproduction: Docker with x86-64 support — nothing else
+* For local reproduction: Rust toolchain (only for `cargo install rustfilt`)
 
 ## Presentation
 
-The slide deck used for the class presentation is at `experiments/rust_features/results/rustdiff.pptx`.
+The slide deck used for the class presentation is at
+[`experiments/rust_features/results/rustdiff.pptx`](experiments/rust_features/results/rustdiff.pptx).
 
-## How it works
+## License
 
-1. **Load binaries**: angr loads O0 and O2 ELF binaries, recovers CFG and basic blocks
-2. **Micro-execute**: each block is run with 4 concrete test inputs; collect register outputs, memory access patterns, dataflow edges, constants
-3. **Compute similarity**: for each (O0 block, O2 block) pair, compute similarity using 3 independent methods:
-   - **Value-based**: weighted combination of concrete output match, dataflow similarity, memory pattern similarity, constant overlap
-   - **Opcode Jaccard**: `|opcodes_O0 ∩ opcodes_O2| / |opcodes_O0 ∪ opcodes_O2|`
-   - **Constant Jaccard**: `|constants_O0 ∩ constants_O2| / |constants_O0 ∪ constants_O2|`
-4. **Hungarian matching**: build cost matrix, find optimal 1-to-1 block assignment
-5. **DWARF validation**: each matched pair is checked against source line mapping — correct iff both blocks map to at least one shared source line
-6. **Accuracy**: `correct_pairs / min(n_O0, n_O2)`
+See `LICENSE`.
