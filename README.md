@@ -60,7 +60,9 @@ pip install -e .
 
 ## Reproduce results
 
-### Step 1: Compile the binaries
+Pre-compiled binaries are already included in the repo (`experiments/rust_features/rust_O0`, `rust_O2`, `c_bench_O0`, `c_bench_O2`), so you can skip compilation and directly run the analysis.
+
+### (Optional) Recompile binaries from source
 
 ```bash
 cd experiments/rust_features
@@ -71,8 +73,6 @@ cd rust_crate
 cargo build                     # O0 binary → target/debug/rust_features
 cargo build --release           # O2 binary → target/release/rust_features
 cd ..
-
-# Copy binaries to experiment directory
 cp rust_crate/target/debug/rust_features   rust_O0
 cp rust_crate/target/release/rust_features rust_O2
 
@@ -86,7 +86,7 @@ Key compiler flags:
 - `panic="unwind"`: keep panic paths in binary (not `abort`)
 - `lto=false`: no cross-function inlining that would destroy function boundaries
 
-### Step 2: Run the analysis
+### Run the analysis
 
 ```bash
 cd /path/to/bond-proj
