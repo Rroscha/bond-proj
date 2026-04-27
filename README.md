@@ -104,6 +104,10 @@ Output: `experiments/rust_features/results/analysis_data.json`
 This JSON contains per-function data for all 200 functions (100 Rust + 100 C): block counts, per-block assembly + opcodes + constants + source lines, matching pairs for each method, accuracy scores, and DWARF ground truth coverage.
 
 
+## Presentation
+
+The slide deck used for the class presentation is at `experiments/rust_features/results/rustdiff.pptx`.
+
 ## How it works
 
 1. **Load binaries**: angr loads O0 and O2 ELF binaries, recovers CFG and basic blocks
