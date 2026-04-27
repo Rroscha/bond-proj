@@ -38,25 +38,92 @@ Source: [`docs/demo.cast`](docs/demo.cast) (play with `asciinema play docs/demo.
 | See the 100 Rust test functions | [`experiments/rust_features/rust_crate/src/main.rs`](experiments/rust_features/rust_crate/src/main.rs) |
 | See the 100 C test functions | [`experiments/rust_features/c_src/bench.c`](experiments/rust_features/c_src/bench.c) |
 
-## Headline result
+## Results
 
-Match accuracy, Rust vs C, per feature × method (higher = the method could
-re-identify O0 blocks in the O2 binary; ground truth = shared DWARF source
-line):
+All numbers below come from the checked-in
+[`analysis_data.json`](experiments/rust_features/results/analysis_data.json)
+(200 functions × 4 methods × O0-vs-O2 Hungarian matching, scored against
+DWARF line ground truth).
 
-| Feature | value | opcodes | constants | size |
-|---|---|---|---|---|
-| Ownership & Move          | R: 3 %  / C: 38 % | R: 9 %  / C: 54 % | R: 4 %  / C: 65 % | R: 3 %  / C: 32 % |
-| Drop Glue (RAII)          | R: 6 %  / C: 44 % | R: 7 %  / C: 48 % | R: 7 %  / C: 58 % | R: 4 %  / C: 26 % |
-| Bounds Checking           | R: 9 %  / C: 41 % | R: 20 % / C: 53 % | R: 9 %  / C: 58 % | R: 11 % / C: 36 % |
-| `?` Operator              | R: 6 %  / C: 50 % | R: 17 % / C: 52 % | R: 9 %  / C: 38 % | R: 6 %  / C: 28 % |
-| Panic / Unwind            | R: 7 %  / C: 59 % | R: 16 % / C: 67 % | R: 11 % / C: 89 % | R: 8 %  / C: 60 % |
+Accuracy is defined as
 
-**Takeaway.** Across every feature and every similarity method, Rust binaries
-are dramatically harder to block-match across optimization levels than the
-C equivalents (typical gap: 5–8×). Drop glue and panic paths are the biggest
-offenders — O2 eliminates, inlines, or reshuffles them in ways that break
-every similarity signal we tried.
+    correct_pairs / min(n_O0_blocks, n_O2_blocks)
+
+where a pair is *correct* iff the two blocks' address ranges map to at least
+one shared source line in DWARF `.debug_line`.
+
+### 1. Overall: Rust is harder to match than C, on every method
+
+Aggregated across all 100 functions per language:
+
+| Method       | Rust accuracy            | C accuracy                | C − Rust gap | C / Rust |
+|--------------|--------------------------|---------------------------|-------------:|---------:|
+| value        | 5.9 %   (134 / 2274)     | 45.0 %   (566 / 1259)     | **+39 pp**   | 7.6×     |
+| opcodes      | 12.7 %  (289 / 2274)     | 53.8 %   (677 / 1259)     | **+41 pp**   | 4.2×     |
+| constants    | 7.6 %   (173 / 2274)     | 60.1 %   (757 / 1259)     | **+52 pp**   | 7.9×     |
+| size         | 5.6 %   (127 / 2274)     | 34.0 %   (428 / 1259)     | **+28 pp**   | 6.1×     |
+
+C wins on **every** method, by 4–8× in relative terms. Among the four
+methods, **opcode-set Jaccard** is the most stable signal for Rust (12.7 %)
+— everything else collapses below 10 %.
+
+### 2. Per feature × method
+
+| Feature                     | value                     | opcodes                   | constants                 | size                      |
+|-----------------------------|---------------------------|---------------------------|---------------------------|---------------------------|
+| `om_` Ownership & Move      | R: 2.6 %  / C: 37.8 %     | R: 9.2 %  / C: 54.4 %     | R: 4.4 %  / C: 65.0 %     | R: 2.7 %  / C: 32.0 %     |
+| `dg_` Drop Glue (RAII)      | R: 6.2 %  / C: 43.8 %     | R: 7.0 %  / C: 48.4 %     | R: 6.7 %  / C: 57.6 %     | R: 3.5 %  / C: 26.2 %     |
+| `bc_` Bounds Checking       | R: 9.3 %  / C: 41.3 %     | R: 20.1 % / C: 53.3 %     | R: 8.8 %  / C: 57.8 %     | R: 11.3 % / C: 35.6 %     |
+| `qm_` `?` Operator          | R: 6.2 %  / C: 49.6 %     | R: 17.0 % / C: 51.8 %     | R: 9.3 %  / C: 38.0 %     | R: 5.6 %  / C: 27.7 %     |
+| `pu_` Panic / Unwind        | R: 7.0 %  / C: 58.6 %     | R: 16.1 % / C: 66.9 %     | R: 11.3 % / C: 89.3 %     | R: 7.8 %  / C: 59.8 %     |
+
+C wins **100 % of the 20 cells**. No method × feature combination exists
+where Rust beats C.
+
+### 3. Why: block-count blow-up and O2 restructuring
+
+Average blocks per function (O0 → O2):
+
+| Feature | Rust O0 → O2           | C O0 → O2             | Rust / C (at O0) |
+|---------|------------------------|-----------------------|------------------|
+| `om_`   | 34.4 → 38.5 (×0.89)    | 15.5 → 15.7 (×0.99)   | **2.2×**         |
+| `dg_`   | 33.9 → 39.2 (×0.86)    | 18.4 → 20.5 (×0.90)   | **1.8×**         |
+| `bc_`   | 37.4 → 23.7 (×1.58)    | 13.2 → 11.7 (×1.13)   | **2.8×**         |
+| `qm_`   | 32.7 → 20.8 (×1.57)    | 13.9 → 11.4 (×1.22)   | **2.4×**         |
+| `pu_`   | 25.8 → 21.4 (×1.21)    |  8.5 →  9.2 (×0.92)   | **3.0×**         |
+
+Two structural patterns drive the Rust accuracy cliff:
+
+1. **Rust compiles to 2–3× more basic blocks than C** at O0 for the same
+   algorithm. Hungarian matching is n² sensitive to rectangular matrices —
+   every extra safety / RAII / panic block is an extra chance to pair
+   incorrectly.
+2. **Rust's O0→O2 block ratio is 1.2–1.6×** for `bc_` / `qm_` / `pu_` (O2
+   eliminates bounds checks, collapses `?`-operator discriminant chains,
+   and outlines panic paths), whereas C's ratio stays near 1×. Matching
+   across such restructuring is exactly what none of the four similarity
+   methods can track.
+
+### 4. Closest Rust gets
+
+The highest Rust accuracy in the whole study is **20.1 %** (opcode Jaccard
+on `bc_`). For context, the lowest C accuracy in the same table is 26.2 %
+(size on `dg_`) — i.e. Rust's best case is still worse than C's worst case.
+
+### 5. Takeaway for binary-diffing tools
+
+Classic cross-optimization block-matching signals (value micro-execution,
+opcode sets, constant sets, instruction counts) that work acceptably on C
+**do not transfer to Rust** without Rust-aware handling of:
+
+* drop glue / `drop_in_place<T>` inlining at O2
+* bounds-check elimination
+* `?` operator discriminant collapsing
+* panic / unwind path outlining
+
+Any practical Rust-aware binary differ probably needs to detect and
+*normalize away* these patterns before similarity scoring, rather than
+treating them as ordinary blocks.
 
 ---
 
