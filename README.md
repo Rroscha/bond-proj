@@ -96,24 +96,13 @@ source .venv/bin/activate
 
 # Run analysis (~10-30 min depending on hardware)
 # Loads 4 binaries, micro-executes all blocks, runs Hungarian matching
-python experiments/rust_features/run_analysis.py
+.venv/bin/python experiments/rust_features/run_analysis.py
 ```
 
 Output: `experiments/rust_features/results/analysis_data.json`
 
 This JSON contains per-function data for all 200 functions (100 Rust + 100 C): block counts, per-block assembly + opcodes + constants + source lines, matching pairs for each method, accuracy scores, and DWARF ground truth coverage.
 
-### Step 3: Generate reports
-
-```bash
-# HTML report
-python experiments/rust_features/generate_report.py
-# → experiments/rust_features/results/report.html
-
-# PowerPoint slides
-python experiments/rust_features/generate_slides.py
-# → experiments/rust_features/results/slides.pptx
-```
 
 ## How it works
 
