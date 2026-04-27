@@ -37,6 +37,7 @@ Source: [`docs/demo.cast`](docs/demo.cast) (play with `asciinema play docs/demo.
 | Read the core micro-execution code | [`rustdiff/micro_exec/block_executor.py`](rustdiff/micro_exec/block_executor.py) |
 | See the 100 Rust test functions | [`experiments/rust_features/rust_crate/src/main.rs`](experiments/rust_features/rust_crate/src/main.rs) |
 | See the 100 C test functions | [`experiments/rust_features/c_src/bench.c`](experiments/rust_features/c_src/bench.c) |
+| Check the fairness of the metric | [§ Fairness of the accuracy metric](#fairness-of-the-accuracy-metric) |
 
 ## Results
 
@@ -124,6 +125,93 @@ opcode sets, constant sets, instruction counts) that work acceptably on C
 Any practical Rust-aware binary differ probably needs to detect and
 *normalize away* these patterns before similarity scoring, rather than
 treating them as ordinary blocks.
+
+---
+
+## Fairness of the accuracy metric
+
+The accuracy denominator is `min(n_O0, n_O2)` (see
+[`run_analysis.py:295`](experiments/rust_features/run_analysis.py#L295)).
+Because Hungarian matching on a rectangular cost matrix produces only
+`min(n_O0, n_O2)` pairs, the `|n_O0 − n_O2|` surplus blocks on the larger
+side are **dropped from scoring entirely** — they neither enter the
+numerator nor the denominator. This section quantifies how lopsided that
+drop is between the two languages, and whether the headline gap survives
+other denominator choices.
+
+### 1. Per-function denominator variance (n = 100 per language)
+
+| Language | `min(n_O0,n_O2)` mean ± sd | CV   | range |
+|----------|----------------------------|------|-------|
+| Rust     | **22.7 ± 16.3**            | 0.72 | 1–73  |
+| C        | **12.6 ± 6.3**             | 0.50 | 1–32  |
+
+Rust's per-function denominator has 2.6× the standard deviation of C's
+and a 44 % higher coefficient of variation — micro-averaged metrics are
+pulled around by a few large Rust functions.
+
+### 2. How many blocks are dropped from scoring ("orphans")
+
+For each function, `orphan = |n_O0 − n_O2|`. Summed across all 100
+functions per language:
+
+| Language | Σ max(n_O0,n_O2) | Σ min (= scored denom) | Σ orphan | **orphan / Σ max** |
+|----------|------------------|------------------------|----------|--------------------|
+| Rust     | 3879             | 2274                   | 1605     | **41.4 %**         |
+| C        | 1499             | 1259                   |  240     | **16.0 %**         |
+
+**41 % of Rust blocks on the larger side never enter the score, vs 16 %
+for C.** Because `min()` is used, dropped blocks are a free pass — they
+can't be counted wrong. This **favors whichever language has more O0↔O2
+asymmetry**, which is Rust.
+
+Per feature:
+
+| Feature | Rust orphan % | C orphan % | Rust/C ratio |
+|---------|---------------|------------|--------------|
+| `om_` Ownership & Move | 32.1 % | 10.8 % | 3.0× |
+| `dg_` Drop Glue        | 36.7 % | 12.6 % | 2.9× |
+| `bc_` Bounds Checking  | **52.5 %** | 17.3 % | 3.0× |
+| `qm_` `?` Operator     | **49.7 %** | 20.1 % | 2.5× |
+| `pu_` Panic / Unwind   | 35.8 % |  9.6 % | 3.7× |
+
+`bc_` and `qm_` are the worst-off: over half of Rust O0 blocks are
+bounds-check or discriminant-check blocks that O2 eliminates outright,
+so they simply vanish from the denominator.
+
+### 3. Headline gap under alternative denominators
+
+To check whether the "C wins 20/20 cells" conclusion depends on the
+`min()` choice, we recompute accuracy under two stricter denominators:
+`max(n_O0, n_O2)` (charge for every orphan block as a miss) and
+`(n_O0 + n_O2) / 2` (the average).
+
+| Method    | gap /min (current) | gap /max | gap /avg |
+|-----------|-------------------:|---------:|---------:|
+| value     | +39.1 pp           | +34.3 pp | +36.7 pp |
+| opcodes   | +41.1 pp           | +37.7 pp | +39.7 pp |
+| constants | +52.5 pp           | +46.0 pp | +49.3 pp |
+| size      | +28.4 pp           | +25.3 pp | +26.9 pp |
+
+Switching denominator **shrinks the gap by 3–6 pp but does not flip a
+single cell** — C still wins 20 / 20 under any of the three denominators.
+
+### 4. What this means for the headline numbers
+
+* **Direction of bias:** `min()` is *lenient toward* Rust, because Rust
+  has 2.6× more orphan blocks to hide from the denominator. The C–Rust
+  gap reported in § Results is therefore a **lower bound** — any
+  denominator that charges for orphans widens the gap.
+* **Robustness:** the qualitative result ("classic block-matching
+  signals work on C but not on Rust") holds under `min`, `max`, and
+  `avg`; only the size of the gap shifts.
+* **What the metric is *not* doing:** it is not penalizing Rust for
+  having more blocks. A 73-block function with 30 correct pairs scores
+  exactly the same as a 10-block function with ~4 correct pairs
+  (both → ~41 %). The penalty comes from Hungarian having to *pick* 1-to-1
+  correspondences inside the `min`-sized square — which is where the
+  structural cost of drop glue / bounds elimination / `?` collapse
+  actually shows up.
 
 ---
 
